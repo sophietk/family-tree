@@ -10,16 +10,41 @@
 </head>
 <body>
 
-<header class="teal lighten-1 white-text">
-    <h4>Family tree</h4>
-</header>
-
+<div class="menu clearfix"></div>
 <main class="container"></main>
 
 </body>
 
 <!-- Mustache templates -->
-<script type="text/mustache" id="tpl-id">
+<script type="text/mustache" id="tpl-menu">
+<div class="nav-wrapper teal lighten-1 white-text">
+    <a href="#" class="brand-logo right">Family tree</a>
+    <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a class="directory">Directory</a></li>
+    </ul>
+</div>
+</script>
+
+<script type="text/mustache" id="tpl-people-card">
+<div class="col s6 m3">
+  <div class="card">
+    <div class="card-image">
+      {{#isMale}}<img src="img/male.png">{{/isMale}}
+      {{^isMale}}<img src="img/female.png">{{/isMale}}
+      <span class="card-title shadowed">{{firstName}} {{name}}</span>
+    </div>
+    <div class="card-content">
+      {{#maidenName}}<p>Maiden name: {{maidenName}}</p>{{/maidenName}}
+      <p>Gender: {{gender}}</p>
+      {{#birthDate}}<p>Birth date: {{birthDate}}</p>{{/birthDate}}
+    </div>
+    <div class="card-action">
+      <a href="#">Show tree</a>
+      <a href='#'>Edit</a>
+    </div>
+  </div>
+</div>
+
 </script>
 
 <!-- build:js app.min.js -->
@@ -30,6 +55,10 @@
 <script type="text/javascript" src="bower_components/moment/moment.js"></script>
 <script type="text/javascript" src="bower_components/chance/chance.js"></script>
 <script type="text/javascript" src="bower_components/materialize/dist/js/materialize.js"></script>
+<script type="text/javascript" src="js/directory/PeopleModel.js"></script>
+<script type="text/javascript" src="js/directory/PeopleCollection.js"></script>
+<script type="text/javascript" src="js/directory/PeopleCardView.js"></script>
+<script type="text/javascript" src="js/directory/DirectoryView.js"></script>
 <script type="text/javascript" src="js/edition/EditView.js"></script>
 <script type="text/javascript" src="js/MenuView.js"></script>
 <script type="text/javascript" src="js/main.js"></script>

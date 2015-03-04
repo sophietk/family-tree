@@ -26,6 +26,7 @@ exports = module.exports = function (app) {
         children = _.where(people, isMale ? {fatherId: id} : {motherId: id});
 
         res.send(_.extend({}, member, {
+            isMale: isMale,
             father: father,
             mother: mother,
             children: children

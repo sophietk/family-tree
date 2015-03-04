@@ -1,2 +1,2 @@
 // App
-$('main').html(new MenuView().render().el);
+$('.menu').html(new MenuView().render().el);
