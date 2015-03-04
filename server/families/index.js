@@ -3,6 +3,10 @@ var _ = require('lodash'),
 
 exports = module.exports = function (app) {
 
+    app.get('/people', function (req, res) {
+        res.send(people);
+    });
+
     app.get('/people/:id', function (req, res) {
         var id = req.params.id,
             member = _.findWhere(people, {_id: id}),
