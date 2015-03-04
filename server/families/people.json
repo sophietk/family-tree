@@ -1,0 +1,53 @@
+[
+  {
+    "_id": "54f758f3f6a4810a19c3b258",
+    "name": "Skywalker",
+    "firstName": "Anakin",
+    "gender": "M"
+  },
+  {
+    "_id": "54f759141138b91019e18e45",
+    "name": "Amidala",
+    "maidenName": "Amidala",
+    "firstName": "Padmé",
+    "gender": "F"
+  },
+  {
+    "_id": "54f759141138b91019e18e46",
+    "name": "Skywalker",
+    "firstName": "Luke",
+    "gender": "M",
+    "fatherId": "54f758f3f6a4810a19c3b258",
+    "motherId": "54f759141138b91019e18e45"
+  },
+  {
+    "_id": "54f759141138b91019e18e47",
+    "name": "Solo",
+    "maidenName": "Organa",
+    "firstName": "Leia",
+    "gender": "F",
+    "fatherId": "54f758f3f6a4810a19c3b258",
+    "motherId": "54f759141138b91019e18e45"
+  },
+  {
+    "_id": "54f759141138b91019e18e48",
+    "name": "Han",
+    "firstName": "Solo",
+    "gender": "M"
+  },
+  {
+    "_id": "54f759141138b91019e18e49",
+    "name": "Skywalker",
+    "maidenName": "Jade",
+    "firstName": "Mara ",
+    "gender": "F"
+  },
+  {
+    "_id": "54f759141138b91019e18e50",
+    "name": "Skywalker",
+    "firstName": "Ben ",
+    "gender": "M",
+    "fatherId": "54f759141138b91019e18e46",
+    "motherId": "54f759141138b91019e18e49"
+  }
+]

@@ -24,4 +24,6 @@ app.listen(port, function () {
     console.log('Listening on port: ' + port);
 });
 
+require('./families')(app);
+
 module.exports = app;
