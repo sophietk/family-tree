@@ -8,6 +8,7 @@ app
     })
     .on('start', function () {
         app.menuRegion.show(new MenuView());
-        app.nudeRegion.show(new HomeView());
+        new Router();
+        Backbone.history.start();
     })
     .start();

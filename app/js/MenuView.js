@@ -4,13 +4,19 @@ var MenuView = Marionette.ItemView.extend({
 
     template: '#tpl-menu',
 
-    events: {
-        'click .directory': 'showDirectory'
+    menuItems: [
+        {route: 'home', title: 'Home'},
+        {route: 'directory', title: 'Directory'}
+    ],
+
+    templateHelpers: function () {
+        return {
+            items: this.menuItems
+        }
     },
 
-    showDirectory: function () {
-        app.nudeRegion.reset();
-        app.mainRegion.show(new DirectoryView(), {className: 'container'});
+    select: function (index) {
+        this.$('li').eq(index).addClass('active')
+            .siblings().removeClass('active');
     }
-
 });

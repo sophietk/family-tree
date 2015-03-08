@@ -18,10 +18,12 @@
 
 <!-- Mustache templates -->
 <script type="text/x-handlebars-template" id="tpl-menu">
-    <div class="nav-wrapper teal lighten-1 white-text">
+    <div class="nav-wrapper brown lighten-1 white-text">
         <a href="#" class="brand-logo right">Family tree</a>
         <ul id="nav-mobile" class="left hide-on-med-and-down">
-            <li><a href="#" class="directory">Directory</a></li>
+            {{#items}}
+            <li><a href="#{{route}}" class="waves-effect">{{title}}</a></li>
+            {{/items}}
         </ul>
     </div>
 </script>
@@ -38,7 +40,7 @@
                     <h5 class="header col s12 light white-text">Find and link your family members</h5>
                 </div>
                 <div class="row center">
-                    <a href="#" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Find
+                    <a href="#directory" class="btn-large waves-effect waves-light teal lighten-1">Find
                         people</a>
                 </div>
                 <br><br>
@@ -131,6 +133,7 @@
 <script type="text/javascript" src="js/edition/EditView.js"></script>
 <script type="text/javascript" src="js/MenuView.js"></script>
 <script type="text/javascript" src="js/App.js"></script>
+<script type="text/javascript" src="js/Router.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <!-- endbuild -->
 
