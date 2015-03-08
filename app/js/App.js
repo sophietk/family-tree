@@ -1,8 +1,9 @@
 var App = Marionette.Application.extend({
 
     regions: {
-        menuRegion: 'div.menu',
-        mainRegion: 'main'
+        menuRegion: 'nav.menu',
+        mainRegion: 'main',
+        nudeRegion: '.nude'
     }
 
 });

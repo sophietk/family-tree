@@ -9,7 +9,8 @@ var MenuView = Marionette.ItemView.extend({
     },
 
     showDirectory: function () {
-        app.mainRegion.show(new DirectoryView());
+        app.nudeRegion.reset();
+        app.mainRegion.show(new DirectoryView(), {className: 'container'});
     }
 
 });

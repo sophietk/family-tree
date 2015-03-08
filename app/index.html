@@ -10,44 +10,108 @@
 </head>
 <body>
 
-<div class="menu clearfix"></div>
+<nav class="menu clearfix" role="navigation"></nav>
+<div class="nude"></div>
 <main class="container"></main>
 
 </body>
 
 <!-- Mustache templates -->
 <script type="text/x-handlebars-template" id="tpl-menu">
-<div class="nav-wrapper teal lighten-1 white-text">
-    <a href="#" class="brand-logo right">Family tree</a>
-    <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li><a href="#" class="directory">Directory</a></li>
-    </ul>
-</div>
+    <div class="nav-wrapper teal lighten-1 white-text">
+        <a href="#" class="brand-logo right">Family tree</a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li><a href="#" class="directory">Directory</a></li>
+        </ul>
+    </div>
 </script>
 
 <script type="text/x-handlebars-template" id="tpl-home">
-Home
+    <div id="index-banner" class="parallax-container">
+        <div class="section">
+            <div class="container">
+                <br><br>
+
+                <h1 class="header center teal-text text-lighten-2">Family tree</h1>
+
+                <div class="row center">
+                    <h5 class="header col s12 light white-text">Find and link your family members</h5>
+                </div>
+                <div class="row center">
+                    <a href="#" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Find
+                        people</a>
+                </div>
+                <br><br>
+            </div>
+        </div>
+        <div class="parallax"><img src="img/meerkats.jpg" alt="Unsplashed background img 2"></div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+
+            <!--   Icon Section   -->
+            <div class="row">
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <h2 class="center brown-text"><i class="mdi-action-search"></i></h2>
+                        <h5 class="center">Find your relations</h5>
+
+                        <p class="light">Macaroon muffin candy sweet roll chocolate. Pastry cotton candy jelly-o carrot
+                            cake cupcake. Macaroon cookie dragée cake oat cake. Bear claw carrot cake chocolate bar
+                            marzipan jelly soufflé ice cream halvah. Powder powder caramels gummi bears marzipan candy
+                            canes sweet roll lollipop. Pastry macaroon sesame snaps cheesecake gingerbread icing.</p>
+                    </div>
+                </div>
+
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <h2 class="center brown-text"><i class="mdi-action-account-child"></i></h2>
+                        <h5 class="center">Enrich your family tree</h5>
+
+                        <p class="light">Marzipan powder jujubes jelly apple pie. Croissant danish gummies toffee
+                            jujubes chocolate bar. Gummi bears jelly tootsie roll powder tootsie roll pudding. Biscuit
+                            pie tart. Halvah cake pie candy gingerbread liquorice chocolate bar. Cake halvah carrot cake
+                            gummies croissant. Jujubes powder wafer. Sugar plum powder bear claw.</p>
+                    </div>
+                </div>
+
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <h2 class="center brown-text"><i class="mdi-action-info-outline"></i></h2>
+                        <h5 class="center">Discover your ancerstors' stories</h5>
+
+                        <p class="light">Halvah dragée fruitcake ice cream macaroon chupa chups pastry pie cake. Danish
+                            bonbon chupa chups chocolate bar chupa chups gummi bears dessert jujubes pie. Jelly beans
+                            gingerbread fruitcake cheesecake. Lollipop cake chocolate bar. Marshmallow candy pie jelly.
+                            Toffee dessert muffin cake donut candy fruitcake jelly.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </script>
 
 <script type="text/x-handlebars-template" id="tpl-people-card">
-<div class="col s6 m3">
-  <div class="card">
-    <div class="card-image">
-      {{#isMale}}<img src="img/male.png">{{/isMale}}
-      {{^isMale}}<img src="img/female.png">{{/isMale}}
-      <span class="card-title shadowed">{{firstName}} {{name}}</span>
+    <div class="col s6 m3">
+        <div class="card">
+            <div class="card-image">
+                {{#isMale}}<img src="img/male.png">{{/isMale}}
+                {{^isMale}}<img src="img/female.png">{{/isMale}}
+                <span class="card-title shadowed">{{firstName}} {{name}}</span>
+            </div>
+            <div class="card-content">
+                {{#maidenName}}<p>Maiden name: {{maidenName}}</p>{{/maidenName}}
+                <p>Gender: {{gender}}</p>
+                {{#birthDate}}<p>Birth date: {{birthDate}}</p>{{/birthDate}}
+            </div>
+            <div class="card-action">
+                <a href="#">Show tree</a>
+                <a href='#'>Edit</a>
+            </div>
+        </div>
     </div>
-    <div class="card-content">
-      {{#maidenName}}<p>Maiden name: {{maidenName}}</p>{{/maidenName}}
-      <p>Gender: {{gender}}</p>
-      {{#birthDate}}<p>Birth date: {{birthDate}}</p>{{/birthDate}}
-    </div>
-    <div class="card-action">
-      <a href="#">Show tree</a>
-      <a href='#'>Edit</a>
-    </div>
-  </div>
-</div>
 
 </script>
 

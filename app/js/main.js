@@ -8,6 +8,6 @@ app
     })
     .on('start', function () {
         app.menuRegion.show(new MenuView());
-        app.mainRegion.show(new HomeView());
+        app.nudeRegion.show(new HomeView());
     })
     .start();
