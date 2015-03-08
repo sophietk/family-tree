@@ -16,16 +16,20 @@
 </body>
 
 <!-- Mustache templates -->
-<script type="text/mustache" id="tpl-menu">
+<script type="text/x-handlebars-template" id="tpl-menu">
 <div class="nav-wrapper teal lighten-1 white-text">
     <a href="#" class="brand-logo right">Family tree</a>
     <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li><a class="directory">Directory</a></li>
+        <li><a href="#" class="directory">Directory</a></li>
     </ul>
 </div>
 </script>
 
-<script type="text/mustache" id="tpl-people-card">
+<script type="text/x-handlebars-template" id="tpl-home">
+Home
+</script>
+
+<script type="text/x-handlebars-template" id="tpl-people-card">
 <div class="col s6 m3">
   <div class="card">
     <div class="card-image">
@@ -51,16 +55,18 @@
 <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript" src="bower_components/lodash/lodash.js"></script>
 <script type="text/javascript" src="bower_components/backbone/backbone.js"></script>
+<script type="text/javascript" src="bower_components/marionette/lib/backbone.marionette.js"></script>
 <script type="text/javascript" src="bower_components/mustache/mustache.js"></script>
 <script type="text/javascript" src="bower_components/moment/moment.js"></script>
-<script type="text/javascript" src="bower_components/chance/chance.js"></script>
 <script type="text/javascript" src="bower_components/materialize/dist/js/materialize.js"></script>
+<script type="text/javascript" src="js/home/HomeView.js"></script>
 <script type="text/javascript" src="js/directory/PeopleModel.js"></script>
 <script type="text/javascript" src="js/directory/PeopleCollection.js"></script>
 <script type="text/javascript" src="js/directory/PeopleCardView.js"></script>
 <script type="text/javascript" src="js/directory/DirectoryView.js"></script>
 <script type="text/javascript" src="js/edition/EditView.js"></script>
 <script type="text/javascript" src="js/MenuView.js"></script>
+<script type="text/javascript" src="js/App.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <!-- endbuild -->
 

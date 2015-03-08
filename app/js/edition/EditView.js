@@ -1,7 +1,3 @@
-var EditView = Backbone.View.extend({
-
-    render: function () {
-        return this;
-    }
+var EditView = Marionette.ItemView.extend({
 
 });
