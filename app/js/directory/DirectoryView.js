@@ -1,6 +1,6 @@
 var DirectoryView = Marionette.CollectionView.extend({
 
-    className: 'row',
+    className: 'directory row',
 
     childView: PeopleCardView,
 

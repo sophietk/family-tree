@@ -74,7 +74,7 @@
 
                 <div class="col s12 m4">
                     <div class="icon-block">
-                        <h2 class="center brown-text"><i class="mdi-action-account-child"></i></h2>
+                        <h2 class="center brown-text"><i class="mdi-social-group-add"></i></h2>
                         <h5 class="center">Enrich your family tree</h5>
 
                         <p class="light">Marzipan powder jujubes jelly apple pie. Croissant danish gummies toffee
@@ -105,8 +105,7 @@
     <div class="col s6 m3">
         <div class="card">
             <div class="card-image">
-                {{#isMale}}<img src="img/male.png">{{/isMale}}
-                {{^isMale}}<img src="img/female.png">{{/isMale}}
+                <img src="{{#if isMale}}img/male.png{{else}}img/female.png{{/if}}">
                 <span class="card-title shadowed">{{firstName}} {{name}}</span>
             </div>
             <div class="card-content">
@@ -115,24 +114,64 @@
                 {{#birthDate}}<p>Birth date: {{birthDate}}</p>{{/birthDate}}
             </div>
             <div class="card-action">
-                <a href="#">Show tree</a>
-                <a href='#'>Edit</a>
+                <a href="#people/{{_id}}">Show tree</a>
+                <a href='#people/{{_id}}/edit'>Edit</a>
             </div>
         </div>
     </div>
-
 </script>
+
+<script type="text/x-handlebars-template" id="tpl-people">
+    <h3>Identity</h3>
+    <ul>
+        <li>First name: {{firstName}}</li>
+        <li>Name: {{name}}</li>
+        {{#maidenName}}
+        <li>Maiden name: {{maidenName}}</li>
+        {{/maidenName}}
+        <li>Gender: {{gender}}</li>
+        {{#birthDate}}
+        <li>Birth date: {{birthDate}}</li>
+        {{/birthDate}}
+    </ul>
+
+    <h3>Parents</h3>
+    <ul>
+        {{#father}}
+        <li>{{> people-link}}</li>
+        {{/father}}
+        {{#mother}}
+        <li>{{> people-link}}</li>
+        {{/mother}}
+    </ul>
+
+    <h3>Children</h3>
+    <ul>
+        {{#children}}
+        <li>{{> people-link}}</li>
+        {{/children}}
+    </ul>
+
+    <a href='#people/{{_id}}/edit'>Edit</a>
+</script>
+
+<script type="text/x-handlebars-template" id="partial-people-link">
+    <a href="#people/{{_id}}" class="{{#if isMale}}cyan-text{{else}}pink-text{{/if}} text-lighten-2">{{#if
+        isMale}}♂{{else}}♀{{/if}} {{firstName}} {{name}}</a>
+</script>
+
 
 <!-- build:js app.min.js -->
 <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript" src="bower_components/lodash/lodash.js"></script>
 <script type="text/javascript" src="bower_components/backbone/backbone.js"></script>
 <script type="text/javascript" src="bower_components/marionette/lib/backbone.marionette.js"></script>
-<script type="text/javascript" src="bower_components/mustache/mustache.js"></script>
+<script type="text/javascript" src="bower_components/handlebars/handlebars.js"></script>
 <script type="text/javascript" src="bower_components/moment/moment.js"></script>
 <script type="text/javascript" src="bower_components/materialize/dist/js/materialize.js"></script>
 <script type="text/javascript" src="js/home/HomeView.js"></script>
-<script type="text/javascript" src="js/directory/PeopleModel.js"></script>
+<script type="text/javascript" src="js/people/PeopleModel.js"></script>
+<script type="text/javascript" src="js/people/PeopleView.js"></script>
 <script type="text/javascript" src="js/directory/PeopleCollection.js"></script>
 <script type="text/javascript" src="js/directory/PeopleCardView.js"></script>
 <script type="text/javascript" src="js/directory/DirectoryView.js"></script>

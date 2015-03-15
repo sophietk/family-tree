@@ -1,32 +1,49 @@
 var _ = require('lodash'),
-    people = require('./people.json');
+    all = require('./people.json');
+
+function enrichWithMaleBoolean(people) {
+    return _.extend(people, {
+        isMale: people.gender === 'M'
+    });
+}
+
+function getPeople(id) {
+    var people = _.findWhere(all, {_id: id});
+    if (_.isUndefined(people)) return;
+    return enrichWithMaleBoolean(people);
+}
+
+function getChildren(parentId) {
+    var children = _.union(
+        _.where(all, {fatherId: parentId}),
+        _.where(all, {motherId: parentId}));
+
+    return _.map(children, enrichWithMaleBoolean);
+}
 
 exports = module.exports = function (app) {
 
     app.get('/people', function (req, res) {
-        res.send(people);
+        res.send(_.map(all, enrichWithMaleBoolean));
     });
 
     app.get('/people/:id', function (req, res) {
         var id = req.params.id,
-            member = _.findWhere(people, {_id: id}),
-            isMale,
+            people = getPeople(id),
             father,
             mother,
             children;
 
-        if (_.isUndefined(member)) {
+        if (_.isUndefined(people)) {
             res.send(404);
             return;
         }
 
-        isMale = member.gender === 'M';
-        father = _.findWhere(people, {_id: member.fatherId});
-        mother = _.findWhere(people, {_id: member.motherId});
-        children = _.where(people, isMale ? {fatherId: id} : {motherId: id});
+        father = getPeople(people.fatherId);
+        mother = getPeople(people.motherId);
+        children = getChildren(id);
 
-        res.send(_.extend({}, member, {
-            isMale: isMale,
+        res.send(_.extend({}, people, {
             father: father,
             mother: mother,
             children: children
