@@ -1,0 +1,27 @@
+/**** Structure ****/
+
+header {
+  padding: 10px;
+}
+
+@media #{$medium-and-down} {
+  nav .brand-logo {
+    left: initial;
+  }
+}
+
+.brand-logo::before {
+  background-image: url('../img/tree.png');
+  background-size: 50px;
+  content: '';
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  vertical-align: middle;
+}
+
+/**** Generic styles ****/
+
+.shadowed {
+  text-shadow: 2px 2px 4px #000000;
+}

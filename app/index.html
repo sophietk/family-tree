@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<nav class="menu clearfix" role="navigation"></nav>
+<div class="menu clearfix" role="navigation"></div>
 <div class="nude"></div>
 <main class="container"></main>
 
@@ -19,8 +19,14 @@
 <!-- Mustache templates -->
 <script type="text/x-handlebars-template" id="tpl-menu">
     <div class="nav-wrapper brown lighten-1 white-text">
+        <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
         <a href="#" class="brand-logo right">Family tree</a>
         <ul id="nav-mobile" class="left hide-on-med-and-down">
+            {{#items}}
+            <li><a href="#{{route}}" class="waves-effect">{{title}}</a></li>
+            {{/items}}
+        </ul>
+        <ul class="side-nav" id="mobile-menu">
             {{#items}}
             <li><a href="#{{route}}" class="waves-effect">{{title}}</a></li>
             {{/items}}

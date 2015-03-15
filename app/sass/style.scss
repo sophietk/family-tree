@@ -1,21 +1,4 @@
-@import "../bower_components/materialize/sass/materialize";
-
-@import "edit";
-
-
-/**** Add materialize features ****/
-
-header {
-  padding: 10px;
-}
-
-ul.striped li:nth-child(odd) {
-  background-color: #f2f2f2;
-}
-
-
-/**** Other ****/
-
-.shadowed {
-  text-shadow: 2px 2px 4px #000000;
-}
+@import '../bower_components/materialize/sass/materialize';
+@import 'app';
+@import 'directory';
+@import 'edit';

@@ -15,6 +15,10 @@ var MenuView = Marionette.ItemView.extend({
         }
     },
 
+    onShow: function () {
+        this.$('.button-collapse').sideNav();
+    },
+
     select: function (index) {
         this.$('li').eq(index).addClass('active')
             .siblings().removeClass('active');
