@@ -22,5 +22,9 @@ var MenuView = Marionette.ItemView.extend({
     select: function (index) {
         this.$('li').eq(index).addClass('active')
             .siblings().removeClass('active');
+    },
+
+    unselect: function () {
+        this.$('li').removeClass('active');
     }
 });

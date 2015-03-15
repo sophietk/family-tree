@@ -16,7 +16,8 @@
 
 </body>
 
-<!-- Mustache templates -->
+<!-- Templates -->
+
 <script type="text/x-handlebars-template" id="tpl-menu">
     <div class="nav-wrapper brown lighten-1 white-text">
         <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
@@ -106,12 +107,12 @@
         <div class="card">
             <div class="card-image">
                 <img src="{{#if isMale}}img/male.png{{else}}img/female.png{{/if}}">
-                <span class="card-title shadowed">{{firstName}} {{name}}</span>
+                <span class="card-title shadowed">{{firstName}} {{lastName}}</span>
             </div>
             <div class="card-content">
-                {{#maidenName}}<p>Maiden name: {{maidenName}}</p>{{/maidenName}}
+                {{#if maidenName}}<p>Maiden name: {{maidenName}}</p>{{/if}}
                 <p>Gender: {{gender}}</p>
-                {{#birthDate}}<p>Birth date: {{birthDate}}</p>{{/birthDate}}
+                {{#if birthDate}}<p>Birth date: {{birthDate}}</p>{{/if}}
             </div>
             <div class="card-action">
                 <a href="#people/{{_id}}">Show tree</a>
@@ -122,20 +123,28 @@
 </script>
 
 <script type="text/x-handlebars-template" id="tpl-people">
-    <h3>Identity</h3>
+    <div class="row">
+        <div class="col m9">&nbsp;</div>
+        <div class="col m3">
+            <a href="#people/{{_id}}/edit" class="waves-effect waves-light btn"><i
+                    class="mdi-editor-mode-edit right"></i>Edit</a>
+        </div>
+    </div>
+
+    <h3>{{firstName}} {{lastName}}</h3>
     <ul>
         <li>First name: {{firstName}}</li>
-        <li>Name: {{name}}</li>
-        {{#maidenName}}
+        <li>Name: {{lastName}}</li>
+        {{#if maidenName}}
         <li>Maiden name: {{maidenName}}</li>
-        {{/maidenName}}
+        {{/if}}
         <li>Gender: {{gender}}</li>
-        {{#birthDate}}
+        {{#if birthDate}}
         <li>Birth date: {{birthDate}}</li>
-        {{/birthDate}}
+        {{/if}}
     </ul>
 
-    <h3>Parents</h3>
+    <h4>Parents</h4>
     <ul>
         {{#father}}
         <li>{{> people-link}}</li>
@@ -145,19 +154,88 @@
         {{/mother}}
     </ul>
 
-    <h3>Children</h3>
+    <h4>Children</h4>
     <ul>
         {{#children}}
         <li>{{> people-link}}</li>
         {{/children}}
     </ul>
-
-    <a href='#people/{{_id}}/edit'>Edit</a>
 </script>
+
+<script type="text/x-handlebars-template" id="tpl-people-edit">
+    <div class="row">
+        <div class="col m9">&nbsp;</div>
+        <div class="col m3">
+            <a href="#people/{{_id}}" class="waves-effect waves-light btn"><i
+                    class="mdi-image-remove-red-eye right"></i>View</a>
+        </div>
+    </div>
+
+    <form class="col s12">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="firstName" type="text" class="validate" value="{{firstName}}">
+                <label for="firstName" class="{{#firstName}}active{{/firstName}}">First Name</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="lastName" type="text" class="validate" value="{{lastName}}">
+                <label for="lastName" class="{{#lastName}}active{{/lastName}}">Last Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s3">
+                <input name="gender" class="with-gap" type="radio" value="M" id="genderM" {{#isMale}}checked="checked"
+                       {{/isMale}} />
+                <label for="genderM">Male</label>
+            </div>
+            <div class="input-field col s3">
+                <input name="gender" class="with-gap" type="radio" value="F" id="genderF" {{^isMale}}checked="checked"
+                       {{/isMale}} />
+                <label for="genderF">Female</label>
+            </div>
+            <div class="input-field col s6 maidenNameBlock">
+                <input id="maidenName" type="text" value="{{maidenName}}">
+                <label for="maidenName" class="{{#maidenName}}active{{/maidenName}}">Maiden name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="birthDate" type="text" class="datepicker" value="{{birthDate}}">
+                <label for="birthDate" class="{{#birthDate}}active{{/birthDate}}">Birth date</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s6">
+                <label for="fatherId">Father</label>
+                <select id="fatherId" class="browser-default">
+                    <option value="" selected>Choose the father</option>
+                </select>
+            </div>
+            <div class="col s6">
+                <label for="motherId">Mother</label>
+                <select id="motherId" class="browser-default">
+                    <option value="" selected>Choose the mother</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="story" class="materialize-textarea"></textarea>
+                        <label for="story">About this people</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </form>
+</script>
+
+<!-- Partials -->
 
 <script type="text/x-handlebars-template" id="partial-people-link">
     <a href="#people/{{_id}}" class="{{#if isMale}}cyan-text{{else}}pink-text{{/if}} text-lighten-2">{{#if
-        isMale}}♂{{else}}♀{{/if}} {{firstName}} {{name}}</a>
+        isMale}}♂{{else}}♀{{/if}} {{firstName}} {{lastName}}</a>
 </script>
 
 
@@ -175,7 +253,7 @@
 <script type="text/javascript" src="js/directory/PeopleCollection.js"></script>
 <script type="text/javascript" src="js/directory/PeopleCardView.js"></script>
 <script type="text/javascript" src="js/directory/DirectoryView.js"></script>
-<script type="text/javascript" src="js/edition/EditView.js"></script>
+<script type="text/javascript" src="js/people/edition/EditView.js"></script>
 <script type="text/javascript" src="js/MenuView.js"></script>
 <script type="text/javascript" src="js/App.js"></script>
 <script type="text/javascript" src="js/Router.js"></script>

@@ -4,6 +4,7 @@ var Router = Marionette.AppRouter.extend({
         'home': 'home',
         'directory': 'directory',
         'people/:id': 'people',
+        'people/:id/edit': 'editPeople',
         '': 'home'
     },
 
@@ -22,6 +23,13 @@ var Router = Marionette.AppRouter.extend({
     people: function (peopleId) {
         app.nudeRegion.reset();
         app.mainRegion.show(new PeopleView({peopleId: peopleId}));
+        app.menuRegion.currentView.unselect();
+    },
+
+    editPeople: function (peopleId) {
+        app.nudeRegion.reset();
+        app.mainRegion.show(new EditView({peopleId: peopleId}));
+        app.menuRegion.currentView.unselect();
     }
 
 });
