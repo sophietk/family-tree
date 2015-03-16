@@ -21,6 +21,36 @@ function getEnrichedChildren(parentId) {
     return _.map(children, enrichWithMaleBoolean);
 }
 
+function buildSpouses(people) {
+    if (!_.isUndefined(people.spouses)) return;
+
+    var id = people._id,
+        spouses = _.map(people.spousesIds, bdd.getPeople),
+        children = getEnrichedChildren(id);
+
+    _.each(children, function (child) {
+        var otherParentId = _.without([child.fatherId, child.motherId], id)[0],
+            otherParent;
+        if (_.isUndefined(otherParentId)) {
+            spouses.push({children: [child]});
+            return;
+        }
+
+        otherParent = _.findWhere(spouses, {_id: otherParentId});
+        if (_.isUndefined(otherParent)) {
+            spouses.push(_.extend({}, otherParent, {children: [child]}));
+            return;
+        }
+
+        if (_.isUndefined(otherParent.children)) {
+            otherParent.children = [];
+        }
+        otherParent.children.push(child);
+    });
+
+    people.spouses = spouses;
+}
+
 exports = module.exports = function (app) {
 
     app.get('/people', function (req, res) {
@@ -70,6 +100,29 @@ exports = module.exports = function (app) {
         });
 
         res.send(getEnrichedPeople(id));
+    });
+
+    app.get('/family/:id', function (req, res) {
+        var id = req.params.id,
+            level = parseInt(req.query.level),
+            people = getEnrichedPeople(id);
+
+        if (_.isUndefined(people)) {
+            res.sendStatus(404);
+            return;
+        }
+
+        buildSpouses(people);
+
+        for (var i = 0; i < level; i++) {
+            var allChildren = _.flatten(_.pluck(people.spouses, 'children'));
+            for (var j = 0; j < i; j++) {
+                allChildren = _.flatten(_.pluck(allChildren.spouses, 'children'));
+            }
+            _.each(allChildren, buildSpouses);
+        }
+
+        res.send(people);
     });
 
 };
