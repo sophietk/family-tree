@@ -1,5 +1,3 @@
-var app = new App();
-
 app
     .on('before:start', function () {
         Marionette.Renderer.render = function (template, data) {

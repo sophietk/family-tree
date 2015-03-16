@@ -7,3 +7,5 @@ var App = Marionette.Application.extend({
     }
 
 });
+
+var app = new App();
