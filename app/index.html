@@ -200,11 +200,11 @@
     <form class="col s12">
         <div class="row">
             <div class="input-field col s6">
-                <input id="firstName" type="text" class="validate" value="{{firstName}}">
+                <input name="firstName" id="firstName" type="text" class="validate" value="{{firstName}}">
                 <label for="firstName" class="{{#firstName}}active{{/firstName}}">First Name</label>
             </div>
             <div class="input-field col s6">
-                <input id="lastName" type="text" class="validate" value="{{lastName}}">
+                <input name="lastName" id="lastName" type="text" class="validate" value="{{lastName}}">
                 <label for="lastName" class="{{#lastName}}active{{/lastName}}">Last Name</label>
             </div>
         </div>
@@ -220,26 +220,30 @@
                 <label for="genderF">Female</label>
             </div>
             <div class="input-field col s6 maidenNameBlock">
-                <input id="maidenName" type="text" value="{{maidenName}}">
+                <input name="maidenName" id="maidenName" type="text" value="{{maidenName}}">
                 <label for="maidenName" class="{{#maidenName}}active{{/maidenName}}">Maiden name</label>
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s12">
-                <input id="birthDate" type="text" class="datepicker" value="{{birthDate}}">
+            <div class="input-field col s6">
+                <input name="birthDate" id="birthDate" type="text" class="datepicker" value="{{birthDate}}">
                 <label for="birthDate" class="{{#birthDate}}active{{/birthDate}}">Birth date</label>
+            </div>
+            <div class="input-field col s6">
+                <input name="deathDate" id="deathDate" type="text" class="datepicker" value="{{deathDate}}">
+                <label for="deathDate" class="{{#deathDate}}active{{/deathDate}}">Death date</label>
             </div>
         </div>
         <div class="row">
             <div class="col s6">
                 <label for="fatherId">Father</label>
-                <select id="fatherId" class="browser-default">
+                <select name="fatherId" id="fatherId" class="browser-default">
                     <option value="" selected>Choose the father</option>
                 </select>
             </div>
             <div class="col s6">
                 <label for="motherId">Mother</label>
-                <select id="motherId" class="browser-default">
+                <select name="motherId" id="motherId" class="browser-default">
                     <option value="" selected>Choose the mother</option>
                 </select>
             </div>
@@ -248,12 +252,16 @@
             <form class="col s12">
                 <div class="row">
                     <div class="input-field col s12">
-                        <textarea id="story" class="materialize-textarea"></textarea>
-                        <label for="story">About this people</label>
+                        <textarea name="about" id="about" class="materialize-textarea">{{about}}</textarea>
+                        <label for="about" class="{{#about}}active{{/about}}">About this people</label>
                     </div>
                 </div>
             </form>
         </div>
+
+        <button class="btn waves-effect waves-light" type="submit" name="action">Save
+            <i class="mdi-content-send right"></i>
+        </button>
     </form>
 </script>
 

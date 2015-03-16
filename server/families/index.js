@@ -1,5 +1,5 @@
 var _ = require('lodash'),
-    all = require('./people.json');
+    bdd = require('../database');
 
 function enrichWithMaleBoolean(people) {
     return _.extend(people, {
@@ -7,16 +7,16 @@ function enrichWithMaleBoolean(people) {
     });
 }
 
-function getPeople(id) {
-    var people = _.findWhere(all, {_id: id});
+function getEnrichedPeople(id) {
+    var people = bdd.getPeople(id);
     if (_.isUndefined(people)) return;
     return enrichWithMaleBoolean(people);
 }
 
-function getChildren(parentId) {
+function getEnrichedChildren(parentId) {
     var children = _.union(
-        _.where(all, {fatherId: parentId}),
-        _.where(all, {motherId: parentId}));
+        _.where(bdd.getAll(), {fatherId: parentId}),
+        _.where(bdd.getAll(), {motherId: parentId}));
 
     return _.map(children, enrichWithMaleBoolean);
 }
@@ -24,30 +24,52 @@ function getChildren(parentId) {
 exports = module.exports = function (app) {
 
     app.get('/people', function (req, res) {
-        res.send(_.map(all, enrichWithMaleBoolean));
+        res.send(_.map(bdd.getAll(), enrichWithMaleBoolean));
     });
 
     app.get('/people/:id', function (req, res) {
         var id = req.params.id,
-            people = getPeople(id),
-            father,
-            mother,
-            children;
+            people = getEnrichedPeople(id);
 
         if (_.isUndefined(people)) {
-            res.send(404);
+            res.sendStatus(404);
             return;
         }
 
-        father = getPeople(people.fatherId);
-        mother = getPeople(people.motherId);
-        children = getChildren(id);
-
         res.send(_.extend({}, people, {
-            father: father,
-            mother: mother,
-            children: children
+            father: getEnrichedPeople(people.fatherId),
+            mother: getEnrichedPeople(people.motherId),
+            children: getEnrichedChildren(id)
         }));
+    });
+
+    app.put('/people/:id', function (req, res) {
+        var id = req.params.id,
+            people = bdd.getPeople(id);
+
+        if (_.isUndefined(people)) {
+            res.sendStatus(404);
+            return;
+        }
+
+        _.each(req.body, function removeEmpty(value, key) {
+            if (_.isUndefined(value) || _.isNull(value) || _.isEmpty(value)) {
+                delete req.body[key];
+            }
+        });
+
+        bdd.replacePeople(id, {
+            _id: req.body._id,
+            lastName: req.body.lastName,
+            maidenName: req.body.maidenName,
+            firstName: req.body.firstName,
+            gender: req.body.gender,
+            fatherId: req.body.fatherId,
+            motherId: req.body.motherId,
+            about: req.body.about
+        });
+
+        res.send(getEnrichedPeople(id));
     });
 
 };

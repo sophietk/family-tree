@@ -7,4 +7,4 @@ app/css/*.css
 .tmp/
 dist/
 zip/
-server/families/people2.json
+server/database/people2.json
