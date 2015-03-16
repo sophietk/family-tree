@@ -1,0 +1,258 @@
+$hover-brown-color: #bcaaa4;
+$hover-blue-color: #b2ebf2;
+$hover-pink-color: #f8bbd0;
+
+.tree {
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  white-space: nowrap;
+
+  ul {
+    padding-top: 5px;
+    position: relative;
+    display: table;
+    margin: 0 auto;
+    font-size: 0;
+
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+  }
+
+  li {
+    display: inline-block;
+    text-align: center;
+    list-style-type: none;
+    position: relative;
+    padding: 20px 5px 0 5px;
+    font-size: 12px;
+    line-height: normal;
+
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+
+    /*We will use ::before and ::after to draw the connectors*/
+
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 50%;
+      border-top: 1px solid #2980B9;
+      width: 50%;
+      height: 20px;
+    }
+
+    &::after {
+      right: auto;
+      left: 50%;
+      border-left: 1px solid #2980B9;
+    }
+
+    /*We need to remove left-right connectors from elements without
+    any siblings*/
+    &:only-child::after {
+      display: none;
+    }
+
+    /*Remove space from the top of single children*/
+    //.tree li:only-child{ padding-top: 0;}
+
+    /*Remove left connector from first child and
+    right connector from last child*/
+    &:first-child::before, &:last-child::after {
+      border: 0 none;
+    }
+
+    /*Adding back the vertical connector to the last nodes*/
+    li:last-child::before {
+      border-right: 1px solid #2980B9;
+      border-radius: 0 5px 0 0;
+      -webkit-border-radius: 0 5px 0 0;
+      -moz-border-radius: 0 5px 0 0;
+    }
+
+    &:first-child::after {
+      border-radius: 5px 0 0 0;
+      -webkit-border-radius: 5px 0 0 0;
+      -moz-border-radius: 5px 0 0 0;
+    }
+
+    li:only-child::before {
+      right: auto;
+      left: 50%;
+      border-left: 1px solid #2980B9;
+      border-right: none;
+    }
+  }
+
+  ul.p {
+    & > li::before {
+      border: none;
+      content: '+';
+      left: 0;
+      width: 100%;
+      display: block;
+    }
+
+    & > li::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 50%;
+      border-top: none;
+      width: 50%;
+      height: 20px;
+      border-left: none;
+    }
+  }
+
+  .p1 {
+    display: table;
+    margin: 0 auto;
+
+    &::before {
+      border: none;
+      content: '+';
+      left: 0;
+      width: 100%;
+      display: block;
+      margin: 5px 0;
+    }
+  }
+
+  /*Time to add downward connectors from parents*/
+
+  ul.c {
+    padding-top: 20px;
+  }
+
+  ul ul.c::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    border-left: 1px solid #2980B9;
+    width: 0;
+    height: 20px;
+  }
+
+  li a {
+    border: 1px solid #ccc;
+    padding: 4px;
+    text-decoration: none;
+    color: #666;
+    background-color: #fff;
+    display: inline-block;
+    min-width: 50px;
+
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    position: relative;
+
+    /* cg - remove focus rectangle */
+    outline: none;
+
+    &#hilight {
+      border: 1px solid #999;
+      color: #333;
+      background-color: #FFFF88;
+    }
+
+    /* red border on contacts */
+    &.o {
+      /* background-color: #f90; */
+    }
+
+    span {
+      display: block;
+      font-size: 10px;
+
+    }
+
+    /*Time for some hover effects*/
+    /*We will apply the hover effect the the lineage of the element also*/
+    /*
+    &:hover {
+
+      &.m {
+        background: $hover-blue-color;
+      }
+      &.f {
+        background: $hover-pink-color;
+      }
+
+      color: #000;
+      border: 1px solid #94a0b4;
+
+      & + ul li a, & + .p1 a {
+        background: $hover-brown-color;
+        color: #000;
+        border: 1px solid #94a0b4;
+      }
+    }*/
+  }
+
+  li.emphasis {
+    & > a.m {
+      border: 2px solid #00bcd4;
+    }
+    & > a.f {
+      border: 2px solid #e91e63;
+    }
+  }
+
+  /*Thats all. I hope you enjoyed it.
+  Thanks :)*/
+
+  .tree-thumbnail {
+    display: block;
+    vertical-align: text-top;
+    margin: 0px auto 4px auto;
+    width: 50px;
+    height: 50px;
+
+    img {
+      background-color: #fff;
+    }
+  }
+
+  a.f .tree-thumbnail {
+    background-image: url('../img/female.png');
+    background-size: 50px;
+  }
+
+  a.m .tree-thumbnail {
+    background-image: url('../img/male.png');
+    background-size: 50px;
+  }
+
+  a.unknown .tree-thumbnail::before {
+    content: '?';
+    font-size: 46px;
+  }
+
+  .tree-detail {
+    display: inline-block;
+    vertical-align: text-top;
+  }
+
+  /* cg: make sure the popovers are higher than the hovers */
+  .popover {
+    z-index: 4444;
+  }
+
+  .icon-info-sign {
+    background-position: 0px 0px;
+    background-image: url('../img/icon-info-sign.png');
+  }
+}

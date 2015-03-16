@@ -111,7 +111,7 @@
             </div>
             <div class="card-content">
                 {{#if maidenName}}<p>Maiden name: {{maidenName}}</p>{{/if}}
-                <p>Gender: {{gender}}</p>
+                <p>Gender: {{> gender-symbol isMale}}</p>
                 {{#if birthDate}}<p>Birth date: {{birthDate}}</p>{{/if}}
             </div>
             <div class="card-action">
@@ -131,35 +131,61 @@
         </div>
     </div>
 
-    <h3>{{firstName}} {{lastName}}</h3>
-    <ul>
-        <li>First name: {{firstName}}</li>
-        <li>Name: {{lastName}}</li>
-        {{#if maidenName}}
-        <li>Maiden name: {{maidenName}}</li>
-        {{/if}}
-        <li>Gender: {{gender}}</li>
-        {{#if birthDate}}
-        <li>Birth date: {{birthDate}}</li>
-        {{/if}}
-    </ul>
+    <div class="row">
+        <div class="col m6 s12">
+            <h3>{{firstName}} {{lastName}}</h3>
+            <ul>
+                <li>First name: {{firstName}}</li>
+                <li>Name: {{lastName}}</li>
+                {{#if maidenName}}
+                <li>Maiden name: {{maidenName}}</li>
+                {{/if}}
+                <li>Gender: {{> gender-symbol isMale}}</li>
+                {{#if birthDate}}
+                <li>Birth date: {{birthDate}}</li>
+                {{/if}}
+            </ul>
 
-    <h4>Parents</h4>
-    <ul>
-        {{#father}}
-        <li>{{> people-link}}</li>
-        {{/father}}
-        {{#mother}}
-        <li>{{> people-link}}</li>
-        {{/mother}}
-    </ul>
+            <h4>Parents</h4>
+            <ul>
+                {{#father}}
+                <li>{{> people-link}}</li>
+                {{/father}}
+                {{#mother}}
+                <li>{{> people-link}}</li>
+                {{/mother}}
+            </ul>
 
-    <h4>Children</h4>
-    <ul>
-        {{#children}}
-        <li>{{> people-link}}</li>
-        {{/children}}
-    </ul>
+            <h4>Children</h4>
+            <ul>
+                {{#children}}
+                <li>{{> people-link}}</li>
+                {{/children}}
+            </ul>
+        </div>
+
+        <div class="col m6 s12 tree">
+            <ul>
+                <li>
+                    {{> tree-node father}}
+                    <div class="p1">
+                        {{> tree-node mother}}
+                        <ul class="c">
+                            <li class="emphasis">{{> tree-node}}
+                                {{#if children}}
+                                <ul class="c">
+                                    {{#each children}}
+                                    <li>{{> tree-node}}</li>
+                                    {{/each}}
+                                </ul>
+                                {{/if}}
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </script>
 
 <script type="text/x-handlebars-template" id="tpl-people-edit">
@@ -233,11 +259,34 @@
 
 <!-- Partials -->
 
-<script type="text/x-handlebars-template" id="partial-people-link">
-    <a href="#people/{{_id}}" class="{{#if isMale}}cyan-text{{else}}pink-text{{/if}} text-lighten-2">{{#if
-        isMale}}♂{{else}}♀{{/if}} {{firstName}} {{lastName}}</a>
+<script type="text/x-handlebars-template" id="partial-gender-symbol">
+    <span class="{{#if .}}cyan-text{{else}}pink-text{{/if}}">
+        {{#if .}}♂{{else}}♀{{/if}}
+    </span>
 </script>
 
+<script type="text/x-handlebars-template" id="partial-people-link">
+    <a href="#people/{{_id}}">{{> gender-symbol isMale}} {{firstName}} {{lastName}}</a>
+</script>
+
+<script type="text/x-handlebars-template" id="partial-tree-node">
+    {{#if .}}
+    <a href="#people/{{_id}}" class="{{#if isMale}}m{{else}}f{{/if}}" rel="content">
+        <div class="tree-thumbnail">{{#avatarUrl}}<img src="{{.}}" class="img-rounded">{{/avatarUrl}}</div>
+        <div class="tree-detail">
+            {{firstName}} {{lastName}}<br>
+            {{#oneOf birthDate deathDate}}
+            <span>({{year birthDate .}} - {{year deathDate}})</span>
+            {{/oneOf}}
+        </div>
+    </a>
+    {{else}}
+    <a class="unknown" rel="content">
+        <div class="tree-thumbnail"></div>
+        <div class="tree-detail"></div>
+    </a>
+    {{/if}}
+</script>
 
 <!-- build:js app.min.js -->
 <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>

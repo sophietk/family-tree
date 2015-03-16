@@ -25,3 +25,14 @@ header {
 .shadowed {
   text-shadow: 2px 2px 4px #000000;
 }
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.img-rounded {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
