@@ -115,7 +115,8 @@
                 {{#if birthDate}}<p>Birth date: {{birthDate}}</p>{{/if}}
             </div>
             <div class="card-action">
-                <a href="#people/{{_id}}">Show tree</a>
+                <a href="#people/{{_id}}">View</a>
+                <a href="#family/{{_id}}">Show tree</a>
                 <a href='#people/{{_id}}/edit'>Edit</a>
             </div>
         </div>
@@ -124,8 +125,12 @@
 
 <script type="text/x-handlebars-template" id="tpl-people">
     <div class="row">
-        <div class="col m9">&nbsp;</div>
-        <div class="col m3">
+        <div class="col m6">&nbsp;</div>
+        <div class="col m3 s12">
+            <a href="#family/{{_id}}" class="waves-effect waves-light btn"><i
+                    class="mdi-social-people right"></i>Show tree</a>
+        </div>
+        <div class="col m3 s12">
             <a href="#people/{{_id}}/edit" class="waves-effect waves-light btn"><i
                     class="mdi-editor-mode-edit right"></i>Edit</a>
         </div>
@@ -265,6 +270,26 @@
     </form>
 </script>
 
+<script type="text/x-handlebars-template" id="tpl-family">
+    <div class="row">
+        <div class="col m9">&nbsp;</div>
+        <div class="col m3">
+            <a href="#people/{{_id}}" class="waves-effect waves-light btn"><i
+                    class="mdi-image-remove-red-eye right"></i>View</a>
+        </div>
+    </div>
+
+    <h3>Tree of {{firstName}} {{lastName}}</h3>
+
+    <div class="col m6 s12 tree">
+        <ul>
+            <li>
+                {{> tree-node-recursive}}
+            </li>
+        </ul>
+    </div>
+</script>
+
 <!-- Partials -->
 
 <script type="text/x-handlebars-template" id="partial-gender-symbol">
@@ -296,6 +321,39 @@
     {{/if}}
 </script>
 
+<script type="text/x-handlebars-template" id="partial-tree-node-recursive">
+    {{> tree-node}}
+    {{#if oneSpouse}}
+    <div class="p1">
+        {{#spouses}}
+        {{> tree-node}}
+        {{#if children}}
+        <ul class="c">
+            {{#each children}}
+            <li>{{> tree-node-recursive}}</li>
+            {{/each}}
+        </ul>
+        {{/if}}
+        {{/spouses}}
+    </div>
+    {{/if}}
+    {{#if severalSpouses}}
+    <ul class="p">
+        {{#spouses}}
+        <li>{{> tree-node}}
+            {{#if children}}
+            <ul class="c">
+                {{#each children}}
+                <li>{{> tree-node-recursive}}</li>
+                {{/each}}
+            </ul>
+            {{/if}}
+        </li>
+        {{/spouses}}
+    </ul>
+    {{/if}}
+</script>
+
 <!-- build:js app.min.js -->
 <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript" src="bower_components/lodash/lodash.js"></script>
@@ -307,6 +365,8 @@
 <script type="text/javascript" src="js/home/HomeView.js"></script>
 <script type="text/javascript" src="js/people/PeopleModel.js"></script>
 <script type="text/javascript" src="js/people/PeopleView.js"></script>
+<script type="text/javascript" src="js/family/FamilyModel.js"></script>
+<script type="text/javascript" src="js/family/FamilyView.js"></script>
 <script type="text/javascript" src="js/directory/PeopleCollection.js"></script>
 <script type="text/javascript" src="js/directory/PeopleCardView.js"></script>
 <script type="text/javascript" src="js/directory/DirectoryView.js"></script>

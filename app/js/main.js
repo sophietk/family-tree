@@ -6,6 +6,7 @@ app
         Handlebars.registerPartial('gender-symbol', $('#partial-gender-symbol').html());
         Handlebars.registerPartial('people-link', $('#partial-people-link').html());
         Handlebars.registerPartial('tree-node', $('#partial-tree-node').html());
+        Handlebars.registerPartial('tree-node-recursive', $('#partial-tree-node-recursive').html());
         Handlebars.registerHelper('year', function (date) {
             if (_.isUndefined(date)) return '';
             return moment(date).year();

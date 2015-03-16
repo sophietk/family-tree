@@ -1,5 +1,6 @@
 var _ = require('lodash'),
-    bdd = require('../database');
+    bdd = require('../database'),
+    DEFAULT_FAMILY_LEVEL = 4;
 
 function enrichWithMaleBoolean(people) {
     return _.extend(people, {
@@ -38,7 +39,7 @@ function buildSpouses(people) {
 
         otherParent = _.findWhere(spouses, {_id: otherParentId});
         if (_.isUndefined(otherParent)) {
-            spouses.push(_.extend({}, otherParent, {children: [child]}));
+            spouses.push(_.extend({}, getEnrichedPeople(otherParentId), {children: [child]}));
             return;
         }
 
@@ -48,6 +49,8 @@ function buildSpouses(people) {
         otherParent.children.push(child);
     });
 
+    people.oneSpouse = spouses.length === 1;
+    people.severalSpouses = spouses.length > 1;
     people.spouses = spouses;
 }
 
@@ -104,7 +107,7 @@ exports = module.exports = function (app) {
 
     app.get('/family/:id', function (req, res) {
         var id = req.params.id,
-            level = parseInt(req.query.level),
+            level = parseInt(req.query.level) || DEFAULT_FAMILY_LEVEL,
             people = getEnrichedPeople(id);
 
         if (_.isUndefined(people)) {
