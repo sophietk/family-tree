@@ -249,14 +249,25 @@
             <div class="col s6">
                 <label for="fatherId">Father</label>
                 <select name="fatherId" id="fatherId" class="browser-default">
-                    <option value="" selected>Choose the father</option>
+                    <option value="" selected>-</option>
                 </select>
             </div>
             <div class="col s6">
                 <label for="motherId">Mother</label>
                 <select name="motherId" id="motherId" class="browser-default">
-                    <option value="" selected>Choose the mother</option>
+                    <option value="" selected>-</option>
                 </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 addSpouseBlock">
+                <label>Spouses</label>
+                <a class="btn-floating btn-small waves-effect waves-light"><i class="mdi-content-add"></i></a>
+                {{#spousesIds}}
+                <select name="spouse" id="spouse{{@index}}" class="browser-default">
+                    <option value="" selected>-</option>
+                </select>
+                {{/spousesIds}}
             </div>
         </div>
         <div class="row">

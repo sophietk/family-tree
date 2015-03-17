@@ -10,7 +10,8 @@
     "lastName": "Amidala",
     "maidenName": "Amidala",
     "firstName": "Padmé",
-    "gender": "F"
+    "gender": "F",
+    "spousesIds": ["54f758f3f6a4810a19c3b258"]
   },
   {
     "_id": "54f759141138b91019e18e46",
@@ -27,7 +28,8 @@
     "firstName": "Leia",
     "gender": "F",
     "fatherId": "54f758f3f6a4810a19c3b258",
-    "motherId": "54f759141138b91019e18e45"
+    "motherId": "54f759141138b91019e18e45",
+    "spousesIds": ["54f759141138b91019e18e48"]
   },
   {
     "_id": "54f759141138b91019e18e48",

@@ -5,6 +5,8 @@ var _ = require('lodash'),
 function retrievePeopleFromReq(req) {
     var people = req.body;
 
+    people.spousesIds = _.compact(people.spousesIds);
+
     _.each(people, function removeIfEmpty(value, key) {
         if (_.isUndefined(value) || _.isNull(value) || _.isEmpty(value)) {
             delete people[key];
@@ -21,6 +23,7 @@ function retrievePeopleFromReq(req) {
         'deathDate',
         'fatherId',
         'motherId',
+        'spousesIds',
         'about'
     );
 }
@@ -47,7 +50,7 @@ function buildSpousesWithChildren(people) {
     if (!_.isUndefined(people.spouses)) return;
 
     var id = people._id,
-        spouses = _.map(people.spousesIds, db.getPeople),
+        spouses = _.map(people.spousesIds, getEnrichedPeople),
         children = getEnrichedChildren(id);
 
     _.each(children, function (child) {
@@ -138,6 +141,7 @@ exports = module.exports = function (app) {
                 .flatten()
                 .pluck('children')
                 .flatten()
+                .compact()
                 .reject({_id: id}) // avoid circular families
                 .value();
             if (_.isEmpty(allChildrenAtLevel)) break;

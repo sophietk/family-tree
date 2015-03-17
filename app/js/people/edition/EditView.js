@@ -14,11 +14,14 @@ var EditView = Marionette.ItemView.extend({
         about: 'textarea[name="about"]',
 
         maidenNameBlock: '.maidenNameBlock',
+        addSpouseBlock: '.addSpouseBlock',
+        addSpouse: '.addSpouseBlock a',
         button: 'button'
     },
 
     events: {
         'change @ui.gender': 'updateGender',
+        'click @ui.addSpouse': 'addSpouseSelect',
         'click @ui.button': 'save'
     },
 
@@ -48,23 +51,48 @@ var EditView = Marionette.ItemView.extend({
     },
 
     fillSelects: function () {
+        this.collection.remove(this.model.id);
         _.each(this.collection.where({gender: 'M'}), this.fillFatherSelect, this);
         _.each(this.collection.where({gender: 'F'}), this.fillMotherSelect, this);
+        this.collection.each(this.fillSpousesSelects, this);
 
         this.ui.fatherId.val(this.model.get('fatherId'));
         this.ui.motherId.val(this.model.get('motherId'));
+        this.$('select[name="spouse"]').each(_.bind(function fillSpouseSelect(index, el) {
+            $(el).val(this.model.get('spousesIds')[index]);
+        }, this));
     },
 
     fillFatherSelect: function (man) {
-        this.ui.fatherId.append('<option value="' + man.id + '">' + man.get('firstName') + ' ' + man.get('lastName') + '</option>');
+        this.ui.fatherId.append(this.buildOption(man));
     },
 
     fillMotherSelect: function (woman) {
-        this.ui.motherId.append('<option value="' + woman.id + '">' + woman.get('firstName') + ' ' + woman.get('lastName') + '</option>');
+        this.ui.motherId.append(this.buildOption(woman));
+    },
+
+    fillSpousesSelects: function (people) {
+        this.$('select[name="spouse"]').each(_.bind(function fillSpouseSelect(index, el) {
+            $(el).append(this.buildOption(people));
+        }, this));
+    },
+
+    buildOption: function (people) {
+        return '<option value="' + people.id + '">' + (people.get('firstName') || '') + ' ' + (people.get('lastName') || '') + '</option>';
     },
 
     updateGender: function () {
         this.ui.maidenNameBlock.toggle(this.getGender() === 'F');
+    },
+
+    addSpouseSelect: function () {
+        var $spouseSelect = $('<select name="spouse" id="spouse{{@index}}" class="browser-default">'
+        + '<option value="" selected>-</option>'
+        + '</select>');
+        this.ui.addSpouseBlock.append($spouseSelect);
+        this.collection.each(function fillSpouseSelect(people) {
+            $spouseSelect.append(this.buildOption(people));
+        }, this);
     },
 
     getGender: function () {
@@ -83,6 +111,12 @@ var EditView = Marionette.ItemView.extend({
         return moment(date).format('YYYY-MM-DD');
     },
 
+    getSpousesIds: function () {
+        return this.$('select[name="spouse"]').map(function (index, el) {
+            return $(el).val();
+        }).get();
+    },
+
     save: function () {
         this.model.save({
             firstName: this.ui.firstName.val(),
@@ -93,6 +127,7 @@ var EditView = Marionette.ItemView.extend({
             deathDate: this.getDeathDate(),
             fatherId: this.ui.fatherId.val(),
             motherId: this.ui.motherId.val(),
+            spousesIds: this.getSpousesIds(),
             about: this.ui.about.val()
         }, {
             success: _.bind(this.saveSuccess, this)
