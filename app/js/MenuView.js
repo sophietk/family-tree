@@ -7,6 +7,7 @@ var MenuView = Marionette.ItemView.extend({
     menuItems: [
         {route: 'home', title: 'Home'},
         {route: 'directory', title: 'Directory'},
+        {route: 'people/new', title: 'Add member'},
         {route: 'family/54f758f3f6a4810a19c3b258', title: 'Anakin’s family', class: 'teal'}
     ],
 

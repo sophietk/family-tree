@@ -24,9 +24,14 @@ var EditView = Marionette.ItemView.extend({
 
     initialize: function (options) {
         this.model = new PeopleModel();
-        this.model.set('_id', options.peopleId);
-        this.listenTo(this.model, 'sync', this.render);
-        this.model.fetch();
+
+        if (options.peopleId) {
+            this.model.set('_id', options.peopleId);
+            this.listenTo(this.model, 'sync', this.render);
+            this.model.fetch();
+        } else {
+            this.render();
+        }
 
         this.collection = new PeopleCollection();
         this.listenTo(this.collection, 'sync', this.fillSelects);

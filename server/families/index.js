@@ -2,6 +2,14 @@ var _ = require('lodash'),
     bdd = require('../database'),
     DEFAULT_FAMILY_LEVEL = 4;
 
+function removeEmpty(body) {
+    _.each(body, function removeEmpty(value, key) {
+        if (_.isUndefined(value) || _.isNull(value) || _.isEmpty(value)) {
+            delete body[key];
+        }
+    });
+}
+
 function enrichWithMaleBoolean(people) {
     return _.extend(people, {
         isMale: people.gender === 'M'
@@ -60,6 +68,25 @@ exports = module.exports = function (app) {
         res.send(_.map(bdd.getAll(), enrichWithMaleBoolean));
     });
 
+    app.post('/people', function (req, res) {
+        removeEmpty(req.body);
+
+        var id = bdd.createPeople({
+            _id: req.body._id,
+            lastName: req.body.lastName,
+            maidenName: req.body.maidenName,
+            firstName: req.body.firstName,
+            gender: req.body.gender,
+            birthDate: req.body.birthDate,
+            deathDate: req.body.deathDate,
+            fatherId: req.body.fatherId,
+            motherId: req.body.motherId,
+            about: req.body.about
+        });
+
+        res.send(getEnrichedPeople(id));
+    });
+
     app.get('/people/:id', function (req, res) {
         var id = req.params.id,
             people = getEnrichedPeople(id);
@@ -85,11 +112,7 @@ exports = module.exports = function (app) {
             return;
         }
 
-        _.each(req.body, function removeEmpty(value, key) {
-            if (_.isUndefined(value) || _.isNull(value) || _.isEmpty(value)) {
-                delete req.body[key];
-            }
-        });
+        removeEmpty(req.body);
 
         bdd.replacePeople(id, {
             _id: req.body._id,

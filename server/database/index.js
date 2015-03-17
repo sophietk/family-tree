@@ -22,6 +22,9 @@ exports = module.exports = {
     },
 
     createPeople: function (people) {
+        var id = _.uniqueId();
+        people._id = id;
         all.push(people);
+        return id;
     }
 };
