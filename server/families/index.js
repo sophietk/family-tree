@@ -1,13 +1,28 @@
 var _ = require('lodash'),
-    bdd = require('../database'),
-    DEFAULT_FAMILY_LEVEL = 4;
+    db = require('../database'),
+    DEFAULT_FAMILY_LEVEL = 10;
 
-function removeEmpty(body) {
-    _.each(body, function removeEmpty(value, key) {
+function retrievePeopleFromReq(req) {
+    var people = req.body;
+
+    _.each(people, function removeIfEmpty(value, key) {
         if (_.isUndefined(value) || _.isNull(value) || _.isEmpty(value)) {
-            delete body[key];
+            delete people[key];
         }
     });
+
+    return _.pick(people,
+        '_id',
+        'lastName',
+        'maidenName',
+        'firstName',
+        'gender',
+        'birthDate',
+        'deathDate',
+        'fatherId',
+        'motherId',
+        'about'
+    );
 }
 
 function enrichWithMaleBoolean(people) {
@@ -17,24 +32,22 @@ function enrichWithMaleBoolean(people) {
 }
 
 function getEnrichedPeople(id) {
-    var people = bdd.getPeople(id);
+    var people = db.getPeople(id);
     if (_.isUndefined(people)) return;
     return enrichWithMaleBoolean(people);
 }
 
 function getEnrichedChildren(parentId) {
-    var children = _.union(
-        _.where(bdd.getAll(), {fatherId: parentId}),
-        _.where(bdd.getAll(), {motherId: parentId}));
+    var children = db.getChildren(parentId);
 
     return _.map(children, enrichWithMaleBoolean);
 }
 
-function buildSpouses(people) {
+function buildSpousesWithChildren(people) {
     if (!_.isUndefined(people.spouses)) return;
 
     var id = people._id,
-        spouses = _.map(people.spousesIds, bdd.getPeople),
+        spouses = _.map(people.spousesIds, db.getPeople),
         children = getEnrichedChildren(id);
 
     _.each(children, function (child) {
@@ -65,24 +78,13 @@ function buildSpouses(people) {
 exports = module.exports = function (app) {
 
     app.get('/people', function (req, res) {
-        res.send(_.map(bdd.getAll(), enrichWithMaleBoolean));
+        res.send(_.map(db.getAll(), enrichWithMaleBoolean));
     });
 
     app.post('/people', function (req, res) {
-        removeEmpty(req.body);
+        var people = retrievePeopleFromReq(req);
 
-        var id = bdd.createPeople({
-            _id: req.body._id,
-            lastName: req.body.lastName,
-            maidenName: req.body.maidenName,
-            firstName: req.body.firstName,
-            gender: req.body.gender,
-            birthDate: req.body.birthDate,
-            deathDate: req.body.deathDate,
-            fatherId: req.body.fatherId,
-            motherId: req.body.motherId,
-            about: req.body.about
-        });
+        var id = db.createPeople(people);
 
         res.send(getEnrichedPeople(id));
     });
@@ -105,27 +107,14 @@ exports = module.exports = function (app) {
 
     app.put('/people/:id', function (req, res) {
         var id = req.params.id,
-            people = bdd.getPeople(id);
+            people = db.getPeople(id);
 
         if (_.isUndefined(people)) {
             res.sendStatus(404);
             return;
         }
 
-        removeEmpty(req.body);
-
-        bdd.replacePeople(id, {
-            _id: req.body._id,
-            lastName: req.body.lastName,
-            maidenName: req.body.maidenName,
-            firstName: req.body.firstName,
-            gender: req.body.gender,
-            birthDate: req.body.birthDate,
-            deathDate: req.body.deathDate,
-            fatherId: req.body.fatherId,
-            motherId: req.body.motherId,
-            about: req.body.about
-        });
+        db.replacePeople(id, retrievePeopleFromReq(req));
 
         res.send(getEnrichedPeople(id));
     });
@@ -140,14 +129,19 @@ exports = module.exports = function (app) {
             return;
         }
 
-        buildSpouses(people);
+        buildSpousesWithChildren(people);
 
+        var allChildrenAtLevel = [people];
         for (var i = 0; i < level; i++) {
-            var allChildren = _.flatten(_.pluck(people.spouses, 'children'));
-            for (var j = 0; j < i; j++) {
-                allChildren = _.flatten(_.pluck(allChildren.spouses, 'children'));
-            }
-            _.each(allChildren, buildSpouses);
+            allChildrenAtLevel = _.chain(allChildrenAtLevel)
+                .pluck('spouses')
+                .flatten()
+                .pluck('children')
+                .flatten()
+                .reject({_id: id}) // avoid circular families
+                .value();
+            if (_.isEmpty(allChildrenAtLevel)) break;
+            _.each(allChildrenAtLevel, buildSpousesWithChildren);
         }
 
         res.send(people);

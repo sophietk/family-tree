@@ -320,7 +320,7 @@
 </script>
 
 <script type="text/x-handlebars-template" id="partial-tree-node">
-    {{#if .}}
+    {{#if gender}} {{! else unknown people}}
     <a href="#people/{{_id}}" class="{{#if isMale}}m{{else}}f{{/if}}" rel="content">
         <div class="tree-thumbnail">{{#avatarUrl}}<img src="{{.}}" class="img-rounded">{{/avatarUrl}}</div>
         <div class="tree-detail">

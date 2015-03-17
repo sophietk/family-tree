@@ -2,19 +2,26 @@ var _ = require('lodash'),
     all = require('./people.json');
 
 function getPeople(id) {
-    return _.findWhere(all, {_id: id});
+    return _.cloneDeep(_.findWhere(all, {_id: id}));
 }
 
 exports = module.exports = {
 
     getAll: function () {
-        return all;
+        return _.cloneDeep(all);
     },
 
     getPeople: getPeople,
 
+    getChildren: function (parentId) {
+        return _.cloneDeep(_.union(
+            _.where(all, {fatherId: parentId}),
+            _.where(all, {motherId: parentId})));
+    },
+
     replacePeople: function (id, people) {
-        all[all.indexOf(getPeople(id))] = people;
+        var index = _.findIndex(all, {_id: id});
+        all[index] = people;
     },
 
     deletePeople: function (id) {
