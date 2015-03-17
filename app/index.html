@@ -113,6 +113,7 @@
                 {{#if maidenName}}<p>Maiden name: {{maidenName}}</p>{{/if}}
                 <p>Gender: {{> gender-symbol isMale}}</p>
                 {{#if birthDate}}<p>Birth date: {{birthDate}}</p>{{/if}}
+                {{#if deathDate}}<p>Death date: {{deathDate}}</p>{{/if}}
             </div>
             <div class="card-action">
                 <a href="#people/{{_id}}">View</a>
@@ -140,14 +141,17 @@
         <div class="col m6 s12">
             <h3>{{firstName}} {{lastName}}</h3>
             <ul>
-                <li>First name: {{firstName}}</li>
-                <li>Name: {{lastName}}</li>
+                <li><label>First name:</label> {{firstName}}</li>
+                <li><label>Name:</label> {{lastName}}</li>
                 {{#if maidenName}}
-                <li>Maiden name: {{maidenName}}</li>
+                <li><label>Maiden name:</label> {{maidenName}}</li>
                 {{/if}}
-                <li>Gender: {{> gender-symbol isMale}}</li>
+                <li><label>Gender:</label> {{> gender-symbol isMale}}</li>
                 {{#if birthDate}}
-                <li>Birth date: {{birthDate}}</li>
+                <li><label>Birth date:</label> {{readableDate birthDate}}</li>
+                {{/if}}
+                {{#if deathDate}}
+                <li><label>Death date:</label> {{readableDate deathDate}}</li>
                 {{/if}}
             </ul>
 
@@ -231,11 +235,13 @@
         </div>
         <div class="row">
             <div class="input-field col s6">
-                <input name="birthDate" id="birthDate" type="text" class="datepicker" value="{{birthDate}}">
+                <input name="birthDate" id="birthDate" type="text" class="datepicker"
+                       value="{{readableDate birthDate}}">
                 <label for="birthDate" class="{{#birthDate}}active{{/birthDate}}">Birth date</label>
             </div>
             <div class="input-field col s6">
-                <input name="deathDate" id="deathDate" type="text" class="datepicker" value="{{deathDate}}">
+                <input name="deathDate" id="deathDate" type="text" class="datepicker"
+                       value="{{readableDate deathDate}}">
                 <label for="deathDate" class="{{#deathDate}}active{{/deathDate}}">Death date</label>
             </div>
         </div>
@@ -281,12 +287,23 @@
 
     <h3>Tree of {{firstName}} {{lastName}}</h3>
 
-    <div class="col m6 s12 tree">
-        <ul>
-            <li>
-                {{> tree-node-recursive}}
-            </li>
-        </ul>
+    <div class="row">
+        <div class="col m2 s12">
+            <input name="withDate" type="checkbox" id="withDate" data-prop="date" checked="checked"/>
+            <label for="withDate">With dates</label>
+            <input name="withAvatar" type="checkbox" id="withAvatar" data-prop="avatar" checked="checked"/>
+            <label for="withAvatar">With avatars</label>
+            <input name="withName" type="checkbox" id="withName" data-prop="name" checked="checked"/>
+            <label for="withName">With names</label>
+        </div>
+
+        <div class="col m10 s12 tree">
+            <ul>
+                <li>
+                    {{> tree-node-recursive}}
+                </li>
+            </ul>
+        </div>
     </div>
 </script>
 
@@ -307,16 +324,21 @@
     <a href="#people/{{_id}}" class="{{#if isMale}}m{{else}}f{{/if}}" rel="content">
         <div class="tree-thumbnail">{{#avatarUrl}}<img src="{{.}}" class="img-rounded">{{/avatarUrl}}</div>
         <div class="tree-detail">
-            {{firstName}} {{lastName}}<br>
+            <p>{{firstName}}<br>{{lastName}}<br></p>
             {{#oneOf birthDate deathDate}}
             <span>({{year birthDate .}} - {{year deathDate}})</span>
+            {{else}}
+            <span>&nbsp;</span>
             {{/oneOf}}
         </div>
     </a>
     {{else}}
     <a class="unknown" rel="content">
         <div class="tree-thumbnail"></div>
-        <div class="tree-detail"></div>
+        <div class="tree-detail">
+            <br><br>
+            <span>&nbsp;</span>
+        </div>
     </a>
     {{/if}}
 </script>

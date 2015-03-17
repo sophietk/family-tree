@@ -97,6 +97,8 @@ exports = module.exports = function (app) {
             maidenName: req.body.maidenName,
             firstName: req.body.firstName,
             gender: req.body.gender,
+            birthDate: req.body.birthDate,
+            deathDate: req.body.deathDate,
             fatherId: req.body.fatherId,
             motherId: req.body.motherId,
             about: req.body.about

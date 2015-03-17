@@ -1,6 +1,8 @@
-$hover-brown-color: #bcaaa4;
-$hover-blue-color: #b2ebf2;
-$hover-pink-color: #f8bbd0;
+$color-teal: #b2dfdb;
+$color-brown: #8d6e63;
+
+$color-link: $color-brown;
+$color-border: $color-teal;
 
 .tree {
   * {
@@ -42,7 +44,7 @@ $hover-pink-color: #f8bbd0;
       position: absolute;
       top: 0;
       right: 50%;
-      border-top: 1px solid #2980B9;
+      border-top: 1px solid $color-link;
       width: 50%;
       height: 20px;
     }
@@ -50,7 +52,7 @@ $hover-pink-color: #f8bbd0;
     &::after {
       right: auto;
       left: 50%;
-      border-left: 1px solid #2980B9;
+      border-left: 1px solid $color-link;
     }
 
     /*We need to remove left-right connectors from elements without
@@ -70,7 +72,7 @@ $hover-pink-color: #f8bbd0;
 
     /*Adding back the vertical connector to the last nodes*/
     li:last-child::before {
-      border-right: 1px solid #2980B9;
+      border-right: 1px solid $color-link;
       border-radius: 0 5px 0 0;
       -webkit-border-radius: 0 5px 0 0;
       -moz-border-radius: 0 5px 0 0;
@@ -85,7 +87,7 @@ $hover-pink-color: #f8bbd0;
     li:only-child::before {
       right: auto;
       left: 50%;
-      border-left: 1px solid #2980B9;
+      border-left: 1px solid $color-link;
       border-right: none;
     }
   }
@@ -94,6 +96,7 @@ $hover-pink-color: #f8bbd0;
     & > li::before {
       border: none;
       content: '+';
+      color: $color-link;
       left: 0;
       width: 100%;
       display: block;
@@ -118,6 +121,7 @@ $hover-pink-color: #f8bbd0;
     &::before {
       border: none;
       content: '+';
+      color: $color-link;
       left: 0;
       width: 100%;
       display: block;
@@ -136,13 +140,13 @@ $hover-pink-color: #f8bbd0;
     position: absolute;
     top: 0;
     left: 50%;
-    border-left: 1px solid #2980B9;
+    border-left: 1px solid $color-link;
     width: 0;
     height: 20px;
   }
 
   li a {
-    border: 1px solid #ccc;
+    border: 1px solid $color-border;
     padding: 4px;
     text-decoration: none;
     color: #666;
@@ -178,28 +182,6 @@ $hover-pink-color: #f8bbd0;
       font-size: 10px;
 
     }
-
-    /*Time for some hover effects*/
-    /*We will apply the hover effect the the lineage of the element also*/
-    /*
-    &:hover {
-
-      &.m {
-        background: $hover-blue-color;
-      }
-      &.f {
-        background: $hover-pink-color;
-      }
-
-      color: #000;
-      border: 1px solid #94a0b4;
-
-      & + ul li a, & + .p1 a {
-        background: $hover-brown-color;
-        color: #000;
-        border: 1px solid #94a0b4;
-      }
-    }*/
   }
 
   li.emphasis {
@@ -238,12 +220,15 @@ $hover-pink-color: #f8bbd0;
 
   a.unknown .tree-thumbnail::before {
     content: '?';
-    font-size: 46px;
+    font-size: 60px;
   }
 
   .tree-detail {
     display: inline-block;
     vertical-align: text-top;
+    text-overflow: ellipsis;
+    width: 65px;
+    overflow: hidden;
   }
 
   /* cg: make sure the popovers are higher than the hovers */
@@ -254,5 +239,16 @@ $hover-pink-color: #f8bbd0;
   .icon-info-sign {
     background-position: 0px 0px;
     background-image: url('../img/icon-info-sign.png');
+  }
+
+  // Vizualisation options
+  &.hidden-date span {
+    display: none;
+  }
+  &.hidden-avatar .tree-thumbnail {
+    display: none;
+  }
+  &.hidden-name p {
+    display: none;
   }
 }

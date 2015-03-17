@@ -18,6 +18,10 @@ app
                 return options.fn(this);
             }
         });
+        Handlebars.registerHelper('readableDate', function (date) {
+            if (_.isUndefined(date)) return '';
+            return moment(date).format('D MMMM, YYYY');
+        });
     })
     .on('start', function () {
         app.menuRegion.show(new MenuView());
