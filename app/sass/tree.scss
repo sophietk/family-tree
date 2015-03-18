@@ -13,7 +13,6 @@ $color-border: $color-teal;
   white-space: nowrap;
 
   ul {
-    padding-top: 5px;
     position: relative;
     display: table;
     margin: 0 auto;
@@ -29,7 +28,7 @@ $color-border: $color-teal;
     text-align: center;
     list-style-type: none;
     position: relative;
-    padding: 20px 5px 0 5px;
+    padding: 15px 5px 0 5px;
     font-size: 12px;
     line-height: normal;
 
@@ -46,7 +45,7 @@ $color-border: $color-teal;
       right: 50%;
       border-top: 1px solid $color-link;
       width: 50%;
-      height: 20px;
+      height: 15px;
     }
 
     &::after {
@@ -109,7 +108,7 @@ $color-border: $color-teal;
       right: 50%;
       border-top: none;
       width: 50%;
-      height: 20px;
+      height: 15px;
       border-left: none;
     }
   }
@@ -125,7 +124,6 @@ $color-border: $color-teal;
       left: 0;
       width: 100%;
       display: block;
-      margin: 5px 0;
     }
   }
 
