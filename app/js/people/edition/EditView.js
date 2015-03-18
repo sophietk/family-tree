@@ -1,6 +1,6 @@
 var EditView = Marionette.ItemView.extend({
 
-    template: '#tpl-people-edit',
+    template: JST.peopleEdit,
 
     ui: {
         firstName: 'input[name="firstName"]',

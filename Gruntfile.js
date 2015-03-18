@@ -8,6 +8,10 @@ module.exports = function (grunt) {
             sass: {
                 files: ['app/sass/*.scss'],
                 tasks: ['sass:dev']
+            },
+            handlebars: {
+                files: ['app/**/*.hbs'],
+                tasks: ['handlebars:dev']
             }
         },
 
@@ -20,6 +24,26 @@ module.exports = function (grunt) {
             dev: {
                 files: {
                     'app/css/style.css': 'app/sass/style.scss'
+                }
+            }
+        },
+
+        handlebars: {
+            options: {
+                namespace: 'JST',
+                partialRegex: /\.partial/,
+                processName: function (filePath) {
+                    var pieces = filePath.split('/');
+                    return pieces[pieces.length - 1].replace('.hbs', '');
+                },
+                processPartialName: function (filePath) {
+                    var pieces = filePath.split('/');
+                    return pieces[pieces.length - 1].replace('.partial.hbs', '');
+                }
+            },
+            dev: {
+                files: {
+                    'app/js/templates.js': '**/*.hbs'
                 }
             }
         },
@@ -91,6 +115,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-handlebars');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-usemin');
     grunt.loadNpmTasks('grunt-contrib-concat');
@@ -107,6 +132,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:dist',
         'sass',
+        'handlebars',
         'copy',
         'useminPrepare',
         'concat:generated',

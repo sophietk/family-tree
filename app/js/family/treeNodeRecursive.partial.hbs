@@ -1,0 +1,30 @@
+{{> treeNode}}
+{{#if oneSpouse}}
+    <div class="p1">
+        {{#spouses}}
+            {{> treeNode}}
+            {{#if children}}
+                <ul class="c">
+                    {{#each children}}
+                        <li>{{> treeNodeRecursive}}</li>
+                    {{/each}}
+                </ul>
+            {{/if}}
+        {{/spouses}}
+    </div>
+{{/if}}
+{{#if severalSpouses}}
+    <ul class="p">
+        {{#spouses}}
+            <li>{{> treeNode}}
+                {{#if children}}
+                    <ul class="c">
+                        {{#each children}}
+                            <li>{{> treeNodeRecursive}}</li>
+                        {{/each}}
+                    </ul>
+                {{/if}}
+            </li>
+        {{/spouses}}
+    </ul>
+{{/if}}

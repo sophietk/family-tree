@@ -1,6 +1,6 @@
 var PeopleView = Marionette.ItemView.extend({
 
-    template: '#tpl-people',
+    template: JST.people,
 
     initialize: function (options) {
         this.model = new PeopleModel();

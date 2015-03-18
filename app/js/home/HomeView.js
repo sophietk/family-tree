@@ -1,6 +1,6 @@
 var HomeView = Marionette.ItemView.extend({
 
-    template: '#tpl-home',
+    template: JST.home,
 
     onShow: function () {
         this.$('.parallax').parallax();

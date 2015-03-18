@@ -12,6 +12,6 @@
     "materialize": "0.95.3",
     "moment": "2.9.0",
     "marionette": "2.4.1",
-    "handlebars": "3.0.0"
+    "handlebars": "2.0.0"
   }
 }

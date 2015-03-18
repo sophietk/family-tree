@@ -1,6 +1,6 @@
 var FamilyView = Marionette.ItemView.extend({
 
-    template: '#tpl-family',
+    template: JST.family,
 
     ui: {
         tree: '.tree',

@@ -2,7 +2,7 @@ var MenuView = Marionette.ItemView.extend({
 
     tagName: 'nav',
 
-    template: '#tpl-menu',
+    template: JST.menu,
 
     menuItems: [
         {route: 'home', title: 'Home'},

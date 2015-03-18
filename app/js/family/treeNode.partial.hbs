@@ -1,0 +1,21 @@
+{{#if gender}} {{! else unknown people}}
+    <a href="#people/{{_id}}" class="{{#if isMale}}m{{else}}f{{/if}}" rel="content">
+        <div class="tree-thumbnail rounded" {{#avatarUrl}}style="background-image:url({{.}});"{{/avatarUrl}}></div>
+        <div class="tree-detail">
+            <p>{{firstName}}<br>{{lastName}}<br></p>
+            {{#oneOf birthDate deathDate}}
+                <span>({{year birthDate .}} - {{year deathDate}})</span>
+            {{else}}
+                <span>&nbsp;</span>
+            {{/oneOf}}
+        </div>
+    </a>
+{{else}}
+    <a class="unknown" rel="content">
+        <div class="tree-thumbnail rounded"></div>
+        <div class="tree-detail">
+            <br><br>
+            <span>&nbsp;</span>
+        </div>
+    </a>
+{{/if}}
