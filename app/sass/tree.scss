@@ -198,24 +198,19 @@ $color-border: $color-teal;
 
   .tree-thumbnail {
     display: block;
-    vertical-align: text-top;
-    margin: 0px auto 4px auto;
+    margin: 0 auto 4px auto;
     width: 50px;
     height: 50px;
-
-    img {
-      background-color: #fff;
-    }
+    background: no-repeat center center;
+    background-size: cover;
   }
 
   a.f .tree-thumbnail {
     background-image: url('../img/female.png');
-    background-size: 50px;
   }
 
   a.m .tree-thumbnail {
     background-image: url('../img/male.png');
-    background-size: 50px;
   }
 
   a.unknown .tree-thumbnail::before {
@@ -226,9 +221,13 @@ $color-border: $color-teal;
   .tree-detail {
     display: inline-block;
     vertical-align: text-top;
-    text-overflow: ellipsis;
-    width: 65px;
-    overflow: hidden;
+
+    p {
+      text-overflow: ellipsis;
+      max-width: 65px;
+      white-space: nowrap;
+      overflow: hidden;
+    }
   }
 
   /* cg: make sure the popovers are higher than the hovers */
@@ -248,7 +247,12 @@ $color-border: $color-teal;
   &.hidden-avatar .tree-thumbnail {
     display: none;
   }
-  &.hidden-name p {
-    display: none;
+  &.hidden-name {
+    p {
+      display: none;
+    }
+    .tree-thumbnail {
+      margin: 0 auto;
+    }
   }
 }

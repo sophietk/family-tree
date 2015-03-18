@@ -106,10 +106,10 @@
     <div class="col s6 m3">
         <div class="card">
             <div class="card-image">
-                <img src="{{#if isMale}}img/male.png{{else}}img/female.png{{/if}}">
+                <div class="directory-img {{#if isMale}}m{{else}}f{{/if}}" {{#avatarUrl}}style="background-image:url({{.}});"{{/avatarUrl}}></div>
                 <span class="card-title shadowed">{{firstName}} {{lastName}}</span>
             </div>
-            <div class="card-content">
+            <div class="card-content clearfix">
                 {{#if maidenName}}<p>Maiden name: {{maidenName}}</p>{{/if}}
                 <p>Gender: {{> gender-symbol isMale}}</p>
                 {{#if birthDate}}<p>Birth date: {{birthDate}}</p>{{/if}}
@@ -271,14 +271,16 @@
             </div>
         </div>
         <div class="row">
-            <form class="col s12">
-                <div class="row">
-                    <div class="input-field col s12">
-                        <textarea name="about" id="about" class="materialize-textarea">{{about}}</textarea>
-                        <label for="about" class="{{#about}}active{{/about}}">About this people</label>
-                    </div>
-                </div>
-            </form>
+            <div class="input-field col s12">
+                <input name="avatarUrl" id="avatarUrl" type="text" value="{{avatarUrl}}">
+                <label for="avatarUrl" class="{{#avatarUrl}}active{{/avatarUrl}}">Avatar URL</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea name="about" id="about" class="materialize-textarea">{{about}}</textarea>
+                <label for="about" class="{{#about}}active{{/about}}">About this people</label>
+            </div>
         </div>
 
         <button class="btn waves-effect waves-light" type="submit" name="action">Save
@@ -333,7 +335,7 @@
 <script type="text/x-handlebars-template" id="partial-tree-node">
     {{#if gender}} {{! else unknown people}}
     <a href="#people/{{_id}}" class="{{#if isMale}}m{{else}}f{{/if}}" rel="content">
-        <div class="tree-thumbnail">{{#avatarUrl}}<img src="{{.}}" class="img-rounded">{{/avatarUrl}}</div>
+        <div class="tree-thumbnail rounded" {{#avatarUrl}}style="background-image:url({{.}});"{{/avatarUrl}}></div>
         <div class="tree-detail">
             <p>{{firstName}}<br>{{lastName}}<br></p>
             {{#oneOf birthDate deathDate}}
@@ -345,7 +347,7 @@
     </a>
     {{else}}
     <a class="unknown" rel="content">
-        <div class="tree-thumbnail"></div>
+        <div class="tree-thumbnail rounded"></div>
         <div class="tree-detail">
             <br><br>
             <span>&nbsp;</span>

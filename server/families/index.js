@@ -24,6 +24,7 @@ function retrievePeopleFromReq(req) {
         'fatherId',
         'motherId',
         'spousesIds',
+        'avatarUrl',
         'about'
     );
 }

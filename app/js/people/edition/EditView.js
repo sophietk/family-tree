@@ -11,6 +11,7 @@ var EditView = Marionette.ItemView.extend({
         deathDate: 'input[name="deathDate"]',
         fatherId: 'select[name="fatherId"]',
         motherId: 'select[name="motherId"]',
+        avatarUrl: 'input[name="avatarUrl"]',
         about: 'textarea[name="about"]',
 
         maidenNameBlock: '.maidenNameBlock',
@@ -128,6 +129,7 @@ var EditView = Marionette.ItemView.extend({
             fatherId: this.ui.fatherId.val(),
             motherId: this.ui.motherId.val(),
             spousesIds: this.getSpousesIds(),
+            avatarUrl: this.ui.avatarUrl.val(),
             about: this.ui.about.val()
         }, {
             success: _.bind(this.saveSuccess, this)
