@@ -15,7 +15,7 @@ app.use(cookieParser());
 
 require('./static')(app, env);
 
-require('./families')(app);
+require('./family')(app);
 
 // Listen
 app.listen(port, function () {

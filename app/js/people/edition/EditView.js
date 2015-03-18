@@ -17,13 +17,15 @@ var EditView = Marionette.ItemView.extend({
         maidenNameBlock: '.maidenNameBlock',
         addSpouseBlock: '.addSpouseBlock',
         addSpouse: '.addSpouseBlock a',
-        button: 'button'
+        submit: 'button[name="submit"]',
+        deletePeople: 'button[name="delete"]'
     },
 
     events: {
         'change @ui.gender': 'updateGender',
         'click @ui.addSpouse': 'addSpouseSelect',
-        'click @ui.button': 'save'
+        'click @ui.submit': 'savePeople',
+        'click @ui.deletePeople': 'deletePeople'
     },
 
     initialize: function (options) {
@@ -118,7 +120,8 @@ var EditView = Marionette.ItemView.extend({
         }).get();
     },
 
-    save: function () {
+    savePeople: function (event) {
+        event.preventDefault();
         this.model.save({
             firstName: this.ui.firstName.val(),
             lastName: this.ui.lastName.val(),
@@ -136,8 +139,19 @@ var EditView = Marionette.ItemView.extend({
         });
     },
 
+    deletePeople: function (event) {
+        event.preventDefault();
+        this.model.destroy({
+            success: _.bind(this.destroySuccess, this)
+        });
+    },
+
     saveSuccess: function () {
         Backbone.history.navigate('#people/' + this.model.id, {trigger: true});
+    },
+
+    destroySuccess: function () {
+        Backbone.history.navigate('#directory', {trigger: true});
     }
 
 });

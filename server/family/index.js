@@ -93,6 +93,19 @@ exports = module.exports = function (app) {
         res.send(getEnrichedPeople(id));
     });
 
+    app.delete('/people/:id', function (req, res) {
+        var id = req.params.id,
+            people = getEnrichedPeople(id);
+
+        if (_.isUndefined(people)) {
+            res.sendStatus(404);
+            return;
+        }
+
+        db.deletePeople(id);
+        res.sendStatus(204);
+    });
+
     app.get('/people/:id', function (req, res) {
         var id = req.params.id,
             people = getEnrichedPeople(id);

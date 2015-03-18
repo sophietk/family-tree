@@ -83,7 +83,13 @@
         </div>
     </div>
 
-    <button class="btn waves-effect waves-light" type="submit" name="action">Save
+    <button class="btn waves-effect waves-light" type="submit" name="submit">Save
         <i class="mdi-content-send right"></i>
     </button>
+
+    {{#_id}}
+    <button class="btn waves-effect waves-light" name="delete">Delete
+        <i class="mdi-action-delete right"></i>
+    </button>
+    {{/_id}}
 </form>

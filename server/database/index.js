@@ -35,7 +35,7 @@ exports = module.exports = {
     },
 
     deletePeople: function (id) {
-        all = _.without(all, getPeople(id));
+        all = _.reject(all, {_id: id});
         updateFile();
     },
 
