@@ -22,6 +22,10 @@ exports = module.exports = {
 
     getPeople: getPeople,
 
+    getInMenu: function () {
+        return _.cloneDeep(_.where(all, {menuTab: true}));
+    },
+
     getChildren: function (parentId) {
         return _.cloneDeep(_.union(
             _.where(all, {fatherId: parentId}),

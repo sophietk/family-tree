@@ -4,7 +4,8 @@
     "lastName": "Skywalker",
     "firstName": "Anakin",
     "gender": "M",
-    "avatarUrl": "http://img2.wikia.nocookie.net/__cb20090419091716/fr.starwars/images/d/d5/Vador.jpg"
+    "avatarUrl": "http://img2.wikia.nocookie.net/__cb20090419091716/fr.starwars/images/d/d5/Vador.jpg",
+    "menuTab": true
   },
   {
     "_id": "54f759141138b91019e18e45",

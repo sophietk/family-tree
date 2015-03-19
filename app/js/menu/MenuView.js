@@ -7,9 +7,25 @@ var MenuView = Marionette.ItemView.extend({
     menuItems: [
         {route: 'home', title: 'Home'},
         {route: 'directory', title: 'Directory'},
-        {route: 'people/new', title: 'Add member'},
-        {route: 'family/54f758f3f6a4810a19c3b258', title: 'Anakin’s family', class: 'teal'}
+        {route: 'people/new', title: 'Add member'}
     ],
+
+    initialize: function () {
+        this.collection = new MenuCollection();
+        this.listenTo(this.collection, 'sync', this.addToMenuAndRender);
+        this.collection.fetch();
+    },
+
+    addToMenuAndRender: function () {
+        this.collection.each(function transformToMenuItem(people) {
+            this.menuItems.push({
+                route: 'family/' + people.get('_id'),
+                title: people.get('firstName') + '’s family',
+                className: 'teal'
+            });
+        }, this);
+        this.render();
+    },
 
     templateHelpers: function () {
         return {

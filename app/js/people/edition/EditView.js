@@ -13,6 +13,7 @@ var EditView = Marionette.ItemView.extend({
         motherId: 'select[name="motherId"]',
         avatarUrl: 'input[name="avatarUrl"]',
         about: 'textarea[name="about"]',
+        menuTab: 'input[name="menuTab"]',
 
         maidenNameBlock: '.js-maidenNameBlock',
         addSpouseBlock: '.js-addSpouseBlock',
@@ -152,7 +153,8 @@ var EditView = Marionette.ItemView.extend({
             motherId: this.ui.motherId.val(),
             spousesIds: this.getSpousesIds(),
             avatarUrl: this.ui.avatarUrl.val(),
-            about: this.ui.about.val()
+            about: this.ui.about.val(),
+            menuTab: this.ui.menuTab.prop('checked')
         }, {
             success: _.bind(this.saveSuccess, this)
         });

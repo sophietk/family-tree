@@ -18,12 +18,12 @@
         </div>
     </div>
     <div class="row">
-        <div class="input-field col s3">
+        <div class="col s3">
             <input name="gender" class="with-gap" type="radio" value="M" id="genderM" {{#isMale}}checked="checked"
             {{/isMale}} />
             <label for="genderM">Male</label>
         </div>
-        <div class="input-field col s3">
+        <div class="col s3">
             <input name="gender" class="with-gap" type="radio" value="F" id="genderF" {{^isMale}}checked="checked"
             {{/isMale}} />
             <label for="genderF">Female</label>
@@ -85,16 +85,24 @@
             <label for="about" class="{{#about}}active{{/about}}">About this people</label>
         </div>
     </div>
+    <div class="row">
+        <div class="col s6">
+            <input name="menuTab" type="checkbox" id="menuTab" {{#menuTab}}checked="checked"{{/menuTab}}/>
+            <label for="menuTab">Show in menu</label>
+        </div>
+    </div>
 
-    <a class="btn waves-effect waves-light js-save">Save
-        <i class="mdi-content-send right"></i>
-    </a>
-
-    {{#_id}}
-        <a class="btn waves-effect waves-light js-delete">Delete
-            <i class="mdi-action-delete right"></i>
+    <div class="row">
+        <a class="btn waves-effect waves-light js-save">Save
+            <i class="mdi-content-send right"></i>
         </a>
-    {{/_id}}
+
+        {{#_id}}
+            <a class="btn waves-effect waves-light js-delete">Delete
+                <i class="mdi-action-delete right"></i>
+            </a>
+        {{/_id}}
+    </div>
 </form>
 
 <div id="modalDelete" class="modal">

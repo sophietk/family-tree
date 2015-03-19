@@ -8,7 +8,7 @@ function retrievePeopleFromReq(req) {
     people.spousesIds = _.compact(people.spousesIds);
 
     _.each(people, function removeIfEmpty(value, key) {
-        if (_.isUndefined(value) || _.isNull(value) || _.isEmpty(value)) {
+        if (_.isUndefined(value) || _.isNull(value) || (!_.isBoolean(value) && _.isEmpty(value))) {
             delete people[key];
         }
     });
@@ -25,7 +25,8 @@ function retrievePeopleFromReq(req) {
         'motherId',
         'spousesIds',
         'avatarUrl',
-        'about'
+        'about',
+        'menuTab'
     );
 }
 
@@ -80,6 +81,10 @@ function buildSpousesWithChildren(people) {
 }
 
 exports = module.exports = function (app) {
+
+    app.get('/menu', function (req, res) {
+        res.send(_.map(db.getInMenu(), enrichWithMaleBoolean));
+    });
 
     app.get('/people', function (req, res) {
         res.send(_.map(db.getAll(), enrichWithMaleBoolean));
