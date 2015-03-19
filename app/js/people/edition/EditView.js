@@ -14,18 +14,22 @@ var EditView = Marionette.ItemView.extend({
         avatarUrl: 'input[name="avatarUrl"]',
         about: 'textarea[name="about"]',
 
-        maidenNameBlock: '.maidenNameBlock',
-        addSpouseBlock: '.addSpouseBlock',
-        addSpouse: '.addSpouseBlock a',
-        submit: 'button[name="submit"]',
-        deletePeople: 'button[name="delete"]'
+        maidenNameBlock: '.js-maidenNameBlock',
+        addSpouseBlock: '.js-addSpouseBlock',
+        addSpouse: '.js-addSpouseBlock a',
+        save: '.js-save',
+        delete: '.js-delete',
+        deleteConfirm: '.js-delete-confirm',
+        deleteCancel: '.js-delete-cancel'
     },
 
     events: {
         'change @ui.gender': 'updateGender',
         'click @ui.addSpouse': 'addSpouseSelect',
-        'click @ui.submit': 'savePeople',
-        'click @ui.deletePeople': 'deletePeople'
+        'click @ui.save': 'savePeople',
+        'click @ui.delete': 'showConfirmDelete',
+        'click @ui.deleteCancel': 'cancelDelete',
+        'click @ui.deleteConfirm': 'deletePeople'
     },
 
     initialize: function (options) {
@@ -120,8 +124,7 @@ var EditView = Marionette.ItemView.extend({
         }).get();
     },
 
-    savePeople: function (event) {
-        event.preventDefault();
+    savePeople: function () {
         this.model.save({
             firstName: this.ui.firstName.val(),
             lastName: this.ui.lastName.val(),
@@ -139,8 +142,15 @@ var EditView = Marionette.ItemView.extend({
         });
     },
 
-    deletePeople: function (event) {
-        event.preventDefault();
+    showConfirmDelete: function () {
+        this.$('#modalDelete').openModal();
+    },
+
+    cancelDelete: function () {
+        this.$('#modalDelete').closeModal();
+    },
+
+    deletePeople: function () {
         this.model.destroy({
             success: _.bind(this.destroySuccess, this)
         });
