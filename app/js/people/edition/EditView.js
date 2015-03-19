@@ -16,7 +16,8 @@ var EditView = Marionette.ItemView.extend({
 
         maidenNameBlock: '.js-maidenNameBlock',
         addSpouseBlock: '.js-addSpouseBlock',
-        addSpouse: '.js-addSpouseBlock a',
+        addSpouse: '.js-addSpouse',
+        removeSpouse: '.js-removeSpouse',
         save: '.js-save',
         delete: '.js-delete',
         deleteConfirm: '.js-delete-confirm',
@@ -26,6 +27,7 @@ var EditView = Marionette.ItemView.extend({
     events: {
         'change @ui.gender': 'updateGender',
         'click @ui.addSpouse': 'addSpouseSelect',
+        'click @ui.removeSpouse': 'removeLastSpouseSelect',
         'click @ui.save': 'savePeople',
         'click @ui.delete': 'showConfirmDelete',
         'click @ui.deleteCancel': 'cancelDelete',
@@ -54,6 +56,7 @@ var EditView = Marionette.ItemView.extend({
             selectYears: 15
         });
 
+        this.refreshSpousesButtons();
         this.updateGender();
     },
 
@@ -93,13 +96,26 @@ var EditView = Marionette.ItemView.extend({
     },
 
     addSpouseSelect: function () {
-        var $spouseSelect = $('<select name="spouse" id="spouse{{@index}}" class="browser-default">'
+        var $spouseSelect = $('<select name="spouse" class="browser-default">'
         + '<option value="" selected>-</option>'
         + '</select>');
         this.ui.addSpouseBlock.append($spouseSelect);
         this.collection.each(function fillSpouseSelect(people) {
             $spouseSelect.append(this.buildOption(people));
         }, this);
+
+        this.refreshSpousesButtons();
+    },
+
+    removeLastSpouseSelect: function () {
+        this.ui.addSpouseBlock.find('select:last-child').remove();
+
+        this.refreshSpousesButtons();
+    },
+
+    refreshSpousesButtons: function () {
+        var nbSelect = this.ui.addSpouseBlock.find('select').size();
+        this.ui.removeSpouse.toggleClass('disabled', nbSelect < 1);
     },
 
     getGender: function () {

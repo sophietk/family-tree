@@ -32,6 +32,14 @@ header {
   }
 }
 
+.btn-left {
+  border-radius: 6px 0 0 6px;
+}
+
+.btn-right {
+  border-radius: 0 6px 6px 0;
+}
+
 .shadowed {
   text-shadow: 2px 2px 4px #000000;
 }

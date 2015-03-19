@@ -62,9 +62,12 @@
     <div class="row">
         <div class="col s12 js-addSpouseBlock">
             <label>Spouses</label>
-            <a class="btn-floating btn-small waves-effect waves-light"><i class="mdi-content-add"></i></a>
+            <a class="btn-floating btn-small btn-left waves-effect waves-light js-addSpouse"><i
+                    class="mdi-content-add"></i></a>
+            <a class="btn-floating btn-small btn-right waves-effect waves-light js-removeSpouse"><i
+                    class="mdi-content-remove"></i></a>
             {{#spousesIds}}
-                <select name="spouse" id="spouse{{@index}}" class="browser-default">
+                <select name="spouse" class="browser-default">
                     <option value="" selected>-</option>
                 </select>
             {{/spousesIds}}
