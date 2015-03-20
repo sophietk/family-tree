@@ -54,7 +54,7 @@ var EditView = Marionette.ItemView.extend({
     onRender: function () {
         this.$('.datepicker').pickadate({
             selectMonths: true,
-            selectYears: 15
+            selectYears: 100
         });
 
         this.refreshSpousesButtons();
