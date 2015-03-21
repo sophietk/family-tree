@@ -17,6 +17,8 @@ require('./static')(app, env);
 
 require('./family')(app);
 
+require('./upload')(app);
+
 // Listen
 app.listen(port, function () {
     console.log('Listening on port: ' + port);

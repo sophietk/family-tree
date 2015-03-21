@@ -4,18 +4,4 @@
     height: 100px;
   }
 
-  &-img {
-    padding-bottom: 100%;
-    background: no-repeat center center;
-    background-size: cover;
-
-    &.f {
-      background-image: url('../img/female.png');
-    }
-
-    &.m {
-      background-image: url('../img/male.png');
-    }
-  }
-
 }

@@ -19,16 +19,18 @@ var EditView = Marionette.ItemView.extend({
         addSpouseBlock: '.js-addSpouseBlock',
         addSpouse: '.js-addSpouse',
         removeSpouse: '.js-removeSpouse',
+        avatarUpload: '.js-avatarUpload',
         save: '.js-save',
+        deleteModal: '#deleteModal',
         delete: '.js-delete',
-        deleteConfirm: '.js-delete-confirm',
-        deleteCancel: '.js-delete-cancel'
+        deleteConfirm: '.js-delete-confirm'
     },
 
     events: {
         'change @ui.gender': 'updateGender',
         'click @ui.addSpouse': 'addSpouseSelect',
         'click @ui.removeSpouse': 'removeLastSpouseSelect',
+        'click @ui.avatarUpload': 'showAvatarModal',
         'click @ui.save': 'savePeople',
         'click @ui.delete': 'showConfirmDelete',
         'click @ui.deleteCancel': 'cancelDelete',
@@ -41,6 +43,7 @@ var EditView = Marionette.ItemView.extend({
         if (options.peopleId) {
             this.model.set('_id', options.peopleId);
             this.listenTo(this.model, 'sync', this.render);
+            this.listenTo(this.model, 'error', this.renderError);
             this.model.fetch();
         } else {
             this.render();
@@ -59,6 +62,10 @@ var EditView = Marionette.ItemView.extend({
 
         this.refreshSpousesButtons();
         this.updateGender();
+    },
+
+    renderError: function () {
+        this.$el.html('Oops');
     },
 
     fillSelects: function () {
@@ -119,6 +126,19 @@ var EditView = Marionette.ItemView.extend({
         this.ui.removeSpouse.toggleClass('disabled', nbSelect < 1);
     },
 
+    showAvatarModal: function (event) {
+        event.preventDefault();
+
+        var avatarUploadView = new AvatarUploadView();
+        this.$el.append(avatarUploadView.render().el);
+        this.listenToOnce(avatarUploadView, 'complete', this.uploadAvatarSuccess);
+    },
+
+    uploadAvatarSuccess: function (uploadedAvatarUrl) {
+        this.ui.avatarUrl.val(uploadedAvatarUrl)
+            .siblings('label').addClass('active');
+    },
+
     getGender: function () {
         return this.$('input[name="gender"]:checked').val();
     },
@@ -161,11 +181,7 @@ var EditView = Marionette.ItemView.extend({
     },
 
     showConfirmDelete: function () {
-        this.$('#modalDelete').openModal();
-    },
-
-    cancelDelete: function () {
-        this.$('#modalDelete').closeModal();
+        this.ui.deleteModal.openModal();
     },
 
     deletePeople: function () {

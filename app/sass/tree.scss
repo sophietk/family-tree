@@ -197,18 +197,9 @@ $color-border: $color-teal;
   .tree-thumbnail {
     display: block;
     margin: 0 auto 4px auto;
+    padding-bottom: 0;
     width: 50px;
     height: 50px;
-    background: no-repeat center center;
-    background-size: cover;
-  }
-
-  a.f .tree-thumbnail {
-    background-image: url('../img/female.png');
-  }
-
-  a.m .tree-thumbnail {
-    background-image: url('../img/male.png');
   }
 
   a.unknown .tree-thumbnail::before {

@@ -49,6 +49,12 @@ img {
   vertical-align: middle;
 }
 
+.img-cover {
+  background: no-repeat center center;
+  background-size: cover;
+  padding-bottom: 100%;
+}
+
 .rounded {
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;

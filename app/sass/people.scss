@@ -1,0 +1,15 @@
+.img-gender {
+
+  &.f {
+    background-image: url('../img/female.png');
+  }
+
+  &.m {
+    background-image: url('../img/male.png');
+  }
+}
+
+.gender-symbol {
+  display: inline-block;
+  width: 15px;
+}

@@ -77,6 +77,9 @@
         <div class="input-field col s12">
             <input name="avatarUrl" id="avatarUrl" type="text" value="{{avatarUrl}}">
             <label for="avatarUrl" class="{{#avatarUrl}}active{{/avatarUrl}}">Avatar URL</label>
+            {{#_id}}
+                <a href="#" class="right js-avatarUpload"><i class="mdi-file-file-upload"></i> Or upload photo</a>
+            {{/_id}}
         </div>
     </div>
     <div class="row">
@@ -105,14 +108,14 @@
     </div>
 </form>
 
-<div id="modalDelete" class="modal">
+<div id="deleteModal" class="modal">
     <div class="modal-content">
         <h4>Delete {{firstName}} {{lastName}}</h4>
 
         <p>Are you sure?</p>
     </div>
     <div class="modal-footer">
-        <a class="waves-effect waves-green btn-flat modal-action modal-close js-delete-cancel">No</a>
+        <a class="waves-effect waves-green btn-flat modal-action modal-close">No</a>
         <a class="waves-effect waves-green btn-flat modal-action modal-close js-delete-confirm">Yes</a>
     </div>
 </div>

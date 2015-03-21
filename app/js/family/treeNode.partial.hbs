@@ -1,6 +1,7 @@
 {{#if gender}} {{! else unknown people}}
-    <a href="#people/{{_id}}" class="{{#if isMale}}m{{else}}f{{/if}}" rel="content">
-        <div class="tree-thumbnail rounded" {{#avatarUrl}}style="background-image:url({{.}});"{{/avatarUrl}}></div>
+    <a href="#people/{{_id}}" rel="content">
+        <div class="tree-thumbnail rounded img-cover img-gender {{#if isMale}}m{{else}}f{{/if}}"
+             {{#avatarUrl}}style="background-image:url({{.}});"{{/avatarUrl}}></div>
         <div class="tree-detail">
             <p>{{firstName}}<br>{{lastName}}<br></p>
             {{#oneOf birthDate deathDate}}

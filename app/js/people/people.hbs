@@ -13,6 +13,9 @@
 <div class="row">
     <div class="col m6 s12">
         <h3>{{firstName}} {{lastName}}</h3>
+        {{#avatarUrl}}
+            <div class="img-cover rounded" style="background-image:url({{.}});"></div>
+        {{/avatarUrl}}
         <ul>
             <li><label>First name:</label> {{firstName}}</li>
             <li><label>Name:</label> {{lastName}}</li>
