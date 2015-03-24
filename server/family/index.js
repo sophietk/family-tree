@@ -151,10 +151,10 @@ exports = module.exports = function (app) {
             return;
         }
 
-        buildSpousesWithChildren(people);
-
         var allChildrenAtLevel = [people];
         for (var i = 0; i < level; i++) {
+            _.each(allChildrenAtLevel, buildSpousesWithChildren);
+
             allChildrenAtLevel = _.chain(allChildrenAtLevel)
                 .pluck('spouses')
                 .flatten()
@@ -164,7 +164,6 @@ exports = module.exports = function (app) {
                 .reject({_id: id}) // avoid circular families
                 .value();
             if (_.isEmpty(allChildrenAtLevel)) break;
-            _.each(allChildrenAtLevel, buildSpousesWithChildren);
         }
 
         res.send(people);
