@@ -1,6 +1,21 @@
 var _ = require('lodash'),
+    Q = require('q'),
     db = require('../database'),
     DEFAULT_FAMILY_LEVEL = 10;
+
+/**
+ * Loop until the promise returned by `fn` returns a truthy value.
+ * @see https://www.npmjs.com/package/q-flow
+ */
+Q.until = function (fn) {
+    return fn().then(function (result) {
+        if (result) {
+            return result;
+        }
+
+        return Q.until(fn);
+    });
+};
 
 function retrievePeopleFromReq(req) {
     var people = req.body;
@@ -30,143 +45,186 @@ function retrievePeopleFromReq(req) {
     );
 }
 
-function enrichWithMaleBoolean(people) {
-    return _.extend(people, {
-        isMale: people.gender === 'M'
-    });
-}
-
-function getEnrichedPeople(id) {
-    var people = db.getPeople(id);
-    if (_.isUndefined(people)) return;
-    return enrichWithMaleBoolean(people);
-}
-
-function getEnrichedChildren(parentId) {
-    var children = db.getChildren(parentId);
-
-    return _.map(children, enrichWithMaleBoolean);
-}
-
+var all = []; // @todo: load async in children each loop
 function buildSpousesWithChildren(people) {
-    if (!_.isUndefined(people.spouses)) return;
+    return Q.Promise(function (resolve, reject) {
+        // Spouses are already built
+        if (!_.isUndefined(people.spouses)) return;
 
-    var id = people._id,
-        spouses = _.map(people.spousesIds, getEnrichedPeople),
-        children = getEnrichedChildren(id);
+        var id = people._id;
+        if (_.isUndefined(people.spousesIds)) people.spousesIds = [];
 
-    _.each(children, function (child) {
-        var otherParentId = _.without([child.fatherId, child.motherId], id)[0],
-            otherParent;
-        if (_.isUndefined(otherParentId)) {
-            spouses.push({children: [child]});
-            return;
-        }
+        Q.all([
+            db.getChildren(id),
+            db.getSeveralPeople(people.spousesIds)
+        ])
+            .then(function (data) {
+                var children = data[0],
+                    spouses = data[1];
 
-        otherParent = _.findWhere(spouses, {_id: otherParentId});
-        if (_.isUndefined(otherParent)) {
-            spouses.push(_.extend({}, getEnrichedPeople(otherParentId), {children: [child]}));
-            return;
-        }
+                _.each(children, function (child) {
+                    var otherParentId = _.without([child.fatherId, child.motherId], id)[0],
+                        otherParent;
+                    if (_.isUndefined(otherParentId)) {
+                        spouses.push({children: [child]});
+                        return;
+                    }
 
-        if (_.isUndefined(otherParent.children)) {
-            otherParent.children = [];
-        }
-        otherParent.children.push(child);
+                    otherParent = _.findWhere(spouses, {_id: otherParentId});
+                    if (_.isUndefined(otherParent)) {
+                        otherParent = _.findWhere(all, {_id: otherParentId});
+                        spouses.push(_.extend({}, otherParent, {children: [child]}));
+                        return;
+                    }
+
+                    if (_.isUndefined(otherParent.children)) {
+                        otherParent.children = [];
+                    }
+                    otherParent.children.push(child);
+                });
+
+                people.oneSpouse = spouses.length === 1;
+                people.severalSpouses = spouses.length > 1;
+                people.spouses = spouses;
+                resolve();
+            })
+            .fail(function (err) {
+                reject(err);
+            });
     });
-
-    people.oneSpouse = spouses.length === 1;
-    people.severalSpouses = spouses.length > 1;
-    people.spouses = spouses;
 }
 
 exports = module.exports = function (app) {
 
     app.get('/menu', function (req, res) {
-        res.send(_.map(db.getInMenu(), enrichWithMaleBoolean));
+        db.getInMenu()
+            .then(function (dbPeople) {
+                res.send(dbPeople);
+            })
+            .fail(function (err) {
+                res.status(500).send(err.message)
+            });
     });
 
     app.get('/people', function (req, res) {
-        res.send(_.map(db.getAll(), enrichWithMaleBoolean));
+        db.getAll()
+            .then(function (dbPeople) {
+                res.send(dbPeople);
+            })
+            .fail(function (err) {
+                res.status(500).send(err.message)
+            });
     });
 
     app.post('/people', function (req, res) {
         var people = retrievePeopleFromReq(req);
 
-        var id = db.createPeople(people);
-
-        res.send(getEnrichedPeople(id));
-    });
-
-    app.delete('/people/:id', function (req, res) {
-        var id = req.params.id,
-            people = getEnrichedPeople(id);
-
-        if (_.isUndefined(people)) {
-            res.sendStatus(404);
-            return;
-        }
-
-        db.deletePeople(id);
-        res.sendStatus(204);
+        db.createPeople(people)
+            .then(function (dbPeople) {
+                res.send(dbPeople);
+            })
+            .fail(function (err) {
+                res.status(500).send(err.message)
+            });
     });
 
     app.get('/people/:id', function (req, res) {
-        var id = req.params.id,
-            people = getEnrichedPeople(id);
+        var id = req.params.id;
 
-        if (_.isUndefined(people)) {
-            res.sendStatus(404);
-            return;
-        }
+        db.getPeople(id)
+            .then(function (dbPeople) {
+                if (_.isUndefined(dbPeople)) return res.sendStatus(404);
 
-        res.send(_.extend({}, people, {
-            father: getEnrichedPeople(people.fatherId),
-            mother: getEnrichedPeople(people.motherId),
-            children: getEnrichedChildren(id)
-        }));
+                Q.all([
+                    db.getPeople(dbPeople.fatherId),
+                    db.getPeople(dbPeople.motherId),
+                    db.getChildren(dbPeople._id)
+                ])
+                    .then(function (data) {
+                        res.send(_.extend({}, dbPeople, {
+                            father: data[0],
+                            mother: data[1],
+                            children: data[2]
+                        }));
+                    })
+                    .fail(function (err) {
+                        res.status(500).send(err)
+                    });
+            })
+            .fail(function (err) {
+                res.status(500).send(err.message)
+            });
+
     });
 
     app.put('/people/:id', function (req, res) {
         var id = req.params.id,
-            people = db.getPeople(id);
+            people = retrievePeopleFromReq(req);
 
-        if (_.isUndefined(people)) {
-            res.sendStatus(404);
-            return;
-        }
+        db.replacePeople(id, people)
+            .then(function (dbPeople) {
+                res.send(dbPeople);
+            })
+            .fail(function (err) {
+                res.status(500).send(err.message)
+            });
+    });
 
-        db.replacePeople(id, retrievePeopleFromReq(req));
+    app.delete('/people/:id', function (req, res) {
+        var id = req.params.id;
 
-        res.send(getEnrichedPeople(id));
+        db.deletePeople(id)
+            .then(function () {
+                res.sendStatus(204);
+            })
+            .fail(function (err) {
+                res.status(500).send(err.message)
+            });
     });
 
     app.get('/family/:id', function (req, res) {
         var id = req.params.id,
-            level = parseInt(req.query.level) || DEFAULT_FAMILY_LEVEL,
-            people = getEnrichedPeople(id);
+            limitLevel = parseInt(req.query.level) || DEFAULT_FAMILY_LEVEL,
+            currentLevel = 0;
 
-        if (_.isUndefined(people)) {
-            res.sendStatus(404);
-            return;
-        }
+        Q.all([
+            db.getPeople(id),
+            db.getAll()
+        ])
+            .then(function (data) {
+                var dbPeople = data[0],
+                    allChildrenAtLevel = [dbPeople];
+                all = data[1];
 
-        var allChildrenAtLevel = [people];
-        for (var i = 0; i < level; i++) {
-            _.each(allChildrenAtLevel, buildSpousesWithChildren);
+                Q.until(function () {
+                    var promises = _.map(allChildrenAtLevel, buildSpousesWithChildren);
 
-            allChildrenAtLevel = _.chain(allChildrenAtLevel)
-                .pluck('spouses')
-                .flatten()
-                .pluck('children')
-                .flatten()
-                .compact()
-                .reject({_id: id}) // avoid circular families
-                .value();
-            if (_.isEmpty(allChildrenAtLevel)) break;
-        }
+                    return Q.all(promises)
+                        .then(function () {
+                            currentLevel++;
+                            allChildrenAtLevel = _.chain(allChildrenAtLevel)
+                                .pluck('spouses')
+                                .flatten()
+                                .pluck('children')
+                                .flatten()
+                                .compact()
+                                .reject({_id: id}) // avoid circular families
+                                .value();
+                            return !!(_.isEmpty(allChildrenAtLevel) || currentLevel >= limitLevel);
+                            //res.send(dbPeople);
+                        })
+                        .fail(function (err) {
+                            return true;
+                            //res.status(500).send({message: err.message, stack: err.stack});
+                        });
+                }).done(function () {
+                    res.send(dbPeople);
+                });
 
-        res.send(people);
+            })
+            .fail(function (err) {
+                res.status(500).send({message: err.message, stack: err.stack});
+            });
     });
 
 };

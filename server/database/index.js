@@ -1,59 +1,94 @@
-var DB_FILENAME = process.env.DB_FILENAME || 'people.json',
-    _ = require('lodash'),
-    all = require('./' + DB_FILENAME),
-    fs = require('fs'),
-    path = require('path');
+var _ = require('lodash'),
+    Q = require('q'),
+    mongojs = require('mongojs'),
+    collection;
 
-all = _.sortBy(all, 'birthDate');
+collection = mongojs('familytree').collection('people');
 
-function getPeople(id) {
-    return _.cloneDeep(_.findWhere(all, {_id: id}));
-}
-
-function updateFile() {
-    fs.writeFile(path.resolve(__dirname, DB_FILENAME), JSON.stringify(all), function (err) {
-        if (err) return console.log(err);
-        console.log('File updated');
+function enrich(people) {
+    if (_.isUndefined(people) || _.isNull(people)) return;
+    return _.extend(people, {
+        _id: people._id.toString(),
+        isMale: people.gender === 'M'
     });
 }
 
 exports = module.exports = {
 
     getAll: function () {
-        return _.cloneDeep(all);
+        return Q.Promise(function (resolve, reject) {
+            collection.find().sort({birthDate: 1}, function (err, docs) {
+                if (err) return reject(err);
+                resolve(_.map(docs, enrich));
+            });
+        });
     },
 
-    getPeople: getPeople,
+    getPeople: function (id) {
+        return Q.Promise(function (resolve, reject) {
+            collection.findOne({_id: mongojs.ObjectId(id)}, function (err, doc) {
+                if (err) return reject(err);
+                resolve(enrich(doc));
+            });
+        });
+    },
+
+    getSeveralPeople: function (idArray) {
+        return Q.Promise(function (resolve, reject) {
+            collection.find({_id: {$in: idArray}}, function (err, docs) {
+                if (err) return reject(err);
+                resolve(_.map(docs, enrich));
+            });
+        });
+    },
 
     getInMenu: function () {
-        return _.cloneDeep(_.where(all, {menuTab: true}));
+        return Q.Promise(function (resolve, reject) {
+            collection.find({menuTab: true}, function (err, docs) {
+                if (err) return reject(err);
+                resolve(_.map(docs, enrich));
+            });
+        });
     },
 
     getChildren: function (parentId) {
-        return _.cloneDeep(_.union(
-            _.where(all, {fatherId: parentId}),
-            _.where(all, {motherId: parentId})));
+        return Q.Promise(function (resolve, reject) {
+            collection.find({$or: [{fatherId: parentId}, {motherId: parentId}]})
+                .sort({birthDate: 1}, function (err, docs) {
+                    if (err) return reject(err);
+                    resolve(_.map(docs, enrich));
+                });
+        });
     },
 
     replacePeople: function (id, people) {
-        var index = _.findIndex(all, {_id: id});
-        all[index] = people;
-        all = _.sortBy(all, 'birthDate');
-        updateFile();
+        people = _.omit(people, '_id');
+        return Q.Promise(function (resolve, reject) {
+            collection.findAndModify({
+                query: {_id: mongojs.ObjectId(id)},
+                update: {$set: people}
+            }, function (err, doc) {
+                if (err) return reject(err);
+                resolve(enrich(doc));
+            });
+        });
     },
 
     deletePeople: function (id) {
-        all = _.reject(all, {_id: id});
-        all = _.sortBy(all, 'birthDate');
-        updateFile();
+        return Q.Promise(function (resolve, reject) {
+            collection.remove({_id: mongojs.ObjectId(id)}, true, function (err) {
+                if (err) return reject(err);
+                resolve();
+            });
+        });
     },
 
     createPeople: function (people) {
-        var id = String(new Date().getTime());
-        people._id = id;
-        all.push(people);
-        all = _.sortBy(all, 'birthDate');
-        updateFile();
-        return id;
+        return Q.Promise(function (resolve, reject) {
+            collection.insert(people, function (err, doc) {
+                if (err) return reject(err);
+                resolve(enrich(doc));
+            });
+        });
     }
 };
