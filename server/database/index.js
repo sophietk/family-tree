@@ -1,9 +1,10 @@
 var _ = require('lodash'),
     Q = require('q'),
     mongojs = require('mongojs'),
+    dbUrl = process.env.DB_URL || 'family',
     collection;
 
-collection = mongojs('familytree').collection('people');
+collection = mongojs(dbUrl).collection('people');
 
 function enrich(people) {
     if (_.isUndefined(people) || _.isNull(people)) return;
