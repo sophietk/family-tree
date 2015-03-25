@@ -4,6 +4,7 @@ node_modules/
 app/bower_components
 .sass-cache/
 app/css/*.css
+app/css/*.css.map
 app/js/templates.js
 .tmp/
 dist/
