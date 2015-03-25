@@ -1,9 +1,8 @@
 var express = require('express'),
     logger = require('morgan'),
-    cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
     env = process.env.NODE_ENV || 'dev',
-    port = Number(process.env.PORT || 3000),
+    port = Number(process.env.PORT) || 3000,
     app = express();
 
 console.log('Sever starting in mode: ' + env);
@@ -11,9 +10,10 @@ console.log('Sever starting in mode: ' + env);
 app.use(logger(env === 'prod' ? 'common' : 'dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser());
 
 require('./static')(app, env);
+
+require('./authentication')(app);
 
 require('./family')(app);
 
