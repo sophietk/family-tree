@@ -1,6 +1,8 @@
-var fs = require('fs'),
+var _ = require('lodash'),
+    fs = require('fs'),
     path = require('path'),
     multer = require('multer'),
+    db = require('../database'),
     done = false,
     lastUpload;
 
@@ -17,24 +19,45 @@ exports = module.exports = function (app) {
         },
         onFileUploadComplete: function (file) {
             console.log(file.fieldname + ' uploaded to  ' + file.path);
-            lastUpload = file.name;
+            lastUpload = file;
             done = true;
         }
     }));
 
-    app.get('/avatar/:fileName', function (req, res) {
-        var fileName = req.params.fileName,
-            img = fs.readFileSync(path.resolve(__dirname, './avatar/', fileName));
-        res.writeHead(200, {'Content-Type': 'image/jpg'});
-        res.end(img, 'binary');
+    app.post('/upload/avatar', function (req, res) {
+        var avatar = {
+            name: lastUpload.name,
+            extension: lastUpload.extension,
+            originalName: lastUpload.originalname,
+            data: new Buffer(fs.readFileSync(lastUpload.path)).toString('base64'),
+            contentType: lastUpload.mimetype,
+            size: lastUpload.size
+        };
+
+        db.createAvatar(avatar)
+            .then(function (dbAvatar) {
+                res.send({
+                    avatarUrl: '/avatar/' + dbAvatar._id
+                });
+            })
+            .fail(function (err) {
+                res.status(500).send(err.message)
+            });
     });
 
-    app.post('/upload/avatar', function (req, res) {
-        if (done === true) {
-            res.send({
-                avatarUrl: '/avatar/' + lastUpload
+    app.get('/avatar/:id', function (req, res) {
+        var id = req.params.id;
+
+        db.getAvatar(id)
+            .then(function (dbAvatar) {
+                if (_.isUndefined(dbAvatar)) return res.sendStatus(404);
+
+                res.contentType(dbAvatar.contentType);
+                res.send(new Buffer(dbAvatar.data, 'base64'));
+            })
+            .fail(function (err) {
+                res.status(500).send(err.message)
             });
-        }
     });
 
 };

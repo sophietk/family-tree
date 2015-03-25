@@ -2,16 +2,19 @@ var _ = require('lodash'),
     Q = require('q'),
     mongojs = require('mongojs'),
     dbUrl = process.env.DB_URL || 'family',
-    collection;
+    collection,
+    uCollection;
+
+console.log('Connecting to db: ' + dbUrl);
 
 collection = mongojs(dbUrl).collection('people');
+uCollection = mongojs(dbUrl).collection('upload');
 
-function enrich(people) {
-    if (_.isUndefined(people) || _.isNull(people)) return;
-    return _.extend(people, {
-        _id: people._id.toString(),
-        isMale: people.gender === 'M'
-    });
+function convert(doc) {
+    if (_.isUndefined(doc) || _.isNull(doc)) return;
+    doc._id = doc._id.toString();
+    if (doc.gender) doc.isMale = doc.gender === 'M';
+    return doc;
 }
 
 exports = module.exports = {
@@ -20,7 +23,7 @@ exports = module.exports = {
         return Q.Promise(function (resolve, reject) {
             collection.find().sort({birthDate: 1}, function (err, docs) {
                 if (err) return reject(err);
-                resolve(_.map(docs, enrich));
+                resolve(_.map(docs, convert));
             });
         });
     },
@@ -29,7 +32,7 @@ exports = module.exports = {
         return Q.Promise(function (resolve, reject) {
             collection.findOne({_id: mongojs.ObjectId(id)}, function (err, doc) {
                 if (err) return reject(err);
-                resolve(enrich(doc));
+                resolve(convert(doc));
             });
         });
     },
@@ -38,7 +41,7 @@ exports = module.exports = {
         return Q.Promise(function (resolve, reject) {
             collection.find({_id: {$in: idArray}}, function (err, docs) {
                 if (err) return reject(err);
-                resolve(_.map(docs, enrich));
+                resolve(_.map(docs, convert));
             });
         });
     },
@@ -47,7 +50,7 @@ exports = module.exports = {
         return Q.Promise(function (resolve, reject) {
             collection.find({menuTab: true}, function (err, docs) {
                 if (err) return reject(err);
-                resolve(_.map(docs, enrich));
+                resolve(_.map(docs, convert));
             });
         });
     },
@@ -57,7 +60,7 @@ exports = module.exports = {
             collection.find({$or: [{fatherId: parentId}, {motherId: parentId}]})
                 .sort({birthDate: 1}, function (err, docs) {
                     if (err) return reject(err);
-                    resolve(_.map(docs, enrich));
+                    resolve(_.map(docs, convert));
                 });
         });
     },
@@ -70,7 +73,7 @@ exports = module.exports = {
                 update: {$set: people}
             }, function (err, doc) {
                 if (err) return reject(err);
-                resolve(enrich(doc));
+                resolve(convert(doc));
             });
         });
     },
@@ -88,7 +91,26 @@ exports = module.exports = {
         return Q.Promise(function (resolve, reject) {
             collection.insert(people, function (err, doc) {
                 if (err) return reject(err);
-                resolve(enrich(doc));
+                resolve(convert(doc));
+            });
+        });
+    },
+
+    getAvatar: function (id) {
+        return Q.Promise(function (resolve, reject) {
+            uCollection.findOne({_id: mongojs.ObjectId(id)}, function (err, doc) {
+                if (err) return reject(err);
+                resolve(convert(doc));
+            });
+        });
+    },
+
+    createAvatar: function (avatar) {
+        avatar.type = 'avatar';
+        return Q.Promise(function (resolve, reject) {
+            uCollection.insert(avatar, function (err, doc) {
+                if (err) return reject(err);
+                resolve(convert(doc));
             });
         });
     }
