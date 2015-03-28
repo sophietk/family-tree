@@ -1,0 +1,15 @@
+.home {
+
+  @media #{$small-and-down} {
+    .parallax-container {
+      height: auto;
+    }
+  }
+
+  @media #{$medium-and-up} {
+    .white-text-unless-mobile {
+      color: #fff;
+    }
+  }
+
+}

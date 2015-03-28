@@ -1,10 +1,9 @@
-$color-teal: #b2dfdb;
-$color-brown: #8d6e63;
-
-$color-link: $color-brown;
-$color-border: $color-teal;
+$color-link: color('brown', 'lighten-1');
+$color-border: color('teal', 'lighten-4');
 
 .tree {
+  overflow-x: scroll;
+
   * {
     margin: 0;
     padding: 0;

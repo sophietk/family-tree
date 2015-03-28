@@ -33,7 +33,7 @@ var MenuView = Marionette.ItemView.extend({
         }
     },
 
-    onShow: function () {
+    onRender: function () {
         this.$('.button-collapse').sideNav();
     },
 
