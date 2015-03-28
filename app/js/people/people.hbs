@@ -1,73 +1,79 @@
-<div class="row">
-    <div class="col m6">&nbsp;</div>
-    <div class="col m3 s12">
-        <a href="#family/{{_id}}" class="waves-effect waves-light btn"><i
-                class="mdi-social-people right"></i>Show tree</a>
-    </div>
-    <div class="col m3 s12">
-        <a href="#people/{{_id}}/edit" class="waves-effect waves-light btn"><i
-                class="mdi-editor-mode-edit right"></i>Edit</a>
-    </div>
-</div>
+{{#if _id}}
 
-<div class="row">
-    <div class="col m6 s12">
-        <h3>{{firstName}} {{lastName}}</h3>
-        {{#avatarUrl}}
-            <div class="img-cover rounded" style="background-image:url({{.}});"></div>
-        {{/avatarUrl}}
-        <ul>
-            <li><label>First name:</label> {{firstName}}</li>
-            <li><label>Name:</label> {{lastName}}</li>
-            {{#if maidenName}}
-                <li><label>Maiden name:</label> {{maidenName}}</li>
-            {{/if}}
-            <li><label>Gender:</label> {{> genderSymbol isMale}}</li>
-            {{#if birthDate}}
-                <li><label>Birth date:</label> {{readableDate birthDate}}</li>
-            {{/if}}
-            {{#if deathDate}}
-                <li><label>Death date:</label> {{readableDate deathDate}}</li>
-            {{/if}}
-        </ul>
-
-        <h4>Parents</h4>
-        <ul>
-            {{#father}}
-                <li>{{> peopleLink}}</li>
-            {{/father}}
-            {{#mother}}
-                <li>{{> peopleLink}}</li>
-            {{/mother}}
-        </ul>
-
-        <h4>Children</h4>
-        <ul>
-            {{#children}}
-                <li>{{> peopleLink}}</li>
-            {{/children}}
-        </ul>
+    <div class="row">
+        <div class="col m6">&nbsp;</div>
+        <div class="col m3 s12">
+            <a href="#family/{{_id}}" class="waves-effect waves-light btn"><i
+                    class="mdi-social-people right"></i>Show tree</a>
+        </div>
+        <div class="col m3 s12">
+            <a href="#people/{{_id}}/edit" class="waves-effect waves-light btn"><i
+                    class="mdi-editor-mode-edit right"></i>Edit</a>
+        </div>
     </div>
 
-    <div class="col m6 s12 tree">
-        <ul>
-            <li>
-                {{> treeNode father}}
-                <div class="p1">
-                    {{> treeNode mother}}
-                    <ul class="c">
-                        <li class="emphasis">{{> treeNode}}
-                            {{#if children}}
-                                <ul class="c">
-                                    {{#each children}}
-                                        <li>{{> treeNode}}</li>
-                                    {{/each}}
-                                </ul>
-                            {{/if}}
-                        </li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
+    <div class="row">
+        <div class="col m6 s12">
+            <h3>{{firstName}} {{lastName}}</h3>
+            {{#avatarUrl}}
+                <div class="img-cover rounded" style="background-image:url({{.}});"></div>
+            {{/avatarUrl}}
+            <ul>
+                <li><label>First name:</label> {{firstName}}</li>
+                <li><label>Name:</label> {{lastName}}</li>
+                {{#if maidenName}}
+                    <li><label>Maiden name:</label> {{maidenName}}</li>
+                {{/if}}
+                <li><label>Gender:</label> {{> genderSymbol isMale}}</li>
+                {{#if birthDate}}
+                    <li><label>Birth date:</label> {{readableDate birthDate}}</li>
+                {{/if}}
+                {{#if deathDate}}
+                    <li><label>Death date:</label> {{readableDate deathDate}}</li>
+                {{/if}}
+            </ul>
+
+            <h4>Parents</h4>
+            <ul>
+                {{#father}}
+                    <li>{{> peopleLink}}</li>
+                {{/father}}
+                {{#mother}}
+                    <li>{{> peopleLink}}</li>
+                {{/mother}}
+            </ul>
+
+            <h4>Children</h4>
+            <ul>
+                {{#children}}
+                    <li>{{> peopleLink}}</li>
+                {{/children}}
+            </ul>
+        </div>
+
+        <div class="col m6 s12 tree">
+            <ul>
+                <li>
+                    {{> treeNode father}}
+                    <div class="p1">
+                        {{> treeNode mother}}
+                        <ul class="c">
+                            <li class="emphasis">{{> treeNode}}
+                                {{#if children}}
+                                    <ul class="c">
+                                        {{#each children}}
+                                            <li>{{> treeNode}}</li>
+                                        {{/each}}
+                                    </ul>
+                                {{/if}}
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
+
+{{else}}
+    {{> loader}}
+{{/if}}

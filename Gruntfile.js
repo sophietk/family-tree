@@ -43,7 +43,7 @@ module.exports = function (grunt) {
             },
             dev: {
                 files: {
-                    'app/js/templates.js': '**/*.hbs'
+                    'app/js/templates.js': ['**/*.hbs', '**/*.partial.hbs']
                 }
             }
         },
