@@ -17,6 +17,10 @@ function convert(doc) {
     return doc;
 }
 
+function toObjectId(string) {
+    return mongojs.ObjectId(string);
+}
+
 exports = module.exports = {
 
     getAll: function () {
@@ -30,7 +34,7 @@ exports = module.exports = {
 
     getPeople: function (id) {
         return Q.Promise(function (resolve, reject) {
-            collection.findOne({_id: mongojs.ObjectId(id)}, function (err, doc) {
+            collection.findOne({_id: toObjectId(id)}, function (err, doc) {
                 if (err) return reject(err);
                 resolve(convert(doc));
             });
@@ -39,7 +43,7 @@ exports = module.exports = {
 
     getSeveralPeople: function (idArray) {
         return Q.Promise(function (resolve, reject) {
-            collection.find({_id: {$in: idArray}}, function (err, docs) {
+            collection.find({_id: {$in: _.map(idArray, toObjectId)}}, function (err, docs) {
                 if (err) return reject(err);
                 resolve(_.map(docs, convert));
             });
@@ -69,7 +73,7 @@ exports = module.exports = {
         people = _.omit(people, '_id');
         return Q.Promise(function (resolve, reject) {
             collection.findAndModify({
-                query: {_id: mongojs.ObjectId(id)},
+                query: {_id: toObjectId(id)},
                 update: {$set: people}
             }, function (err, doc) {
                 if (err) return reject(err);
@@ -80,7 +84,7 @@ exports = module.exports = {
 
     deletePeople: function (id) {
         return Q.Promise(function (resolve, reject) {
-            collection.remove({_id: mongojs.ObjectId(id)}, true, function (err) {
+            collection.remove({_id: toObjectId(id)}, true, function (err) {
                 if (err) return reject(err);
                 resolve();
             });
@@ -98,7 +102,7 @@ exports = module.exports = {
 
     getAvatar: function (id) {
         return Q.Promise(function (resolve, reject) {
-            uCollection.findOne({_id: mongojs.ObjectId(id)}, function (err, doc) {
+            uCollection.findOne({_id: toObjectId(id)}, function (err, doc) {
                 if (err) return reject(err);
                 resolve(convert(doc));
             });
