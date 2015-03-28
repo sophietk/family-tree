@@ -50,27 +50,39 @@
             <label for="fatherId">Father</label>
             <select name="fatherId" id="fatherId" class="browser-default">
                 <option value="" selected>-</option>
+                {{#men}}
+                    {{> peopleOption }}
+                {{/men}}
             </select>
         </div>
         <div class="col s6">
             <label for="motherId">Mother</label>
             <select name="motherId" id="motherId" class="browser-default">
                 <option value="" selected>-</option>
+                {{#women}}
+                    {{> peopleOption }}
+                {{/women}}
             </select>
         </div>
     </div>
     <div class="row">
-        <div class="col s12 js-addSpouseBlock">
+        <div class="col s12">
             <label>Spouses</label>
             <a class="btn-floating btn-small btn-left waves-effect waves-light js-addSpouse"><i
                     class="mdi-content-add"></i></a>
             <a class="btn-floating btn-small btn-right waves-effect waves-light js-removeSpouse"><i
                     class="mdi-content-remove"></i></a>
-            {{#spousesIds}}
-                <select name="spouse" class="browser-default">
-                    <option value="" selected>-</option>
-                </select>
-            {{/spousesIds}}
+
+            <div class="js-spousesBlock">
+                {{#spousesIds}}
+                    <select name="spouse" class="browser-default">
+                        <option value="" selected>-</option>
+                        {{#../people}}
+                            {{> peopleOption }}
+                        {{/../people}}
+                    </select>
+                {{/spousesIds}}
+            </div>
         </div>
     </div>
     <div class="row">

@@ -16,7 +16,7 @@ var EditView = Marionette.ItemView.extend({
         menuTab: 'input[name="menuTab"]',
 
         maidenNameBlock: '.js-maidenNameBlock',
-        addSpouseBlock: '.js-addSpouseBlock',
+        spousesBlock: '.js-spousesBlock',
         addSpouse: '.js-addSpouse',
         removeSpouse: '.js-removeSpouse',
         avatarUpload: '.js-avatarUpload',
@@ -45,13 +45,27 @@ var EditView = Marionette.ItemView.extend({
             this.listenTo(this.model, 'sync', this.render);
             this.listenTo(this.model, 'error', this.renderError);
             this.model.fetch();
-        } else {
-            this.render();
         }
 
         this.collection = new PeopleCollection();
-        this.listenTo(this.collection, 'sync', this.fillSelects);
+        this.listenTo(this.collection, 'sync', this.rejectOneSelf);
+        this.listenTo(this.collection, 'sync', this.render);
         this.collection.fetch();
+    },
+
+    rejectOneSelf: function () {
+        this.collection.remove(this.model.id);
+    },
+
+    templateHelpers: function () {
+        var manCollection = new Backbone.Collection(this.collection.where({gender: 'M'})),
+            womenCollection = new Backbone.Collection(this.collection.where({gender: 'F'}));
+
+        return {
+            men: manCollection.toJSON(),
+            women: womenCollection.toJSON(),
+            people: this.collection.toJSON()
+        }
     },
 
     onRender: function () {
@@ -60,69 +74,40 @@ var EditView = Marionette.ItemView.extend({
             selectYears: 100
         });
 
-        this.refreshSpousesButtons();
         this.updateGender();
+        this.updateFatherMotherSpouses();
+        this.refreshSpousesButtons();
     },
 
     renderError: function () {
         this.$el.html('Oops');
     },
 
-    fillSelects: function () {
-        this.collection.remove(this.model.id);
-        _.each(this.collection.where({gender: 'M'}), this.fillFatherSelect, this);
-        _.each(this.collection.where({gender: 'F'}), this.fillMotherSelect, this);
-        this.collection.each(this.fillSpousesSelects, this);
-
-        this.ui.fatherId.val(this.model.get('fatherId'));
-        this.ui.motherId.val(this.model.get('motherId'));
-        this.$('select[name="spouse"]').each(_.bind(function fillSpouseSelect(index, el) {
-            $(el).val(this.model.get('spousesIds')[index]);
-        }, this));
-    },
-
-    fillFatherSelect: function (man) {
-        this.ui.fatherId.append(this.buildOption(man));
-    },
-
-    fillMotherSelect: function (woman) {
-        this.ui.motherId.append(this.buildOption(woman));
-    },
-
-    fillSpousesSelects: function (people) {
-        this.$('select[name="spouse"]').each(_.bind(function fillSpouseSelect(index, el) {
-            $(el).append(this.buildOption(people));
-        }, this));
-    },
-
-    buildOption: function (people) {
-        return '<option value="' + people.id + '">' + (people.get('firstName') || '') + ' ' + (people.get('lastName') || '') + '</option>';
-    },
-
     updateGender: function () {
         this.ui.maidenNameBlock.toggle(this.getGender() === 'F');
     },
 
-    addSpouseSelect: function () {
-        var $spouseSelect = $('<select name="spouse" class="browser-default">'
-        + '<option value="" selected>-</option>'
-        + '</select>');
-        this.ui.addSpouseBlock.append($spouseSelect);
-        this.collection.each(function fillSpouseSelect(people) {
-            $spouseSelect.append(this.buildOption(people));
+    updateFatherMotherSpouses: function () {
+        // @todo: not necessary, do it in template
+        this.ui.fatherId.val(this.model.get('fatherId'));
+        this.ui.motherId.val(this.model.get('motherId'));
+        _.each(this.model.get('spousesIds'), function fillSpouseSelect(spouseId, index) {
+            this.ui.spousesBlock.children().eq(index).val(spouseId);
         }, this);
+    },
 
+    addSpouseSelect: function () {
+        this.ui.spousesBlock.append(JST.spouseSelect(this.collection.toJSON()));
         this.refreshSpousesButtons();
     },
 
     removeLastSpouseSelect: function () {
-        this.ui.addSpouseBlock.find('select:last-child').remove();
-
+        this.ui.spousesBlock.children().last().remove();
         this.refreshSpousesButtons();
     },
 
     refreshSpousesButtons: function () {
-        var nbSelect = this.ui.addSpouseBlock.find('select').size();
+        var nbSelect = this.ui.spousesBlock.children().size();
         this.ui.removeSpouse.toggleClass('disabled', nbSelect < 1);
     },
 
