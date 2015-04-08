@@ -71,7 +71,15 @@ var EditView = Marionette.ItemView.extend({
     onRender: function () {
         this.$('.datepicker').pickadate({
             selectMonths: true,
-            selectYears: 100
+            selectYears: 200,
+            monthsFull: moment.months(),
+            monthsShort: moment.monthsShort(),
+            weekdaysFull: moment.weekdays(),
+            weekdaysShort: moment.weekdaysShort(),
+            weekdaysLetter: moment.weekdaysMin(),
+            today: polyglot.t('datepicker.today'),
+            clear: polyglot.t('datepicker.clear'),
+            close: polyglot.t('datepicker.close')
         });
 
         this.updateGender();

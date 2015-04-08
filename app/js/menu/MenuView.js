@@ -5,9 +5,9 @@ var MenuView = Marionette.ItemView.extend({
     template: JST.menu,
 
     menuItems: [
-        {route: 'home', title: 'Home'},
-        {route: 'directory', title: 'Directory'},
-        {route: 'people/new', title: 'Add member'}
+        {route: 'home', title: 'tabs.home'},
+        {route: 'directory', title: 'tabs.directory'},
+        {route: 'people/new', title: 'tabs.create'}
     ],
 
     initialize: function () {
@@ -20,7 +20,7 @@ var MenuView = Marionette.ItemView.extend({
         this.collection.each(function transformToMenuItem(people) {
             this.menuItems.push({
                 route: 'family/' + people.get('_id'),
-                title: people.get('firstName') + '’s family',
+                title: polyglot.t('tabs.pinned', {firstName: people.get('firstName')}),
                 className: 'teal'
             });
         }, this);

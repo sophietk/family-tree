@@ -6,15 +6,15 @@
             <span class="card-title shadowed">{{firstName}} {{lastName}}</span>
         </div>
         <div class="card-content clearfix">
-            {{#if maidenName}}<p>Maiden name: {{maidenName}}</p>{{/if}}
-            <p>Gender: {{> genderSymbol isMale}}</p>
-            {{#if birthDate}}<p>Birth date: {{birthDate}}</p>{{/if}}
-            {{#if deathDate}}<p>Death date: {{deathDate}}</p>{{/if}}
+            {{#if maidenName}}<p><label>{{p 'maiden_name'}}:</label> {{maidenName}}</p>{{/if}}
+            <p><label>{{p 'gender'}}:</label> {{> genderSymbol isMale}}</p>
+            {{#if birthDate}}<p><label>{{p 'birth_date.short'}}:</label> {{shortDate birthDate}}</p>{{/if}}
+            {{#if deathDate}}<p><label>{{p 'death_date.short'}}:</label> {{shortDate deathDate}}</p>{{/if}}
         </div>
         <div class="card-action">
-            <a href="#people/{{_id}}">View</a>
-            <a href="#family/{{_id}}">Show tree</a>
-            <a href='#people/{{_id}}/edit'>Edit</a>
+            <a href="#people/{{_id}}">{{p 'menu.view'}}</a>
+            <a href="#family/{{_id}}">{{p 'menu.tree'}}</a>
+            <a href='#people/{{_id}}/edit'>{{p 'menu.edit'}}</a>
         </div>
     </div>
 </div>

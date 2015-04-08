@@ -1,7 +1,7 @@
 <div class="modal-content">
-    <h4>Upload {{firstName}}'s photo</h4>
+    <h4>{{p 'people.avatar.title' .}}</h4>
 
-    <p>Choose a photo</p>
+    <p>{{p 'people.avatar.text'}}</p>
 
     <form action="#">
         <div class="file-field input-field">
@@ -11,13 +11,13 @@
                 <div class="determinate" style="width: 0"></div>
             </div>
             <div class="btn">
-                <span>File</span>
+                <span>{{p 'people.avatar.file'}}</span>
                 <input type="file" class="js-avatarFile"/>
             </div>
         </div>
     </form>
 </div>
 <div class="modal-footer">
-    <a class="waves-effect waves-green btn-flat modal-action modal-close js-avatarUpload-cancel">Cancel</a>
-    <a class="waves-effect waves-green btn-flat js-avatarUpload-save disabled">Save</a>
+    <a class="waves-effect waves-green btn-flat modal-action modal-close js-avatarUpload-cancel">{{p 'cancel'}}</a>
+    <a class="waves-effect waves-green btn-flat js-avatarUpload-save disabled">{{p 'save'}}</a>
 </div>

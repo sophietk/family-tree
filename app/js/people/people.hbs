@@ -4,11 +4,11 @@
         <div class="col m6">&nbsp;</div>
         <div class="col m3 s12">
             <a href="#family/{{_id}}" class="waves-effect waves-light btn"><i
-                    class="mdi-social-people right"></i>Show tree</a>
+                    class="mdi-social-people right"></i>{{p 'menu.tree'}}</a>
         </div>
         <div class="col m3 s12">
             <a href="#people/{{_id}}/edit" class="waves-effect waves-light btn"><i
-                    class="mdi-editor-mode-edit right"></i>Edit</a>
+                    class="mdi-editor-mode-edit right"></i>{{p 'menu.edit'}}</a>
         </div>
     </div>
 
@@ -19,21 +19,21 @@
                 <div class="img-cover rounded" style="background-image:url({{.}});"></div>
             {{/avatarUrl}}
             <ul>
-                <li><label>First name:</label> {{firstName}}</li>
-                <li><label>Name:</label> {{lastName}}</li>
+                <li><label>{{p 'first_name'}}:</label> {{firstName}}</li>
+                <li><label>{{p 'last_name'}}:</label> {{lastName}}</li>
                 {{#if maidenName}}
-                    <li><label>Maiden name:</label> {{maidenName}}</li>
+                    <li><label>{{p 'maiden_name'}}:</label> {{maidenName}}</li>
                 {{/if}}
-                <li><label>Gender:</label> {{> genderSymbol isMale}}</li>
+                <li><label>{{p 'gender'}}:</label> {{> genderSymbol isMale}}</li>
                 {{#if birthDate}}
-                    <li><label>Birth date:</label> {{readableDate birthDate}}</li>
+                    <li><label>{{p 'birth_date'}}:</label> {{readableDate birthDate}}</li>
                 {{/if}}
                 {{#if deathDate}}
-                    <li><label>Death date:</label> {{readableDate deathDate}}</li>
+                    <li><label>{{p 'death_date'}}:</label> {{readableDate deathDate}}</li>
                 {{/if}}
             </ul>
 
-            <h4>Parents</h4>
+            <h4>{{p 'people.parents'}}</h4>
             <ul>
                 {{#father}}
                     <li>{{> peopleLink}}</li>
@@ -43,7 +43,7 @@
                 {{/mother}}
             </ul>
 
-            <h4>Children</h4>
+            <h4>{{p 'people.children'}}</h4>
             <ul>
                 {{#children}}
                     <li>{{> peopleLink}}</li>

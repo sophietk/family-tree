@@ -2,7 +2,7 @@
     <div class="col m9">&nbsp;</div>
     <div class="col m3 s12">
         <a href="#people/{{_id}}" class="waves-effect waves-light btn"><i
-                class="mdi-image-remove-red-eye right"></i>View</a>
+                class="mdi-image-remove-red-eye right"></i>{{p 'menu.view'}}</a>
     </div>
 </div>
 
@@ -10,44 +10,44 @@
     <div class="row">
         <div class="input-field col s6">
             <input name="firstName" id="firstName" type="text" class="validate" value="{{firstName}}">
-            <label for="firstName" class="{{#firstName}}active{{/firstName}}">First Name</label>
+            <label for="firstName" class="{{#firstName}}active{{/firstName}}">{{p 'first_name'}}</label>
         </div>
         <div class="input-field col s6">
             <input name="lastName" id="lastName" type="text" class="validate" value="{{lastName}}">
-            <label for="lastName" class="{{#lastName}}active{{/lastName}}">Last Name</label>
+            <label for="lastName" class="{{#lastName}}active{{/lastName}}">{{p 'last_name'}}</label>
         </div>
     </div>
     <div class="row">
         <div class="col s3">
             <input name="gender" class="with-gap" type="radio" value="M" id="genderM" {{#isMale}}checked="checked"
             {{/isMale}} />
-            <label for="genderM">Male</label>
+            <label for="genderM">{{p 'male'}}</label>
         </div>
         <div class="col s3">
             <input name="gender" class="with-gap" type="radio" value="F" id="genderF" {{^isMale}}checked="checked"
             {{/isMale}} />
-            <label for="genderF">Female</label>
+            <label for="genderF">{{p 'female'}}</label>
         </div>
         <div class="input-field col s6 js-maidenNameBlock">
             <input name="maidenName" id="maidenName" type="text" value="{{maidenName}}">
-            <label for="maidenName" class="{{#maidenName}}active{{/maidenName}}">Maiden name</label>
+            <label for="maidenName" class="{{#maidenName}}active{{/maidenName}}">{{p 'maiden_name'}}</label>
         </div>
     </div>
     <div class="row">
         <div class="input-field col s6">
             <input name="birthDate" id="birthDate" type="text" class="datepicker"
                    value="{{readableDate birthDate}}">
-            <label for="birthDate" class="{{#birthDate}}active{{/birthDate}}">Birth date</label>
+            <label for="birthDate" class="{{#birthDate}}active{{/birthDate}}">{{p 'birth_date'}}</label>
         </div>
         <div class="input-field col s6">
             <input name="deathDate" id="deathDate" type="text" class="datepicker"
                    value="{{readableDate deathDate}}">
-            <label for="deathDate" class="{{#deathDate}}active{{/deathDate}}">Death date</label>
+            <label for="deathDate" class="{{#deathDate}}active{{/deathDate}}">{{p 'death_date'}}</label>
         </div>
     </div>
     <div class="row">
         <div class="col s6">
-            <label for="fatherId">Father</label>
+            <label for="fatherId">{{p 'father'}}</label>
             <select name="fatherId" id="fatherId" class="browser-default">
                 <option value="" selected>-</option>
                 {{#men}}
@@ -56,7 +56,7 @@
             </select>
         </div>
         <div class="col s6">
-            <label for="motherId">Mother</label>
+            <label for="motherId">{{p 'mother'}}</label>
             <select name="motherId" id="motherId" class="browser-default">
                 <option value="" selected>-</option>
                 {{#women}}
@@ -67,7 +67,7 @@
     </div>
     <div class="row">
         <div class="col s12">
-            <label>Spouses</label>
+            <label>{{p 'spouses'}}</label>
             <a class="btn-floating btn-small btn-left waves-effect waves-light js-addSpouse"><i
                     class="mdi-content-add"></i></a>
             <a class="btn-floating btn-small btn-right waves-effect waves-light js-removeSpouse"><i
@@ -88,32 +88,32 @@
     <div class="row">
         <div class="input-field col s12">
             <input name="avatarUrl" id="avatarUrl" type="text" value="{{avatarUrl}}">
-            <label for="avatarUrl" class="{{#avatarUrl}}active{{/avatarUrl}}">Avatar URL</label>
+            <label for="avatarUrl" class="{{#avatarUrl}}active{{/avatarUrl}}">{{p 'people.edit.avatar'}}</label>
             {{#_id}}
-                <a href="#" class="right js-avatarUpload"><i class="mdi-file-file-upload"></i> Or upload photo</a>
+                <a href="#" class="right js-avatarUpload"><i class="mdi-file-file-upload"></i> {{p 'people.edit.upload'}}</a>
             {{/_id}}
         </div>
     </div>
     <div class="row">
         <div class="input-field col s12">
             <textarea name="about" id="about" class="materialize-textarea">{{about}}</textarea>
-            <label for="about" class="{{#about}}active{{/about}}">About this people</label>
+            <label for="about" class="{{#about}}active{{/about}}">{{p 'people.edit.about'}}</label>
         </div>
     </div>
     <div class="row">
         <div class="col s6">
             <input name="menuTab" type="checkbox" id="menuTab" {{#menuTab}}checked="checked"{{/menuTab}}/>
-            <label for="menuTab">Show in menu</label>
+            <label for="menuTab">{{p 'people.edit.pinned'}}</label>
         </div>
     </div>
 
     <div class="row">
-        <a class="btn waves-effect waves-light js-save">Save
+        <a class="btn waves-effect waves-light js-save">{{p 'save'}}
             <i class="mdi-content-send right"></i>
         </a>
 
         {{#_id}}
-            <a class="btn waves-effect waves-light js-delete">Delete
+            <a class="btn waves-effect waves-light js-delete">{{p 'delete'}}
                 <i class="mdi-action-delete right"></i>
             </a>
         {{/_id}}
@@ -122,12 +122,12 @@
 
 <div id="deleteModal" class="modal">
     <div class="modal-content">
-        <h4>Delete {{firstName}} {{lastName}}</h4>
+        <h4>{{p 'people.edit.delete.confirm.title' .}}</h4>
 
-        <p>Are you sure?</p>
+        <p>{{p 'people.edit.delete.confirm.text'}}</p>
     </div>
     <div class="modal-footer">
-        <a class="waves-effect waves-green btn-flat modal-action modal-close">No</a>
-        <a class="waves-effect waves-green btn-flat modal-action modal-close js-delete-confirm">Yes</a>
+        <a class="waves-effect waves-green btn-flat modal-action modal-close">{{p 'no'}}</a>
+        <a class="waves-effect waves-green btn-flat modal-action modal-close js-delete-confirm">{{p 'yes'}}</a>
     </div>
 </div>

@@ -4,23 +4,32 @@
         <div class="col m9">&nbsp;</div>
         <div class="col m3 s12">
             <a href="#people/{{_id}}" class="waves-effect waves-light btn"><i
-                    class="mdi-image-remove-red-eye right"></i>View</a>
+                    class="mdi-image-remove-red-eye right"></i>{{p 'menu.view'}}</a>
         </div>
     </div>
 
-    <h3>Tree of {{firstName}} {{lastName}}</h3>
+    <h3>{{p 'tree.title' .}}</h3>
 
     <div class="row">
-        <div class="col m2 s12">
+        <div class="col m8 s12">&nbsp;</div>
+        <div class="col m4 s12">
             <input name="withDate" type="checkbox" id="withDate" data-prop="date" checked="checked"/>
-            <label for="withDate">With dates</label>
-            <input name="withAvatar" type="checkbox" id="withAvatar" data-prop="avatar" checked="checked"/>
-            <label for="withAvatar">With avatars</label>
-            <input name="withName" type="checkbox" id="withName" data-prop="name" checked="checked"/>
-            <label for="withName">With names</label>
+            <label for="withDate">{{p 'tree.options.with_dates'}}</label>
         </div>
+        <div class="col m8 s12">&nbsp;</div>
+        <div class="col m4 s12">
+            <input name="withAvatar" type="checkbox" id="withAvatar" data-prop="avatar" checked="checked"/>
+            <label for="withAvatar">{{p 'tree.options.with_avatars'}}</label>
+        </div>
+        <div class="col m8 s12">&nbsp;</div>
+        <div class="col m4 s12">
+            <input name="withName" type="checkbox" id="withName" data-prop="name" checked="checked"/>
+            <label for="withName">{{p 'tree.options.with_names'}}</label>
+        </div>
+    </div>
 
-        <div class="col m10 s12 tree">
+    <div class="row">
+        <div class="col s12 tree">
             <ul>
                 <li>
                     {{> treeNodeRecursive}}

@@ -5,7 +5,7 @@ var express = require('express'),
     port = Number(process.env.PORT) || 3000,
     app = express();
 
-console.log('Sever starting in mode: ' + env);
+console.log('Server starting in mode: ' + env);
 
 app.use(logger(env === 'prod' ? 'common' : 'dev'));
 app.use(bodyParser.json());
