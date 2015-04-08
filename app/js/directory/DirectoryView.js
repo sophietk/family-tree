@@ -4,9 +4,12 @@ var DirectoryView = Marionette.CollectionView.extend({
 
     childView: PeopleCardView,
 
+    collectionEvents: {
+        sync: 'render'
+    },
+
     initialize: function () {
         this.collection = new PeopleCollection();
-        this.listenTo(this.collection, 'sync', this.render);
         this.collection.fetch();
     }
 

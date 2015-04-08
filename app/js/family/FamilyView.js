@@ -15,10 +15,13 @@ var FamilyView = Marionette.ItemView.extend({
         'change @ui.withName': 'toggle'
     },
 
+    modelEvents: {
+        sync: 'render'
+    },
+
     initialize: function (options) {
         this.model = new FamilyModel();
         this.model.id = options.familyId;
-        this.listenTo(this.model, 'sync', this.render);
         this.model.fetch();
     },
 

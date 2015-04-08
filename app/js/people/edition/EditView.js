@@ -37,13 +37,16 @@ var EditView = Marionette.ItemView.extend({
         'click @ui.deleteConfirm': 'deletePeople'
     },
 
+    modelEvents: {
+        sync: 'render',
+        error: 'renderError'
+    },
+
     initialize: function (options) {
         this.model = new PeopleModel();
 
         if (options.peopleId) {
             this.model.set('_id', options.peopleId);
-            this.listenTo(this.model, 'sync', this.render);
-            this.listenTo(this.model, 'error', this.renderError);
             this.model.fetch();
         }
 
