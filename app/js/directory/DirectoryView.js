@@ -4,13 +4,20 @@ var DirectoryView = Marionette.CollectionView.extend({
 
     childView: PeopleCardView,
 
+    reorderOnSort: true,
+
     collectionEvents: {
-        sync: 'render'
+        sync: 'sortByBirthDateDesc'
     },
 
     initialize: function () {
         this.collection = new PeopleCollection();
         this.collection.fetch();
+    },
+
+    sortByBirthDateDesc: function () {
+        this.collection.models.reverse();
+        this.collection.trigger('sort');
     }
 
 });
