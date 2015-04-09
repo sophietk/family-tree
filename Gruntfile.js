@@ -64,6 +64,12 @@ module.exports = function (grunt) {
                 cwd: 'app/bower_components/materialize/font',
                 src: '**',
                 dest: 'dist/font'
+            },
+            i18n: {
+                expand: true,
+                cwd: 'app/js/i18n',
+                src: '**',
+                dest: 'dist/js/i18n'
             }
         },
 
