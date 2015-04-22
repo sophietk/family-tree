@@ -141,13 +141,13 @@ var EditView = Marionette.ItemView.extend({
 
     getBirthDate: function () {
         var date = this.ui.birthDate.val();
-        if (date === '') return;
+        if (date === '') return null;
         return moment(date, 'D MMMM, YYYY').format('YYYY-MM-DD');
     },
 
     getDeathDate: function () {
         var date = this.ui.deathDate.val();
-        if (date === '') return;
+        if (date === '') return null;
         return moment(date, 'D MMMM, YYYY').format('YYYY-MM-DD');
     },
 
@@ -165,10 +165,10 @@ var EditView = Marionette.ItemView.extend({
             maidenName: this.ui.maidenName.val(),
             birthDate: this.getBirthDate(),
             deathDate: this.getDeathDate(),
-            fatherId: this.ui.fatherId.val() || undefined,
-            motherId: this.ui.motherId.val() || undefined,
+            fatherId: this.ui.fatherId.val() || null,
+            motherId: this.ui.motherId.val() || null,
             spousesIds: this.getSpousesIds(),
-            avatarUrl: this.ui.avatarUrl.val(),
+            avatarUrl: this.ui.avatarUrl.val() || null,
             about: this.ui.about.val(),
             menuTab: this.ui.menuTab.prop('checked')
         }, {

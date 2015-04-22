@@ -5,22 +5,22 @@ app
 
         // Handlebars helpers
         Handlebars.registerHelper('year', function (date) {
-            if (_.isUndefined(date)) return '';
+            if (!date) return '';
             return moment(date).year();
         });
         Handlebars.registerHelper('oneOf', function (obj1, obj2, options) {
-            if (_.isUndefined(obj1) && _.isUndefined(obj2)) {
+            if (!obj1 && !obj2) {
                 return options.inverse(this);
             } else {
                 return options.fn(this);
             }
         });
         Handlebars.registerHelper('shortDate', function (date) {
-            if (_.isUndefined(date)) return '';
+            if (!date) return '';
             return moment(date).format('L');
         });
         Handlebars.registerHelper('readableDate', function (date) {
-            if (_.isUndefined(date)) return '';
+            if (!date) return '';
             return moment(date).format('D MMMM, YYYY');
         });
         Handlebars.registerHelper('p', function (phrase, obj) {
