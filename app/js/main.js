@@ -17,7 +17,7 @@ app
         });
         Handlebars.registerHelper('shortDate', function (date) {
             if (_.isUndefined(date)) return '';
-            return moment().format('L');
+            return moment(date).format('L');
         });
         Handlebars.registerHelper('readableDate', function (date) {
             if (_.isUndefined(date)) return '';

@@ -142,13 +142,13 @@ var EditView = Marionette.ItemView.extend({
     getBirthDate: function () {
         var date = this.ui.birthDate.val();
         if (date === '') return;
-        return moment(date).format('YYYY-MM-DD');
+        return moment(date, 'D MMMM, YYYY').format('YYYY-MM-DD');
     },
 
     getDeathDate: function () {
         var date = this.ui.deathDate.val();
         if (date === '') return;
-        return moment(date).format('YYYY-MM-DD');
+        return moment(date, 'D MMMM, YYYY').format('YYYY-MM-DD');
     },
 
     getSpousesIds: function () {
