@@ -46,6 +46,13 @@ polyglot.extend({
     'tree.options.with_dates': 'Afficher les dates',
     'tree.options.with_avatars': 'Afficher les avatars',
     'tree.options.with_names': 'Afficher les noms',
+    'tree.modal.title': 'Plus d’actions pour ',
+    'tree.modal.desc': 'Enrichir son arbre rapidement depuis ce menu :',
+    'tree.modal.add.brother': 'Ajouter un frère',
+    'tree.modal.add.sister': 'Ajouter une soeur',
+    'tree.modal.add.son': 'Ajouter un fils',
+    'tree.modal.add.daughter': 'Ajouter une fille',
+    'tree.modal.close': 'Fermer',
 
     // People
     'people.parents': 'Parents',

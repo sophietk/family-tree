@@ -1,0 +1,20 @@
+<div class="modal-content">
+    <h4>{{p 'tree.modal.title'}} {{firstName}} {{lastName}}</h4>
+
+    <p>{{p 'tree.modal.desc'}}</p>
+
+    {{#oneOf motherId fatherId}}
+        <a href="#people/new?motherId={{motherId}}&fatherId={{fatherId}}&gender=M&lastName={{lastName}}" class="waves-effect waves-green btn-flat">{{p 'tree.modal.add.brother'}}</a>
+        <a href="#people/new?motherId={{motherId}}&fatherId={{fatherId}}&gender=F&lastName={{lastName}}" class="waves-effect waves-green btn-flat">{{p 'tree.modal.add.sister'}}</a>
+    {{/oneOf}}
+    {{#isMale}}
+        <a href="#people/new?fatherId={{_id}}&gender=M&lastName={{lastName}}" class="waves-effect waves-green btn-flat">{{p 'tree.modal.add.son'}}</a>
+        <a href="#people/new?fatherId={{_id}}&gender=F&lastName={{lastName}}" class="waves-effect waves-green btn-flat">{{p 'tree.modal.add.daughter'}}</a>
+    {{else}}
+        <a href="#people/new?motherId={{_id}}&gender=M&lastName={{lastName}}" class="waves-effect waves-green btn-flat">{{p 'tree.modal.add.son'}}</a>
+        <a href="#people/new?motherId={{_id}}&gender=F&lastName={{lastName}}" class="waves-effect waves-green btn-flat">{{p 'tree.modal.add.daughter'}}</a>
+    {{/isMale}}
+</div>
+<div class="modal-footer">
+    <a href="" class="modal-actions modal-close waves-effect waves-green btn-flat">{{p 'tree.modal.close'}}</a>
+</div>

@@ -1,5 +1,7 @@
 {{#if gender}} {{! else unknown people}}
-    <a href="#people/{{_id}}" rel="content">
+    <a href="#people/{{_id}}" rel="content" data-id="{{_id}}" data-gender="{{gender}}" data-mother-id="{{motherId}}"
+       data-father-id="{{fatherId}}" data-first-name="{{firstName}}" data-last-name="{{lastName}}">
+        <div class="actions"><i class="mdi-action-info-outline tiny"></i></div>
         <div class="tree-thumbnail rounded img-cover img-gender {{#if isMale}}m{{else}}f{{/if}}"
              {{#avatarUrl}}style="background-image:url({{.}});"{{/avatarUrl}}></div>
         <div class="tree-detail">

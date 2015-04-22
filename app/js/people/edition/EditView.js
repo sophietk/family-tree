@@ -88,6 +88,28 @@ var EditView = Marionette.ItemView.extend({
         this.updateGender();
         this.updateFatherMotherSpouses();
         this.refreshSpousesButtons();
+        this.fillWithQuery();
+    },
+
+    fillWithQuery: function () {
+        var urlHashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        _.each(urlHashes, function updateField(hash) {
+            hash = hash.split('=');
+            switch (hash[0]) {
+                case 'lastName':
+                    this.ui.lastName.val(hash[1]).change();
+                    break;
+                case 'gender':
+                    this.setGender(hash[1]);
+                    break;
+                case 'motherId':
+                    this.ui.motherId.val(hash[1]);
+                    break;
+                case 'fatherId':
+                    this.ui.fatherId.val(hash[1]);
+                    break;
+            }
+        }, this);
     },
 
     renderError: function () {
@@ -137,6 +159,11 @@ var EditView = Marionette.ItemView.extend({
 
     getGender: function () {
         return this.$('input[name="gender"]:checked').val();
+    },
+
+    setGender: function (gender) {
+        this.$('input[name="gender"][value="' + gender + '"]').prop('checked', true);
+        this.updateGender();
     },
 
     getBirthDate: function () {
