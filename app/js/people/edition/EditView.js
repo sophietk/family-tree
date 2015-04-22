@@ -152,9 +152,9 @@ var EditView = Marionette.ItemView.extend({
     },
 
     getSpousesIds: function () {
-        return this.$('select[name="spouse"]').map(function (index, el) {
+        return _.compact(this.$('select[name="spouse"]').map(function (index, el) {
             return $(el).val();
-        }).get();
+        }).get());
     },
 
     savePeople: function () {
@@ -165,8 +165,8 @@ var EditView = Marionette.ItemView.extend({
             maidenName: this.ui.maidenName.val(),
             birthDate: this.getBirthDate(),
             deathDate: this.getDeathDate(),
-            fatherId: this.ui.fatherId.val(),
-            motherId: this.ui.motherId.val(),
+            fatherId: this.ui.fatherId.val() || undefined,
+            motherId: this.ui.motherId.val() || undefined,
             spousesIds: this.getSpousesIds(),
             avatarUrl: this.ui.avatarUrl.val(),
             about: this.ui.about.val(),

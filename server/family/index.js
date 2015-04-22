@@ -20,13 +20,13 @@ Q.until = function (fn) {
 function retrievePeopleFromReq(req) {
     var people = req.body;
 
-    people.spousesIds = _.compact(people.spousesIds);
-
+    /*
     _.each(people, function removeIfEmpty(value, key) {
         if (_.isUndefined(value) || _.isNull(value) || (!_.isBoolean(value) && _.isEmpty(value))) {
             delete people[key];
         }
     });
+    */
 
     return _.pick(people,
         '_id',
