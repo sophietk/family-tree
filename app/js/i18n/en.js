@@ -48,6 +48,7 @@ polyglot.extend({
     'tree.options.with_names': 'With names',
     'tree.modal.title': 'More actions from ',
     'tree.modal.desc': 'Enrich one’s family tree quickly from this menu:',
+    'tree.modal.modify': 'Edit',
     'tree.modal.add.brother': 'Add brother',
     'tree.modal.add.sister': 'Add sister',
     'tree.modal.add.son': 'Add son',

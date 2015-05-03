@@ -3,6 +3,7 @@
 
     <p>{{p 'tree.modal.desc'}}</p>
 
+    <a href="#people/{{_id}}/edit" class="waves-effect waves-green btn-flat">{{p 'tree.modal.modify'}}</a>
     {{#oneOf motherId fatherId}}
         <a href="#people/new?motherId={{motherId}}&fatherId={{fatherId}}&gender=M&lastName={{lastName}}" class="waves-effect waves-green btn-flat">{{p 'tree.modal.add.brother'}}</a>
         <a href="#people/new?motherId={{motherId}}&fatherId={{fatherId}}&gender=F&lastName={{lastName}}" class="waves-effect waves-green btn-flat">{{p 'tree.modal.add.sister'}}</a>
