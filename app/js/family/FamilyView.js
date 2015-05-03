@@ -12,26 +12,36 @@ var FamilyView = Marionette.ItemView.extend({
     },
 
     events: {
-        'change @ui.withDate': 'toggle',
-        'change @ui.withAvatar': 'toggle',
-        'change @ui.withName': 'toggle',
+        'change @ui.withDate, @ui.withAvatar, @ui.withName': 'toggle',
         'click @ui.actionsBtn': 'showActionsModal'
     },
 
     modelEvents: {
-        sync: 'render'
+        sync: 'renderSuccess'
     },
 
     initialize: function (options) {
         this.model = new FamilyModel();
         this.model.id = options.familyId;
         this.model.fetch();
+    },
 
-        this.$currentModal = null;
+    renderSuccess: function () {
+        this.render();
+        this.centerPeople();
+    },
+
+    centerPeople: function () {
+        var $a = this.$('a[data-id="' + this.model.id + '"]'),
+            top = $a.offset().top,
+            left = $a.position().left,
+            margin = (this.ui.tree.width() - $a.width()) / 2;
+        this.ui.tree.animate({scrollLeft: left - margin}, 1000);
+        $('body').animate({scrollTop: top - 20}, 1000);
     },
 
     toggle: function (event) {
-        var $el = $(event.currentTarget),
+        var $el = this.$(event.currentTarget),
             prop = $el.data('prop'),
             hidden = !$el.prop('checked');
         this.ui.tree.toggleClass('hidden-' + prop, hidden);
@@ -41,7 +51,7 @@ var FamilyView = Marionette.ItemView.extend({
         e.preventDefault();
 
         // @todo: create children views
-        var $el = $(e.currentTarget).parent();
+        var $el = this.$(e.currentTarget).parent();
 
         this.ui.actionsModal.html(JST.actionsModal({
             _id: $el.data('id'),
