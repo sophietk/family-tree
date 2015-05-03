@@ -35,14 +35,12 @@
     </div>
     <div class="row">
         <div class="input-field col s6">
-            <input name="birthDate" id="birthDate" type="text" class="datepicker"
-                   value="{{readableDate birthDate}}">
-            <label for="birthDate" class="{{#birthDate}}active{{/birthDate}}">{{p 'birth_date'}}</label>
+            <input name="birthDate" id="birthDate" type="date" value="{{birthDate}}">
+            <label for="birthDate" class="active">{{p 'birth_date'}}</label>
         </div>
         <div class="input-field col s6">
-            <input name="deathDate" id="deathDate" type="text" class="datepicker"
-                   value="{{readableDate deathDate}}">
-            <label for="deathDate" class="{{#deathDate}}active{{/deathDate}}">{{p 'death_date'}}</label>
+            <input name="deathDate" id="deathDate" type="date" value="{{deathDate}}">
+            <label for="deathDate" class="active">{{p 'death_date'}}</label>
         </div>
     </div>
     <div class="row">

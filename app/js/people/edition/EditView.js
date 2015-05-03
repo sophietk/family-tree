@@ -72,19 +72,6 @@ var EditView = Marionette.ItemView.extend({
     },
 
     onRender: function () {
-        this.$('.datepicker').pickadate({
-            selectMonths: true,
-            selectYears: 200,
-            monthsFull: moment.months(),
-            monthsShort: moment.monthsShort(),
-            weekdaysFull: moment.weekdays(),
-            weekdaysShort: moment.weekdaysShort(),
-            weekdaysLetter: moment.weekdaysMin(),
-            today: polyglot.t('datepicker.today'),
-            clear: polyglot.t('datepicker.clear'),
-            close: polyglot.t('datepicker.close')
-        });
-
         this.updateGender();
         this.updateFatherMotherSpouses();
         this.refreshSpousesButtons();
@@ -166,18 +153,6 @@ var EditView = Marionette.ItemView.extend({
         this.updateGender();
     },
 
-    getBirthDate: function () {
-        var date = this.ui.birthDate.val();
-        if (date === '') return null;
-        return moment(date, 'D MMMM, YYYY').format('YYYY-MM-DD');
-    },
-
-    getDeathDate: function () {
-        var date = this.ui.deathDate.val();
-        if (date === '') return null;
-        return moment(date, 'D MMMM, YYYY').format('YYYY-MM-DD');
-    },
-
     getSpousesIds: function () {
         return _.compact(this.$('select[name="spouse"]').map(function (index, el) {
             return $(el).val();
@@ -190,8 +165,8 @@ var EditView = Marionette.ItemView.extend({
             lastName: this.ui.lastName.val(),
             gender: this.getGender(),
             maidenName: this.ui.maidenName.val(),
-            birthDate: this.getBirthDate(),
-            deathDate: this.getDeathDate(),
+            birthDate: this.ui.birthDate.val(),
+            deathDate: this.ui.deathDate.val(),
             fatherId: this.ui.fatherId.val() || null,
             motherId: this.ui.motherId.val() || null,
             spousesIds: this.getSpousesIds(),

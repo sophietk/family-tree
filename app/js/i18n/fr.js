@@ -68,9 +68,6 @@ polyglot.extend({
     'people.edit.delete.confirm.text': 'Êtes-vous sûr ?',
     'people.avatar.title': 'Upload de la photo de %{firstName}',
     'people.avatar.text': 'Choisir une photo',
-    'people.avatar.file': 'Fichier',
-    'datepicker.today': 'Aujourd’hui',
-    'datepicker.clear': 'Reset',
-    'datepicker.close': 'Fermer'
+    'people.avatar.file': 'Fichier'
 
 });
