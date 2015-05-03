@@ -86,8 +86,8 @@ module.exports = function (grunt) {
                 options: {
                     patterns: [
                         {
-                            match: '../font/',
-                            replacement: 'font/'
+                            match: /\.\.\/font\//g,
+                            replacement: './font/'
                         }
                     ]
                 },
