@@ -6,11 +6,11 @@
   "private": true,
   "engines": {
     "node": "0.12.x",
-    "npm": "2.5.x"
+    "npm": "2.7.x"
   },
   "scripts": {
-    "preinstall": "gem install sass",
-    "postinstall": "export PATH=$PATH:/app/vendor/ruby-1.9.2/bin && bower install && grunt build",
+    "preinstall": "ls /app/vendor; gem install sass",
+    "postinstall": "export PATH=$PATH:/app/vendor/ruby-2.2.2/bin && bower install && grunt build",
     "start": "node ./server/server.js"
   },
   "dependencies": {
