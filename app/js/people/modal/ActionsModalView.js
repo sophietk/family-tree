@@ -4,6 +4,14 @@ var ActionsModalView = Marionette.ItemView.extend({
 
     template: JST.actionsModal,
 
+    ui: {
+        btns: '.modal-content a'
+    },
+
+    events: {
+        'click @ui.btns': 'closeModal'
+    },
+
     templateHelpers: function () {
         var $el = this.options.target;
         return {
@@ -20,6 +28,10 @@ var ActionsModalView = Marionette.ItemView.extend({
         this.$el.openModal({
             complete: _.bind(this.destroy, this)
         });
+    },
+
+    closeModal: function () {
+        this.$el.closeModal();
     }
 
 });
