@@ -5,6 +5,10 @@ var FamilyView = Marionette.ItemView.extend({
     behaviors: {
         ModalOpenerBehavior: {
             behaviorClass: ModalOpenerBehavior
+        },
+        NavigatorBehavior: {
+            behaviorClass: NavigatorBehavior,
+            container: '.tree'
         }
     },
 
