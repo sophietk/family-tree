@@ -20,7 +20,8 @@ var MenuView = Marionette.ItemView.extend({
         this.collection.each(function transformToMenuItem(people) {
             this.menuItems.push({
                 route: 'family/' + people.get('_id'),
-                title: polyglot.t('tabs.pinned', {firstName: people.get('firstName')}),
+                title: 'tabs.pinned',
+                args: {firstName: people.get('firstName')},
                 className: 'teal'
             });
         }, this);

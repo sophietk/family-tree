@@ -3,12 +3,12 @@
     <a href="#" class="brand-logo right">Family tree</a>
     <ul id="nav-mobile" class="left hide-on-med-and-down">
         {{#items}}
-            <li><a href="#{{route}}" class="waves-effect {{className}}">{{p title}}</a></li>
+            <li><a href="#{{route}}" class="waves-effect {{className}}">{{p title args}}</a></li>
         {{/items}}
     </ul>
     <ul class="side-nav" id="mobile-menu">
         {{#items}}
-            <li><a href="#{{route}}" class="waves-effect">{{p title}}</a></li>
+            <li><a href="#{{route}}" class="waves-effect">{{p title args}}</a></li>
         {{/items}}
     </ul>
 </div>
