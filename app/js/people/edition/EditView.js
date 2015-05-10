@@ -134,7 +134,12 @@ var EditView = Marionette.ItemView.extend({
     showAvatarModal: function (event) {
         event.preventDefault();
 
-        var avatarUploadView = new AvatarUploadView();
+        var avatarUploadView = new AvatarUploadView({
+            people: {
+                firstName: this.ui.firstName.val(),
+                lastName: this.ui.lastName.val()
+            }
+        });
         this.$el.append(avatarUploadView.render().el);
         this.listenToOnce(avatarUploadView, 'complete', this.uploadAvatarSuccess);
     },

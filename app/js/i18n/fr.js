@@ -46,7 +46,7 @@ polyglot.extend({
     'tree.options.with_dates': 'Afficher les dates',
     'tree.options.with_avatars': 'Afficher les avatars',
     'tree.options.with_names': 'Afficher les noms',
-    'tree.modal.title': 'Plus d’actions pour ',
+    'tree.modal.title': 'Plus d’actions pour %{firstName} %{lastName}',
     'tree.modal.desc': 'Enrichir son arbre rapidement depuis ce menu :',
     'tree.modal.modify': 'Modifier',
     'tree.modal.add.brother': 'Ajouter un frère',
@@ -66,7 +66,7 @@ polyglot.extend({
     'people.edit.pinned': 'Montrer dans les menus',
     'people.edit.delete.confirm.title': 'Supprimer %{firstName} %{lastName}',
     'people.edit.delete.confirm.text': 'Êtes-vous sûr ?',
-    'people.avatar.title': 'Upload de la photo de %{firstName}',
+    'people.avatar.title': 'Upload de la photo de %{firstName} %{lastName}',
     'people.avatar.text': 'Choisir une photo',
     'people.avatar.file': 'Fichier'
 

@@ -13,7 +13,6 @@ var AvatarUploadView = Marionette.ItemView.extend({
 
     events: {
         'change @ui.avatarFile': 'updateAvatarFile',
-        'click @ui.avatarUploadCancel': 'cancelUploadAvatar',
         'click @ui.avatarUploadSave': 'uploadAvatar'
     },
 
@@ -21,9 +20,12 @@ var AvatarUploadView = Marionette.ItemView.extend({
         this.model = new AvatarModel();
     },
 
+    templateHelpers: function () {
+        return this.options.people;
+    },
+
     onRender: function () {
         this.$el.openModal({
-                dismissible: false,
                 complete: _.bind(function () {
                     this.destroy();
                 }, this)
