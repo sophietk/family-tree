@@ -70,9 +70,9 @@ function buildSpousesWithChildren(people) {
                         return;
                     }
 
-                    otherParent = _.findWhere(spouses, {_id: otherParentId});
+                    otherParent = _.find(spouses, {_id: otherParentId});
                     if (_.isUndefined(otherParent)) {
-                        otherParent = _.findWhere(all, {_id: otherParentId});
+                        otherParent = _.find(all, {_id: otherParentId});
                         spouses.push(_.extend({}, otherParent, {children: [child]}));
                         return;
                     }
@@ -202,10 +202,10 @@ exports = module.exports = function (app) {
                     return Q.all(promises)
                         .then(function () {
                             currentLevel++;
-                            allChildrenAtLevel = _.chain(allChildrenAtLevel)
-                                .pluck('spouses')
+                            allChildrenAtLevel = _(allChildrenAtLevel)
+                                .map('spouses')
                                 .flatten()
-                                .pluck('children')
+                                .map('children')
                                 .flatten()
                                 .compact()
                                 .reject({_id: id}) // avoid circular families

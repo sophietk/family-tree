@@ -1,7 +1,7 @@
 var _ = require('lodash'),
     Q = require('q'),
     mongojs = require('mongojs'),
-    dbUrl = process.env.DB_URL || 'family',
+    dbUrl = process.env.DB_URL || 'familytree',
     db,
     collection,
     uCollection;

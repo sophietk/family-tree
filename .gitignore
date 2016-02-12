@@ -11,4 +11,5 @@ dist/
 zip/
 server/database/people2*.json
 server/database/upload2*.json
+server/upload/avatar/
 scripts/

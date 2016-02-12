@@ -2,33 +2,20 @@ var _ = require('lodash'),
     fs = require('fs'),
     path = require('path'),
     multer = require('multer'),
+    upload = multer({dest: 'server/upload/avatar/'})
     db = require('../database'),
-    lastUpload;
+    lastUpload = {};
 
 exports = module.exports = function (app) {
 
-    app.use(multer({
-        dest: path.resolve(__dirname, './avatar'),
-        rename: function (fieldname, filename) {
-            return Date.now();
-        },
-        onFileUploadStart: function (file) {
-            console.log(file.originalname + ' is starting ...');
-        },
-        onFileUploadComplete: function (file) {
-            console.log(file.fieldname + ' uploaded to  ' + file.path);
-            lastUpload = file;
-        }
-    }).any());
-
-    app.post('/upload/avatar', function (req, res) {
+    app.post('/upload/avatar', upload.single('avatarFile'), function (req, res) {
+        console.log(req.body);
         var avatar = {
-            name: lastUpload.name,
-            extension: lastUpload.extension,
-            originalName: lastUpload.originalname,
-            data: new Buffer(fs.readFileSync(lastUpload.path)).toString('base64'),
-            contentType: lastUpload.mimetype,
-            size: lastUpload.size
+            name: req.file.filename,
+            originalName: req.file.originalname,
+            data: new Buffer(fs.readFileSync(req.file.path)).toString('base64'),
+            contentType: req.file.mimetype,
+            size: req.file.size
         };
 
         db.createAvatar(avatar)
