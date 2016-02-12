@@ -4,6 +4,11 @@ var MenuView = Marionette.ItemView.extend({
 
     template: JST.menu,
 
+    ui: {
+        buttonCollapse: '.button-collapse',
+        tabs: 'li'
+    },
+
     menuItems: [
         {route: 'home', title: 'tabs.home'},
         {route: 'directory', title: 'tabs.directory'},
@@ -33,20 +38,21 @@ var MenuView = Marionette.ItemView.extend({
     },
 
     onRender: function () {
-        this.$('.button-collapse').sideNav();
+        this.ui.buttonCollapse.sideNav();
         this.updateCurrentTab();
     },
 
     updateCurrentTab: function () {
-        if (this.currentTab) {
-            this.$('li')
-                .eq(this.currentTab)
-                .addClass('active')
-                .siblings()
-                .removeClass('active');
-        } else {
-            this.$('li').removeClass('active');
+        if (_.isUndefined(this.currentTab)) {
+            this.ui.tabs.removeClass('active');
+            return;
         }
+
+        this.ui.tabs
+            .eq(this.currentTab)
+            .addClass('active')
+            .siblings()
+            .removeClass('active');
     },
 
     select: function (index) {

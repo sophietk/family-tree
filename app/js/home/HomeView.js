@@ -4,8 +4,12 @@ var HomeView = Marionette.ItemView.extend({
 
     template: JST.home,
 
+    ui: {
+    	parallax: '.parallax'
+    },
+
     onShow: function () {
-        this.$('.parallax').parallax();
+        this.ui.parallax.parallax();
     }
 
 });
