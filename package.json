@@ -10,7 +10,7 @@
   },
   "scripts": {
     "preinstall": "gem install sass",
-    "postinstall": "export PATH=$PATH:/app/vendor/$(ls /app/vendor | grep ruby)/bin; echo $PATH; bower i && grunt build",
+    "postinstall": "export PATH=$PATH:/app/vendor/$(ls /app/vendor | grep ruby)/bin; echo $PATH; bower update && grunt build",
     "start": "node ./server/server.js"
   },
   "dependencies": {
