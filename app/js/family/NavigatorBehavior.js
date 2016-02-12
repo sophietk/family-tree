@@ -19,7 +19,7 @@ var NavigatorBehavior = Marionette.Behavior.extend({
         'click @ui.down': 'navigateDown'
     },
 
-    onRender: function () {
+    onShow: function () {
         this.$elNav = $(this.template());
         this.ui.container.parent().prepend(this.$elNav);
         this.step = this.ui.container.width() * 2 / 3;
