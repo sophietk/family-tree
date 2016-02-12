@@ -24,7 +24,7 @@ var FamilyView = Marionette.ItemView.extend({
         'change @ui.withDate, @ui.withAvatar, @ui.withName': 'toggle'
     },
 
-    onRender: function () {
+    onShow: function () {
         this.centerPeople();
     },
 
