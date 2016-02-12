@@ -37,19 +37,7 @@ var EditView = Marionette.ItemView.extend({
         'click @ui.deleteConfirm': 'deletePeople'
     },
 
-    modelEvents: {
-        sync: 'render',
-        error: 'renderError'
-    },
-
-    initialize: function (options) {
-        this.model = new PeopleModel();
-
-        if (options.peopleId) {
-            this.model.set('_id', options.peopleId);
-            this.model.fetch();
-        }
-
+    initialize: function () {
         this.collection = new PeopleCollection();
         this.listenTo(this.collection, 'sync', this.rejectOneSelf);
         this.listenTo(this.collection, 'sync', this.render);
@@ -99,10 +87,6 @@ var EditView = Marionette.ItemView.extend({
         }, this);
     },
 
-    renderError: function () {
-        this.$el.html('Oops');
-    },
-
     updateGender: function () {
         this.ui.maidenNameBlock.toggle(this.getGender() === 'F');
     },
@@ -135,6 +119,7 @@ var EditView = Marionette.ItemView.extend({
         event.preventDefault();
 
         var avatarUploadView = new AvatarUploadView({
+            model: new AvatarModel(),
             people: {
                 firstName: this.ui.firstName.val(),
                 lastName: this.ui.lastName.val()

@@ -24,18 +24,7 @@ var FamilyView = Marionette.ItemView.extend({
         'change @ui.withDate, @ui.withAvatar, @ui.withName': 'toggle'
     },
 
-    modelEvents: {
-        sync: 'renderSuccess'
-    },
-
-    initialize: function (options) {
-        this.model = new FamilyModel();
-        this.model.id = options.familyId;
-        this.model.fetch();
-    },
-
-    renderSuccess: function () {
-        this.render();
+    onRender: function () {
         this.centerPeople();
     },
 

@@ -11,13 +11,11 @@ var MenuView = Marionette.ItemView.extend({
     ],
 
     initialize: function () {
-        this.collection = new MenuCollection();
-        this.listenTo(this.collection, 'sync', this.addToMenuAndRender);
-        this.collection.fetch();
+        this.currentTab = undefined;
     },
 
-    addToMenuAndRender: function () {
-        this.collection.each(function transformToMenuItem(people) {
+    addCollectionToMenu: function (collection) {
+        collection.each(function transformToMenuItem(people) {
             this.menuItems.push({
                 route: 'family/' + people.get('_id'),
                 title: 'tabs.pinned',
@@ -36,14 +34,27 @@ var MenuView = Marionette.ItemView.extend({
 
     onRender: function () {
         this.$('.button-collapse').sideNav();
+        this.updateCurrentTab();
+    },
+
+    updateCurrentTab: function () {
+        if (this.currentTab) {
+            this.$('li')
+                .eq(this.currentTab)
+                .addClass('active')
+                .siblings()
+                .removeClass('active');
+        } else {
+            this.$('li').removeClass('active');
+        }
     },
 
     select: function (index) {
-        this.$('li').eq(index).addClass('active')
-            .siblings().removeClass('active');
+        this.currentTab = index;
+        this.updateCurrentTab();
     },
 
     unselect: function () {
-        this.$('li').removeClass('active');
+        this.select(undefined);
     }
 });

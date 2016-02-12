@@ -6,7 +6,6 @@ var HomeView = Marionette.ItemView.extend({
 
     onShow: function () {
         this.$('.parallax').parallax();
-        return this;
     }
 
 });

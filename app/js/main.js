@@ -38,8 +38,6 @@ app
 
     })
     .on('start', function () {
-
-        app.menuRegion.show(new MenuView());
         new Router();
         Backbone.history.start();
 

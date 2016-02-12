@@ -10,40 +10,76 @@ var Router = Marionette.AppRouter.extend({
         '': 'home'
     },
 
+    initialize: function () {
+        app.menuRegion.show(new MenuView());
+
+        new MenuCollection()
+            .on('sync', function (collection) {
+                app.menuRegion.currentView.addCollectionToMenu(collection);
+            })
+            .fetch();
+    },
+
     home: function () {
         app.nudeRegion.show(new HomeView());
-        app.mainRegion.reset();
         app.menuRegion.currentView.select(0);
+        app.mainRegion.reset();
     },
 
     directory: function () {
         app.nudeRegion.reset();
-        app.mainRegion.show(new DirectoryView());
         app.menuRegion.currentView.select(1);
-    },
+        app.mainRegion.show(new LoaderView());
 
-    people: function (peopleId) {
-        app.nudeRegion.reset();
-        app.mainRegion.show(new PeopleView({peopleId: peopleId}));
-        app.menuRegion.currentView.unselect();
-    },
-
-    editPeople: function (peopleId) {
-        app.nudeRegion.reset();
-        app.mainRegion.show(new EditView({peopleId: peopleId}));
-        app.menuRegion.currentView.unselect();
+        new PeopleCollection()
+            .on('sync', function (collection) {
+                collection.models.reverse();
+                app.mainRegion.show(new DirectoryView({collection: collection}));
+            })
+            .fetch();
     },
 
     createPeople: function () {
         app.nudeRegion.reset();
-        app.mainRegion.show(new EditView());
         app.menuRegion.currentView.unselect();
+        app.mainRegion.show(new EditView({model: new PeopleModel()}));
+    },
+
+    people: function (peopleId) {
+        app.nudeRegion.reset();
+        app.menuRegion.currentView.unselect();
+        app.mainRegion.show(new LoaderView());
+
+        new PeopleModel({_id: peopleId})
+            .on('sync', function (model) {
+                app.mainRegion.show(new PeopleView({model: model}));
+            })
+            .fetch();
+    },
+
+    editPeople: function (peopleId) {
+        app.nudeRegion.reset();
+        app.menuRegion.currentView.unselect();
+        app.mainRegion.show(new LoaderView());
+
+        new PeopleModel({_id: peopleId})
+            .on('sync', function (model) {
+                app.mainRegion.show(new EditView({model: model}));
+            })
+            .fetch();
     },
 
     family: function (familyId) {
         app.nudeRegion.reset();
-        app.mainRegion.show(new FamilyView({familyId: familyId}));
         app.menuRegion.currentView.unselect();
+        app.mainRegion.show(new LoaderView());
+
+
+        new FamilyModel({_id: familyId})
+            .on('sync', function (model) {
+                app.mainRegion.show(new FamilyView({model: model}));
+            })
+            .fetch();
     }
 
 });

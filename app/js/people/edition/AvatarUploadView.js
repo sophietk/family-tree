@@ -16,10 +16,6 @@ var AvatarUploadView = Marionette.ItemView.extend({
         'click @ui.avatarUploadSave': 'uploadAvatar'
     },
 
-    initialize: function () {
-        this.model = new AvatarModel();
-    },
-
     templateHelpers: function () {
         return this.options.people;
     },
@@ -54,8 +50,8 @@ var AvatarUploadView = Marionette.ItemView.extend({
         }, this));
     },
 
-    uploadAvatarSuccess: function (avatarModel) {
-        var uploadedAvatarUrl = avatarModel.get('avatarUrl');
+    uploadAvatarSuccess: function () {
+        var uploadedAvatarUrl = this.model.get('avatarUrl');
         this.trigger('complete', uploadedAvatarUrl);
         this.$el.closeModal();
     }
