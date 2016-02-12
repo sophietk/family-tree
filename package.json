@@ -9,8 +9,8 @@
     "npm": "2.7.x"
   },
   "scripts": {
-    "preinstall": "ls /app/vendor; gem install sass",
-    "postinstall": "export PATH=$PATH:/app/vendor/ruby-2.2.4/bin && bower install && grunt build",
+    "preinstall": "gem install sass",
+    "postinstall": "export PATH=$PATH:/app/vendor/$(ls /app/vendor | grep ruby)/bin; echo $PATH; bower i && grunt build",
     "start": "node ./server/server.js"
   },
   "dependencies": {
@@ -42,5 +42,9 @@
     "grunt-contrib-watch": "0.6.1",
     "grunt-replace": "0.9.1",
     "grunt-usemin": "3.0.0"
-  }
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "app/bower_components"
+  ]
 }
