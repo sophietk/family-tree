@@ -3,7 +3,6 @@ var _ = require('lodash'),
     path = require('path'),
     multer = require('multer'),
     db = require('../database'),
-    done = false,
     lastUpload;
 
 exports = module.exports = function (app) {
@@ -15,14 +14,12 @@ exports = module.exports = function (app) {
         },
         onFileUploadStart: function (file) {
             console.log(file.originalname + ' is starting ...');
-            done = false;
         },
         onFileUploadComplete: function (file) {
             console.log(file.fieldname + ' uploaded to  ' + file.path);
             lastUpload = file;
-            done = true;
         }
-    }));
+    }).any());
 
     app.post('/upload/avatar', function (req, res) {
         var avatar = {

@@ -6,17 +6,18 @@
   ],
   "description": "family tree to find and link your family members, and discover your ancerstors' stories",
   "dependencies": {
-    "jquery": "2.1.4",
+    "jquery": "2.2.0",
     "lodash": "3.10.1",
     "backbone": "1.2.3",
     "materialize": "0.95.3",
-    "moment": "2.10.6",
-    "marionette": "2.4.3",
-    "handlebars": "4.0.4",
+    "moment": "2.11.2",
+    "marionette": "2.4.4",
+    "handlebars": "4.0.5",
     "backbone-model-file-upload": "1.0.0",
-    "polyglot": "0.4.3"
+    "polyglot": "1.0.0"
   },
   "resolutions": {
-    "backbone": "1.2.3"
+    "backbone": "1.2.3",
+    "jquery": "2.2.0"
   }
 }

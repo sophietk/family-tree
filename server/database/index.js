@@ -2,13 +2,16 @@ var _ = require('lodash'),
     Q = require('q'),
     mongojs = require('mongojs'),
     dbUrl = process.env.DB_URL || 'family',
+    db,
     collection,
     uCollection;
 
 console.log('Connecting to db: ' + dbUrl);
 
-collection = mongojs(dbUrl).collection('people');
-uCollection = mongojs(dbUrl).collection('upload');
+db = mongojs(dbUrl, ['people', 'upload']);
+
+collection = db.collection('people');
+uCollection = db.collection('upload');
 
 function convert(doc) {
     if (_.isUndefined(doc) || _.isNull(doc)) return;
