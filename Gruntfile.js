@@ -40,31 +40,6 @@ module.exports = function (grunt) {
             }
         },
 
-        copy: {
-            html: {
-                src: 'app/index.html',
-                dest: 'dist/index.html'
-            },
-            img: {
-                expand: true,
-                cwd: 'app/img',
-                src: '**',
-                dest: 'dist/img'
-            },
-            font: {
-                expand: true,
-                cwd: 'app/bower_components/materialize/font',
-                src: '**',
-                dest: 'dist/font'
-            },
-            i18n: {
-                expand: true,
-                cwd: 'app/js/i18n',
-                src: '**',
-                dest: 'dist/js/i18n'
-            }
-        },
-
         cssmin: {
             options: {
                 keepSpecialComments: 0,
@@ -111,7 +86,10 @@ module.exports = function (grunt) {
 
         exec: {
             sass: {
-              cmd: 'npm run sass'
+                cmd: 'npm run sass'
+            },
+            'copy-all': {
+                cmd: 'npm run copy-all'
             }
         }
     });
@@ -119,7 +97,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-handlebars');
-    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-usemin');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -137,7 +114,7 @@ module.exports = function (grunt) {
         'clean:dist',
         'exec:sass',
         'handlebars',
-        'copy',
+        'exec:copy-all',
         'useminPrepare',
         'concat:generated',
         'cssmin:generated',
