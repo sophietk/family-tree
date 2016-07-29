@@ -11,6 +11,8 @@
   "scripts": {
     "postinstall": "bower update && grunt build",
     "start": "node ./server/server.js",
+    "clean:dist": "rm -rf dist",
+    "clean:zip": "rm -rf zip",
     "sass": "node-sass --source-map true app/sass/style.scss -o app/css",
     "copy-all": "mkdir dist; npm-run-all copy:*",
     "copy:html": "cp app/index.html dist/index.html",
@@ -36,7 +38,6 @@
     "bower": "1.7.7",
     "grunt": "0.4.5",
     "grunt-cli": "0.1.13",
-    "grunt-contrib-clean": "0.7.0",
     "grunt-contrib-compress": "0.14.0",
     "grunt-contrib-concat": "0.5.1",
     "grunt-contrib-cssmin": "0.14.0",

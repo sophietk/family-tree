@@ -15,11 +15,6 @@ module.exports = function (grunt) {
             }
         },
 
-        clean: {
-            dist: ['dist/**'],
-            zip: ['zip/**']
-        },
-
         handlebars: {
             options: {
                 namespace: 'JST',
@@ -90,12 +85,17 @@ module.exports = function (grunt) {
             },
             'copy-all': {
                 cmd: 'npm run copy-all'
+            },
+            'clean-dist': {
+                cmd: 'npm run clean:dist'
+            },
+            'clean-zip': {
+                cmd: 'npm run clean:zip'
             }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-handlebars');
     grunt.loadNpmTasks('grunt-usemin');
     grunt.loadNpmTasks('grunt-contrib-concat');
@@ -111,7 +111,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('build', [
-        'clean:dist',
+        'exec:clean-dist',
         'exec:sass',
         'handlebars',
         'exec:copy-all',
@@ -125,7 +125,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('dist', [
         'build',
-        'clean:zip',
+        'exec:clean-zip',
         'compress'
     ]);
 
