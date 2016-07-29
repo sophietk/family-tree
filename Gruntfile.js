@@ -7,7 +7,7 @@ module.exports = function (grunt) {
         watch: {
             sass: {
                 files: ['app/sass/*.scss'],
-                tasks: ['sass:dev']
+                tasks: ['exec:sass']
             },
             handlebars: {
                 files: ['app/**/*.hbs'],
@@ -18,14 +18,6 @@ module.exports = function (grunt) {
         clean: {
             dist: ['dist/**'],
             zip: ['zip/**']
-        },
-
-        sass: {
-            dev: {
-                files: {
-                    'app/css/style.css': 'app/sass/style.scss'
-                }
-            }
         },
 
         handlebars: {
@@ -115,12 +107,17 @@ module.exports = function (grunt) {
                 src: ['**/*'],
                 dest: '<%= pkg.name %>/'
             }
+        },
+
+        exec: {
+            sass: {
+              cmd: 'npm run sass'
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-handlebars');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-usemin');
@@ -129,15 +126,16 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-compress');
+    grunt.loadNpmTasks('grunt-exec');
 
     grunt.registerTask('default', [
-        'sass',
+        'exec:sass',
         'watch'
     ]);
 
     grunt.registerTask('build', [
         'clean:dist',
-        'sass',
+        'exec:sass',
         'handlebars',
         'copy',
         'useminPrepare',
