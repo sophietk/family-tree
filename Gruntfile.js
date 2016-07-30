@@ -15,21 +15,6 @@ module.exports = function (grunt) {
             }
         },
 
-        cssmin: {
-            options: {
-                keepSpecialComments: 0,
-                rebase: false
-            }
-        },
-
-        useminPrepare: {
-            html: 'app/index.html'
-        },
-
-        usemin: {
-            html: 'dist/index.html'
-        },
-
         exec: {
             sass: {
                 cmd: 'npm run sass'
@@ -51,15 +36,14 @@ module.exports = function (grunt) {
             },
             'replace-cssfont': {
                 cmd: 'npm run replace:cssfont'
+            },
+            usemin: {
+                cmd: 'npm run usemin'
             }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-usemin');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-exec');
 
     grunt.registerTask('default', [
@@ -72,11 +56,7 @@ module.exports = function (grunt) {
         'exec:sass',
         'exec:handlebars',
         'exec:copy-all',
-        'useminPrepare',
-        'concat:generated',
-        'cssmin:generated',
-        'uglify:generated',
-        'usemin',
+        'exec:usemin',
         'exec:replace-cssfont'
     ]);
 
