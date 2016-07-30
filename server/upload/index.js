@@ -24,7 +24,7 @@ exports = module.exports = function (app) {
                     avatarUrl: '/avatar/' + dbAvatar._id
                 });
             })
-            .fail(function (err) {
+            .catch(function (err) {
                 res.status(500).send(err.message)
             });
     });
@@ -39,7 +39,7 @@ exports = module.exports = function (app) {
                 res.contentType(dbAvatar.contentType);
                 res.send(new Buffer(dbAvatar.data, 'base64'));
             })
-            .fail(function (err) {
+            .catch(function (err) {
                 res.status(500).send(err.message)
             });
     });

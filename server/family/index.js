@@ -88,7 +88,7 @@ function buildSpousesWithChildren(people) {
                 people.spouses = spouses;
                 resolve();
             })
-            .fail(function (err) {
+            .catch(function (err) {
                 reject(err);
             });
     });
@@ -101,7 +101,7 @@ exports = module.exports = function (app) {
             .then(function (dbPeople) {
                 res.send(dbPeople);
             })
-            .fail(function (err) {
+            .catch(function (err) {
                 res.status(500).send(err.message)
             });
     });
@@ -111,7 +111,7 @@ exports = module.exports = function (app) {
             .then(function (dbPeople) {
                 res.send(dbPeople);
             })
-            .fail(function (err) {
+            .catch(function (err) {
                 res.status(500).send(err.message)
             });
     });
@@ -123,7 +123,7 @@ exports = module.exports = function (app) {
             .then(function (dbPeople) {
                 res.send(dbPeople);
             })
-            .fail(function (err) {
+            .catch(function (err) {
                 res.status(500).send(err.message)
             });
     });
@@ -147,11 +147,11 @@ exports = module.exports = function (app) {
                             children: data[2]
                         }));
                     })
-                    .fail(function (err) {
+                    .catch(function (err) {
                         res.status(500).send(err)
                     });
             })
-            .fail(function (err) {
+            .catch(function (err) {
                 res.status(500).send(err.message)
             });
 
@@ -165,7 +165,7 @@ exports = module.exports = function (app) {
             .then(function (dbPeople) {
                 res.send(dbPeople);
             })
-            .fail(function (err) {
+            .catch(function (err) {
                 res.status(500).send(err.message)
             });
     });
@@ -177,7 +177,7 @@ exports = module.exports = function (app) {
             .then(function () {
                 res.sendStatus(204);
             })
-            .fail(function (err) {
+            .catch(function (err) {
                 res.status(500).send(err.message)
             });
     });
@@ -213,7 +213,7 @@ exports = module.exports = function (app) {
                             return !!(_.isEmpty(allChildrenAtLevel) || currentLevel >= limitLevel);
                             //res.send(dbPeople);
                         })
-                        .fail(function (err) {
+                        .catch(function (err) {
                             return true;
                             //res.status(500).send({message: err.message, stack: err.stack});
                         });
@@ -222,7 +222,7 @@ exports = module.exports = function (app) {
                 });
 
             })
-            .fail(function (err) {
+            .catch(function (err) {
                 res.status(500).send({message: err.message, stack: err.stack});
             });
     });
