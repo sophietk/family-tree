@@ -67,18 +67,6 @@ module.exports = function (grunt) {
             html: 'dist/index.html'
         },
 
-        compress: {
-            zip: {
-                options: {
-                    archive: 'zip/<%= pkg.name %>-<%= pkg.version %>.zip'
-                },
-                expand: true,
-                cwd: 'dist/',
-                src: ['**/*'],
-                dest: '<%= pkg.name %>/'
-            }
-        },
-
         exec: {
             sass: {
                 cmd: 'npm run sass'
@@ -91,6 +79,9 @@ module.exports = function (grunt) {
             },
             'clean-zip': {
                 cmd: 'npm run clean:zip'
+            },
+            compress: {
+                cmd: 'npm run compress'
             }
         }
     });
@@ -102,7 +93,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-exec');
 
     grunt.registerTask('default', [
@@ -126,7 +116,7 @@ module.exports = function (grunt) {
     grunt.registerTask('dist', [
         'build',
         'exec:clean-zip',
-        'compress'
+        'exec:compress'
     ]);
 
 };

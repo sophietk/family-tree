@@ -18,7 +18,8 @@
     "copy:html": "cp app/index.html dist/index.html",
     "copy:img": "cp -r app/img dist/",
     "copy:font": "cp -r app/bower_components/materialize/font dist/",
-    "copy:i18n": "mkdir dist/js; cp -r app/js/i18n dist/js/"
+    "copy:i18n": "mkdir dist/js; cp -r app/js/i18n dist/js/",
+    "compress": "mkdir zip; zip -r zip/$npm_package_name-$npm_package_version.zip dist"
   },
   "dependencies": {
     "basic-auth-connect": "1.0.0",
@@ -38,7 +39,6 @@
     "bower": "1.7.7",
     "grunt": "0.4.5",
     "grunt-cli": "0.1.13",
-    "grunt-contrib-compress": "0.14.0",
     "grunt-contrib-concat": "0.5.1",
     "grunt-contrib-cssmin": "0.14.0",
     "grunt-contrib-handlebars": "0.11.0",
