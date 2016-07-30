@@ -22,23 +22,6 @@ module.exports = function (grunt) {
             }
         },
 
-        // @todo: replace by cssmin relativeTo/target configuration
-        replace: {
-            cssfont: {
-                options: {
-                    patterns: [
-                        {
-                            match: /\.\.\/font\//g,
-                            replacement: './font/'
-                        }
-                    ]
-                },
-                files: {
-                    'dist/style.min.css': 'dist/style.min.css'
-                }
-            }
-        },
-
         useminPrepare: {
             html: 'app/index.html'
         },
@@ -65,6 +48,9 @@ module.exports = function (grunt) {
             },
             handlebars: {
                 cmd: 'npm run handlebars'
+            },
+            'replace-cssfont': {
+                cmd: 'npm run replace:cssfont'
             }
         }
     });
@@ -73,7 +59,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-usemin');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-exec');
 
@@ -90,9 +75,9 @@ module.exports = function (grunt) {
         'useminPrepare',
         'concat:generated',
         'cssmin:generated',
-        'replace:cssfont',
         'uglify:generated',
-        'usemin'
+        'usemin',
+        'exec:replace-cssfont'
     ]);
 
     grunt.registerTask('dist', [

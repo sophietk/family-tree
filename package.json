@@ -22,6 +22,7 @@
     "copy:img": "cp -r app/img dist/",
     "copy:font": "cp -r app/bower_components/materialize/font dist/",
     "copy:i18n": "mkdir dist/js; cp -r app/js/i18n dist/js/",
+    "replace:cssfont": "replace ../font/ ./font/ dist/style.min.css",
     "compress": "mkdir zip; zip -r zip/$npm_package_name-$npm_package_version.zip dist"
   },
   "dependencies": {
@@ -47,11 +48,11 @@
     "grunt-contrib-uglify": "0.11.1",
     "grunt-contrib-watch": "0.6.1",
     "grunt-exec": "1.0.0",
-    "grunt-replace": "0.11.0",
     "grunt-usemin": "3.1.1",
     "handlebars": "4.0.5",
     "node-sass": "3.8.0",
-    "npm-run-all": "2.3.0"
+    "npm-run-all": "2.3.0",
+    "replace": "0.3.0"
   },
   "cacheDirectories": [
     "node_modules",
