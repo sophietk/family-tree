@@ -6,6 +6,7 @@ app/bower_components
 app/css/*.css
 app/css/*.css.map
 app/js/templates.js
+app/js/partials.js
 .tmp/
 dist/
 zip/

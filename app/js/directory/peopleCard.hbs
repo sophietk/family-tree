@@ -7,7 +7,7 @@
         </div>
         <div class="card-content clearfix">
             {{#if maidenName}}<p><label>{{p 'maiden_name'}}:</label> {{maidenName}}</p>{{/if}}
-            <p><label>{{p 'gender'}}:</label> {{> genderSymbol isMale}}</p>
+            <p><label>{{p 'gender'}}:</label> {{> genderSymbol.partial.hbs isMale}}</p>
             {{#if birthDate}}<p><label>{{p 'birth_date.short'}}:</label> {{shortDate birthDate}}</p>{{/if}}
             {{#if deathDate}}<p><label>{{p 'death_date.short'}}:</label> {{shortDate deathDate}}</p>{{/if}}
         </div>

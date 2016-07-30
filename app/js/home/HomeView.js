@@ -2,7 +2,7 @@ var HomeView = Marionette.ItemView.extend({
 
     className: 'home',
 
-    template: JST.home,
+    template: Handlebars.templates['home.hbs'],
 
     ui: {
     	parallax: '.parallax'

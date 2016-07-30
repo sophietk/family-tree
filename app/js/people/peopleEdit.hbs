@@ -51,7 +51,7 @@
             <select name="fatherId" id="fatherId" class="browser-default">
                 <option value="" selected>-</option>
                 {{#men}}
-                    {{> peopleOption }}
+                    {{> peopleOption.partial.hbs}}
                 {{/men}}
             </select>
         </div>
@@ -60,7 +60,7 @@
             <select name="motherId" id="motherId" class="browser-default">
                 <option value="" selected>-</option>
                 {{#women}}
-                    {{> peopleOption }}
+                    {{> peopleOption.partial.hbs}}
                 {{/women}}
             </select>
         </div>
@@ -78,7 +78,7 @@
                     <select name="spouse" class="browser-default">
                         <option value="" selected>-</option>
                         {{#../people}}
-                            {{> peopleOption }}
+                            {{> peopleOption.partial.hbs}}
                         {{/../people}}
                     </select>
                 {{/spousesIds}}

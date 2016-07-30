@@ -1,12 +1,12 @@
-{{> treeNode}}
+{{> treeNode.partial.hbs}}
 {{#if oneSpouse}}
     <div class="p1">
         {{#spouses}}
-            {{> treeNode}}
+            {{> treeNode.partial.hbs}}
             {{#if children}}
                 <ul class="c">
                     {{#each children}}
-                        <li>{{> treeNodeRecursive}}</li>
+                        <li>{{> treeNodeRecursive.partial.hbs}}</li>
                     {{/each}}
                 </ul>
             {{/if}}
@@ -16,11 +16,11 @@
 {{#if severalSpouses}}
     <ul class="p">
         {{#spouses}}
-            <li>{{> treeNode}}
+            <li>{{> treeNode.partial.hbs}}
                 {{#if children}}
                     <ul class="c">
                         {{#each children}}
-                            <li>{{> treeNodeRecursive}}</li>
+                            <li>{{> treeNodeRecursive.partial.hbs}}</li>
                         {{/each}}
                     </ul>
                 {{/if}}

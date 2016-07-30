@@ -1,5 +1,5 @@
 var LoaderView = Marionette.ItemView.extend({
 
-    template: JST.loader
+    template: Handlebars.templates['loader.hbs']
 
 });

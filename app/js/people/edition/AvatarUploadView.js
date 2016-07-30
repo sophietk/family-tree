@@ -1,6 +1,6 @@
 var AvatarUploadView = Marionette.ItemView.extend({
 
-    template: JST.avatarUpload,
+    template: Handlebars.templates['avatarUpload.hbs'],
 
     className: 'modal',
 

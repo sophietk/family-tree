@@ -1,5 +1,5 @@
 var PeopleCardView = Marionette.ItemView.extend({
 
-    template: JST.peopleCard
+    template: Handlebars.templates['peopleCard.hbs']
 
 });

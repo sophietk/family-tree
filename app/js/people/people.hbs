@@ -22,7 +22,7 @@
             {{#if maidenName}}
                 <li><label>{{p 'maiden_name'}}:</label> {{maidenName}}</li>
             {{/if}}
-            <li><label>{{p 'gender'}}:</label> {{> genderSymbol isMale}}</li>
+            <li><label>{{p 'gender'}}:</label> {{> genderSymbol.partial.hbs isMale}}</li>
             {{#if birthDate}}
                 <li><label>{{p 'birth_date'}}:</label> {{readableDate birthDate}}</li>
             {{/if}}
@@ -34,17 +34,17 @@
         <h4>{{p 'people.parents'}}</h4>
         <ul>
             {{#father}}
-                <li>{{> peopleLink}}</li>
+                <li>{{> peopleLink.partial.hbs}}</li>
             {{/father}}
             {{#mother}}
-                <li>{{> peopleLink}}</li>
+                <li>{{> peopleLink.partial.hbs}}</li>
             {{/mother}}
         </ul>
 
         <h4>{{p 'people.children'}}</h4>
         <ul>
             {{#children}}
-                <li>{{> peopleLink}}</li>
+                <li>{{> peopleLink.partial.hbs}}</li>
             {{/children}}
         </ul>
     </div>
@@ -52,15 +52,15 @@
     <div class="col m6 s12 tree">
         <ul>
             <li>
-                {{> treeNode father}}
+                {{> treeNode.partial.hbs father}}
                 <div class="p1">
-                    {{> treeNode mother}}
+                    {{> treeNode.partial.hbs mother}}
                     <ul class="c">
-                        <li class="emphasis">{{> treeNode}}
+                        <li class="emphasis">{{> treeNode.partial.hbs}}
                             {{#if children}}
                                 <ul class="c">
                                     {{#each children}}
-                                        <li>{{> treeNode}}</li>
+                                        <li>{{> treeNode.partial.hbs}}</li>
                                     {{/each}}
                                 </ul>
                             {{/if}}

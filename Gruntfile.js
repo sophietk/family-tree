@@ -11,27 +11,7 @@ module.exports = function (grunt) {
             },
             handlebars: {
                 files: ['app/**/*.hbs'],
-                tasks: ['handlebars:dev']
-            }
-        },
-
-        handlebars: {
-            options: {
-                namespace: 'JST',
-                partialRegex: /\.partial/,
-                processName: function (filePath) {
-                    var pieces = filePath.split('/');
-                    return pieces[pieces.length - 1].replace('.hbs', '');
-                },
-                processPartialName: function (filePath) {
-                    var pieces = filePath.split('/');
-                    return pieces[pieces.length - 1].replace('.partial.hbs', '');
-                }
-            },
-            dev: {
-                files: {
-                    'app/js/templates.js': ['**/*.hbs', '**/*.partial.hbs']
-                }
+                tasks: ['exec:handlebars']
             }
         },
 
@@ -82,12 +62,14 @@ module.exports = function (grunt) {
             },
             compress: {
                 cmd: 'npm run compress'
+            },
+            handlebars: {
+                cmd: 'npm run handlebars'
             }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-handlebars');
     grunt.loadNpmTasks('grunt-usemin');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -103,7 +85,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'exec:clean-dist',
         'exec:sass',
-        'handlebars',
+        'exec:handlebars',
         'exec:copy-all',
         'useminPrepare',
         'concat:generated',

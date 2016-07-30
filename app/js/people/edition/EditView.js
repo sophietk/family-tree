@@ -1,6 +1,6 @@
 var EditView = Marionette.ItemView.extend({
 
-    template: JST.peopleEdit,
+    template: Handlebars.templates['peopleEdit.hbs'],
 
     ui: {
         firstName: 'input[name="firstName"]',
@@ -101,7 +101,7 @@ var EditView = Marionette.ItemView.extend({
     },
 
     addSpouseSelect: function () {
-        this.ui.spousesBlock.append(JST.spouseSelect(this.collection.toJSON()));
+        this.ui.spousesBlock.append(Handlebars.templates['spouseSelect.hbs'](this.collection.toJSON()));
         this.refreshSpousesButtons();
     },
 

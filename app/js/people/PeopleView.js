@@ -1,6 +1,6 @@
 var PeopleView = Marionette.ItemView.extend({
 
-    template: JST.people,
+    template: Handlebars.templates['people.hbs'],
 
     behaviors: {
         ModalOpenerBehavior: {

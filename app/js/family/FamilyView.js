@@ -1,6 +1,6 @@
 var FamilyView = Marionette.ItemView.extend({
 
-    template: JST.family,
+    template: Handlebars.templates['family.hbs'],
 
     behaviors: {
         ModalOpenerBehavior: {

@@ -2,7 +2,7 @@ var ActionsModalView = Marionette.ItemView.extend({
 
     className: 'modal actions-modal',
 
-    template: JST.actionsModal,
+    template: Handlebars.templates['actionsModal.hbs'],
 
     ui: {
         btns: '.modal-content a'

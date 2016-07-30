@@ -2,7 +2,7 @@ var MenuView = Marionette.ItemView.extend({
 
     tagName: 'nav',
 
-    template: JST.menu,
+    template: Handlebars.templates['menu.hbs'],
 
     ui: {
         buttonCollapse: '.button-collapse',
