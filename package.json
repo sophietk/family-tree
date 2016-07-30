@@ -11,6 +11,7 @@
   "scripts": {
     "postinstall": "bower update && grunt build",
     "start": "node ./server/server.js",
+    "watch": "npm-watch",
     "clean:dist": "rm -rf dist",
     "clean:zip": "rm -rf zip",
     "sass": "node-sass --source-map true app/sass/style.scss -o app/css",
@@ -25,6 +26,16 @@
     "usemin": "usemin app/index.html -d dist > dist/index.html",
     "replace:cssfont": "replace ../font/ ./font/ dist/style.min.css",
     "compress": "mkdir zip; zip -r zip/$npm_package_name-$npm_package_version.zip dist"
+  },
+  "watch": {
+    "sass": {
+      "patterns": ["app/sass"],
+      "extensions": "scss"
+    },
+    "handlebars": {
+      "patterns": ["app/js"],
+      "extensions": "hbs"
+    }
   },
   "dependencies": {
     "basic-auth-connect": "1.0.0",
@@ -44,11 +55,11 @@
     "bower": "1.7.9",
     "grunt": "0.4.5",
     "grunt-cli": "0.1.13",
-    "grunt-contrib-watch": "0.6.1",
     "grunt-exec": "1.0.0",
     "handlebars": "4.0.5",
     "node-sass": "3.8.0",
     "npm-run-all": "2.3.0",
+    "npm-watch": "0.1.5",
     "replace": "0.3.0",
     "usemin-cli": "0.1.0"
   },
