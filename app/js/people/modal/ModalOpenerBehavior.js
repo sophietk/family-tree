@@ -1,5 +1,4 @@
 var ModalOpenerBehavior = Marionette.Behavior.extend({
-
   ui: {
     actionsBtn: '.actions'
   },

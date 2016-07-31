@@ -4,10 +4,8 @@ var express = require('express'),
   DIST_DIR = '/../../dist'
 
 exports = module.exports = function (app, env) {
-
   var staticDir = path.join(__dirname, env === 'prod' ? DIST_DIR : DEV_DIR)
 
-    // Serve static files (dev or dist)
+  // Serve static files (dev or dist)
   app.use(express.static(staticDir))
-
 }

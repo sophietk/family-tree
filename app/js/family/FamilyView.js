@@ -1,5 +1,4 @@
 var FamilyView = Marionette.ItemView.extend({
-
   template: Handlebars.templates['family.hbs'],
 
   behaviors: {

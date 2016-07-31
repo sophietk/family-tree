@@ -1,5 +1,4 @@
 var NavigatorBehavior = Marionette.Behavior.extend({
-
   template: Handlebars.templates['navigation.hbs'],
 
   ui: function () {

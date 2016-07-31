@@ -5,7 +5,6 @@ var _ = require('lodash'),
   db = require('../database')
 
 exports = module.exports = function (app) {
-
   app.post('/upload/avatar', upload.single('avatarFile'), function (req, res) {
     console.log(req.body)
     var avatar = {
@@ -17,29 +16,28 @@ exports = module.exports = function (app) {
     }
 
     db.createAvatar(avatar)
-            .then(function (dbAvatar) {
-              res.send({
-                avatarUrl: '/avatar/' + dbAvatar._id
-              })
-            })
-            .catch(function (err) {
-              res.status(500).send(err.message)
-            })
+      .then(function (dbAvatar) {
+        res.send({
+          avatarUrl: '/avatar/' + dbAvatar._id
+        })
+      })
+      .catch(function (err) {
+        res.status(500).send(err.message)
+      })
   })
 
   app.get('/avatar/:id', function (req, res) {
     var id = req.params.id
 
     db.getAvatar(id)
-            .then(function (dbAvatar) {
-              if (_.isUndefined(dbAvatar)) return res.sendStatus(404)
+      .then(function (dbAvatar) {
+        if (_.isUndefined(dbAvatar)) return res.sendStatus(404)
 
-              res.contentType(dbAvatar.contentType)
-              res.send(new Buffer(dbAvatar.data, 'base64'))
-            })
-            .catch(function (err) {
-              res.status(500).send(err.message)
-            })
+        res.contentType(dbAvatar.contentType)
+        res.send(new Buffer(dbAvatar.data, 'base64'))
+      })
+      .catch(function (err) {
+        res.status(500).send(err.message)
+      })
   })
-
 }

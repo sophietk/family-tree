@@ -1,5 +1,4 @@
 var MenuView = Marionette.ItemView.extend({
-
   tagName: 'nav',
 
   template: Handlebars.templates['menu.hbs'],
@@ -10,9 +9,9 @@ var MenuView = Marionette.ItemView.extend({
   },
 
   menuItems: [
-        {route: 'home', title: 'tabs.home'},
-        {route: 'directory', title: 'tabs.directory'},
-        {route: 'people/new', title: 'tabs.create'}
+    {route: 'home', title: 'tabs.home'},
+    {route: 'directory', title: 'tabs.directory'},
+    {route: 'people/new', title: 'tabs.create'}
   ],
 
   initialize: function () {
@@ -49,10 +48,10 @@ var MenuView = Marionette.ItemView.extend({
     }
 
     this.ui.tabs
-            .eq(this.currentTab)
-            .addClass('active')
-            .siblings()
-            .removeClass('active')
+      .eq(this.currentTab)
+      .addClass('active')
+      .siblings()
+      .removeClass('active')
   },
 
   select: function (index) {

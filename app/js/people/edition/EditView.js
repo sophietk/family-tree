@@ -1,5 +1,4 @@
 var EditView = Marionette.ItemView.extend({
-
   template: Handlebars.templates['peopleEdit.hbs'],
 
   ui: {
@@ -92,7 +91,7 @@ var EditView = Marionette.ItemView.extend({
   },
 
   updateFatherMotherSpouses: function () {
-        // @todo: not necessary, do it in template
+    // @todo: not necessary, do it in template
     this.ui.fatherId.val(this.model.get('fatherId'))
     this.ui.motherId.val(this.model.get('motherId'))
     _.each(this.model.get('spousesIds'), function fillSpouseSelect (spouseId, index) {
@@ -131,7 +130,7 @@ var EditView = Marionette.ItemView.extend({
 
   uploadAvatarSuccess: function (uploadedAvatarUrl) {
     this.ui.avatarUrl.val(uploadedAvatarUrl)
-            .siblings('label').addClass('active')
+      .siblings('label').addClass('active')
   },
 
   getGender: function () {

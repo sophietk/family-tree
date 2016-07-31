@@ -24,7 +24,6 @@ function toObjectId (string) {
 }
 
 exports = module.exports = {
-
   getAll: function () {
     return new Promise(function (resolve, reject) {
       collection.find().sort({birthDate: 1}, function (err, docs) {
@@ -64,10 +63,10 @@ exports = module.exports = {
   getChildren: function (parentId) {
     return new Promise(function (resolve, reject) {
       collection.find({$or: [{fatherId: parentId}, {motherId: parentId}]})
-                .sort({birthDate: 1}, function (err, docs) {
-                  if (err) return reject(err)
-                  resolve(_.map(docs, convert))
-                })
+        .sort({birthDate: 1}, function (err, docs) {
+          if (err) return reject(err)
+          resolve(_.map(docs, convert))
+        })
     })
   },
 

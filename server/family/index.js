@@ -19,35 +19,35 @@ Promise.until = function (fn) {
 function retrievePeopleFromReq (req) {
   var people = req.body
 
-    /*
-    _.each(people, function removeIfEmpty(value, key) {
-        if (_.isUndefined(value) || _.isNull(value) || (!_.isBoolean(value) && _.isEmpty(value))) {
-            delete people[key];
-        }
-    });
-    */
+  /*
+  _.each(people, function removeIfEmpty(value, key) {
+      if (_.isUndefined(value) || _.isNull(value) || (!_.isBoolean(value) && _.isEmpty(value))) {
+          delete people[key]
+      }
+  })
+  */
 
   return _.pick(people,
-        '_id',
-        'lastName',
-        'maidenName',
-        'firstName',
-        'gender',
-        'birthDate',
-        'deathDate',
-        'fatherId',
-        'motherId',
-        'spousesIds',
-        'avatarUrl',
-        'about',
-        'menuTab'
-    )
+    '_id',
+    'lastName',
+    'maidenName',
+    'firstName',
+    'gender',
+    'birthDate',
+    'deathDate',
+    'fatherId',
+    'motherId',
+    'spousesIds',
+    'avatarUrl',
+    'about',
+    'menuTab'
+  )
 }
 
 var all = [] // @todo: load async in children each loop
 function buildSpousesWithChildren (people) {
   return new Promise(function (resolve, reject) {
-        // Spouses are already built
+    // Spouses are already built
     if (!_.isUndefined(people.spouses)) return
 
     var id = people._id
@@ -57,103 +57,101 @@ function buildSpousesWithChildren (people) {
       db.getChildren(id),
       db.getSeveralPeople(people.spousesIds)
     ])
-            .then(function (data) {
-              var children = data[0],
-                spouses = data[1]
+      .then(function (data) {
+        var children = data[0],
+          spouses = data[1]
 
-              _.each(children, function (child) {
-                var otherParentId = _.without([child.fatherId, child.motherId], id)[0],
-                  otherParent
-                if (_.isUndefined(otherParentId)) {
-                  spouses.push({children: [child]})
-                  return
-                }
+        _.each(children, function (child) {
+          var otherParentId = _.without([child.fatherId, child.motherId], id)[0],
+            otherParent
+          if (_.isUndefined(otherParentId)) {
+            spouses.push({children: [child]})
+            return
+          }
 
-                otherParent = _.find(spouses, {_id: otherParentId})
-                if (_.isUndefined(otherParent)) {
-                  otherParent = _.find(all, {_id: otherParentId})
-                  spouses.push(_.extend({}, otherParent, {children: [child]}))
-                  return
-                }
+          otherParent = _.find(spouses, {_id: otherParentId})
+          if (_.isUndefined(otherParent)) {
+            otherParent = _.find(all, {_id: otherParentId})
+            spouses.push(_.extend({}, otherParent, {children: [child]}))
+            return
+          }
 
-                if (_.isUndefined(otherParent.children)) {
-                  otherParent.children = []
-                }
-                otherParent.children.push(child)
-              })
+          if (_.isUndefined(otherParent.children)) {
+            otherParent.children = []
+          }
+          otherParent.children.push(child)
+        })
 
-              people.oneSpouse = spouses.length === 1
-              people.severalSpouses = spouses.length > 1
-              people.spouses = spouses
-              resolve()
-            })
-            .catch(function (err) {
-              reject(err)
-            })
+        people.oneSpouse = spouses.length === 1
+        people.severalSpouses = spouses.length > 1
+        people.spouses = spouses
+        resolve()
+      })
+      .catch(function (err) {
+        reject(err)
+      })
   })
 }
 
 exports = module.exports = function (app) {
-
   app.get('/menu', function (req, res) {
     db.getInMenu()
-            .then(function (dbPeople) {
-              res.send(dbPeople)
-            })
-            .catch(function (err) {
-              res.status(500).send(err.message)
-            })
+      .then(function (dbPeople) {
+        res.send(dbPeople)
+      })
+      .catch(function (err) {
+        res.status(500).send(err.message)
+      })
   })
 
   app.get('/people', function (req, res) {
     db.getAll()
-            .then(function (dbPeople) {
-              res.send(dbPeople)
-            })
-            .catch(function (err) {
-              res.status(500).send(err.message)
-            })
+      .then(function (dbPeople) {
+        res.send(dbPeople)
+      })
+      .catch(function (err) {
+        res.status(500).send(err.message)
+      })
   })
 
   app.post('/people', function (req, res) {
     var people = retrievePeopleFromReq(req)
 
     db.createPeople(people)
-            .then(function (dbPeople) {
-              res.send(dbPeople)
-            })
-            .catch(function (err) {
-              res.status(500).send(err.message)
-            })
+      .then(function (dbPeople) {
+        res.send(dbPeople)
+      })
+      .catch(function (err) {
+        res.status(500).send(err.message)
+      })
   })
 
   app.get('/people/:id', function (req, res) {
     var id = req.params.id
 
     db.getPeople(id)
-            .then(function (dbPeople) {
-              if (_.isUndefined(dbPeople)) return res.sendStatus(404)
+      .then(function (dbPeople) {
+        if (_.isUndefined(dbPeople)) return res.sendStatus(404)
 
-              Promise.all([
-                db.getPeople(dbPeople.fatherId),
-                db.getPeople(dbPeople.motherId),
-                db.getChildren(dbPeople._id)
-              ])
-                    .then(function (data) {
-                      res.send(_.extend({}, dbPeople, {
-                        father: data[0],
-                        mother: data[1],
-                        children: data[2]
-                      }))
-                    })
-                    .catch(function (err) {
-                      res.status(500).send(err)
-                    })
-            })
-            .catch(function (err) {
-              res.status(500).send(err.message)
-            })
-
+        Promise.all([
+          db.getPeople(dbPeople.fatherId),
+          db.getPeople(dbPeople.motherId),
+          db.getChildren(dbPeople._id)
+        ])
+          .then(function (data) {
+            res.send(_.extend({}, dbPeople, {
+              father: data[0],
+              mother: data[1],
+              children: data[2]
+            }))
+          })
+          .catch(function (err) {
+            res.status(500).send(err)
+          })
+      })
+      .catch(function (err) {
+        res.status(500).send(err.message)
+      })
   })
 
   app.put('/people/:id', function (req, res) {
@@ -161,24 +159,24 @@ exports = module.exports = function (app) {
       people = retrievePeopleFromReq(req)
 
     db.replacePeople(id, people)
-            .then(function (dbPeople) {
-              res.send(dbPeople)
-            })
-            .catch(function (err) {
-              res.status(500).send(err.message)
-            })
+      .then(function (dbPeople) {
+        res.send(dbPeople)
+      })
+      .catch(function (err) {
+        res.status(500).send(err.message)
+      })
   })
 
   app.delete('/people/:id', function (req, res) {
     var id = req.params.id
 
     db.deletePeople(id)
-            .then(function () {
-              res.sendStatus(204)
-            })
-            .catch(function (err) {
-              res.status(500).send(err.message)
-            })
+      .then(function () {
+        res.sendStatus(204)
+      })
+      .catch(function (err) {
+        res.status(500).send(err.message)
+      })
   })
 
   app.get('/family/:id', function (req, res) {
@@ -190,40 +188,38 @@ exports = module.exports = function (app) {
       db.getPeople(id),
       db.getAll()
     ])
-            .then(function (data) {
-              var dbPeople = data[0],
-                allChildrenAtLevel = [dbPeople]
-              all = data[1]
+      .then(function (data) {
+        var dbPeople = data[0],
+          allChildrenAtLevel = [dbPeople]
+        all = data[1]
 
-              Promise.until(function () {
-                var promises = _.map(allChildrenAtLevel, buildSpousesWithChildren)
+        Promise.until(function () {
+          var promises = _.map(allChildrenAtLevel, buildSpousesWithChildren)
 
-                return Promise.all(promises)
-                        .then(function () {
-                          currentLevel++
-                          allChildrenAtLevel = _(allChildrenAtLevel)
-                                .map('spouses')
-                                .flatten()
-                                .map('children')
-                                .flatten()
-                                .compact()
-                                .reject({_id: id}) // avoid circular families
-                                .value()
-                          return !!(_.isEmpty(allChildrenAtLevel) || currentLevel >= limitLevel)
-                            // res.send(dbPeople);
-                        })
-                        .catch(function (err) {
-                          return true
-                            // res.status(500).send({message: err.message, stack: err.stack});
-                        })
-              }).then(function () {
-                res.send(dbPeople)
-              })
-
+          return Promise.all(promises)
+            .then(function () {
+              currentLevel++
+              allChildrenAtLevel = _(allChildrenAtLevel)
+                .map('spouses')
+                .flatten()
+                .map('children')
+                .flatten()
+                .compact()
+                .reject({_id: id}) // avoid circular families
+                .value()
+              return !!(_.isEmpty(allChildrenAtLevel) || currentLevel >= limitLevel)
+            // res.send(dbPeople)
             })
             .catch(function (err) {
-              res.status(500).send({message: err.message, stack: err.stack})
+              return true
+            // res.status(500).send({message: err.message, stack: err.stack})
             })
+        }).then(function () {
+          res.send(dbPeople)
+        })
+      })
+      .catch(function (err) {
+        res.status(500).send({message: err.message, stack: err.stack})
+      })
   })
-
 }

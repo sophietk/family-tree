@@ -1,5 +1,4 @@
 var AvatarUploadView = Marionette.ItemView.extend({
-
   template: Handlebars.templates['avatarUpload.hbs'],
 
   className: 'modal',
@@ -26,7 +25,7 @@ var AvatarUploadView = Marionette.ItemView.extend({
         this.destroy()
       }, this)
     }
-        )
+    )
   },
 
   updateAvatarFile: function () {
@@ -40,7 +39,7 @@ var AvatarUploadView = Marionette.ItemView.extend({
     var fileObject = this.ui.avatarFile[0].files[0]
 
     this.model.save({
-            // peopleId: this.model.id,
+      // peopleId: this.model.id,
       avatarFile: fileObject
     }, {
       success: _.bind(this.uploadAvatarSuccess, this)

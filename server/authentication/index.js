@@ -4,10 +4,8 @@ var cookieParser = require('cookie-parser'),
   password = process.env.AUTH_PASSWORD
 
 exports = module.exports = function (app) {
-
   app.use(cookieParser())
   if (user && password) {
     app.use(basicAuth(user, password))
   }
-
 }

@@ -1,5 +1,4 @@
 var Router = Marionette.AppRouter.extend({
-
   routes: {
     'home': 'home',
     'directory': 'directory',
@@ -14,10 +13,10 @@ var Router = Marionette.AppRouter.extend({
     app.menuRegion.show(new MenuView())
 
     new MenuCollection()
-            .on('sync', function (collection) {
-              app.menuRegion.currentView.addCollectionToMenu(collection)
-            })
-            .fetch()
+      .on('sync', function (collection) {
+        app.menuRegion.currentView.addCollectionToMenu(collection)
+      })
+      .fetch()
   },
 
   home: function () {
@@ -32,11 +31,11 @@ var Router = Marionette.AppRouter.extend({
     app.mainRegion.show(new LoaderView())
 
     new PeopleCollection()
-            .on('sync', function (collection) {
-              collection.models.reverse()
-              app.mainRegion.show(new DirectoryView({collection: collection}))
-            })
-            .fetch()
+      .on('sync', function (collection) {
+        collection.models.reverse()
+        app.mainRegion.show(new DirectoryView({collection: collection}))
+      })
+      .fetch()
   },
 
   createPeople: function () {
@@ -51,10 +50,10 @@ var Router = Marionette.AppRouter.extend({
     app.mainRegion.show(new LoaderView())
 
     new PeopleModel({_id: peopleId})
-            .on('sync', function (model) {
-              app.mainRegion.show(new PeopleView({model: model}))
-            })
-            .fetch()
+      .on('sync', function (model) {
+        app.mainRegion.show(new PeopleView({model: model}))
+      })
+      .fetch()
   },
 
   editPeople: function (peopleId) {
@@ -63,10 +62,10 @@ var Router = Marionette.AppRouter.extend({
     app.mainRegion.show(new LoaderView())
 
     new PeopleModel({_id: peopleId})
-            .on('sync', function (model) {
-              app.mainRegion.show(new EditView({model: model}))
-            })
-            .fetch()
+      .on('sync', function (model) {
+        app.mainRegion.show(new EditView({model: model}))
+      })
+      .fetch()
   },
 
   family: function (familyId) {
@@ -74,12 +73,11 @@ var Router = Marionette.AppRouter.extend({
     app.menuRegion.currentView.unselect()
     app.mainRegion.show(new LoaderView())
 
-
     new FamilyModel({_id: familyId})
-            .on('sync', function (model) {
-              app.mainRegion.show(new FamilyView({model: model}))
-            })
-            .fetch()
+      .on('sync', function (model) {
+        app.mainRegion.show(new FamilyView({model: model}))
+      })
+      .fetch()
   }
 
 })

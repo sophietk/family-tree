@@ -1,5 +1,4 @@
 var ActionsModalView = Marionette.ItemView.extend({
-
   className: 'modal actions-modal',
 
   template: Handlebars.templates['actionsModal.hbs'],

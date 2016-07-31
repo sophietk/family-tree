@@ -1,5 +1,4 @@
 var PeopleView = Marionette.ItemView.extend({
-
   template: Handlebars.templates['people.hbs'],
 
   behaviors: {
