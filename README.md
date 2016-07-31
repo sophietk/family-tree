@@ -3,7 +3,6 @@
 ## install
 
 ```
-npm install -g grunt-cli
 npm install
 ```
 
@@ -16,6 +15,6 @@ npm start
 ## build prod files
 
 ```
-grunt build
-grunt dist
+npm run build
+npm run dist
 ```
