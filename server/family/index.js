@@ -1,6 +1,7 @@
-var _ = require('lodash'),
-  db = require('../database'),
-  DEFAULT_FAMILY_LEVEL = 10
+var _ = require('lodash')
+var db = require('../database')
+
+var DEFAULT_FAMILY_LEVEL = 10
 
 /**
  * Loop until the promise returned by `fn` returns a truthy value.
@@ -58,12 +59,12 @@ function buildSpousesWithChildren (people) {
       db.getSeveralPeople(people.spousesIds)
     ])
       .then(function (data) {
-        var children = data[0],
-          spouses = data[1]
+        var children = data[0]
+        var spouses = data[1]
 
         _.each(children, function (child) {
-          var otherParentId = _.without([child.fatherId, child.motherId], id)[0],
-            otherParent
+          var otherParentId = _.without([child.fatherId, child.motherId], id)[0]
+          var otherParent
           if (_.isUndefined(otherParentId)) {
             spouses.push({children: [child]})
             return
@@ -155,8 +156,8 @@ exports = module.exports = function (app) {
   })
 
   app.put('/people/:id', function (req, res) {
-    var id = req.params.id,
-      people = retrievePeopleFromReq(req)
+    var id = req.params.id
+    var people = retrievePeopleFromReq(req)
 
     db.replacePeople(id, people)
       .then(function (dbPeople) {
@@ -180,17 +181,17 @@ exports = module.exports = function (app) {
   })
 
   app.get('/family/:id', function (req, res) {
-    var id = req.params.id,
-      limitLevel = parseInt(req.query.level) || DEFAULT_FAMILY_LEVEL,
-      currentLevel = 0
+    var id = req.params.id
+    var limitLevel = parseInt(req.query.level) || DEFAULT_FAMILY_LEVEL
+    var currentLevel = 0
 
     Promise.all([
       db.getPeople(id),
       db.getAll()
     ])
       .then(function (data) {
-        var dbPeople = data[0],
-          allChildrenAtLevel = [dbPeople]
+        var dbPeople = data[0]
+        var allChildrenAtLevel = [dbPeople]
         all = data[1]
 
         Promise.until(function () {

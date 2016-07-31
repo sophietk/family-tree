@@ -1,8 +1,9 @@
-var _ = require('lodash'),
-  fs = require('fs'),
-  multer = require('multer'),
-  upload = multer({dest: 'server/upload/avatar/'}),
-  db = require('../database')
+var _ = require('lodash')
+var fs = require('fs')
+var multer = require('multer')
+var db = require('../database')
+
+var upload = multer({dest: 'server/upload/avatar/'})
 
 exports = module.exports = function (app) {
   app.post('/upload/avatar', upload.single('avatarFile'), function (req, res) {

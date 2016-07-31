@@ -1,9 +1,10 @@
-var _ = require('lodash'),
-  mongojs = require('mongojs'),
-  dbUrl = process.env.DB_URL || 'familytree',
-  db,
-  collection,
-  uCollection
+var _ = require('lodash')
+var mongojs = require('mongojs')
+
+var dbUrl = process.env.DB_URL || 'familytree'
+var db
+var collection
+var uCollection
 
 console.log('Connecting to db: ' + dbUrl)
 

@@ -28,18 +28,18 @@ var FamilyView = Marionette.ItemView.extend({
   },
 
   centerPeople: function () {
-    var $a = this.$('a[data-id="' + this.model.id + '"]'),
-      top = $a.offset().top,
-      left = $a.position().left,
-      margin = (this.ui.tree.width() - $a.width()) / 2
+    var $a = this.$('a[data-id="' + this.model.id + '"]')
+    var top = $a.offset().top
+    var left = $a.position().left
+    var margin = (this.ui.tree.width() - $a.width()) / 2
     this.ui.tree.animate({scrollLeft: left - margin}, 1000)
     $('body').animate({scrollTop: top - 20}, 1000)
   },
 
   toggle: function (event) {
-    var $el = this.$(event.currentTarget),
-      prop = $el.data('prop'),
-      hidden = !$el.prop('checked')
+    var $el = this.$(event.currentTarget)
+    var prop = $el.data('prop')
+    var hidden = !$el.prop('checked')
     this.ui.tree.toggleClass('hidden-' + prop, hidden)
   }
 
