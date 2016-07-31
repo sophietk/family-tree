@@ -1,5 +1,4 @@
 var _ = require('lodash'),
-    Q = require('q'),
     db = require('../database'),
     DEFAULT_FAMILY_LEVEL = 10;
 
@@ -7,13 +6,13 @@ var _ = require('lodash'),
  * Loop until the promise returned by `fn` returns a truthy value.
  * @see https://www.npmjs.com/package/q-flow
  */
-Q.until = function (fn) {
+Promise.until = function (fn) {
     return fn().then(function (result) {
         if (result) {
             return result;
         }
 
-        return Q.until(fn);
+        return Promise.until(fn);
     });
 };
 
@@ -47,14 +46,14 @@ function retrievePeopleFromReq(req) {
 
 var all = []; // @todo: load async in children each loop
 function buildSpousesWithChildren(people) {
-    return Q.Promise(function (resolve, reject) {
+    return new Promise(function (resolve, reject) {
         // Spouses are already built
         if (!_.isUndefined(people.spouses)) return;
 
         var id = people._id;
         if (_.isUndefined(people.spousesIds)) people.spousesIds = [];
 
-        Q.all([
+        Promise.all([
             db.getChildren(id),
             db.getSeveralPeople(people.spousesIds)
         ])
@@ -135,7 +134,7 @@ exports = module.exports = function (app) {
             .then(function (dbPeople) {
                 if (_.isUndefined(dbPeople)) return res.sendStatus(404);
 
-                Q.all([
+                Promise.all([
                     db.getPeople(dbPeople.fatherId),
                     db.getPeople(dbPeople.motherId),
                     db.getChildren(dbPeople._id)
@@ -187,7 +186,7 @@ exports = module.exports = function (app) {
             limitLevel = parseInt(req.query.level) || DEFAULT_FAMILY_LEVEL,
             currentLevel = 0;
 
-        Q.all([
+        Promise.all([
             db.getPeople(id),
             db.getAll()
         ])
@@ -196,10 +195,10 @@ exports = module.exports = function (app) {
                     allChildrenAtLevel = [dbPeople];
                 all = data[1];
 
-                Q.until(function () {
+                Promise.until(function () {
                     var promises = _.map(allChildrenAtLevel, buildSpousesWithChildren);
 
-                    return Q.all(promises)
+                    return Promise.all(promises)
                         .then(function () {
                             currentLevel++;
                             allChildrenAtLevel = _(allChildrenAtLevel)
@@ -217,7 +216,7 @@ exports = module.exports = function (app) {
                             return true;
                             //res.status(500).send({message: err.message, stack: err.stack});
                         });
-                }).done(function () {
+                }).then(function () {
                     res.send(dbPeople);
                 });
 

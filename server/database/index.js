@@ -1,5 +1,4 @@
 var _ = require('lodash'),
-    Q = require('q'),
     mongojs = require('mongojs'),
     dbUrl = process.env.DB_URL || 'familytree',
     db,
@@ -27,7 +26,7 @@ function toObjectId(string) {
 exports = module.exports = {
 
     getAll: function () {
-        return Q.Promise(function (resolve, reject) {
+        return new Promise(function (resolve, reject) {
             collection.find().sort({birthDate: 1}, function (err, docs) {
                 if (err) return reject(err);
                 resolve(_.map(docs, convert));
@@ -36,7 +35,7 @@ exports = module.exports = {
     },
 
     getPeople: function (id) {
-        return Q.Promise(function (resolve, reject) {
+        return new Promise(function (resolve, reject) {
             collection.findOne({_id: toObjectId(id)}, function (err, doc) {
                 if (err) return reject(err);
                 resolve(convert(doc));
@@ -45,7 +44,7 @@ exports = module.exports = {
     },
 
     getSeveralPeople: function (idArray) {
-        return Q.Promise(function (resolve, reject) {
+        return new Promise(function (resolve, reject) {
             collection.find({_id: {$in: _.map(idArray, toObjectId)}}, function (err, docs) {
                 if (err) return reject(err);
                 resolve(_.map(docs, convert));
@@ -54,7 +53,7 @@ exports = module.exports = {
     },
 
     getInMenu: function () {
-        return Q.Promise(function (resolve, reject) {
+        return new Promise(function (resolve, reject) {
             collection.find({menuTab: true}, function (err, docs) {
                 if (err) return reject(err);
                 resolve(_.map(docs, convert));
@@ -63,7 +62,7 @@ exports = module.exports = {
     },
 
     getChildren: function (parentId) {
-        return Q.Promise(function (resolve, reject) {
+        return new Promise(function (resolve, reject) {
             collection.find({$or: [{fatherId: parentId}, {motherId: parentId}]})
                 .sort({birthDate: 1}, function (err, docs) {
                     if (err) return reject(err);
@@ -74,7 +73,7 @@ exports = module.exports = {
 
     replacePeople: function (id, people) {
         people = _.omit(people, '_id');
-        return Q.Promise(function (resolve, reject) {
+        return new Promise(function (resolve, reject) {
             collection.findAndModify({
                 query: {_id: toObjectId(id)},
                 update: {$set: people}
@@ -86,7 +85,7 @@ exports = module.exports = {
     },
 
     deletePeople: function (id) {
-        return Q.Promise(function (resolve, reject) {
+        return new Promise(function (resolve, reject) {
             collection.remove({_id: toObjectId(id)}, true, function (err) {
                 if (err) return reject(err);
                 resolve();
@@ -95,7 +94,7 @@ exports = module.exports = {
     },
 
     createPeople: function (people) {
-        return Q.Promise(function (resolve, reject) {
+        return new Promise(function (resolve, reject) {
             collection.insert(people, function (err, doc) {
                 if (err) return reject(err);
                 resolve(convert(doc));
@@ -104,7 +103,7 @@ exports = module.exports = {
     },
 
     getAvatar: function (id) {
-        return Q.Promise(function (resolve, reject) {
+        return new Promise(function (resolve, reject) {
             uCollection.findOne({_id: toObjectId(id)}, function (err, doc) {
                 if (err) return reject(err);
                 resolve(convert(doc));
@@ -114,7 +113,7 @@ exports = module.exports = {
 
     createAvatar: function (avatar) {
         avatar.type = 'avatar';
-        return Q.Promise(function (resolve, reject) {
+        return new Promise(function (resolve, reject) {
             uCollection.insert(avatar, function (err, doc) {
                 if (err) return reject(err);
                 resolve(convert(doc));
