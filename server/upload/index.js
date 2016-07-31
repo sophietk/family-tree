@@ -1,10 +1,8 @@
 var _ = require('lodash'),
   fs = require('fs'),
-  path = require('path'),
   multer = require('multer'),
   upload = multer({dest: 'server/upload/avatar/'}),
-  db = require('../database'),
-  lastUpload = {}
+  db = require('../database')
 
 exports = module.exports = function (app) {
 
