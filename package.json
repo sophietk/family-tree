@@ -12,6 +12,8 @@
     "postinstall": "bower update && run-s build",
     "start": "node ./server/server.js",
     "watch": "npm-watch",
+    "test": "run-p lint:*",
+    "lint:js": "standard",
     "build": "run-s clean:dist && run-p sass handlebars copy-assets && run-s usemin replace:cssfont",
     "dist": "run-p build clean:zip && run-s compress",
     "clean:dist": "rm -rf dist",
@@ -30,11 +32,15 @@
   },
   "watch": {
     "sass": {
-      "patterns": ["app/sass"],
+      "patterns": [
+        "app/sass"
+      ],
       "extensions": "scss"
     },
     "handlebars": {
-      "patterns": ["app/js"],
+      "patterns": [
+        "app/js"
+      ],
       "extensions": "hbs"
     }
   },
@@ -56,6 +62,7 @@
     "npm-run-all": "2.3.0",
     "npm-watch": "0.1.5",
     "replace": "0.3.0",
+    "standard": "7.1.2",
     "usemin-cli": "0.1.0"
   },
   "cacheDirectories": [
