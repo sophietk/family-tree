@@ -13,7 +13,7 @@
     "start": "node ./server/server.js",
     "watch": "npm-watch",
     "test": "run-p lint:*",
-    "lint:js": "standard",
+    "lint:js": "eslint .",
     "build": "run-s clean:dist && run-p sass handlebars copy-assets && run-s usemin replace:cssfont",
     "dist": "run-p build clean:zip && run-s compress",
     "clean:dist": "rm -rf dist",
@@ -57,12 +57,13 @@
   },
   "devDependencies": {
     "bower": "1.7.9",
+    "eslint": "3.2.0",
+    "eslint-config-standard": "5.3.5",
     "handlebars": "4.0.5",
     "node-sass": "3.8.0",
     "npm-run-all": "2.3.0",
     "npm-watch": "0.1.5",
     "replace": "0.3.0",
-    "standard": "7.1.2",
     "usemin-cli": "0.1.0"
   },
   "cacheDirectories": [
