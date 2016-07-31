@@ -212,8 +212,7 @@ exports = module.exports = function (app) {
             // res.send(dbPeople)
             })
             .catch(function (err) {
-              return true
-            // res.status(500).send({message: err.message, stack: err.stack})
+              res.status(500).send({message: err.message, stack: err.stack})
             })
         }).then(function () {
           res.send(dbPeople)

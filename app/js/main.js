@@ -36,7 +36,7 @@ app
     moment.locale(appLang)
   })
   .on('start', function () {
-    new Router()
+    new Router() // eslint-disable-line no-new
     Backbone.history.start()
   })
   .start()
