@@ -1,15 +1,15 @@
 var HomeView = Marionette.ItemView.extend({
 
-    className: 'home',
+  className: 'home',
 
-    template: Handlebars.templates['home.hbs'],
+  template: Handlebars.templates['home.hbs'],
 
-    ui: {
-    	parallax: '.parallax'
-    },
+  ui: {
+    	  parallax: '.parallax'
+  },
 
-    onShow: function () {
-        this.ui.parallax.parallax();
-    }
+  onShow: function () {
+    this.ui.parallax.parallax()
+  }
 
-});
+})

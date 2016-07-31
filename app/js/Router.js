@@ -1,85 +1,85 @@
 var Router = Marionette.AppRouter.extend({
 
-    routes: {
-        'home': 'home',
-        'directory': 'directory',
-        'people/new': 'createPeople',
-        'people/:id': 'people',
-        'people/:id/edit': 'editPeople',
-        'family/:id': 'family',
-        '': 'home'
-    },
+  routes: {
+    'home': 'home',
+    'directory': 'directory',
+    'people/new': 'createPeople',
+    'people/:id': 'people',
+    'people/:id/edit': 'editPeople',
+    'family/:id': 'family',
+    '': 'home'
+  },
 
-    initialize: function () {
-        app.menuRegion.show(new MenuView());
+  initialize: function () {
+    app.menuRegion.show(new MenuView())
 
-        new MenuCollection()
+    new MenuCollection()
             .on('sync', function (collection) {
-                app.menuRegion.currentView.addCollectionToMenu(collection);
+              app.menuRegion.currentView.addCollectionToMenu(collection)
             })
-            .fetch();
-    },
+            .fetch()
+  },
 
-    home: function () {
-        app.nudeRegion.show(new HomeView());
-        app.menuRegion.currentView.select(0);
-        app.mainRegion.reset();
-    },
+  home: function () {
+    app.nudeRegion.show(new HomeView())
+    app.menuRegion.currentView.select(0)
+    app.mainRegion.reset()
+  },
 
-    directory: function () {
-        app.nudeRegion.reset();
-        app.menuRegion.currentView.select(1);
-        app.mainRegion.show(new LoaderView());
+  directory: function () {
+    app.nudeRegion.reset()
+    app.menuRegion.currentView.select(1)
+    app.mainRegion.show(new LoaderView())
 
-        new PeopleCollection()
+    new PeopleCollection()
             .on('sync', function (collection) {
-                collection.models.reverse();
-                app.mainRegion.show(new DirectoryView({collection: collection}));
+              collection.models.reverse()
+              app.mainRegion.show(new DirectoryView({collection: collection}))
             })
-            .fetch();
-    },
+            .fetch()
+  },
 
-    createPeople: function () {
-        app.nudeRegion.reset();
-        app.menuRegion.currentView.unselect();
-        app.mainRegion.show(new EditView({model: new PeopleModel()}));
-    },
+  createPeople: function () {
+    app.nudeRegion.reset()
+    app.menuRegion.currentView.unselect()
+    app.mainRegion.show(new EditView({model: new PeopleModel()}))
+  },
 
-    people: function (peopleId) {
-        app.nudeRegion.reset();
-        app.menuRegion.currentView.unselect();
-        app.mainRegion.show(new LoaderView());
+  people: function (peopleId) {
+    app.nudeRegion.reset()
+    app.menuRegion.currentView.unselect()
+    app.mainRegion.show(new LoaderView())
 
-        new PeopleModel({_id: peopleId})
+    new PeopleModel({_id: peopleId})
             .on('sync', function (model) {
-                app.mainRegion.show(new PeopleView({model: model}));
+              app.mainRegion.show(new PeopleView({model: model}))
             })
-            .fetch();
-    },
+            .fetch()
+  },
 
-    editPeople: function (peopleId) {
-        app.nudeRegion.reset();
-        app.menuRegion.currentView.unselect();
-        app.mainRegion.show(new LoaderView());
+  editPeople: function (peopleId) {
+    app.nudeRegion.reset()
+    app.menuRegion.currentView.unselect()
+    app.mainRegion.show(new LoaderView())
 
-        new PeopleModel({_id: peopleId})
+    new PeopleModel({_id: peopleId})
             .on('sync', function (model) {
-                app.mainRegion.show(new EditView({model: model}));
+              app.mainRegion.show(new EditView({model: model}))
             })
-            .fetch();
-    },
+            .fetch()
+  },
 
-    family: function (familyId) {
-        app.nudeRegion.reset();
-        app.menuRegion.currentView.unselect();
-        app.mainRegion.show(new LoaderView());
+  family: function (familyId) {
+    app.nudeRegion.reset()
+    app.menuRegion.currentView.unselect()
+    app.mainRegion.show(new LoaderView())
 
 
-        new FamilyModel({_id: familyId})
+    new FamilyModel({_id: familyId})
             .on('sync', function (model) {
-                app.mainRegion.show(new FamilyView({model: model}));
+              app.mainRegion.show(new FamilyView({model: model}))
             })
-            .fetch();
-    }
+            .fetch()
+  }
 
-});
+})

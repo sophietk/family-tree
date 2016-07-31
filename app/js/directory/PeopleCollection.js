@@ -1,7 +1,7 @@
 var PeopleCollection = Backbone.Collection.extend({
 
-    model: PeopleModel,
+  model: PeopleModel,
 
-    url: '/people'
+  url: '/people'
 
-});
+})

@@ -1,7 +1,7 @@
 var AvatarModel = Backbone.Model.extend({
 
-    fileAttribute: 'avatarFile',
+  fileAttribute: 'avatarFile',
 
-    url: 'upload/avatar'
+  url: 'upload/avatar'
 
-});
+})

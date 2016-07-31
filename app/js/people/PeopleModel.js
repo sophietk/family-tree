@@ -1,9 +1,9 @@
 var PeopleModel = Backbone.Model.extend({
 
-    idAttribute: '_id',
+  idAttribute: '_id',
 
-    url: function () {
-        return '/people' + (this.id ? '/' + this.id : '');
-    }
+  url: function () {
+    return '/people' + (this.id ? '/' + this.id : '')
+  }
 
-});
+})

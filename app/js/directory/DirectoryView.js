@@ -1,9 +1,9 @@
 var DirectoryView = Marionette.CollectionView.extend({
 
-    className: 'directory row',
+  className: 'directory row',
 
-    childView: PeopleCardView,
+  childView: PeopleCardView,
 
-    reorderOnSort: true
+  reorderOnSort: true
 
-});
+})
