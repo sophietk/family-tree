@@ -1,7 +1,7 @@
-var pick = require('lodash.pick')
-var db = require('../database')
+const pick = require('lodash.pick')
+const db = require('../database')
 
-var DEFAULT_FAMILY_LEVEL = 10
+const DEFAULT_FAMILY_LEVEL = 10
 
 /**
  * Loop until the promise returned by `fn` returns a truthy value.
@@ -12,7 +12,7 @@ Promise.until = function (fn) {
 }
 
 function retrievePeopleFromReq (req) {
-  var people = req.body
+  const people = req.body
 
   /*
   people.forEch(function removeIfEmpty(value, key) {
@@ -39,13 +39,13 @@ function retrievePeopleFromReq (req) {
   ])
 }
 
-var all = [] // @todo: load async in children each loop
+let all = [] // @todo: load async in children each loop
 function buildSpousesWithChildren (people) {
   return new Promise(function (resolve, reject) {
     // Spouses are already built
     if (people.spouses !== undefined) return
 
-    var id = people._id
+    const id = people._id
     if (people.spousesIds === undefined) people.spousesIds = []
 
     Promise.all([
@@ -53,18 +53,17 @@ function buildSpousesWithChildren (people) {
       db.getSeveralPeople(people.spousesIds)
     ])
       .then(function (data) {
-        var children = data[0]
-        var spouses = data[1]
+        const children = data[0]
+        const spouses = data[1]
 
         children.forEach(function (child) {
-          var otherParentId = [child.fatherId, child.motherId].find(parentId => parentId !== id)
-          var otherParent
+          const otherParentId = [child.fatherId, child.motherId].find(parentId => parentId !== id)
           if (otherParentId === undefined) {
             spouses.push({children: [child]})
             return
           }
 
-          otherParent = spouses.find(spouse => spouse._id === otherParentId)
+          let otherParent = spouses.find(spouse => spouse._id === otherParentId)
           if (otherParent === undefined) {
             otherParent = all.find(people => people._id === otherParentId)
             spouses.push(Object.assign({}, otherParent, {children: [child]}))
@@ -110,7 +109,7 @@ exports = module.exports = function (app) {
   })
 
   app.post('/people', function (req, res) {
-    var people = retrievePeopleFromReq(req)
+    const people = retrievePeopleFromReq(req)
 
     db.createPeople(people)
       .then(function (dbPeople) {
@@ -122,7 +121,7 @@ exports = module.exports = function (app) {
   })
 
   app.get('/people/:id', function (req, res) {
-    var id = req.params.id
+    const id = req.params.id
 
     db.getPeople(id)
       .then(function (dbPeople) {
@@ -150,8 +149,8 @@ exports = module.exports = function (app) {
   })
 
   app.put('/people/:id', function (req, res) {
-    var id = req.params.id
-    var people = retrievePeopleFromReq(req)
+    const id = req.params.id
+    const people = retrievePeopleFromReq(req)
 
     db.replacePeople(id, people)
       .then(function (dbPeople) {
@@ -163,7 +162,7 @@ exports = module.exports = function (app) {
   })
 
   app.delete('/people/:id', function (req, res) {
-    var id = req.params.id
+    const id = req.params.id
 
     db.deletePeople(id)
       .then(function () {
@@ -175,21 +174,21 @@ exports = module.exports = function (app) {
   })
 
   app.get('/family/:id', function (req, res) {
-    var id = req.params.id
-    var limitLevel = parseInt(req.query.level) || DEFAULT_FAMILY_LEVEL
-    var currentLevel = 0
+    const id = req.params.id
+    const limitLevel = parseInt(req.query.level) || DEFAULT_FAMILY_LEVEL
 
     Promise.all([
       db.getPeople(id),
       db.getAll()
     ])
       .then(function (data) {
-        var dbPeople = data[0]
-        var allChildrenAtLevel = [dbPeople]
+        let currentLevel = 0
+        const dbPeople = data[0]
+        let allChildrenAtLevel = [dbPeople]
         all = data[1]
 
         Promise.until(function () {
-          var promises = allChildrenAtLevel.map(buildSpousesWithChildren)
+          const promises = allChildrenAtLevel.map(buildSpousesWithChildren)
 
           return Promise.all(promises)
             .then(function () {

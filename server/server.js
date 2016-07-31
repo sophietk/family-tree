@@ -1,10 +1,10 @@
-var express = require('express')
-var logger = require('morgan')
-var bodyParser = require('body-parser')
+const express = require('express')
+const logger = require('morgan')
+const bodyParser = require('body-parser')
 
-var env = process.env.NODE_ENV || 'dev'
-var port = Number(process.env.PORT) || 3000
-var app = express()
+const env = process.env.NODE_ENV || 'dev'
+const port = Number(process.env.PORT) || 3000
+const app = express()
 
 console.log('Server starting in mode: ' + env)
 

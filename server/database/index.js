@@ -1,17 +1,11 @@
-var mongojs = require('mongojs')
-var omit = require('object.omit')
+const mongojs = require('mongojs')
+const omit = require('object.omit')
 
-var dbUrl = process.env.DB_URL || 'familytree'
-var db
-var collection
-var uCollection
-
+const dbUrl = process.env.DB_URL || 'familytree'
 console.log('Connecting to db: ' + dbUrl)
-
-db = mongojs(dbUrl, ['people', 'upload'])
-
-collection = db.collection('people')
-uCollection = db.collection('upload')
+const db = mongojs(dbUrl, ['people', 'upload'])
+const collection = db.collection('people')
+const uCollection = db.collection('upload')
 
 function convert (doc) {
   if (doc === undefined || doc === null) return
