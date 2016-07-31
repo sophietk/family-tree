@@ -1,4 +1,3 @@
-var _ = require('lodash')
 var fs = require('fs')
 var multer = require('multer')
 var db = require('../database')
@@ -32,7 +31,7 @@ exports = module.exports = function (app) {
 
     db.getAvatar(id)
       .then(function (dbAvatar) {
-        if (_.isUndefined(dbAvatar)) return res.sendStatus(404)
+        if (dbAvatar === undefined) return res.sendStatus(404)
 
         res.contentType(dbAvatar.contentType)
         res.send(new Buffer(dbAvatar.data, 'base64'))

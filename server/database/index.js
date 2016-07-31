@@ -1,5 +1,5 @@
-var _ = require('lodash')
 var mongojs = require('mongojs')
+var omit = require('object.omit')
 
 var dbUrl = process.env.DB_URL || 'familytree'
 var db
@@ -14,7 +14,7 @@ collection = db.collection('people')
 uCollection = db.collection('upload')
 
 function convert (doc) {
-  if (_.isUndefined(doc) || _.isNull(doc)) return
+  if (doc === undefined || doc === null) return
   doc._id = doc._id.toString()
   if (doc.gender) doc.isMale = doc.gender === 'M'
   return doc
@@ -29,7 +29,7 @@ exports = module.exports = {
     return new Promise(function (resolve, reject) {
       collection.find().sort({birthDate: 1}, function (err, docs) {
         if (err) return reject(err)
-        resolve(_.map(docs, convert))
+        resolve(docs.map(convert))
       })
     })
   },
@@ -45,9 +45,9 @@ exports = module.exports = {
 
   getSeveralPeople: function (idArray) {
     return new Promise(function (resolve, reject) {
-      collection.find({_id: {$in: _.map(idArray, toObjectId)}}, function (err, docs) {
+      collection.find({_id: {$in: idArray.map(toObjectId)}}, function (err, docs) {
         if (err) return reject(err)
-        resolve(_.map(docs, convert))
+        resolve(docs.map(convert))
       })
     })
   },
@@ -56,7 +56,7 @@ exports = module.exports = {
     return new Promise(function (resolve, reject) {
       collection.find({menuTab: true}, function (err, docs) {
         if (err) return reject(err)
-        resolve(_.map(docs, convert))
+        resolve(docs.map(convert))
       })
     })
   },
@@ -66,13 +66,13 @@ exports = module.exports = {
       collection.find({$or: [{fatherId: parentId}, {motherId: parentId}]})
         .sort({birthDate: 1}, function (err, docs) {
           if (err) return reject(err)
-          resolve(_.map(docs, convert))
+          resolve(docs.map(convert))
         })
     })
   },
 
   replacePeople: function (id, people) {
-    people = _.omit(people, '_id')
+    people = omit(people, '_id')
     return new Promise(function (resolve, reject) {
       collection.findAndModify({
         query: {_id: toObjectId(id)},

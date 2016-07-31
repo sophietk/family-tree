@@ -1,4 +1,4 @@
-var _ = require('lodash')
+var pick = require('lodash.pick')
 var db = require('../database')
 
 var DEFAULT_FAMILY_LEVEL = 10
@@ -21,14 +21,14 @@ function retrievePeopleFromReq (req) {
   var people = req.body
 
   /*
-  _.each(people, function removeIfEmpty(value, key) {
-      if (_.isUndefined(value) || _.isNull(value) || (!_.isBoolean(value) && _.isEmpty(value))) {
+  people.forEch(function removeIfEmpty(value, key) {
+      if (value === undefined || value === null || value === '') {
           delete people[key]
       }
   })
   */
 
-  return _.pick(people,
+  return pick(people, [
     '_id',
     'lastName',
     'maidenName',
@@ -42,17 +42,17 @@ function retrievePeopleFromReq (req) {
     'avatarUrl',
     'about',
     'menuTab'
-  )
+  ])
 }
 
 var all = [] // @todo: load async in children each loop
 function buildSpousesWithChildren (people) {
   return new Promise(function (resolve, reject) {
     // Spouses are already built
-    if (!_.isUndefined(people.spouses)) return
+    if (people.spouses !== undefined) return
 
     var id = people._id
-    if (_.isUndefined(people.spousesIds)) people.spousesIds = []
+    if (people.spousesIds === undefined) people.spousesIds = []
 
     Promise.all([
       db.getChildren(id),
@@ -62,22 +62,22 @@ function buildSpousesWithChildren (people) {
         var children = data[0]
         var spouses = data[1]
 
-        _.each(children, function (child) {
-          var otherParentId = _.without([child.fatherId, child.motherId], id)[0]
+        children.forEach(function (child) {
+          var otherParentId = [child.fatherId, child.motherId].find(function (parentId) { return parentId !== id })
           var otherParent
-          if (_.isUndefined(otherParentId)) {
+          if (otherParentId === undefined) {
             spouses.push({children: [child]})
             return
           }
 
-          otherParent = _.find(spouses, {_id: otherParentId})
-          if (_.isUndefined(otherParent)) {
-            otherParent = _.find(all, {_id: otherParentId})
-            spouses.push(_.extend({}, otherParent, {children: [child]}))
+          otherParent = spouses.find(function (spouse) { return spouse._id === otherParentId })
+          if (otherParent === undefined) {
+            otherParent = all.find(function (people) { return people._id === otherParentId })
+            spouses.push(Object.assign({}, otherParent, {children: [child]}))
             return
           }
 
-          if (_.isUndefined(otherParent.children)) {
+          if (otherParent.children === undefined) {
             otherParent.children = []
           }
           otherParent.children.push(child)
@@ -132,7 +132,7 @@ exports = module.exports = function (app) {
 
     db.getPeople(id)
       .then(function (dbPeople) {
-        if (_.isUndefined(dbPeople)) return res.sendStatus(404)
+        if (dbPeople === undefined) return res.sendStatus(404)
 
         Promise.all([
           db.getPeople(dbPeople.fatherId),
@@ -140,7 +140,7 @@ exports = module.exports = function (app) {
           db.getChildren(dbPeople._id)
         ])
           .then(function (data) {
-            res.send(_.extend({}, dbPeople, {
+            res.send(Object.assign({}, dbPeople, {
               father: data[0],
               mother: data[1],
               children: data[2]
@@ -195,20 +195,19 @@ exports = module.exports = function (app) {
         all = data[1]
 
         Promise.until(function () {
-          var promises = _.map(allChildrenAtLevel, buildSpousesWithChildren)
+          var promises = allChildrenAtLevel.map(buildSpousesWithChildren)
 
           return Promise.all(promises)
             .then(function () {
               currentLevel++
-              allChildrenAtLevel = _(allChildrenAtLevel)
-                .map('spouses')
-                .flatten()
-                .map('children')
-                .flatten()
-                .compact()
-                .reject({_id: id}) // avoid circular families
-                .value()
-              return !!(_.isEmpty(allChildrenAtLevel) || currentLevel >= limitLevel)
+              allChildrenAtLevel = allChildrenAtLevel
+                .map(function getSpouses (people) { return people.spouses })
+                .reduce(function concatSpouse (spouses, spouse) { return spouses.concat(spouse) }, [])
+                .map(function getChildren (people) { return people.children })
+                .reduce(function concatChild (children, child) { return children.concat(child) }, [])
+                .filter(function exist (people) { return people !== undefined })
+                .filter(function isNotSame (people) { return people._id !== id }) // avoid circular families
+              return !!(allChildrenAtLevel.length === 0 || currentLevel >= limitLevel)
             // res.send(dbPeople)
             })
             .catch(function (err) {
