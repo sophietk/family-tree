@@ -8,13 +8,7 @@ var DEFAULT_FAMILY_LEVEL = 10
  * @see https://www.npmjs.com/package/q-flow
  */
 Promise.until = function (fn) {
-  return fn().then(function (result) {
-    if (result) {
-      return result
-    }
-
-    return Promise.until(fn)
-  })
+  return fn().then(result => result || Promise.until(fn))
 }
 
 function retrievePeopleFromReq (req) {
@@ -63,16 +57,16 @@ function buildSpousesWithChildren (people) {
         var spouses = data[1]
 
         children.forEach(function (child) {
-          var otherParentId = [child.fatherId, child.motherId].find(function (parentId) { return parentId !== id })
+          var otherParentId = [child.fatherId, child.motherId].find(parentId => parentId !== id)
           var otherParent
           if (otherParentId === undefined) {
             spouses.push({children: [child]})
             return
           }
 
-          otherParent = spouses.find(function (spouse) { return spouse._id === otherParentId })
+          otherParent = spouses.find(spouse => spouse._id === otherParentId)
           if (otherParent === undefined) {
-            otherParent = all.find(function (people) { return people._id === otherParentId })
+            otherParent = all.find(people => people._id === otherParentId)
             spouses.push(Object.assign({}, otherParent, {children: [child]}))
             return
           }
@@ -201,12 +195,12 @@ exports = module.exports = function (app) {
             .then(function () {
               currentLevel++
               allChildrenAtLevel = allChildrenAtLevel
-                .map(function getSpouses (people) { return people.spouses })
-                .reduce(function concatSpouse (spouses, spouse) { return spouses.concat(spouse) }, [])
-                .map(function getChildren (people) { return people.children })
-                .reduce(function concatChild (children, child) { return children.concat(child) }, [])
-                .filter(function exist (people) { return people !== undefined })
-                .filter(function isNotSame (people) { return people._id !== id }) // avoid circular families
+                .map(people => people.spouses)
+                .reduce((spouses, spouse) => spouses.concat(spouse), [])
+                .map(people => people.children)
+                .reduce((children, child) => children.concat(child), [])
+                .filter(people => people !== undefined)
+                .filter(people => people._id !== id) // avoid circular families
               return !!(allChildrenAtLevel.length === 0 || currentLevel >= limitLevel)
             // res.send(dbPeople)
             })
