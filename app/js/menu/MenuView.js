@@ -42,7 +42,7 @@ var MenuView = Marionette.ItemView.extend({
   },
 
   updateCurrentTab: function () {
-    if (_.isUndefined(this.currentTab)) {
+    if (this.currentTab === undefined) {
       this.ui.tabs.removeClass('active')
       return
     }

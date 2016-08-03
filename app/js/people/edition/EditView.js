@@ -67,7 +67,7 @@ var EditView = Marionette.ItemView.extend({
 
   fillWithQuery: function () {
     var urlHashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&')
-    _.each(urlHashes, function updateField (hash) {
+    urlHashes.forEach(function updateField (hash) {
       hash = hash.split('=')
       switch (hash[0]) {
         case 'lastName':
@@ -94,7 +94,7 @@ var EditView = Marionette.ItemView.extend({
     // @todo: not necessary, do it in template
     this.ui.fatherId.val(this.model.get('fatherId'))
     this.ui.motherId.val(this.model.get('motherId'))
-    _.each(this.model.get('spousesIds'), function fillSpouseSelect (spouseId, index) {
+    ;(this.model.get('spousesIds') || []).forEach(function fillSpouseSelect (spouseId, index) {
       this.ui.spousesBlock.children().eq(index).val(spouseId)
     }, this)
   },
@@ -143,9 +143,14 @@ var EditView = Marionette.ItemView.extend({
   },
 
   getSpousesIds: function () {
-    return _.compact(this.$('select[name="spouse"]').map(function (index, el) {
-      return $(el).val()
-    }).get())
+    return this.$('select[name="spouse"]')
+      .map(function (index, el) {
+        return $(el).val()
+      })
+      .get()
+      .filter(function exist (spouseId) {
+        return spouseId !== ''
+      })
   },
 
   savePeople: function () {
@@ -163,7 +168,7 @@ var EditView = Marionette.ItemView.extend({
       about: this.ui.about.val(),
       menuTab: this.ui.menuTab.prop('checked')
     }, {
-      success: _.bind(this.saveSuccess, this)
+      success: this.saveSuccess.bind(this)
     })
   },
 
@@ -173,7 +178,7 @@ var EditView = Marionette.ItemView.extend({
 
   deletePeople: function () {
     this.model.destroy({
-      success: _.bind(this.destroySuccess, this)
+      success: this.destroySuccess.bind(this)
     })
   },
 

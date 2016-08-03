@@ -25,7 +25,7 @@ var NavigatorBehavior = Marionette.Behavior.extend({
     this.duration = 300
     this.glueLimit = this.ui.container.position() ? this.ui.container.position().top - 40 : 0
 
-    $(window).scroll(_.debounce(_.bind(this.glueNavigation, this), 10))
+    $(window).scroll(_.debounce(this.glueNavigation.bind(this), 10))
   },
 
   glueNavigation: function () {

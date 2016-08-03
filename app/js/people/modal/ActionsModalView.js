@@ -25,7 +25,7 @@ var ActionsModalView = Marionette.ItemView.extend({
 
   onRender: function () {
     this.$el.openModal({
-      complete: _.bind(this.destroy, this)
+      complete: this.destroy.bind(this)
     })
   },
 

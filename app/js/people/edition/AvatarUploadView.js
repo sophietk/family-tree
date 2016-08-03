@@ -21,11 +21,8 @@ var AvatarUploadView = Marionette.ItemView.extend({
 
   onRender: function () {
     this.$el.openModal({
-      complete: _.bind(function () {
-        this.destroy()
-      }, this)
-    }
-    )
+      complete: this.destroy.bind(this)
+    })
   },
 
   updateAvatarFile: function () {
@@ -42,11 +39,11 @@ var AvatarUploadView = Marionette.ItemView.extend({
       // peopleId: this.model.id,
       avatarFile: fileObject
     }, {
-      success: _.bind(this.uploadAvatarSuccess, this)
+      success: this.uploadAvatarSuccess.bind(this)
     })
-    this.model.on('progress', _.bind(function (fraction) {
+    this.model.on('progress', function (fraction) {
       this.ui.progressBar.css('width', (fraction * 100) + '%')
-    }, this))
+    }.bind(this))
   },
 
   uploadAvatarSuccess: function () {
