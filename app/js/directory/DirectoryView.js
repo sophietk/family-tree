@@ -1,4 +1,4 @@
-var DirectoryView = Marionette.CollectionView.extend({
+const DirectoryView = Marionette.CollectionView.extend({
   className: 'directory row',
 
   childView: PeopleCardView,

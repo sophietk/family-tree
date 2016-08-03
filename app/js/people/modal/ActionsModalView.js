@@ -1,4 +1,4 @@
-var ActionsModalView = Marionette.ItemView.extend({
+const ActionsModalView = Marionette.ItemView.extend({
   className: 'modal actions-modal',
 
   template: Handlebars.templates['actionsModal.hbs'],
@@ -12,7 +12,7 @@ var ActionsModalView = Marionette.ItemView.extend({
   },
 
   templateHelpers: function () {
-    var $el = this.options.target
+    const $el = this.options.target
     return {
       _id: $el.data('id'),
       firstName: $el.data('firstName'),

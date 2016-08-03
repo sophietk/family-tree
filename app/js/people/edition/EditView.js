@@ -1,4 +1,4 @@
-var EditView = Marionette.ItemView.extend({
+const EditView = Marionette.ItemView.extend({
   template: Handlebars.templates['peopleEdit.hbs'],
 
   ui: {
@@ -48,8 +48,8 @@ var EditView = Marionette.ItemView.extend({
   },
 
   templateHelpers: function () {
-    var manCollection = new Backbone.Collection(this.collection.where({gender: 'M'}))
-    var womenCollection = new Backbone.Collection(this.collection.where({gender: 'F'}))
+    const manCollection = new Backbone.Collection(this.collection.where({gender: 'M'}))
+    const womenCollection = new Backbone.Collection(this.collection.where({gender: 'F'}))
 
     return {
       men: manCollection.toJSON(),
@@ -66,7 +66,7 @@ var EditView = Marionette.ItemView.extend({
   },
 
   fillWithQuery: function () {
-    var urlHashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&')
+    const urlHashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&')
     urlHashes.forEach(function updateField (hash) {
       hash = hash.split('=')
       switch (hash[0]) {
@@ -110,14 +110,14 @@ var EditView = Marionette.ItemView.extend({
   },
 
   refreshSpousesButtons: function () {
-    var nbSelect = this.ui.spousesBlock.children().size()
+    const nbSelect = this.ui.spousesBlock.children().size()
     this.ui.removeSpouse.toggleClass('disabled', nbSelect < 1)
   },
 
   showAvatarModal: function (event) {
     event.preventDefault()
 
-    var avatarUploadView = new AvatarUploadView({
+    const avatarUploadView = new AvatarUploadView({
       model: new AvatarModel(),
       people: {
         firstName: this.ui.firstName.val(),

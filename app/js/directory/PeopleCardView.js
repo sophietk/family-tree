@@ -1,4 +1,4 @@
-var PeopleCardView = Marionette.ItemView.extend({
+const PeopleCardView = Marionette.ItemView.extend({
   template: Handlebars.templates['peopleCard.hbs']
 
 })

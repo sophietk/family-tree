@@ -1,4 +1,4 @@
-var ModalOpenerBehavior = Marionette.Behavior.extend({
+const ModalOpenerBehavior = Marionette.Behavior.extend({
   ui: {
     actionsBtn: '.actions'
   },
@@ -10,7 +10,7 @@ var ModalOpenerBehavior = Marionette.Behavior.extend({
   showActionsModal: function (e) {
     e.preventDefault()
 
-    var $el = this.$(e.currentTarget).parent()
+    const $el = this.$(e.currentTarget).parent()
     this.$el.append(new ActionsModalView({target: $el}).render().el)
   }
 })

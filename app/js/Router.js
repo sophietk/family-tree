@@ -1,4 +1,4 @@
-var Router = Marionette.AppRouter.extend({
+const Router = Marionette.AppRouter.extend({
   routes: {
     'home': 'home',
     'directory': 'directory',

@@ -1,4 +1,4 @@
-var HomeView = Marionette.ItemView.extend({
+const HomeView = Marionette.ItemView.extend({
   className: 'home',
 
   template: Handlebars.templates['home.hbs'],

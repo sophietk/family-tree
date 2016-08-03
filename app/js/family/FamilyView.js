@@ -1,4 +1,4 @@
-var FamilyView = Marionette.ItemView.extend({
+const FamilyView = Marionette.ItemView.extend({
   template: Handlebars.templates['family.hbs'],
 
   behaviors: {
@@ -28,18 +28,18 @@ var FamilyView = Marionette.ItemView.extend({
   },
 
   centerPeople: function () {
-    var $a = this.$('a[data-id="' + this.model.id + '"]')
-    var top = $a.offset().top
-    var left = $a.position().left
-    var margin = (this.ui.tree.width() - $a.width()) / 2
+    const $a = this.$('a[data-id="' + this.model.id + '"]')
+    const top = $a.offset().top
+    const left = $a.position().left
+    const margin = (this.ui.tree.width() - $a.width()) / 2
     this.ui.tree.animate({scrollLeft: left - margin}, 1000)
     $('body').animate({scrollTop: top - 20}, 1000)
   },
 
   toggle: function (event) {
-    var $el = this.$(event.currentTarget)
-    var prop = $el.data('prop')
-    var hidden = !$el.prop('checked')
+    const $el = this.$(event.currentTarget)
+    const prop = $el.data('prop')
+    const hidden = !$el.prop('checked')
     this.ui.tree.toggleClass('hidden-' + prop, hidden)
   }
 

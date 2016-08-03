@@ -1,4 +1,4 @@
-var MenuCollection = Backbone.Collection.extend({
+const MenuCollection = Backbone.Collection.extend({
   url: '/menu'
 
 })
