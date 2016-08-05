@@ -144,13 +144,9 @@ const EditView = Marionette.ItemView.extend({
 
   getSpousesIds: function () {
     return this.$('select[name="spouse"]')
-      .map(function (index, el) {
-        return $(el).val()
-      })
+      .map((index, el) => $(el).val())
       .get()
-      .filter(function exist (spouseId) {
-        return spouseId !== ''
-      })
+      .filter(spouseId => spouseId !== '')
   },
 
   savePeople: function () {
