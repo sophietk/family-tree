@@ -30,7 +30,7 @@ app
     const userLang = navigator.language || navigator.userLanguage
     const appLang = userLang === 'fr' ? 'fr' : 'en'
     polyglot = new Polyglot({locale: appLang})
-    $('head').append('<script type="text/javascript" src="js/i18n/' + appLang + '.js"></script>')
+    $('head').append(`<script type="text/javascript" src="js/i18n/${appLang}.js"></script>`)
 
     // Moment
     moment.locale(appLang)

@@ -2,7 +2,7 @@ const PeopleModel = Backbone.Model.extend({
   idAttribute: '_id',
 
   url: function () {
-    return '/people' + (this.id ? '/' + this.id : '')
+    return this.id ? `/people/${this.id}` : '/people'
   }
 
 })

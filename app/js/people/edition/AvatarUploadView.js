@@ -42,7 +42,7 @@ const AvatarUploadView = Marionette.ItemView.extend({
       success: this.uploadAvatarSuccess.bind(this)
     })
     this.model.on('progress', function (fraction) {
-      this.ui.progressBar.css('width', (fraction * 100) + '%')
+      this.ui.progressBar.css('width', `${fraction * 100}%`)
     }.bind(this))
   },
 

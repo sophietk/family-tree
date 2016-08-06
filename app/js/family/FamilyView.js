@@ -28,7 +28,7 @@ const FamilyView = Marionette.ItemView.extend({
   },
 
   centerPeople: function () {
-    const $a = this.$('a[data-id="' + this.model.id + '"]')
+    const $a = this.$(`a[data-id="${this.model.id}"]`)
     const top = $a.offset().top
     const left = $a.position().left
     const margin = (this.ui.tree.width() - $a.width()) / 2
@@ -40,7 +40,7 @@ const FamilyView = Marionette.ItemView.extend({
     const $el = this.$(event.currentTarget)
     const prop = $el.data('prop')
     const hidden = !$el.prop('checked')
-    this.ui.tree.toggleClass('hidden-' + prop, hidden)
+    this.ui.tree.toggleClass(`hidden-${prop}`, hidden)
   }
 
 })

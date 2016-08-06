@@ -138,7 +138,7 @@ const EditView = Marionette.ItemView.extend({
   },
 
   setGender: function (gender) {
-    this.$('input[name="gender"][value="' + gender + '"]').prop('checked', true)
+    this.$(`input[name="gender"][value="${gender}"]`).prop('checked', true)
     this.updateGender()
   },
 
@@ -179,7 +179,7 @@ const EditView = Marionette.ItemView.extend({
   },
 
   saveSuccess: function () {
-    Backbone.history.navigate('#people/' + this.model.id, {trigger: true})
+    Backbone.history.navigate(`#people/${this.model.id}`, {trigger: true})
   },
 
   destroySuccess: function () {

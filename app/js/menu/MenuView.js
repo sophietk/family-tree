@@ -21,7 +21,7 @@ const MenuView = Marionette.ItemView.extend({
   addCollectionToMenu: function (collection) {
     collection.each(people => {
       this.menuItems.push({
-        route: 'family/' + people.get('_id'),
+        route: `family/${people.get('_id')}`,
         title: 'tabs.pinned',
         args: {firstName: people.get('firstName')},
         className: 'teal'
