@@ -18,7 +18,7 @@ exports = module.exports = function (app) {
     db.createAvatar(avatar)
       .then(dbAvatar => {
         res.send({
-          avatarUrl: '/avatar/' + dbAvatar._id
+          avatarUrl: `/avatar/${dbAvatar._id}`
         })
       })
       .catch(err => {

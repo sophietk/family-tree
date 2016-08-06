@@ -2,7 +2,7 @@ const mongojs = require('mongojs')
 const omit = require('object.omit')
 
 const dbUrl = process.env.DB_URL || 'familytree'
-console.log('Connecting to db: ' + dbUrl)
+console.log(`Connecting to db: ${dbUrl}`)
 const db = mongojs(dbUrl, ['people', 'upload'])
 const collection = db.collection('people')
 const uCollection = db.collection('upload')

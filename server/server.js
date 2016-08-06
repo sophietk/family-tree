@@ -6,7 +6,7 @@ const env = process.env.NODE_ENV || 'dev'
 const port = Number(process.env.PORT) || 3000
 const app = express()
 
-console.log('Server starting in mode: ' + env)
+console.log(`Server starting in mode: ${env}`)
 
 app.use(logger(env === 'prod' ? 'common' : 'dev'))
 app.use(bodyParser.json())
@@ -22,7 +22,7 @@ require('./upload')(app)
 
 // Listen
 app.listen(port, function () {
-  console.log('Listening on port: ' + port)
+  console.log(`Listening on port: ${port}`)
 })
 
 module.exports = app
