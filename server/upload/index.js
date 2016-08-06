@@ -16,12 +16,12 @@ exports = module.exports = function (app) {
     }
 
     db.createAvatar(avatar)
-      .then(function (dbAvatar) {
+      .then(dbAvatar => {
         res.send({
           avatarUrl: '/avatar/' + dbAvatar._id
         })
       })
-      .catch(function (err) {
+      .catch(err => {
         res.status(500).send(err.message)
       })
   })
@@ -30,13 +30,13 @@ exports = module.exports = function (app) {
     const id = req.params.id
 
     db.getAvatar(id)
-      .then(function (dbAvatar) {
+      .then(dbAvatar => {
         if (dbAvatar === undefined) return res.sendStatus(404)
 
         res.contentType(dbAvatar.contentType)
         res.send(new Buffer(dbAvatar.data, 'base64'))
       })
-      .catch(function (err) {
+      .catch(err => {
         res.status(500).send(err.message)
       })
   })

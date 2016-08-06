@@ -15,11 +15,13 @@ function retrievePeopleFromReq (req) {
   const people = req.body
 
   /*
-  people.forEch(function removeIfEmpty(value, key) {
-      if (value === undefined || value === null || value === '') {
-          delete people[key]
-      }
-  })
+  // remove empty-value keys
+  for (key in people) {
+    const value = people[key]
+    if (value === undefined || value === null || value === '') {
+        delete people[key]
+    }
+  }
   */
 
   return pick(people, [
@@ -41,7 +43,7 @@ function retrievePeopleFromReq (req) {
 
 let all = [] // @todo: load async in children each loop
 function buildSpousesWithChildren (people) {
-  return new Promise(function (resolve, reject) {
+  return new Promise((resolve, reject) => {
     // Spouses are already built
     if (people.spouses !== undefined) return
 
@@ -52,11 +54,11 @@ function buildSpousesWithChildren (people) {
       db.getChildren(id),
       db.getSeveralPeople(people.spousesIds)
     ])
-      .then(function (data) {
+      .then(data => {
         const children = data[0]
         const spouses = data[1]
 
-        children.forEach(function (child) {
+        children.forEach(child => {
           const otherParentId = [child.fatherId, child.motherId].find(parentId => parentId !== id)
           if (otherParentId === undefined) {
             spouses.push({children: [child]})
@@ -81,7 +83,7 @@ function buildSpousesWithChildren (people) {
         people.spouses = spouses
         resolve()
       })
-      .catch(function (err) {
+      .catch(err => {
         reject(err)
       })
   })
@@ -90,20 +92,20 @@ function buildSpousesWithChildren (people) {
 exports = module.exports = function (app) {
   app.get('/menu', function (req, res) {
     db.getInMenu()
-      .then(function (dbPeople) {
+      .then(dbPeople => {
         res.send(dbPeople)
       })
-      .catch(function (err) {
+      .catch(err => {
         res.status(500).send(err.message)
       })
   })
 
   app.get('/people', function (req, res) {
     db.getAll()
-      .then(function (dbPeople) {
+      .then(dbPeople => {
         res.send(dbPeople)
       })
-      .catch(function (err) {
+      .catch(err => {
         res.status(500).send(err.message)
       })
   })
@@ -112,19 +114,19 @@ exports = module.exports = function (app) {
     const people = retrievePeopleFromReq(req)
 
     db.createPeople(people)
-      .then(function (dbPeople) {
+      .then(dbPeople => {
         res.send(dbPeople)
       })
-      .catch(function (err) {
+      .catch(err => {
         res.status(500).send(err.message)
       })
   })
 
-  app.get('/people/:id', function (req, res) {
+  app.get('/people/:id', (req, res) => {
     const id = req.params.id
 
     db.getPeople(id)
-      .then(function (dbPeople) {
+      .then(dbPeople => {
         if (dbPeople === undefined) return res.sendStatus(404)
 
         Promise.all([
@@ -132,48 +134,48 @@ exports = module.exports = function (app) {
           db.getPeople(dbPeople.motherId),
           db.getChildren(dbPeople._id)
         ])
-          .then(function (data) {
+          .then(data => {
             res.send(Object.assign({}, dbPeople, {
               father: data[0],
               mother: data[1],
               children: data[2]
             }))
           })
-          .catch(function (err) {
+          .catch(err => {
             res.status(500).send(err)
           })
       })
-      .catch(function (err) {
+      .catch(err => {
         res.status(500).send(err.message)
       })
   })
 
-  app.put('/people/:id', function (req, res) {
+  app.put('/people/:id', (req, res) => {
     const id = req.params.id
     const people = retrievePeopleFromReq(req)
 
     db.replacePeople(id, people)
-      .then(function (dbPeople) {
+      .then(dbPeople => {
         res.send(dbPeople)
       })
-      .catch(function (err) {
+      .catch(err => {
         res.status(500).send(err.message)
       })
   })
 
-  app.delete('/people/:id', function (req, res) {
+  app.delete('/people/:id', (req, res) => {
     const id = req.params.id
 
     db.deletePeople(id)
-      .then(function () {
+      .then(() => {
         res.sendStatus(204)
       })
-      .catch(function (err) {
+      .catch(err => {
         res.status(500).send(err.message)
       })
   })
 
-  app.get('/family/:id', function (req, res) {
+  app.get('/family/:id', (req, res) => {
     const id = req.params.id
     const limitLevel = parseInt(req.query.level) || DEFAULT_FAMILY_LEVEL
 
@@ -181,17 +183,17 @@ exports = module.exports = function (app) {
       db.getPeople(id),
       db.getAll()
     ])
-      .then(function (data) {
+      .then(data => {
         let currentLevel = 0
         const dbPeople = data[0]
         let allChildrenAtLevel = [dbPeople]
         all = data[1]
 
-        Promise.until(function () {
+        Promise.until(() => {
           const promises = allChildrenAtLevel.map(buildSpousesWithChildren)
 
           return Promise.all(promises)
-            .then(function () {
+            .then(() => {
               currentLevel++
               allChildrenAtLevel = allChildrenAtLevel
                 .map(people => people.spouses)
@@ -203,14 +205,14 @@ exports = module.exports = function (app) {
               return !!(allChildrenAtLevel.length === 0 || currentLevel >= limitLevel)
             // res.send(dbPeople)
             })
-            .catch(function (err) {
+            .catch(err => {
               res.status(500).send({message: err.message, stack: err.stack})
             })
-        }).then(function () {
+        }).then(() => {
           res.send(dbPeople)
         })
       })
-      .catch(function (err) {
+      .catch(err => {
         res.status(500).send({message: err.message, stack: err.stack})
       })
   })
