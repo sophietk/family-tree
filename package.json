@@ -9,7 +9,8 @@
     "npm": "3.10.x"
   },
   "scripts": {
-    "postinstall": "bower update && run-s build && precommit install",
+    "postinstall": "bower update && precommit install",
+    "heroku-postbuild": "run-s build",
     "start": "node ./server/server.js",
     "watch": "npm-watch",
     "test": "run-p lint:*",
