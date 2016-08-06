@@ -3,7 +3,7 @@
 ## install
 
 ```
-npm install
+npm i
 ```
 
 ## start dev server
@@ -16,5 +16,4 @@ npm start
 
 ```
 npm run build
-npm run dist
 ```
