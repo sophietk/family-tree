@@ -19,7 +19,7 @@ const MenuView = Marionette.ItemView.extend({
   },
 
   addCollectionToMenu: function (collection) {
-    collection.each(function transformToMenuItem (people) {
+    collection.each(people => {
       this.menuItems.push({
         route: 'family/' + people.get('_id'),
         title: 'tabs.pinned',

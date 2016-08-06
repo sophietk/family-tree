@@ -67,7 +67,7 @@ const EditView = Marionette.ItemView.extend({
 
   fillWithQuery: function () {
     const urlHashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&')
-    urlHashes.forEach(function updateField (hash) {
+    urlHashes.forEach((hash) => {
       hash = hash.split('=')
       switch (hash[0]) {
         case 'lastName':
@@ -94,7 +94,7 @@ const EditView = Marionette.ItemView.extend({
     // @todo: not necessary, do it in template
     this.ui.fatherId.val(this.model.get('fatherId'))
     this.ui.motherId.val(this.model.get('motherId'))
-    ;(this.model.get('spousesIds') || []).forEach(function fillSpouseSelect (spouseId, index) {
+    ;(this.model.get('spousesIds') || []).forEach((spouseId, index) => {
       this.ui.spousesBlock.children().eq(index).val(spouseId)
     }, this)
   },
