@@ -10,7 +10,7 @@ exports = module.exports = function (app) {
     const avatar = {
       name: req.file.filename,
       originalName: req.file.originalname,
-      data: new Buffer(fs.readFileSync(req.file.path)).toString('base64'),
+      data: Buffer.from(fs.readFileSync(req.file.path)).toString('base64'),
       contentType: req.file.mimetype,
       size: req.file.size
     }
@@ -34,7 +34,7 @@ exports = module.exports = function (app) {
         if (dbAvatar === undefined) return res.sendStatus(404)
 
         res.contentType(dbAvatar.contentType)
-        res.send(new Buffer(dbAvatar.data, 'base64'))
+        res.send(Buffer.from(dbAvatar.data, 'base64'))
       })
       .catch(err => {
         res.status(500).send(err.message)

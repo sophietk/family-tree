@@ -1,12 +1,12 @@
 polyglot.extend({
 
-    // Tabs
+  // Tabs
   'tabs.home': 'Home',
   'tabs.directory': 'Directory',
   'tabs.create': 'Add member',
   'tabs.pinned': '%{firstName}’s family',
 
-    // Home
+  // Home
   'home.subtitle': 'Find and link your family members',
   'home.button': 'Find people',
   'home.p1.title': 'Find your relations',
@@ -16,7 +16,7 @@ polyglot.extend({
   'home.p3.title': 'Discover your ancerstors’ stories',
   'home.p3.text': 'Halvah dragée fruitcake ice cream macaroon chupa chups pastry pie cake. Danish bonbon chupa chups chocolate bar chupa chups gummi bears dessert jujubes pie. Jelly beans gingerbread fruitcake cheesecake. Lollipop cake chocolate bar. Marshmallow candy pie jelly. Toffee dessert muffin cake donut candy fruitcake jelly.',
 
-    // Common
+  // Common
   'yes': 'Yes',
   'no': 'No',
   'cancel': 'Cancel',
@@ -36,12 +36,12 @@ polyglot.extend({
   'mother': 'Mother',
   'spouses': 'Spouses',
 
-    // People menu
+  // People menu
   'menu.view': 'View',
   'menu.tree': 'Show tree',
   'menu.edit': 'Edit',
 
-    // Family tree
+  // Family tree
   'tree.title': 'Tree of %{firstName} %{lastName}',
   'tree.options.with_dates': 'With dates',
   'tree.options.with_avatars': 'With avatars',
@@ -55,11 +55,11 @@ polyglot.extend({
   'tree.modal.add.daughter': 'Add daughter',
   'tree.modal.close': 'Close',
 
-    // People
+  // People
   'people.parents': 'Parents',
   'people.children': 'Children',
 
-    // People edit
+  // People edit
   'people.edit.avatar': 'Avatar URL',
   'people.edit.upload': 'Or upload a picture',
   'people.edit.about': 'About this people',
