@@ -21,7 +21,7 @@ function toObjectId (string) {
 exports = module.exports = {
   getAll: function () {
     return new Promise((resolve, reject) => {
-      collection.find().sort({birthDate: 1}, function (err, docs) {
+      collection.find().sort({lastName: -1, firstName: -1, birthDate: -1}, function (err, docs) {
         if (err) return reject(err)
         resolve(docs.map(convert))
       })

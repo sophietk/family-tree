@@ -5,7 +5,7 @@
         <div class="tree-thumbnail rounded img-cover img-gender {{#if isMale}}m{{else}}f{{/if}}"
              {{#avatarUrl}}style="background-image:url({{.}});"{{/avatarUrl}}></div>
         <div class="tree-detail">
-            <p>{{firstName}}<br>{{lastName}}<br></p>
+            <p>{{lastName}}<br>{{firstName}}<br></p>
             {{#oneOf birthDate deathDate}}
                 <span>({{year birthDate .}}{{#if deathDate}} - {{year deathDate}}{{/if}})</span>
             {{else}}

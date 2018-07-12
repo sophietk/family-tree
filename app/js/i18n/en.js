@@ -42,11 +42,11 @@ polyglot.extend({
   'menu.edit': 'Edit',
 
   // Family tree
-  'tree.title': 'Tree of %{firstName} %{lastName}',
+  'tree.title': 'Tree of %{lastName} %{firstName}',
   'tree.options.with_dates': 'With dates',
   'tree.options.with_avatars': 'With avatars',
   'tree.options.with_names': 'With names',
-  'tree.modal.title': 'More actions from %{firstName} %{lastName}',
+  'tree.modal.title': 'More actions from %{lastName} %{firstName}',
   'tree.modal.desc': 'Enrich one’s family tree quickly from this menu:',
   'tree.modal.modify': 'Edit',
   'tree.modal.add.brother': 'Add brother',
@@ -64,9 +64,9 @@ polyglot.extend({
   'people.edit.upload': 'Or upload a picture',
   'people.edit.about': 'About this people',
   'people.edit.pinned': 'Pin to menu',
-  'people.edit.delete.confirm.title': 'Delete %{firstName} %{lastName}',
+  'people.edit.delete.confirm.title': 'Delete %{lastName} %{firstName}',
   'people.edit.delete.confirm.text': 'Are you sure?',
-  'people.avatar.title': 'Upload %{firstName} %{lastName}’s picture',
+  'people.avatar.title': 'Upload %{lastName} %{firstName}’s picture',
   'people.avatar.text': 'Choose a picture',
   'people.avatar.file': 'File'
 

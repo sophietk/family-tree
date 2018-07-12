@@ -3,7 +3,7 @@
         <div class="card-image">
             <div class="directory-img img-cover img-gender {{#if isMale}}m{{else}}f{{/if}}"
                  {{#avatarUrl}}style="background-image:url({{.}});"{{/avatarUrl}}></div>
-            <span class="card-title shadowed">{{firstName}} {{lastName}}</span>
+            <span class="card-title shadowed">{{lastName}} {{firstName}}</span>
         </div>
         <div class="card-content clearfix">
             {{#if maidenName}}<p><label>{{p 'maiden_name'}}:</label> {{maidenName}}</p>{{/if}}
