@@ -40,7 +40,7 @@ var Router = Marionette.AppRouter.extend({
 
   createPeople: function () {
     app.nudeRegion.reset()
-    app.menuRegion.currentView.unselect()
+    app.menuRegion.currentView.select(2)
     app.mainRegion.show(new EditView({model: new PeopleModel()}))
   },
 
