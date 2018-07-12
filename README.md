@@ -10,6 +10,10 @@ npm i
 
 ```
 npm start
+
+// example with env vars
+ACCESS_USERS="myuser:mypassword:5b47c1eb252696382be9daae;otheruser:otherpassword:" DB_URL=familytree npm start
+
 ```
 
 ## build prod files

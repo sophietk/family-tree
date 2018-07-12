@@ -6,7 +6,6 @@ const upload = multer({dest: 'server/upload/avatar/'})
 
 exports = module.exports = function (app) {
   app.post('/upload/avatar', upload.single('avatarFile'), function (req, res) {
-    console.log(req.body)
     const avatar = {
       name: req.file.filename,
       originalName: req.file.originalname,
@@ -15,7 +14,7 @@ exports = module.exports = function (app) {
       size: req.file.size
     }
 
-    db.createAvatar(avatar)
+    db(req.family).createAvatar(avatar)
       .then(dbAvatar => {
         res.send({
           avatarUrl: `/avatar/${dbAvatar._id}`
@@ -29,7 +28,7 @@ exports = module.exports = function (app) {
   app.get('/avatar/:id', function (req, res) {
     const id = req.params.id
 
-    db.getAvatar(id)
+    db(req.family).getAvatar(id)
       .then(dbAvatar => {
         if (dbAvatar === undefined) return res.sendStatus(404)
 

@@ -42,8 +42,8 @@ function retrievePeopleFromReq (req) {
 }
 
 let all = [] // @todo: load async in children each loop
-function buildSpousesWithChildren (people) {
-  return new Promise((resolve, reject) => {
+function buildSpousesWithChildren (familyId) {
+  return people => new Promise((resolve, reject) => {
     // Spouses are already built
     if (people.spouses !== undefined) return
 
@@ -51,8 +51,8 @@ function buildSpousesWithChildren (people) {
     if (people.spousesIds === undefined) people.spousesIds = []
 
     Promise.all([
-      db.getChildren(id),
-      db.getSeveralPeople(people.spousesIds)
+      db(familyId).getChildren(id),
+      db(familyId).getSeveralPeople(people.spousesIds)
     ])
       .then(data => {
         const children = data[0]
@@ -91,7 +91,7 @@ function buildSpousesWithChildren (people) {
 
 exports = module.exports = function (app) {
   app.get('/menu', function (req, res) {
-    db.getInMenu()
+    db(req.family).getInMenu()
       .then(dbPeople => {
         res.send(dbPeople)
       })
@@ -101,7 +101,7 @@ exports = module.exports = function (app) {
   })
 
   app.get('/people', function (req, res) {
-    db.getAll()
+    db(req.family).getAll()
       .then(dbPeople => {
         res.send(dbPeople)
       })
@@ -113,7 +113,7 @@ exports = module.exports = function (app) {
   app.post('/people', function (req, res) {
     const people = retrievePeopleFromReq(req)
 
-    db.createPeople(people)
+    db(req.family).createPeople(people)
       .then(dbPeople => {
         res.send(dbPeople)
       })
@@ -125,14 +125,14 @@ exports = module.exports = function (app) {
   app.get('/people/:id', (req, res) => {
     const id = req.params.id
 
-    db.getPeople(id)
+    db(req.family).getPeople(id)
       .then(dbPeople => {
         if (dbPeople === undefined) return res.sendStatus(404)
 
         Promise.all([
-          db.getPeople(dbPeople.fatherId),
-          db.getPeople(dbPeople.motherId),
-          db.getChildren(dbPeople._id)
+          db(req.family).getPeople(dbPeople.fatherId),
+          db(req.family).getPeople(dbPeople.motherId),
+          db(req.family).getChildren(dbPeople._id)
         ])
           .then(data => {
             res.send(Object.assign({}, dbPeople, {
@@ -154,7 +154,7 @@ exports = module.exports = function (app) {
     const id = req.params.id
     const people = retrievePeopleFromReq(req)
 
-    db.replacePeople(id, people)
+    db(req.family).replacePeople(id, people)
       .then(dbPeople => {
         res.send(dbPeople)
       })
@@ -166,7 +166,7 @@ exports = module.exports = function (app) {
   app.delete('/people/:id', (req, res) => {
     const id = req.params.id
 
-    db.deletePeople(id)
+    db(req.family).deletePeople(id)
       .then(() => {
         res.sendStatus(204)
       })
@@ -180,8 +180,8 @@ exports = module.exports = function (app) {
     const limitLevel = parseInt(req.query.level) || DEFAULT_FAMILY_LEVEL
 
     Promise.all([
-      db.getPeople(id),
-      db.getAll()
+      db(req.family).getPeople(id),
+      db(req.family).getAll()
     ])
       .then(data => {
         let currentLevel = 0
@@ -190,7 +190,7 @@ exports = module.exports = function (app) {
         all = data[1]
 
         Promise.until(() => {
-          const promises = allChildrenAtLevel.map(buildSpousesWithChildren)
+          const promises = allChildrenAtLevel.map(buildSpousesWithChildren(req.family))
 
           return Promise.all(promises)
             .then(() => {

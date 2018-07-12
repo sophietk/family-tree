@@ -5,7 +5,8 @@
     "firstName": "Anakin",
     "gender": "M",
     "avatarUrl": "http://img2.wikia.nocookie.net/__cb20090419091716/fr.starwars/images/d/d5/Vador.jpg",
-    "menuTab": true
+    "menuTab": true,
+    "families": ["5b47c1eb252696382be9daae"]
   },
   {
     "_id": ObjectId("54f759141138b91019e18e45"),
@@ -14,7 +15,8 @@
     "firstName": "Padmé",
     "gender": "F",
     "spousesIds": ["54f758f3f6a4810a19c3b258"],
-    "avatarUrl": "http://imalbum.aufeminin.com/album/D20051008/137988_LO3LWPLRKBAHHVSA43326VZNHVJT3X_face_H002819_L.jpg"
+    "avatarUrl": "http://imalbum.aufeminin.com/album/D20051008/137988_LO3LWPLRKBAHHVSA43326VZNHVJT3X_face_H002819_L.jpg",
+    "families": ["5b47c1eb252696382be9daae"]
   },
   {
     "_id": ObjectId("54f759141138b91019e18e46"),
@@ -23,7 +25,8 @@
     "gender": "M",
     "fatherId": "54f758f3f6a4810a19c3b258",
     "motherId": "54f759141138b91019e18e45",
-    "avatarUrl": "http://images.thehollywoodgossip.com/iu/t_full/v1364527858/mark-hamill-as-luke-skywalker.jpg"
+    "avatarUrl": "http://images.thehollywoodgossip.com/iu/t_full/v1364527858/mark-hamill-as-luke-skywalker.jpg",
+    "families": ["5b47c1eb252696382be9daae"]
   },
   {
     "_id": ObjectId("54f759141138b91019e18e47"),
@@ -34,14 +37,16 @@
     "fatherId": "54f758f3f6a4810a19c3b258",
     "motherId": "54f759141138b91019e18e45",
     "spousesIds": ["54f759141138b91019e18e48"],
-    "avatarUrl": "http://3.bp.blogspot.com/-29FEw7dAn3E/UE40fFnYgGI/AAAAAAAAFyY/DVjFE7BxpNc/s200/princess-leia-2.jpg"
+    "avatarUrl": "http://3.bp.blogspot.com/-29FEw7dAn3E/UE40fFnYgGI/AAAAAAAAFyY/DVjFE7BxpNc/s200/princess-leia-2.jpg",
+    "families": ["5b47c1eb252696382be9daae"]
   },
   {
     "_id": ObjectId("54f759141138b91019e18e48"),
     "lastName": "Solo",
     "firstName": "Han",
     "gender": "M",
-    "avatarUrl": "http://img1.wikia.nocookie.net/__cb20100806150756/starwars/images/b/b7/HanSolo-Headshot-New.jpg"
+    "avatarUrl": "http://img1.wikia.nocookie.net/__cb20100806150756/starwars/images/b/b7/HanSolo-Headshot-New.jpg",
+    "families": ["5b47c1eb252696382be9daae"]
   },
   {
     "_id": ObjectId("54f759141138b91019e18e49"),
@@ -49,7 +54,8 @@
     "maidenName": "Jade",
     "firstName": "Mara ",
     "gender": "F",
-    "avatarUrl": "http://img2.wikia.nocookie.net/__cb20061129193816/es.starwars/images/d/de/Survivorsquest.jpg"
+    "avatarUrl": "http://img2.wikia.nocookie.net/__cb20061129193816/es.starwars/images/d/de/Survivorsquest.jpg",
+    "families": ["5b47c1eb252696382be9daae"]
   },
   {
     "_id": ObjectId("54f759141138b91019e18e50"),
@@ -58,6 +64,7 @@
     "gender": "M",
     "fatherId": "54f759141138b91019e18e46",
     "motherId": "54f759141138b91019e18e49",
-    "avatarUrl": "http://img2.wikia.nocookie.net/__cb20090820055233/starwars/images/6/66/BenSkywalker_Atlas.jpg"
+    "avatarUrl": "http://img2.wikia.nocookie.net/__cb20090820055233/starwars/images/6/66/BenSkywalker_Atlas.jpg",
+    "families": ["5b47c1eb252696382be9daae"]
   }
 ]
