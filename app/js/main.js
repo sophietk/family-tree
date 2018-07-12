@@ -27,7 +27,7 @@ app
     })
 
     // i18n
-    var userLang = navigator.language || navigator.userLanguage
+    var userLang = localStorage.getItem('language') || navigator.language || navigator.userLanguage
     var appLang = userLang === 'fr' ? 'fr' : 'en'
     polyglot = new Polyglot({locale: appLang})
     $('head').append('<script type="text/javascript" src="js/i18n/' + appLang + '.js"></script>')

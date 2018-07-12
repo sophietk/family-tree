@@ -11,6 +11,7 @@ var Router = Marionette.AppRouter.extend({
 
   initialize: function () {
     app.menuRegion.show(new MenuView())
+    app.languagesRegion.show(new LanguageCollectionView())
 
     new MenuCollection()
       .on('sync', function (collection) {

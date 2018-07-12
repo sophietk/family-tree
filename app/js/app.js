@@ -2,6 +2,7 @@ var App = Marionette.Application.extend({
 
   regions: {
     menuRegion: '.menu',
+    languagesRegion: '.languages',
     mainRegion: 'main',
     nudeRegion: '.nude'
   }

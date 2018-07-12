@@ -66,3 +66,13 @@ img {
     width: 100%;
   }
 }
+
+.language {
+  display: inline-block;
+  padding-right: 10px;
+  cursor: pointer;
+
+  &-ico {
+    height: 30px;
+  }
+}
