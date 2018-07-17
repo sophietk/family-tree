@@ -2,8 +2,9 @@
 <div class="row">
     <div class="col m9">&nbsp;</div>
     <div class="col m3 s12">
-        <a href="#people/{{_id}}" class="waves-effect waves-light btn"><i
-                class="mdi-image-remove-red-eye right"></i>{{p 'menu.view'}}</a>
+        <a href="#people/{{_id}}" class="waves-effect waves-light btn">
+          {{p 'menu.view'}}
+          <i class="material-icons right">remove_red_eye</i></a>
     </div>
 </div>
 {{/_id}}
@@ -68,10 +69,12 @@
     <div class="row">
         <div class="col s12">
             <label>{{p 'spouses'}}</label>
-            <a class="btn-floating btn-small btn-left waves-effect waves-light js-addSpouse"><i
-                    class="mdi-content-add"></i></a>
-            <a class="btn-floating btn-small btn-right waves-effect waves-light js-removeSpouse"><i
-                    class="mdi-content-remove"></i></a>
+            <a class="btn-floating btn-small btn-left waves-effect waves-light js-addSpouse">
+              <i class="material-icons">add</i>
+            </a>
+            <a class="btn-floating btn-small btn-right waves-effect waves-light js-removeSpouse">
+              <i class="material-icons">remove</i>
+            </a>
 
             <div class="js-spousesBlock">
                 {{#spousesIds}}
@@ -90,7 +93,7 @@
             <input name="avatarUrl" id="avatarUrl" type="text" value="{{avatarUrl}}">
             <label for="avatarUrl" class="{{#avatarUrl}}active{{/avatarUrl}}">{{p 'people.edit.avatar'}}</label>
             {{#_id}}
-                <a href="#" class="right js-avatarUpload"><i class="mdi-file-file-upload"></i> {{p 'people.edit.upload'}}</a>
+                <a href="#" class="right js-avatarUpload"><i class="material-icons tiny">file_upload</i> {{p 'people.edit.upload'}}</a>
             {{/_id}}
         </div>
     </div>
@@ -109,12 +112,12 @@
 
     <div class="row">
         <a class="btn waves-effect waves-light js-save">{{p 'save'}}
-            <i class="mdi-content-send right"></i>
+            <i class="material-icons right">send</i>
         </a>
 
         {{#_id}}
             <a class="btn waves-effect waves-light js-delete">{{p 'delete'}}
-                <i class="mdi-action-delete right"></i>
+                <i class="material-icons right">delete</i>
             </a>
         {{/_id}}
     </div>

@@ -14,7 +14,8 @@
     "marionette": "2.4.7",
     "handlebars": "4.0.5",
     "backbone-model-file-upload": "1.0.0",
-    "polyglot": "2.0.0"
+    "polyglot": "2.0.0",
+    "material-design-icons": "3.0.1"
   },
   "resolutions": {
     "backbone": "1.3.3"
