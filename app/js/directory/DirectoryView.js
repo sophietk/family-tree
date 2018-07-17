@@ -1,8 +1,20 @@
-var DirectoryView = Marionette.CollectionView.extend({
-  className: 'directory row',
+var DirectoryView = Marionette.LayoutView.extend({
+  className: 'directory',
 
-  childView: PeopleCardView,
+  template: Handlebars.templates['directory.hbs'],
 
-  reorderOnSort: true
+  regions: {
+    search: '.search',
+    people: '.people'
+  },
+
+  initialize: function () {
+    this.filterDispatcher = _.extend({value: ''}, Backbone.Events)
+  },
+
+  onRender: function () {
+    this.showChildView('search', new SearchView({filterDispatcher: this.filterDispatcher}))
+    this.showChildView('people', new PeopleCollectionView({collection: this.collection, filterDispatcher: this.filterDispatcher}))
+  }
 
 })

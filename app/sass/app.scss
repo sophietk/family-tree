@@ -20,6 +20,16 @@ header {
   vertical-align: middle;
 }
 
+.language {
+  display: inline-block;
+  padding-right: 10px;
+  cursor: pointer;
+
+  &-ico {
+    height: 30px;
+  }
+}
+
 /**** Generic styles ****/
 
 .btn-small {
@@ -67,12 +77,8 @@ img {
   }
 }
 
-.language {
-  display: inline-block;
-  padding-right: 10px;
-  cursor: pointer;
+/**** Override ****/
 
-  &-ico {
-    height: 30px;
-  }
+.input-field .prefix {
+  top: .5rem;
 }

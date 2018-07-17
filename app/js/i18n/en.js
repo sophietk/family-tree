@@ -41,6 +41,9 @@ polyglot.extend({
   'menu.tree': 'Show tree',
   'menu.edit': 'Edit',
 
+  // Directory
+  'directory.search': 'Search',
+
   // Family tree
   'tree.title': 'Tree of %{lastName} %{firstName}',
   'tree.options.with_dates': 'With dates',
