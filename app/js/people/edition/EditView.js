@@ -1,4 +1,4 @@
-var EditView = Marionette.ItemView.extend({
+var EditView = Marionette.View.extend({
   template: Handlebars.templates['peopleEdit.hbs'],
 
   ui: {
@@ -47,7 +47,7 @@ var EditView = Marionette.ItemView.extend({
     this.collection.remove(this.model.id)
   },
 
-  templateHelpers: function () {
+  templateContext: function () {
     var manCollection = new Backbone.Collection(this.collection.where({gender: 'M'}))
     var womenCollection = new Backbone.Collection(this.collection.where({gender: 'F'}))
 

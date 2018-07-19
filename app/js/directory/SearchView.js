@@ -1,4 +1,4 @@
-var SearchView = Marionette.ItemView.extend({
+var SearchView = Marionette.View.extend({
   className: 'row',
 
   template: Handlebars.templates['search.hbs'],

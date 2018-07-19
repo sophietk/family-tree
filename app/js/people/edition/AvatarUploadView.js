@@ -1,4 +1,4 @@
-var AvatarUploadView = Marionette.ItemView.extend({
+var AvatarUploadView = Marionette.View.extend({
   template: Handlebars.templates['avatarUpload.hbs'],
 
   className: 'modal',
@@ -15,7 +15,7 @@ var AvatarUploadView = Marionette.ItemView.extend({
     'click @ui.avatarUploadSave': 'uploadAvatar'
   },
 
-  templateHelpers: function () {
+  templateContext: function () {
     return this.options.people
   },
 

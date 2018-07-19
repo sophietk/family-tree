@@ -21,7 +21,7 @@
     "clean:zip": "rm -rf zip",
     "sass": "node-sass --source-map true app/sass/style.scss -o app/css",
     "handlebars": "run-p handlebars:templates handlebars:partials",
-    "handlebars:templates": "handlebars app/js/**/*.hbs app/js/**/**/*.hbs -f app/js/templates.js",
+    "handlebars:templates": "handlebars app/js/*.hbs app/js/**/*.hbs app/js/**/**/*.hbs -f app/js/templates.js",
     "handlebars:partials": "handlebars app/js/**/*.partial.hbs app/js/**/**/*.partial.hbs -p -f app/js/partials.js",
     "copy-assets": "mkdir dist; run-p copy:*",
     "copy:img": "cp -r app/img dist/",

@@ -1,4 +1,4 @@
-var FamilyView = Marionette.ItemView.extend({
+var FamilyView = Marionette.View.extend({
   template: Handlebars.templates['family.hbs'],
 
   behaviors: {
@@ -23,7 +23,7 @@ var FamilyView = Marionette.ItemView.extend({
     'change @ui.withDate, @ui.withAvatar, @ui.withName': 'toggle'
   },
 
-  onShow: function () {
+  onAttach: function () {
     this.centerPeople()
   },
 

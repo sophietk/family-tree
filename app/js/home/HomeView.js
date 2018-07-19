@@ -1,4 +1,4 @@
-var HomeView = Marionette.ItemView.extend({
+var HomeView = Marionette.View.extend({
   className: 'home',
 
   template: Handlebars.templates['home.hbs'],
@@ -7,7 +7,7 @@ var HomeView = Marionette.ItemView.extend({
     parallax: '.parallax'
   },
 
-  onShow: function () {
+  onAttach: function () {
     this.ui.parallax.parallax()
   }
 

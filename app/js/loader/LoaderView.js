@@ -1,4 +1,4 @@
-var LoaderView = Marionette.ItemView.extend({
+var LoaderView = Marionette.View.extend({
   template: Handlebars.templates['loader.hbs']
 
 })

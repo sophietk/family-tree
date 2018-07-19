@@ -1,4 +1,4 @@
-var MenuView = Marionette.ItemView.extend({
+var MenuView = Marionette.View.extend({
   tagName: 'nav',
 
   template: Handlebars.templates['menu.hbs'],
@@ -30,7 +30,7 @@ var MenuView = Marionette.ItemView.extend({
     this.render()
   },
 
-  templateHelpers: function () {
+  templateContext: function () {
     return {
       items: this.menuItems
     }

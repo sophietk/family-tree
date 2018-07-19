@@ -1,10 +1,8 @@
 var App = Marionette.Application.extend({
+  region: 'body',
 
-  regions: {
-    menuRegion: '.menu',
-    languagesRegion: '.languages',
-    mainRegion: 'main',
-    nudeRegion: '.nude'
+  onStart: function () {
+    this.showView(new RootView())
   }
 
 })
