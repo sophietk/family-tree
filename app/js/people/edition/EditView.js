@@ -110,7 +110,7 @@ var EditView = Marionette.View.extend({
   },
 
   refreshSpousesButtons: function () {
-    var nbSelect = this.ui.spousesBlock.children().size()
+    var nbSelect = this.ui.spousesBlock.children().length
     this.ui.removeSpouse.toggleClass('disabled', nbSelect < 1)
   },
 

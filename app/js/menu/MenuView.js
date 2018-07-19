@@ -26,7 +26,7 @@ var MenuView = Marionette.View.extend({
         args: {firstName: people.get('firstName')},
         className: 'teal'
       })
-    }, this)
+    }.bind(this), this)
     this.render()
   },
 
