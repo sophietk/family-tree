@@ -8,7 +8,7 @@ var SearchView = Marionette.View.extend({
   },
 
   events: {
-    'keyup @ui.input': 'onChange'
+    'input @ui.input': 'onChange'
   },
 
   onChange: function (event) {
