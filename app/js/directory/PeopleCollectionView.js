@@ -6,7 +6,13 @@ var PeopleCollectionView = Marionette.CollectionView.extend({
   reorderOnSort: true,
 
   initialize: function () {
-    this.listenTo(this.options.filterDispatcher, 'change', this.render)
+    this.filterValue = ''
+    this.listenTo(this.getOption('filterDispatcher'), 'change', this.onFilterChange)
+  },
+
+  onFilterChange: function (filterValue) {
+    this.filterValue = filterValue
+    this.render()
   },
 
   filter: function (child, index, collection) {
@@ -15,9 +21,9 @@ var PeopleCollectionView = Marionette.CollectionView.extend({
       child.get('maidenName'),
       child.get('firstName')
     ]
-      .join('')
+      .join(' ')
       .toLowerCase()
-      .includes(this.options.filterDispatcher.value)
+      .includes(this.filterValue.toLowerCase())
   }
 
 })

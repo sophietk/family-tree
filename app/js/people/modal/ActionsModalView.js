@@ -12,7 +12,7 @@ var ActionsModalView = Marionette.View.extend({
   },
 
   templateContext: function () {
-    var $el = this.options.target
+    var $el = this.getOption('target')
     return {
       _id: $el.data('id'),
       firstName: $el.data('firstName'),

@@ -16,7 +16,7 @@ var AvatarUploadView = Marionette.View.extend({
   },
 
   templateContext: function () {
-    return this.options.people
+    return this.getOption('people')
   },
 
   onRender: function () {

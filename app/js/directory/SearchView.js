@@ -12,8 +12,7 @@ var SearchView = Marionette.View.extend({
   },
 
   onChange: function (event) {
-    this.options.filterDispatcher.value = event.currentTarget.value
-    this.options.filterDispatcher.trigger('change')
+    this.getOption('filterDispatcher').trigger('change', event.currentTarget.value)
   }
 
 })

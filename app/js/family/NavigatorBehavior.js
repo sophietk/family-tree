@@ -7,7 +7,7 @@ var NavigatorBehavior = Marionette.Behavior.extend({
       right: '.nav-right',
       up: '.nav-up',
       down: '.nav-down',
-      container: this.options.container
+      container: this.getOption('container')
     }
   },
 
