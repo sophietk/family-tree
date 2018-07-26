@@ -45,11 +45,11 @@ var NavigatorBehavior = Marionette.Behavior.extend({
   },
 
   navigateUp: function () {
-    $('body').animate({scrollTop: $('body').scrollTop() - this.step}, this.duration)
+    $('html, body').animate({scrollTop: $('body').scrollTop() - this.step}, this.duration)
   },
 
   navigateDown: function () {
-    $('body').animate({scrollTop: $('body').scrollTop() + this.step}, this.duration)
+    $('html, body').animate({scrollTop: $('body').scrollTop() + this.step}, this.duration)
   }
 
 })
