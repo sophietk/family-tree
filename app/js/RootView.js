@@ -32,7 +32,6 @@ var RootView = Marionette.View.extend({
 
     new PeopleCollection()
       .on('sync', function (collection) {
-        collection.models.reverse()
         this.getRegion('main').show(new DirectoryView({collection: collection}))
       }.bind(this))
       .fetch()
