@@ -11,6 +11,10 @@ var FamilyView = Marionette.View.extend({
     }
   },
 
+  regions: {
+    stats: '.stats'
+  },
+
   ui: {
     tree: '.tree',
     withDate: 'input[name="withDate"]',
@@ -21,6 +25,10 @@ var FamilyView = Marionette.View.extend({
 
   events: {
     'change @ui.withDate, @ui.withAvatar, @ui.withName': 'toggle'
+  },
+
+  onRender: function () {
+    this.showChildView('stats', new StatsView({model: this.model}))
   },
 
   onAttach: function () {

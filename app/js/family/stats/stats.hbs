@@ -1,0 +1,21 @@
+<h4>{{p 'tree.stats.title'}}</h4>
+
+<div class="row">
+  <div class="col s12 l4">
+    <div class="card darken-1">
+      <div class="card-content">{{> genderSymbol.partial.hbs true}} {{p 'tree.stats.male_count' maleCount}}</div>
+    </div>
+  </div>
+  <div class="col s12 l4">
+    <div class="card darken-1">
+      <div class="card-content">{{> genderSymbol.partial.hbs false}} {{p 'tree.stats.female_count' femaleCount}}</div>
+    </div>
+  </div>
+  {{#if averageAge}}
+  <div class="col s12 l4">
+    <div class="card darken-1">
+      <div class="card-content">{{p 'tree.stats.average_age'}}: {{averageAge}}</div>
+    </div>
+  </div>
+  {{/if}}
+</div>
