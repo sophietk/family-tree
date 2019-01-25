@@ -1,10 +1,12 @@
 <div class="col s6 m3">
     <div class="card">
-        <div class="card-image">
-            <div class="directory-img img-cover img-gender {{#if isMale}}m{{else}}f{{/if}}"
-                 {{#avatarUrl}}style="background-image:url({{.}});"{{/avatarUrl}}></div>
-            <span class="card-title shadowed">{{lastName}} {{firstName}}</span>
-        </div>
+        <a href="#people/{{_id}}" title="{{p 'menu.view'}}">
+          <div class="card-image">
+              <div class="directory-img img-cover img-gender {{#if isMale}}m{{else}}f{{/if}}"
+                   {{#avatarUrl}}style="background-image:url({{.}});"{{/avatarUrl}}></div>
+              <span class="card-title shadowed">{{lastName}} {{firstName}}</span>
+          </div>
+        </a>
         <div class="card-content clearfix">
             {{#if maidenName}}<p><label>{{p 'maiden_name'}}:</label> {{maidenName}}</p>{{/if}}
             <p><label>{{p 'gender'}}:</label> {{> genderSymbol.partial.hbs isMale}}</p>
