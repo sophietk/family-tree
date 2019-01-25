@@ -48,11 +48,11 @@ var EditView = Marionette.View.extend({
   },
 
   templateContext: function () {
-    var manCollection = new Backbone.Collection(this.collection.where({gender: 'M'}))
+    var menCollection = new Backbone.Collection(this.collection.where({gender: 'M'}))
     var womenCollection = new Backbone.Collection(this.collection.where({gender: 'F'}))
 
     return {
-      men: manCollection.toJSON(),
+      men: menCollection.toJSON(),
       women: womenCollection.toJSON(),
       people: this.collection.toJSON()
     }
