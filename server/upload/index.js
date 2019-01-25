@@ -4,8 +4,8 @@ const db = require('../database')
 
 const upload = multer({dest: 'server/upload/avatar/'})
 
-exports = module.exports = function (app) {
-  app.post('/upload/avatar', upload.single('avatarFile'), function (req, res) {
+exports = module.exports = app => {
+  app.post('/upload/avatar', upload.single('avatarFile'), (req, res) => {
     const avatar = {
       name: req.file.filename,
       originalName: req.file.originalname,
@@ -25,7 +25,7 @@ exports = module.exports = function (app) {
       })
   })
 
-  app.get('/avatar/:id', function (req, res) {
+  app.get('/avatar/:id', (req, res) => {
     const id = req.params.id
 
     db(req.family).getAvatar(id)

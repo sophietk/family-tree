@@ -7,11 +7,11 @@ const accessUsers = isProtected ? process.env.ACCESS_USERS.split(';').map(user =
   return {username: userStones[0], password: userStones[1], family: userStones[2]}
 }) : []
 
-exports = module.exports = function (app) {
+exports = module.exports = app => {
   app.use(cookieParser())
 
   if (isProtected) {
-    app.use(basicAuth(function (username, password) {
+    app.use(basicAuth((username, password) => {
       return accessUsers.some(user => user.username === username && user.password === password)
     }))
   }

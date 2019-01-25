@@ -21,7 +21,7 @@ require('./family')(app)
 require('./upload')(app)
 
 // Listen
-app.listen(port, function () {
+app.listen(port, () => {
   console.log(`Listening on port: ${port}`)
 })
 

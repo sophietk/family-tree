@@ -19,99 +19,99 @@ function toObjectId (string) {
 }
 
 exports = module.exports = (familyId) => ({
-  getAll: function () {
+  getAll () {
     return new Promise((resolve, reject) => {
-      collection.find({families: familyId}).sort({lastName: 1, firstName: 1, birthDate: 1}, function (err, docs) {
+      collection.find({families: familyId}).sort({lastName: 1, firstName: 1, birthDate: 1}, (err, docs) => {
         if (err) return reject(err)
         resolve(docs.map(convert))
       })
     })
   },
 
-  getPeople: function (id) {
+  getPeople (id) {
     return new Promise((resolve, reject) => {
-      collection.findOne({families: familyId, _id: toObjectId(id)}, function (err, doc) {
+      collection.findOne({families: familyId, _id: toObjectId(id)}, (err, doc) => {
         if (err) return reject(err)
         resolve(convert(doc))
       })
     })
   },
 
-  getSeveralPeople: function (idArray) {
+  getSeveralPeople (idArray) {
     return new Promise((resolve, reject) => {
-      collection.find({families: familyId, _id: {$in: idArray.map(toObjectId)}}, function (err, docs) {
+      collection.find({families: familyId, _id: {$in: idArray.map(toObjectId)}}, (err, docs) => {
         if (err) return reject(err)
         resolve(docs.map(convert))
       })
     })
   },
 
-  getInMenu: function () {
+  getInMenu () {
     return new Promise((resolve, reject) => {
-      collection.find({families: familyId, menuTab: true}, function (err, docs) {
+      collection.find({families: familyId, menuTab: true}, (err, docs) => {
         if (err) return reject(err)
         resolve(docs.map(convert))
       })
     })
   },
 
-  getChildren: function (parentId) {
+  getChildren (parentId) {
     return new Promise((resolve, reject) => {
       collection.find({families: familyId, $or: [{fatherId: parentId}, {motherId: parentId}]})
-        .sort({birthDate: 1}, function (err, docs) {
+        .sort({birthDate: 1}, (err, docs) => {
           if (err) return reject(err)
           resolve(docs.map(convert))
         })
     })
   },
 
-  replacePeople: function (id, people) {
+  replacePeople (id, people) {
     people = omit(people, '_id')
     return new Promise((resolve, reject) => {
       collection.findAndModify({
         query: {families: familyId, _id: toObjectId(id)},
         update: {$set: people}
-      }, function (err, doc) {
+      }, (err, doc) => {
         if (err) return reject(err)
         resolve(convert(doc))
       })
     })
   },
 
-  deletePeople: function (id) {
+  deletePeople (id) {
     return new Promise((resolve, reject) => {
-      collection.remove({families: familyId, _id: toObjectId(id)}, true, function (err) {
+      collection.remove({families: familyId, _id: toObjectId(id)}, true, err => {
         if (err) return reject(err)
         resolve()
       })
     })
   },
 
-  createPeople: function (people) {
+  createPeople (people) {
     return new Promise((resolve, reject) => {
       people.families = [familyId]
-      collection.insert(people, function (err, doc) {
+      collection.insert(people, (err, doc) => {
         if (err) return reject(err)
         resolve(convert(doc))
       })
     })
   },
 
-  getAvatar: function (id) {
+  getAvatar (id) {
     return new Promise((resolve, reject) => {
       // @todo: add "families: familyId" in db query
-      uCollection.findOne({_id: toObjectId(id)}, function (err, doc) {
+      uCollection.findOne({_id: toObjectId(id)}, (err, doc) => {
         if (err) return reject(err)
         resolve(convert(doc))
       })
     })
   },
 
-  createAvatar: function (avatar) {
+  createAvatar (avatar) {
     avatar.type = 'avatar'
     avatar.families = [familyId]
     return new Promise((resolve, reject) => {
-      uCollection.insert(avatar, function (err, doc) {
+      uCollection.insert(avatar, (err, doc) => {
         if (err) return reject(err)
         resolve(convert(doc))
       })

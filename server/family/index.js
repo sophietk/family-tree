@@ -7,7 +7,7 @@ const DEFAULT_FAMILY_LEVEL = 10
  * Loop until the promise returned by `fn` returns a truthy value.
  * @see https://www.npmjs.com/package/q-flow
  */
-Promise.until = function (fn) {
+Promise.until = fn => {
   return fn().then(result => result || Promise.until(fn))
 }
 
@@ -89,8 +89,8 @@ function buildSpousesWithChildren (familyId) {
   })
 }
 
-exports = module.exports = function (app) {
-  app.get('/menu', function (req, res) {
+exports = module.exports = app => {
+  app.get('/menu', (req, res) => {
     db(req.family).getInMenu()
       .then(dbPeople => {
         res.send(dbPeople)
@@ -100,7 +100,7 @@ exports = module.exports = function (app) {
       })
   })
 
-  app.get('/people', function (req, res) {
+  app.get('/people', (req, res) => {
     db(req.family).getAll()
       .then(dbPeople => {
         res.send(dbPeople)
@@ -110,7 +110,7 @@ exports = module.exports = function (app) {
       })
   })
 
-  app.post('/people', function (req, res) {
+  app.post('/people', (req, res) => {
     const people = retrievePeopleFromReq(req)
 
     db(req.family).createPeople(people)
