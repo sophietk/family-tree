@@ -16,10 +16,11 @@ var StatsView = Marionette.View.extend({
   },
 
   getAllPeopleInFamily: function (familyPeople) {
+    const that = this
     const spouses = familyPeople.spouses.filter(function (spouse) { return spouse._id !== undefined })
     const children = familyPeople.spouses
       .flatMap(function (spouse) { return spouse.children || [] })
-      .flatMap(function (child) { return this.getAllPeopleInFamily(child) })
+      .flatMap(function (child) { return that.getAllPeopleInFamily(child) })
 
     return [familyPeople, spouses, children].flat()
   },
