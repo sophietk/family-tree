@@ -3,12 +3,14 @@ var StatsView = Marionette.View.extend({
 
   templateContext: function () {
     var allPeople = this.getAllPeopleInFamily(this.model.toJSON())
+    var peopleCount = allPeople.length
     var maleCount = allPeople.filter(function (people) { return people.gender === 'M' }).length
     var femaleCount = allPeople.filter(function (people) { return people.gender === 'F' }).length
     var alivePeople = allPeople.filter(function (people) { return !people.deathDate })
     var averageAge = this.getAverageAge(alivePeople)
 
     return {
+      peopleCount: peopleCount,
       maleCount: maleCount,
       femaleCount: femaleCount,
       averageAge: averageAge

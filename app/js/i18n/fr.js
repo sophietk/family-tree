@@ -58,6 +58,7 @@ polyglot.extend({
   'tree.modal.add.daughter': 'Ajouter une fille',
   'tree.modal.close': 'Fermer',
   'tree.stats.title': 'Statistiques de l’arbre',
+  'tree.stats.people_count': '%{smart_count} personne |||| %{smart_count} personnes',
   'tree.stats.male_count': '%{smart_count} homme |||| %{smart_count} hommes',
   'tree.stats.female_count': '%{smart_count} femme |||| %{smart_count} femmes',
   'tree.stats.average_age': 'Âge moyen',
