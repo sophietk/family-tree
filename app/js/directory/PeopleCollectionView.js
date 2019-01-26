@@ -15,11 +15,11 @@ var PeopleCollectionView = Marionette.CollectionView.extend({
     this.render()
   },
 
-  filter: function (child, index, collection) {
+  viewFilter: function (view) {
     return [
-      child.get('lastName'),
-      child.get('maidenName'),
-      child.get('firstName')
+      view.model.get('lastName'),
+      view.model.get('maidenName'),
+      view.model.get('firstName')
     ]
       .join(' ')
       .toLowerCase()
