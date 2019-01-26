@@ -8,7 +8,7 @@ const app = express()
 
 console.log(`Server starting in mode: ${env}`)
 
-app.use(logger(env === 'prod' ? 'common' : 'dev'))
+app.use(logger(env === 'production' ? 'common' : 'dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
