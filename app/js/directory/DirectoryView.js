@@ -15,6 +15,12 @@ var DirectoryView = Marionette.View.extend({
   onRender: function () {
     this.showChildView('search', new SearchView({ filterDispatcher: this.filterDispatcher }))
     this.showChildView('people', new PeopleCollectionView({ collection: this.collection, filterDispatcher: this.filterDispatcher }))
+  },
+
+  templateContext: function () {
+    return {
+      count: this.collection.size()
+    }
   }
 
 })

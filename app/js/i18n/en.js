@@ -57,11 +57,11 @@ polyglot.extend({
   'tree.modal.add.son': 'Add son',
   'tree.modal.add.daughter': 'Add daughter',
   'tree.modal.close': 'Close',
-  'tree.stats.title': 'Tree statistics',
-  'tree.stats.people_count': '%{smart_count} members |||| %{smart_count} members',
-  'tree.stats.male_count': '%{smart_count} male |||| %{smart_count} males',
-  'tree.stats.female_count': '%{smart_count} female |||| %{smart_count} females',
-  'tree.stats.average_age': 'Average age',
+  'stats.title': 'Tree statistics',
+  'stats.people_count': '%{smart_count} people |||| %{smart_count} people',
+  'stats.male_count': '%{smart_count} male |||| %{smart_count} males',
+  'stats.female_count': '%{smart_count} female |||| %{smart_count} females',
+  'stats.average_age': 'Average age',
 
   // People
   'people.parents': 'Parents',
