@@ -14,7 +14,7 @@
     "lodash": "4.17.11",
     "marionette.approuter": "1.0.1",
     "material-design-icons": "3.0.1",
-    "materialize": "0.95.3",
+    "materialize": "1.0.0",
     "moment": "2.24.0",
     "polyglot": "2.2.2"
   },

@@ -4,17 +4,15 @@
     <p>{{p 'people.avatar.text'}}</p>
 
     <form action="#">
-        <div class="file-field input-field">
-            <input class="file-path validate js-avatarPath" type="text" disabled="disabled"/>
-
-            <div class="progress">
-                <div class="determinate" style="width: 0"></div>
-            </div>
-            <div class="btn">
-                <span>{{p 'people.avatar.file'}}</span>
-                <input type="file" class="js-avatarFile"/>
-            </div>
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>{{p 'people.avatar.file'}}</span>
+          <input type="file" class="js-avatarFile">
         </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text">
+        </div>
+      </div>
     </form>
 </div>
 <div class="modal-footer">

@@ -21,16 +21,6 @@ var ActionsModalView = Marionette.View.extend({
       motherId: $el.data('motherId'),
       fatherId: $el.data('fatherId')
     }
-  },
-
-  onRender: function () {
-    this.$el.openModal({
-      complete: this.destroy.bind(this)
-    })
-  },
-
-  closeModal: function () {
-    this.$el.closeModal()
   }
 
 })

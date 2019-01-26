@@ -19,12 +19,6 @@ var AvatarUploadView = Marionette.View.extend({
     return this.getOption('people')
   },
 
-  onRender: function () {
-    this.$el.openModal({
-      complete: this.destroy.bind(this)
-    })
-  },
-
   updateAvatarFile: function () {
     this.ui.avatarPath.val(this.ui.avatarFile.val())
     this.ui.avatarUploadSave.removeClass('disabled')
@@ -49,7 +43,7 @@ var AvatarUploadView = Marionette.View.extend({
   uploadAvatarSuccess: function () {
     var uploadedAvatarUrl = this.model.get('avatarUrl')
     this.trigger('complete', uploadedAvatarUrl)
-    this.$el.closeModal()
+    M.Modal.getInstance(this.$el).close()
   }
 
 })

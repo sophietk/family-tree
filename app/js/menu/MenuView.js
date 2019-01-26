@@ -4,7 +4,7 @@ var MenuView = Marionette.View.extend({
   template: Handlebars.templates['menu.hbs'],
 
   ui: {
-    buttonCollapse: '.button-collapse',
+    sidenav: '.sidenav',
     tabs: 'li'
   },
 
@@ -37,7 +37,7 @@ var MenuView = Marionette.View.extend({
   },
 
   onRender: function () {
-    this.ui.buttonCollapse.sideNav()
+    this.ui.sidenav.sidenav()
     this.updateCurrentTab()
   },
 

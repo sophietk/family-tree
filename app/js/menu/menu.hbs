@@ -1,14 +1,15 @@
-<div class="nav-wrapper brown lighten-1 white-text">
-    <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
+<nav class="nav-wrapper brown lighten-1 white-text">
     <a href="#" class="brand-logo right">Family tree</a>
+    <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     <ul id="nav-mobile" class="left hide-on-med-and-down">
         {{#items}}
             <li><a href="#{{route}}" class="waves-effect {{className}}">{{p title args}}</a></li>
         {{/items}}
     </ul>
-    <ul class="side-nav" id="mobile-menu">
-        {{#items}}
-            <li><a href="#{{route}}" class="waves-effect">{{p title args}}</a></li>
-        {{/items}}
-    </ul>
-</div>
+</nav>
+
+<ul class="sidenav" id="mobile-menu">
+    {{#items}}
+        <li><a href="#{{route}}" class="waves-effect">{{p title args}}</a></li>
+    {{/items}}
+</ul>

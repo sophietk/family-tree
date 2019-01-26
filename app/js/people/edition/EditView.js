@@ -63,6 +63,7 @@ var EditView = Marionette.View.extend({
     this.updateFatherMotherSpouses()
     this.refreshSpousesButtons()
     this.fillWithQuery()
+    this.ui.deleteModal.modal()
   },
 
   fillWithQuery: function () {
@@ -125,6 +126,10 @@ var EditView = Marionette.View.extend({
       }
     })
     this.$el.append(avatarUploadView.render().el)
+    avatarUploadView.$el.modal({
+      onCloseEnd: avatarUploadView.destroy.bind(avatarUploadView)
+    })
+    M.Modal.getInstance(avatarUploadView.$el).open()
     this.listenToOnce(avatarUploadView, 'complete', this.uploadAvatarSuccess)
   },
 
@@ -173,7 +178,7 @@ var EditView = Marionette.View.extend({
   },
 
   showConfirmDelete: function () {
-    this.ui.deleteModal.openModal()
+    M.Modal.getInstance(this.ui.deleteModal).open()
   },
 
   deletePeople: function () {
