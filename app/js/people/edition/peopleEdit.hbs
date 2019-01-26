@@ -1,136 +1,134 @@
 {{#_id}}
-<div class="row">
+  <div class="row">
     <div class="col m9">&nbsp;</div>
     <div class="col m3 s12">
-        <a href="#people/{{.}}" class="waves-effect waves-light btn">
-          {{p 'menu.view'}}
-          <i class="material-icons right">remove_red_eye</i></a>
+      <a href="#people/{{.}}" class="waves-effect waves-light btn">
+        {{p 'menu.view'}}
+        <i class="material-icons right">remove_red_eye</i></a>
     </div>
-</div>
+  </div>
 {{/_id}}
 
 <form class="col s12">
-    <div class="row">
-        <div class="input-field col s6">
-            <input name="lastName" id="lastName" type="text" class="validate" value="{{lastName}}">
-            <label for="lastName" class="{{#lastName}}active{{/lastName}}">{{p 'last_name'}}</label>
-        </div>
-        <div class="input-field col s6">
-            <input name="firstName" id="firstName" type="text" class="validate" value="{{firstName}}">
-            <label for="firstName" class="{{#firstName}}active{{/firstName}}">{{p 'first_name'}}</label>
-        </div>
+  <div class="row">
+    <div class="input-field col s6">
+      <input name="lastName" id="lastName" type="text" class="validate" value="{{lastName}}">
+      <label for="lastName" class="{{#lastName}}active{{/lastName}}">{{p 'last_name'}}</label>
     </div>
-    <div class="row">
-        <div class="col s3">
-            <input name="gender" class="with-gap" type="radio" value="M" id="genderM" {{#isMale}}checked="checked"
-            {{/isMale}} />
-            <label for="genderM">{{p 'male'}}</label>
-        </div>
-        <div class="col s3">
-            <input name="gender" class="with-gap" type="radio" value="F" id="genderF" {{^isMale}}checked="checked"
-            {{/isMale}} />
-            <label for="genderF">{{p 'female'}}</label>
-        </div>
-        <div class="input-field col s6 js-maidenNameBlock">
-            <input name="maidenName" id="maidenName" type="text" value="{{maidenName}}">
-            <label for="maidenName" class="{{#maidenName}}active{{/maidenName}}">{{p 'maiden_name'}}</label>
-        </div>
+    <div class="input-field col s6">
+      <input name="firstName" id="firstName" type="text" class="validate" value="{{firstName}}">
+      <label for="firstName" class="{{#firstName}}active{{/firstName}}">{{p 'first_name'}}</label>
     </div>
-    <div class="row">
-        <div class="input-field col s6">
-            <input name="birthDate" id="birthDate" type="date" value="{{birthDate}}">
-            <label for="birthDate" class="active">{{p 'birth_date'}}</label>
-        </div>
-        <div class="input-field col s6">
-            <input name="deathDate" id="deathDate" type="date" value="{{deathDate}}">
-            <label for="deathDate" class="active">{{p 'death_date'}}</label>
-        </div>
+  </div>
+  <div class="row">
+    <div class="col s3">
+      <input name="gender" class="with-gap" type="radio" value="M" id="genderM" {{#isMale}} checked="checked" {{/isMale}}>
+      <label for="genderM">{{p 'male'}}</label>
     </div>
-    <div class="row">
-        <div class="col s6">
-            <label for="fatherId">{{p 'father'}}</label>
-            <select name="fatherId" id="fatherId" class="browser-default">
-                <option value="" selected>-</option>
-                {{#men}}
-                    {{> peopleOption.partial.hbs}}
-                {{/men}}
-            </select>
-        </div>
-        <div class="col s6">
-            <label for="motherId">{{p 'mother'}}</label>
-            <select name="motherId" id="motherId" class="browser-default">
-                <option value="" selected>-</option>
-                {{#women}}
-                    {{> peopleOption.partial.hbs}}
-                {{/women}}
-            </select>
-        </div>
+    <div class="col s3">
+      <input name="gender" class="with-gap" type="radio" value="F" id="genderF" {{^isMale}} checked="checked" {{/isMale}}>
+      <label for="genderF">{{p 'female'}}</label>
     </div>
-    <div class="row">
-        <div class="col s12">
-            <label>{{p 'spouses'}}</label>
-            <a class="btn-floating btn-small btn-left waves-effect waves-light js-addSpouse">
-              <i class="material-icons">add</i>
-            </a>
-            <a class="btn-floating btn-small btn-right waves-effect waves-light js-removeSpouse">
-              <i class="material-icons">remove</i>
-            </a>
+    <div class="input-field col s6 js-maidenNameBlock">
+      <input name="maidenName" id="maidenName" type="text" value="{{maidenName}}">
+      <label for="maidenName" class="{{#maidenName}}active{{/maidenName}}">{{p 'maiden_name'}}</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s6">
+      <input name="birthDate" id="birthDate" type="date" value="{{birthDate}}">
+      <label for="birthDate" class="active">{{p 'birth_date'}}</label>
+    </div>
+    <div class="input-field col s6">
+      <input name="deathDate" id="deathDate" type="date" value="{{deathDate}}">
+      <label for="deathDate" class="active">{{p 'death_date'}}</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s6">
+      <label for="fatherId">{{p 'father'}}</label>
+      <select name="fatherId" id="fatherId" class="browser-default">
+        <option value="" selected>-</option>
+        {{#men}}
+          {{> peopleOption.partial.hbs}}
+        {{/men}}
+      </select>
+    </div>
+    <div class="col s6">
+      <label for="motherId">{{p 'mother'}}</label>
+      <select name="motherId" id="motherId" class="browser-default">
+        <option value="" selected>-</option>
+        {{#women}}
+          {{> peopleOption.partial.hbs}}
+        {{/women}}
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12">
+      <label>{{p 'spouses'}}</label>
+      <a class="btn-floating btn-small btn-left waves-effect waves-light js-addSpouse">
+        <i class="material-icons">add</i>
+      </a>
+      <a class="btn-floating btn-small btn-right waves-effect waves-light js-removeSpouse">
+        <i class="material-icons">remove</i>
+      </a>
 
-            <div class="js-spousesBlock">
-                {{#spousesIds}}
-                    <select name="spouse" class="browser-default">
-                        <option value="" selected>-</option>
-                        {{#../people}}
-                            {{> peopleOption.partial.hbs}}
-                        {{/../people}}
-                    </select>
-                {{/spousesIds}}
-            </div>
-        </div>
+      <div class="js-spousesBlock">
+        {{#spousesIds}}
+          <select name="spouse" class="browser-default">
+            <option value="" selected>-</option>
+            {{#../people}}
+              {{> peopleOption.partial.hbs}}
+            {{/../people}}
+          </select>
+        {{/spousesIds}}
+      </div>
     </div>
-    <div class="row">
-        <div class="input-field col s12">
-            <input name="avatarUrl" id="avatarUrl" type="text" value="{{avatarUrl}}">
-            <label for="avatarUrl" class="{{#avatarUrl}}active{{/avatarUrl}}">{{p 'people.edit.avatar'}}</label>
-            {{#_id}}
-                <a href="#" class="right js-avatarUpload"><i class="material-icons tiny">file_upload</i> {{p 'people.edit.upload'}}</a>
-            {{/_id}}
-        </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <input name="avatarUrl" id="avatarUrl" type="text" value="{{avatarUrl}}">
+      <label for="avatarUrl" class="{{#avatarUrl}}active{{/avatarUrl}}">{{p 'people.edit.avatar'}}</label>
+      {{#_id}}
+        <a href="#" class="right js-avatarUpload"><i class="material-icons tiny">file_upload</i> {{p 'people.edit.upload'}}</a>
+      {{/_id}}
     </div>
-    <div class="row">
-        <div class="input-field col s12">
-            <textarea name="about" id="about" class="materialize-textarea">{{about}}</textarea>
-            <label for="about" class="{{#about}}active{{/about}}">{{p 'people.edit.about'}}</label>
-        </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <textarea name="about" id="about" class="materialize-textarea">{{about}}</textarea>
+      <label for="about" class="{{#about}}active{{/about}}">{{p 'people.edit.about'}}</label>
     </div>
-    <div class="row">
-        <div class="col s6">
-            <input name="menuTab" type="checkbox" id="menuTab" {{#menuTab}}checked="checked"{{/menuTab}}/>
-            <label for="menuTab">{{p 'people.edit.pinned'}}</label>
-        </div>
+  </div>
+  <div class="row">
+    <div class="col s6">
+      <input name="menuTab" type="checkbox" id="menuTab" {{#menuTab}} checked="checked" {{/menuTab}}>
+      <label for="menuTab">{{p 'people.edit.pinned'}}</label>
     </div>
+  </div>
 
-    <div class="row">
-        <a class="btn waves-effect waves-light js-save">{{p 'save'}}
-            <i class="material-icons right">send</i>
-        </a>
+  <div class="row">
+    <a class="btn waves-effect waves-light js-save">{{p 'save'}}
+      <i class="material-icons right">send</i>
+    </a>
 
-        {{#_id}}
-            <a class="btn waves-effect waves-light js-delete">{{p 'delete'}}
-                <i class="material-icons right">delete</i>
-            </a>
-        {{/_id}}
-    </div>
+    {{#_id}}
+      <a class="btn waves-effect waves-light js-delete">{{p 'delete'}}
+        <i class="material-icons right">delete</i>
+      </a>
+    {{/_id}}
+  </div>
 </form>
 
 <div id="deleteModal" class="modal">
-    <div class="modal-content">
-        <h4>{{p 'people.edit.delete.confirm.title' .}}</h4>
+  <div class="modal-content">
+    <h4>{{p 'people.edit.delete.confirm.title' .}}</h4>
 
-        <p>{{p 'people.edit.delete.confirm.text'}}</p>
-    </div>
-    <div class="modal-footer">
-        <a class="waves-effect waves-green btn-flat modal-action modal-close">{{p 'no'}}</a>
-        <a class="waves-effect waves-green btn-flat modal-action modal-close js-delete-confirm">{{p 'yes'}}</a>
-    </div>
+    <p>{{p 'people.edit.delete.confirm.text'}}</p>
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-green btn-flat modal-action modal-close">{{p 'no'}}</a>
+    <a class="waves-effect waves-green btn-flat modal-action modal-close js-delete-confirm">{{p 'yes'}}</a>
+  </div>
 </div>

@@ -1,22 +1,27 @@
 <div class="col s6 m3">
-    <div class="card">
-        <a href="#people/{{_id}}" title="{{p 'menu.view'}}">
-          <div class="card-image">
-              <div class="directory-img img-cover img-gender {{#if isMale}}m{{else}}f{{/if}}"
-                   {{#avatarUrl}}style="background-image:url({{.}});"{{/avatarUrl}}></div>
-              <span class="card-title shadowed">{{lastName}} {{firstName}}</span>
-          </div>
-        </a>
-        <div class="card-content clearfix">
-            {{#if maidenName}}<p><label>{{p 'maiden_name'}}:</label> {{maidenName}}</p>{{/if}}
-            <p><label>{{p 'gender'}}:</label> {{> genderSymbol.partial.hbs isMale}}</p>
-            {{#if birthDate}}<p><label>{{p 'birth_date.short'}}:</label> {{shortDate birthDate}}</p>{{/if}}
-            {{#if deathDate}}<p><label>{{p 'death_date.short'}}:</label> {{shortDate deathDate}}</p>{{/if}}
-        </div>
-        <div class="card-action">
-            <a href="#people/{{_id}}">{{p 'menu.view'}}</a>
-            <a href="#family/{{_id}}">{{p 'menu.tree'}}</a>
-            <a href='#people/{{_id}}/edit'>{{p 'menu.edit'}}</a>
-        </div>
+  <div class="card">
+    <a href="#people/{{_id}}" title="{{p 'menu.view'}}">
+      <div class="card-image">
+        <div class="directory-img img-cover img-gender {{#if isMale}}m{{else}}f{{/if}}" {{#avatarUrl}} style="background-image:url({{.}});" {{/avatarUrl}}></div>
+        <span class="card-title shadowed">{{lastName}} {{firstName}}</span>
+      </div>
+    </a>
+    <div class="card-content clearfix">
+      {{#if maidenName}}
+        <p><label>{{p 'maiden_name'}}:</label> {{maidenName}}</p>
+      {{/if}}
+      <p><label>{{p 'gender'}}:</label> {{> genderSymbol.partial.hbs isMale}}</p>
+      {{#if birthDate}}
+        <p><label>{{p 'birth_date.short'}}:</label> {{shortDate birthDate}}</p>
+      {{/if}}
+      {{#if deathDate}}
+        <p><label>{{p 'death_date.short'}}:</label> {{shortDate deathDate}}</p>
+      {{/if}}
     </div>
+    <div class="card-action">
+      <a href="#people/{{_id}}">{{p 'menu.view'}}</a>
+      <a href="#family/{{_id}}">{{p 'menu.tree'}}</a>
+      <a href='#people/{{_id}}/edit'>{{p 'menu.edit'}}</a>
+    </div>
+  </div>
 </div>

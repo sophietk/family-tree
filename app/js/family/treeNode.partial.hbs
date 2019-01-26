@@ -1,24 +1,22 @@
 {{#if gender}} {{! else unknown people}}
-    <a href="#people/{{_id}}" rel="content" data-id="{{_id}}" data-gender="{{gender}}" data-mother-id="{{motherId}}"
-       data-father-id="{{fatherId}}" data-first-name="{{firstName}}" data-last-name="{{lastName}}">
-        <div class="actions"><i class="material-icons tiny">info_outline</i></div>
-        <div class="tree-thumbnail rounded img-cover img-gender {{#if isMale}}m{{else}}f{{/if}}"
-             {{#avatarUrl}}style="background-image:url({{.}});"{{/avatarUrl}}></div>
-        <div class="tree-detail">
-            <p>{{lastName}}<br>{{firstName}}<br></p>
-            {{#oneOf birthDate deathDate}}
-                <span>({{year birthDate .}}{{#if deathDate}} - {{year deathDate}}{{/if}})</span>
-            {{else}}
-                <span>&nbsp;</span>
-            {{/oneOf}}
-        </div>
-    </a>
+  <a href="#people/{{_id}}" rel="content" data-id="{{_id}}" data-gender="{{gender}}" data-mother-id="{{motherId}}" data-father-id="{{fatherId}}" data-first-name="{{firstName}}" data-last-name="{{lastName}}">
+    <div class="actions"><i class="material-icons tiny">info_outline</i></div>
+    <div class="tree-thumbnail rounded img-cover img-gender {{#if isMale}}m{{else}}f{{/if}}" {{#avatarUrl}} style="background-image:url({{.}});" {{/avatarUrl}}></div>
+    <div class="tree-detail">
+      <p>{{lastName}}<br>{{firstName}}<br></p>
+      {{#oneOf birthDate deathDate}}
+        <span>({{year birthDate .}}{{#if deathDate}} - {{year deathDate}}{{/if}})</span>
+      {{else}}
+        <span>&nbsp;</span>
+      {{/oneOf}}
+    </div>
+  </a>
 {{else}}
-    <a class="unknown" rel="content">
-        <div class="tree-thumbnail rounded"></div>
-        <div class="tree-detail">
-            <br><br>
-            <span>&nbsp;</span>
-        </div>
-    </a>
+  <a class="unknown" rel="content">
+    <div class="tree-thumbnail rounded"></div>
+    <div class="tree-detail">
+      <br><br>
+      <span>&nbsp;</span>
+    </div>
+  </a>
 {{/if}}

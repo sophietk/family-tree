@@ -1,15 +1,15 @@
 <nav class="nav-wrapper brown lighten-1 white-text">
-    <a href="#" class="brand-logo right">Family tree</a>
-    <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-    <ul id="nav-mobile" class="left hide-on-med-and-down">
-        {{#items}}
-            <li><a href="#{{route}}" class="waves-effect {{className}}">{{p title args}}</a></li>
-        {{/items}}
-    </ul>
+  <a href="#" class="brand-logo right">Family tree</a>
+  <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+  <ul id="nav-mobile" class="left hide-on-med-and-down">
+    {{#items}}
+      <li><a href="#{{route}}" class="waves-effect {{className}}">{{p title args}}</a></li>
+    {{/items}}
+  </ul>
 </nav>
 
 <ul class="sidenav" id="mobile-menu">
-    {{#items}}
-        <li><a href="#{{route}}" class="waves-effect">{{p title args}}</a></li>
-    {{/items}}
+  {{#items}}
+    <li><a href="#{{route}}" class="waves-effect">{{p title args}}</a></li>
+  {{/items}}
 </ul>

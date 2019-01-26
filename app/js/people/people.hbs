@@ -1,77 +1,77 @@
 <div class="row">
-    <div class="col m6">&nbsp;</div>
-    <div class="col m3 s12">
-        <a href="#family/{{_id}}" class="waves-effect waves-light btn">
-          {{p 'menu.tree'}}
-          <i class="material-icons right">people</i>
-        </a>
-    </div>
-    <div class="col m3 s12">
-        <a href="#people/{{_id}}/edit" class="waves-effect waves-light btn">
-          {{p 'menu.edit'}}
-          <i class="material-icons right">mode_edit</i>
-        </a>
-    </div>
+  <div class="col m6">&nbsp;</div>
+  <div class="col m3 s12">
+    <a href="#family/{{_id}}" class="waves-effect waves-light btn">
+      {{p 'menu.tree'}}
+      <i class="material-icons right">people</i>
+    </a>
+  </div>
+  <div class="col m3 s12">
+    <a href="#people/{{_id}}/edit" class="waves-effect waves-light btn">
+      {{p 'menu.edit'}}
+      <i class="material-icons right">mode_edit</i>
+    </a>
+  </div>
 </div>
 
 <div class="row">
-    <div class="col m6 s12">
-        <h3>{{lastName}} {{firstName}}</h3>
-        {{#avatarUrl}}
-            <div class="img-cover rounded" style="background-image:url({{.}});"></div>
-        {{/avatarUrl}}
-        <ul>
-            <li><label>{{p 'first_name'}}:</label> {{firstName}}</li>
-            <li><label>{{p 'last_name'}}:</label> {{lastName}}</li>
-            {{#if maidenName}}
-                <li><label>{{p 'maiden_name'}}:</label> {{maidenName}}</li>
-            {{/if}}
-            <li><label>{{p 'gender'}}:</label> {{> genderSymbol.partial.hbs isMale}}</li>
-            {{#if birthDate}}
-                <li><label>{{p 'birth_date'}}:</label> {{readableDate birthDate}}</li>
-            {{/if}}
-            {{#if deathDate}}
-                <li><label>{{p 'death_date'}}:</label> {{readableDate deathDate}}</li>
-            {{/if}}
-        </ul>
+  <div class="col m6 s12">
+    <h3>{{lastName}} {{firstName}}</h3>
+    {{#avatarUrl}}
+      <div class="img-cover rounded" style="background-image:url({{.}});"></div>
+    {{/avatarUrl}}
+    <ul>
+      <li><label>{{p 'first_name'}}:</label> {{firstName}}</li>
+      <li><label>{{p 'last_name'}}:</label> {{lastName}}</li>
+      {{#if maidenName}}
+        <li><label>{{p 'maiden_name'}}:</label> {{maidenName}}</li>
+      {{/if}}
+      <li><label>{{p 'gender'}}:</label> {{> genderSymbol.partial.hbs isMale}}</li>
+      {{#if birthDate}}
+        <li><label>{{p 'birth_date'}}:</label> {{readableDate birthDate}}</li>
+      {{/if}}
+      {{#if deathDate}}
+        <li><label>{{p 'death_date'}}:</label> {{readableDate deathDate}}</li>
+      {{/if}}
+    </ul>
 
-        <h4>{{p 'people.parents'}}</h4>
-        <ul>
-            {{#father}}
-                <li>{{> peopleLink.partial.hbs}}</li>
-            {{/father}}
-            {{#mother}}
-                <li>{{> peopleLink.partial.hbs}}</li>
-            {{/mother}}
-        </ul>
+    <h4>{{p 'people.parents'}}</h4>
+    <ul>
+      {{#father}}
+        <li>{{> peopleLink.partial.hbs}}</li>
+      {{/father}}
+      {{#mother}}
+        <li>{{> peopleLink.partial.hbs}}</li>
+      {{/mother}}
+    </ul>
 
-        <h4>{{p 'people.children'}}</h4>
-        <ul>
-            {{#children}}
-                <li>{{> peopleLink.partial.hbs}}</li>
-            {{/children}}
-        </ul>
-    </div>
+    <h4>{{p 'people.children'}}</h4>
+    <ul>
+      {{#children}}
+        <li>{{> peopleLink.partial.hbs}}</li>
+      {{/children}}
+    </ul>
+  </div>
 
-    <div class="col m6 s12 tree">
-        <ul>
-            <li>
-                {{> treeNode.partial.hbs father}}
-                <div class="p1">
-                    {{> treeNode.partial.hbs mother}}
-                    <ul class="c">
-                        <li class="emphasis">{{> treeNode.partial.hbs}}
-                            {{#if children}}
-                                <ul class="c">
-                                    {{#each children}}
-                                        <li>{{> treeNode.partial.hbs}}</li>
-                                    {{/each}}
-                                </ul>
-                            {{/if}}
-                        </li>
-                    </ul>
-                </div>
+  <div class="col m6 s12 tree">
+    <ul>
+      <li>
+        {{> treeNode.partial.hbs father}}
+        <div class="p1">
+          {{> treeNode.partial.hbs mother}}
+          <ul class="c">
+            <li class="emphasis">{{> treeNode.partial.hbs}}
+              {{#if children}}
+                <ul class="c">
+                  {{#each children}}
+                    <li>{{> treeNode.partial.hbs}}</li>
+                  {{/each}}
+                </ul>
+              {{/if}}
             </li>
-        </ul>
-    </div>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>

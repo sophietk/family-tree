@@ -1,40 +1,40 @@
 <div class="row">
-    <div class="col m9">&nbsp;</div>
-    <div class="col m3 s12">
-        <a href="#people/{{_id}}" class="waves-effect waves-light btn">{{p 'menu.view'}}
-          <i class="material-icons right">remove_red_eye</i>
-        </a>
-    </div>
+  <div class="col m9">&nbsp;</div>
+  <div class="col m3 s12">
+    <a href="#people/{{_id}}" class="waves-effect waves-light btn">{{p 'menu.view'}}
+      <i class="material-icons right">remove_red_eye</i>
+    </a>
+  </div>
 </div>
 
 <h3>{{p 'tree.title' .}}</h3>
 
 <div class="row">
-    <div class="col m8 s12">&nbsp;</div>
-    <div class="col m4 s12">
-        <input name="withDate" type="checkbox" id="withDate" data-prop="date" checked="checked"/>
-        <label for="withDate">{{p 'tree.options.with_dates'}}</label>
-    </div>
-    <div class="col m8 s12">&nbsp;</div>
-    <div class="col m4 s12">
-        <input name="withAvatar" type="checkbox" id="withAvatar" data-prop="avatar" checked="checked"/>
-        <label for="withAvatar">{{p 'tree.options.with_avatars'}}</label>
-    </div>
-    <div class="col m8 s12">&nbsp;</div>
-    <div class="col m4 s12">
-        <input name="withName" type="checkbox" id="withName" data-prop="name" checked="checked"/>
-        <label for="withName">{{p 'tree.options.with_names'}}</label>
-    </div>
+  <div class="col m8 s12">&nbsp;</div>
+  <div class="col m4 s12">
+    <input name="withDate" type="checkbox" id="withDate" data-prop="date" checked="checked">
+    <label for="withDate">{{p 'tree.options.with_dates'}}</label>
+  </div>
+  <div class="col m8 s12">&nbsp;</div>
+  <div class="col m4 s12">
+    <input name="withAvatar" type="checkbox" id="withAvatar" data-prop="avatar" checked="checked">
+    <label for="withAvatar">{{p 'tree.options.with_avatars'}}</label>
+  </div>
+  <div class="col m8 s12">&nbsp;</div>
+  <div class="col m4 s12">
+    <input name="withName" type="checkbox" id="withName" data-prop="name" checked="checked">
+    <label for="withName">{{p 'tree.options.with_names'}}</label>
+  </div>
 </div>
 
 <div class="row">
-    <div class="col s12 tree">
-        <ul>
-            <li>
-                {{> treeNodeRecursive.partial.hbs}}
-            </li>
-        </ul>
-    </div>
+  <div class="col s12 tree">
+    <ul>
+      <li>
+        {{> treeNodeRecursive.partial.hbs}}
+      </li>
+    </ul>
+  </div>
 </div>
 
 <div class="stats"></div>
