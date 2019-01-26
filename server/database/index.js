@@ -21,7 +21,7 @@ function toObjectId (string) {
 exports = module.exports = (familyId) => ({
   getAll () {
     return new Promise((resolve, reject) => {
-      collection.find({families: familyId}).sort({lastName: 1, firstName: 1, birthDate: 1}, (err, docs) => {
+      collection.find({ families: familyId }).sort({ lastName: 1, firstName: 1, birthDate: 1 }, (err, docs) => {
         if (err) return reject(err)
         resolve(docs.map(convert))
       })
@@ -30,7 +30,7 @@ exports = module.exports = (familyId) => ({
 
   getPeople (id) {
     return new Promise((resolve, reject) => {
-      collection.findOne({families: familyId, _id: toObjectId(id)}, (err, doc) => {
+      collection.findOne({ families: familyId, _id: toObjectId(id) }, (err, doc) => {
         if (err) return reject(err)
         resolve(convert(doc))
       })
@@ -39,7 +39,7 @@ exports = module.exports = (familyId) => ({
 
   getSeveralPeople (idArray) {
     return new Promise((resolve, reject) => {
-      collection.find({families: familyId, _id: {$in: idArray.map(toObjectId)}}, (err, docs) => {
+      collection.find({ families: familyId, _id: { $in: idArray.map(toObjectId) } }, (err, docs) => {
         if (err) return reject(err)
         resolve(docs.map(convert))
       })
@@ -48,7 +48,7 @@ exports = module.exports = (familyId) => ({
 
   getInMenu () {
     return new Promise((resolve, reject) => {
-      collection.find({families: familyId, menuTab: true}, (err, docs) => {
+      collection.find({ families: familyId, menuTab: true }, (err, docs) => {
         if (err) return reject(err)
         resolve(docs.map(convert))
       })
@@ -57,8 +57,8 @@ exports = module.exports = (familyId) => ({
 
   getChildren (parentId) {
     return new Promise((resolve, reject) => {
-      collection.find({families: familyId, $or: [{fatherId: parentId}, {motherId: parentId}]})
-        .sort({birthDate: 1}, (err, docs) => {
+      collection.find({ families: familyId, $or: [{ fatherId: parentId }, { motherId: parentId }] })
+        .sort({ birthDate: 1 }, (err, docs) => {
           if (err) return reject(err)
           resolve(docs.map(convert))
         })
@@ -69,8 +69,8 @@ exports = module.exports = (familyId) => ({
     people = omit(people, '_id')
     return new Promise((resolve, reject) => {
       collection.findAndModify({
-        query: {families: familyId, _id: toObjectId(id)},
-        update: {$set: people}
+        query: { families: familyId, _id: toObjectId(id) },
+        update: { $set: people }
       }, (err, doc) => {
         if (err) return reject(err)
         resolve(convert(doc))
@@ -80,7 +80,7 @@ exports = module.exports = (familyId) => ({
 
   deletePeople (id) {
     return new Promise((resolve, reject) => {
-      collection.remove({families: familyId, _id: toObjectId(id)}, true, err => {
+      collection.remove({ families: familyId, _id: toObjectId(id) }, true, err => {
         if (err) return reject(err)
         resolve()
       })
@@ -100,7 +100,7 @@ exports = module.exports = (familyId) => ({
   getAvatar (id) {
     return new Promise((resolve, reject) => {
       // @todo: add "families: familyId" in db query
-      uCollection.findOne({_id: toObjectId(id)}, (err, doc) => {
+      uCollection.findOne({ _id: toObjectId(id) }, (err, doc) => {
         if (err) return reject(err)
         resolve(convert(doc))
       })

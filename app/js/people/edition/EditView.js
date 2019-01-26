@@ -48,8 +48,8 @@ var EditView = Marionette.View.extend({
   },
 
   templateContext: function () {
-    var menCollection = new Backbone.Collection(this.collection.where({gender: 'M'}))
-    var womenCollection = new Backbone.Collection(this.collection.where({gender: 'F'}))
+    var menCollection = new Backbone.Collection(this.collection.where({ gender: 'M' }))
+    var womenCollection = new Backbone.Collection(this.collection.where({ gender: 'F' }))
 
     return {
       men: menCollection.toJSON(),
@@ -183,11 +183,11 @@ var EditView = Marionette.View.extend({
   },
 
   saveSuccess: function () {
-    Backbone.history.navigate('#people/' + this.model.id, {trigger: true})
+    Backbone.history.navigate('#people/' + this.model.id, { trigger: true })
   },
 
   destroySuccess: function () {
-    Backbone.history.navigate('#directory', {trigger: true})
+    Backbone.history.navigate('#directory', { trigger: true })
   }
 
 })

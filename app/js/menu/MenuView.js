@@ -9,9 +9,9 @@ var MenuView = Marionette.View.extend({
   },
 
   menuItems: [
-    {route: 'home', title: 'tabs.home'},
-    {route: 'directory', title: 'tabs.directory'},
-    {route: 'people/new', title: 'tabs.create'}
+    { route: 'home', title: 'tabs.home' },
+    { route: 'directory', title: 'tabs.directory' },
+    { route: 'people/new', title: 'tabs.create' }
   ],
 
   initialize: function () {
@@ -23,7 +23,7 @@ var MenuView = Marionette.View.extend({
       this.menuItems.push({
         route: 'family/' + people.get('_id'),
         title: 'tabs.pinned',
-        args: {firstName: people.get('firstName')},
+        args: { firstName: people.get('firstName') },
         className: 'teal'
       })
     }.bind(this), this)

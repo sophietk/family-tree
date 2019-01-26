@@ -28,7 +28,7 @@ var FamilyView = Marionette.View.extend({
   },
 
   onRender: function () {
-    this.showChildView('stats', new StatsView({model: this.model}))
+    this.showChildView('stats', new StatsView({ model: this.model }))
   },
 
   onAttach: function () {
@@ -40,8 +40,8 @@ var FamilyView = Marionette.View.extend({
     var top = $a.offset().top
     var left = $a.position().left
     var margin = (this.ui.tree.width() - $a.width()) / 2
-    this.ui.tree.animate({scrollLeft: left - margin}, 1000)
-    $('body').animate({scrollTop: top - 20}, 1000)
+    this.ui.tree.animate({ scrollLeft: left - margin }, 1000)
+    $('body').animate({ scrollTop: top - 20 }, 1000)
   },
 
   toggle: function (event) {

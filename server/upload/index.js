@@ -2,7 +2,7 @@ const fs = require('fs')
 const multer = require('multer')
 const db = require('../database')
 
-const upload = multer({dest: 'server/upload/avatar/'})
+const upload = multer({ dest: 'server/upload/avatar/' })
 
 exports = module.exports = app => {
   app.post('/upload/avatar', upload.single('avatarFile'), (req, res) => {

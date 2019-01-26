@@ -4,8 +4,8 @@ var LanguageCollectionView = Marionette.CollectionView.extend({
   childView: LanguageView,
 
   collection: new Backbone.Collection([
-    {code: 'en'},
-    {code: 'fr'}
+    { code: 'en' },
+    { code: 'fr' }
   ])
 
 })

@@ -11,6 +11,6 @@ var ModalOpenerBehavior = Marionette.Behavior.extend({
     e.preventDefault()
 
     var $el = this.$(e.currentTarget).parent()
-    this.$el.append(new ActionsModalView({target: $el}).render().el)
+    this.$el.append(new ActionsModalView({ target: $el }).render().el)
   }
 })

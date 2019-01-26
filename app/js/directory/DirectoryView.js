@@ -9,12 +9,12 @@ var DirectoryView = Marionette.View.extend({
   },
 
   initialize: function () {
-    this.filterDispatcher = _.extend({value: ''}, Backbone.Events)
+    this.filterDispatcher = _.extend({ value: '' }, Backbone.Events)
   },
 
   onRender: function () {
-    this.showChildView('search', new SearchView({filterDispatcher: this.filterDispatcher}))
-    this.showChildView('people', new PeopleCollectionView({collection: this.collection, filterDispatcher: this.filterDispatcher}))
+    this.showChildView('search', new SearchView({ filterDispatcher: this.filterDispatcher }))
+    this.showChildView('people', new PeopleCollectionView({ collection: this.collection, filterDispatcher: this.filterDispatcher }))
   }
 
 })

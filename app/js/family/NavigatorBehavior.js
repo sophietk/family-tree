@@ -37,19 +37,19 @@ var NavigatorBehavior = Marionette.Behavior.extend({
   },
 
   navigateLeft: function () {
-    this.ui.container.animate({scrollLeft: this.ui.container.scrollLeft() - this.step}, this.duration)
+    this.ui.container.animate({ scrollLeft: this.ui.container.scrollLeft() - this.step }, this.duration)
   },
 
   navigateRight: function () {
-    this.ui.container.animate({scrollLeft: this.ui.container.scrollLeft() + this.step}, this.duration)
+    this.ui.container.animate({ scrollLeft: this.ui.container.scrollLeft() + this.step }, this.duration)
   },
 
   navigateUp: function () {
-    $('html, body').animate({scrollTop: $('body').scrollTop() - this.step}, this.duration)
+    $('html, body').animate({ scrollTop: $('body').scrollTop() - this.step }, this.duration)
   },
 
   navigateDown: function () {
-    $('html, body').animate({scrollTop: $('body').scrollTop() + this.step}, this.duration)
+    $('html, body').animate({ scrollTop: $('body').scrollTop() + this.step }, this.duration)
   }
 
 })

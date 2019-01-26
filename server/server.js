@@ -10,7 +10,7 @@ console.log(`Server starting in mode: ${env}`)
 
 app.use(logger(env === 'prod' ? 'common' : 'dev'))
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 
 require('./static')(app, env)
 

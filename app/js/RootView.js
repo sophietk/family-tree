@@ -32,7 +32,7 @@ var RootView = Marionette.View.extend({
 
     new PeopleCollection()
       .on('sync', function (collection) {
-        this.getRegion('main').show(new DirectoryView({collection: collection}))
+        this.getRegion('main').show(new DirectoryView({ collection: collection }))
       }.bind(this))
       .fetch()
   },
@@ -40,7 +40,7 @@ var RootView = Marionette.View.extend({
   showCreatePeople: function () {
     this.getRegion('nude').reset()
     this.getRegion('menu').currentView.select(2)
-    this.getRegion('main').show(new EditView({model: new PeopleModel()}))
+    this.getRegion('main').show(new EditView({ model: new PeopleModel() }))
   },
 
   showPeople: function (peopleId) {
@@ -48,9 +48,9 @@ var RootView = Marionette.View.extend({
     this.getRegion('menu').currentView.unselect()
     this.getRegion('main').show(new LoaderView())
 
-    new PeopleModel({_id: peopleId})
+    new PeopleModel({ _id: peopleId })
       .on('sync', function (model) {
-        this.getRegion('main').show(new PeopleView({model: model}))
+        this.getRegion('main').show(new PeopleView({ model: model }))
       }.bind(this))
       .fetch()
   },
@@ -60,9 +60,9 @@ var RootView = Marionette.View.extend({
     this.getRegion('menu').currentView.unselect()
     this.getRegion('main').show(new LoaderView())
 
-    new PeopleModel({_id: peopleId})
+    new PeopleModel({ _id: peopleId })
       .on('sync', function (model) {
-        this.getRegion('main').show(new EditView({model: model}))
+        this.getRegion('main').show(new EditView({ model: model }))
       }.bind(this))
       .fetch()
   },
@@ -72,9 +72,9 @@ var RootView = Marionette.View.extend({
     this.getRegion('menu').currentView.unselect()
     this.getRegion('main').show(new LoaderView())
 
-    new FamilyModel({_id: peopleId})
+    new FamilyModel({ _id: peopleId })
       .on('sync', function (model) {
-        this.getRegion('main').show(new FamilyView({model: model}))
+        this.getRegion('main').show(new FamilyView({ model: model }))
       }.bind(this))
       .fetch()
   }

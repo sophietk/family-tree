@@ -61,14 +61,14 @@ function buildSpousesWithChildren (familyId) {
         children.forEach(child => {
           const otherParentId = [child.fatherId, child.motherId].find(parentId => parentId !== id)
           if (otherParentId === undefined) {
-            spouses.push({children: [child]})
+            spouses.push({ children: [child] })
             return
           }
 
           let otherParent = spouses.find(spouse => spouse._id === otherParentId)
           if (otherParent === undefined) {
             otherParent = all.find(people => people._id === otherParentId)
-            spouses.push(Object.assign({}, otherParent, {children: [child]}))
+            spouses.push(Object.assign({}, otherParent, { children: [child] }))
             return
           }
 
@@ -206,14 +206,14 @@ exports = module.exports = app => {
             // res.send(dbPeople)
             })
             .catch(err => {
-              res.status(500).send({message: err.message, stack: err.stack})
+              res.status(500).send({ message: err.message, stack: err.stack })
             })
         }).then(() => {
           res.send(dbPeople)
         })
       })
       .catch(err => {
-        res.status(500).send({message: err.message, stack: err.stack})
+        res.status(500).send({ message: err.message, stack: err.stack })
       })
   })
 }
