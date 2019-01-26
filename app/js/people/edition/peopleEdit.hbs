@@ -22,12 +22,16 @@
   </div>
   <div class="row">
     <div class="col s3">
-      <input name="gender" class="with-gap" type="radio" value="M" id="genderM" {{#isMale}} checked="checked" {{/isMale}}>
-      <label for="genderM">{{p 'male'}}</label>
+      <label>
+        <input name="gender" class="with-gap" type="radio" value="M" {{#isMale}} checked="checked" {{/isMale}}>
+        <span>{{p 'male'}}</span>
+      </label>
     </div>
     <div class="col s3">
-      <input name="gender" class="with-gap" type="radio" value="F" id="genderF" {{^isMale}} checked="checked" {{/isMale}}>
-      <label for="genderF">{{p 'female'}}</label>
+      <label>
+        <input name="gender" class="with-gap" type="radio" value="F" {{^isMale}} checked="checked" {{/isMale}}>
+        <span>{{p 'female'}}</span>
+      </label>
     </div>
     <div class="input-field col s6 js-maidenNameBlock">
       <input name="maidenName" id="maidenName" type="text" value="{{maidenName}}">
@@ -103,8 +107,10 @@
   </div>
   <div class="row">
     <div class="col s6">
-      <input name="menuTab" type="checkbox" id="menuTab" {{#menuTab}} checked="checked" {{/menuTab}}>
-      <label for="menuTab">{{p 'people.edit.pinned'}}</label>
+      <label>
+        <input name="menuTab" type="checkbox" {{#menuTab}} checked="checked" {{/menuTab}}>
+        <span>{{p 'people.edit.pinned'}}</span>
+      </label>
     </div>
   </div>
 

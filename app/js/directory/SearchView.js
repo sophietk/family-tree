@@ -1,4 +1,6 @@
 var SearchView = Marionette.View.extend({
+  className: 'input-field',
+
   template: Handlebars.templates['search.hbs'],
 
   ui: {
