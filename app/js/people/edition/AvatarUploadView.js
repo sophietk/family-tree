@@ -5,7 +5,6 @@ var AvatarUploadView = Marionette.View.extend({
 
   ui: {
     avatarFile: '.js-avatarFile',
-    avatarPath: '.js-avatarPath',
     progressBar: '.determinate',
     avatarUploadSave: '.js-avatarUpload-save'
   },
@@ -20,7 +19,6 @@ var AvatarUploadView = Marionette.View.extend({
   },
 
   updateAvatarFile: function () {
-    this.ui.avatarPath.val(this.ui.avatarFile.val())
     this.ui.avatarUploadSave.removeClass('disabled')
   },
 

@@ -1,15 +1,7 @@
 var ActionsModalView = Marionette.View.extend({
-  className: 'modal actions-modal',
+  className: 'modal',
 
   template: Handlebars.templates['actionsModal.hbs'],
-
-  ui: {
-    btns: '.modal-content a'
-  },
-
-  events: {
-    'click @ui.btns': 'closeModal'
-  },
 
   templateContext: function () {
     var $el = this.getOption('target')
