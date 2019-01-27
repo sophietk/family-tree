@@ -18,10 +18,6 @@ function toObjectId (string) {
   return mongojs.ObjectId(string)
 }
 
-function getCurrentDate () {
-  return new Date().toISOString()
-}
-
 exports = module.exports = (familyId) => ({
   getAll () {
     return new Promise((resolve, reject) => {
@@ -69,13 +65,16 @@ exports = module.exports = (familyId) => ({
     })
   },
 
-  replacePeople (id, people) {
+  replacePeople (id, people, audit) {
     people = omit(people, '_id')
-    people.updatedAt = getCurrentDate()
     return new Promise((resolve, reject) => {
       collection.findAndModify({
         query: { families: familyId, _id: toObjectId(id) },
-        update: { $set: people }
+        update: { $set: {
+          ...people,
+          'audit.updatedAt': audit.updatedAt,
+          'audit.updatedBy': audit.updatedBy
+        } }
       }, (err, doc) => {
         if (err) return reject(err)
         resolve(convert(doc))
@@ -92,10 +91,10 @@ exports = module.exports = (familyId) => ({
     })
   },
 
-  createPeople (people) {
+  createPeople (people, audit) {
+    people.families = [familyId]
+    people.audit = audit
     return new Promise((resolve, reject) => {
-      people.families = [familyId]
-      people.createdAt = getCurrentDate()
       collection.insert(people, (err, doc) => {
         if (err) return reject(err)
         resolve(convert(doc))
@@ -113,10 +112,10 @@ exports = module.exports = (familyId) => ({
     })
   },
 
-  createAvatar (avatar) {
+  createAvatar (avatar, audit) {
     avatar.type = 'avatar'
     avatar.families = [familyId]
-    avatar.createdAt = getCurrentDate()
+    avatar.audit = audit
     return new Promise((resolve, reject) => {
       uCollection.insert(avatar, (err, doc) => {
         if (err) return reject(err)

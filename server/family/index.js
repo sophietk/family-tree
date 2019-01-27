@@ -113,7 +113,7 @@ exports = module.exports = app => {
   app.post('/people', (req, res) => {
     const people = retrievePeopleFromReq(req)
 
-    db(req.family).createPeople(people)
+    db(req.family).createPeople(people, req.audit)
       .then(dbPeople => {
         res.send(dbPeople)
       })
@@ -154,7 +154,7 @@ exports = module.exports = app => {
     const id = req.params.id
     const people = retrievePeopleFromReq(req)
 
-    db(req.family).replacePeople(id, people)
+    db(req.family).replacePeople(id, people, req.audit)
       .then(dbPeople => {
         res.send(dbPeople)
       })

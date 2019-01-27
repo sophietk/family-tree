@@ -14,7 +14,7 @@ exports = module.exports = app => {
       size: req.file.size
     }
 
-    db(req.family).createAvatar(avatar)
+    db(req.family).createAvatar(avatar, req.audit)
       .then(dbAvatar => {
         res.send({
           avatarUrl: `/avatar/${dbAvatar._id}`
