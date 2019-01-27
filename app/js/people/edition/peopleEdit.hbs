@@ -13,11 +13,11 @@
   <div class="row">
     <div class="input-field col s6">
       <input name="lastName" id="lastName" type="text" class="validate" value="{{lastName}}">
-      <label for="lastName" class="{{#lastName}}active{{/lastName}}">{{p 'last_name'}}</label>
+      <label for="lastName" class="{{#if lastName}}active{{/if}}">{{p 'last_name'}}</label>
     </div>
     <div class="input-field col s6">
       <input name="firstName" id="firstName" type="text" class="validate" value="{{firstName}}">
-      <label for="firstName" class="{{#firstName}}active{{/firstName}}">{{p 'first_name'}}</label>
+      <label for="firstName" class="{{#if firstName}}active{{/if}}">{{p 'first_name'}}</label>
     </div>
   </div>
   <div class="row">
@@ -35,7 +35,7 @@
     </div>
     <div class="input-field col s6 js-maidenNameBlock">
       <input name="maidenName" id="maidenName" type="text" value="{{maidenName}}">
-      <label for="maidenName" class="{{#maidenName}}active{{/maidenName}}">{{p 'maiden_name'}}</label>
+      <label for="maidenName" class="{{#if maidenName}}active{{/if}}">{{p 'maiden_name'}}</label>
     </div>
   </div>
   <div class="row">
@@ -105,7 +105,7 @@
     <div class="input-field col s12">
       <i class="material-icons prefix">mode_edit</i>
       <textarea name="about" id="about" class="materialize-textarea edit-about">{{{about}}}</textarea>
-      <label for="about" class="{{#about}}active{{/about}}">{{p 'people.edit.about'}}</label>
+      <label for="about" class="{{#if about}}active{{/if}}">{{p 'people.edit.about'}}</label>
     </div>
   </div>
   <div class="row">

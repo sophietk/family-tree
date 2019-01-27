@@ -14,6 +14,8 @@ var EditView = Marionette.View.extend({
     about: 'textarea[name="about"]',
     menuTab: 'input[name="menuTab"]',
 
+    lastNameLabel: 'label[for="lastName"]',
+
     maidenNameBlock: '.js-maidenNameBlock',
     spousesBlock: '.js-spousesBlock',
     addSpouse: '.js-addSpouse',
@@ -73,6 +75,7 @@ var EditView = Marionette.View.extend({
       switch (hash[0]) {
         case 'lastName':
           this.ui.lastName.val(hash[1]).change()
+          if (hash[1]) this.ui.lastNameLabel.addClass('active')
           break
         case 'gender':
           this.setGender(hash[1])
