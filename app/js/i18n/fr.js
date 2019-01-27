@@ -66,6 +66,8 @@ polyglot.extend({
   // People
   'people.parents': 'Parents',
   'people.children': 'Enfants',
+  'people.about': 'Autres informations',
+  'people.tree': 'Arbre',
 
   // People edit
   'people.edit.avatar': 'Ajouter l’adresse de l’avatar',

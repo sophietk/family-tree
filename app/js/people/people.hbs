@@ -15,8 +15,11 @@
 </div>
 
 <div class="row">
+  <h3>{{lastName}} {{firstName}}</h3>
+</div>
+
+<div class="row">
   <div class="col m6 s12">
-    <h3>{{lastName}} {{firstName}}</h3>
     {{#avatarUrl}}
       <div class="img-cover rounded" style="background-image:url({{.}});"></div>
     {{/avatarUrl}}
@@ -35,25 +38,35 @@
       {{/if}}
     </ul>
 
-    <h4>{{p 'people.parents'}}</h4>
-    <ul>
-      {{#father}}
-        <li>{{> peopleLink.partial.hbs}}</li>
-      {{/father}}
-      {{#mother}}
-        <li>{{> peopleLink.partial.hbs}}</li>
-      {{/mother}}
-    </ul>
+    {{#if hasParents}}
+      <h4>{{p 'people.parents'}}</h4>
+      <ul>
+        {{#father}}
+          <li>{{> peopleLink.partial.hbs}}</li>
+        {{/father}}
+        {{#mother}}
+          <li>{{> peopleLink.partial.hbs}}</li>
+        {{/mother}}
+      </ul>
+    {{/if}}
 
-    <h4>{{p 'people.children'}}</h4>
-    <ul>
-      {{#children}}
-        <li>{{> peopleLink.partial.hbs}}</li>
-      {{/children}}
-    </ul>
+    {{#if children}}
+      <h4>{{p 'people.children'}}</h4>
+      <ul>
+        {{#children}}
+          <li>{{> peopleLink.partial.hbs}}</li>
+        {{/children}}
+      </ul>
+    {{/if}}
+
+    {{#if about}}
+      <h4>{{p 'people.about'}}</h4>
+      <p>{{about}}</p>
+    {{/if}}
   </div>
 
   <div class="col m6 s12 tree">
+    <h4>{{p 'people.tree'}}</h4>
     <ul>
       <li>
         {{> treeNode.partial.hbs father}}

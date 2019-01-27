@@ -5,6 +5,12 @@ var PeopleView = Marionette.View.extend({
     ModalOpenerBehavior: {
       behaviorClass: ModalOpenerBehavior
     }
+  },
+
+  templateContext: function () {
+    return {
+      hasParents: this.model.has('fatherId') || this.model.has('motherId')
+    }
   }
 
 })
