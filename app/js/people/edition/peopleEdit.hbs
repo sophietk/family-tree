@@ -96,6 +96,8 @@
       <label for="avatarUrl" class="{{#avatarUrl}}active{{/avatarUrl}}">{{p 'people.edit.avatar'}}</label>
       {{#_id}}
         <a href="#" class="right js-avatarUpload"><i class="material-icons tiny">file_upload</i> {{p 'people.edit.upload'}}</a>
+        {{else}}
+          <span class="helper-text">{{p 'people.edit.avatar.helper'}}</span>
       {{/_id}}
     </div>
   </div>

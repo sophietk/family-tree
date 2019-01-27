@@ -71,6 +71,7 @@ polyglot.extend({
 
   // People edit
   'people.edit.avatar': 'Ajouter l’adresse de l’avatar',
+  'people.edit.avatar.helper': 'Pour ajouter une photo depuis votre galerie d’images, enregistrez une première fois la fiche d’édition, puis modifiez-la.',
   'people.edit.upload': 'Ou uploader une image',
   'people.edit.about': 'Autres informations sur cette personne',
   'people.edit.pinned': 'Montrer dans les menus',

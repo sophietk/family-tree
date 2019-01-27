@@ -71,6 +71,7 @@ polyglot.extend({
 
   // People edit
   'people.edit.avatar': 'Avatar URL',
+  'people.edit.avatar.helper': 'If you want to add a custom photo from your gallery, please save the people data a first time then edit it again.',
   'people.edit.upload': 'Or upload a picture',
   'people.edit.about': 'About this people',
   'people.edit.pinned': 'Pin to menu',
