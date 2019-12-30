@@ -70,11 +70,13 @@ exports = module.exports = (familyId) => ({
     return new Promise((resolve, reject) => {
       collection.findAndModify({
         query: { families: familyId, _id: toObjectId(id) },
-        update: { $set: {
-          ...people,
-          'audit.updatedAt': audit.updatedAt,
-          'audit.updatedBy': audit.updatedBy
-        } }
+        update: {
+          $set: {
+            ...people,
+            'audit.updatedAt': audit.updatedAt,
+            'audit.updatedBy': audit.updatedBy
+          }
+        }
       }, (err, doc) => {
         if (err) return reject(err)
         resolve(convert(doc))
