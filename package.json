@@ -11,7 +11,6 @@
   "scripts": {
     "postinstall": "bower update",
     "heroku-postbuild": "run-s build",
-    "prepare": "precommit install",
     "start": "node ./server/server.js",
     "watch": "npm-watch",
     "test": "run-p lint:*",
@@ -46,9 +45,11 @@
       "extensions": "hbs"
     }
   },
-  "precommit": [
-    "npm test"
-  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
+  },
   "dependencies": {
     "basic-auth-connect": "1.0.0",
     "body-parser": "1.18.3",
@@ -56,9 +57,9 @@
     "cookie-parser": "1.4.3",
     "debug": "4.1.1",
     "express": "4.16.4",
-    "handlebars": "4.0.12",
+    "handlebars": "4.5.3",
     "lodash.pick": "4.4.0",
-    "mongojs": "2.6.0",
+    "mongojs": "3.1.0",
     "morgan": "1.9.1",
     "multer": "1.4.1",
     "node-sass": "4.11.0",
@@ -74,8 +75,8 @@
     "eslint-plugin-node": "8.0.1",
     "eslint-plugin-promise": "4.0.1",
     "eslint-plugin-standard": "4.0.0",
-    "npm-watch": "0.6.0",
-    "precommit": "1.2.2"
+    "husky": "3.1.0",
+    "npm-watch": "0.6.0"
   },
   "cacheDirectories": [
     "node_modules",
