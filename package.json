@@ -56,7 +56,7 @@
     "bower": "1.8.8",
     "cookie-parser": "1.4.5",
     "express": "4.17.1",
-    "handlebars": "4.7.6",
+    "handlebars": "4.7.7",
     "lodash.pick": "4.4.0",
     "mongodb": "3.6.2",
     "morgan": "1.10.0",
