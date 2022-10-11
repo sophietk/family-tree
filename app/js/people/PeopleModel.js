@@ -1,4 +1,4 @@
-var PeopleModel = Backbone.Model.extend({
+const PeopleModel = Backbone.Model.extend({
   idAttribute: '_id',
 
   url: function () {

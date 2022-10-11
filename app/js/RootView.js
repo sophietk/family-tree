@@ -1,4 +1,4 @@
-var RootView = Marionette.View.extend({
+const RootView = Marionette.View.extend({
   template: Handlebars.templates['root.hbs'],
 
   regions: {
@@ -32,7 +32,7 @@ var RootView = Marionette.View.extend({
 
     new PeopleCollection()
       .on('sync', function (collection) {
-        this.getRegion('main').show(new DirectoryView({ collection: collection }))
+        this.getRegion('main').show(new DirectoryView({ collection }))
       }.bind(this))
       .fetch()
   },
@@ -50,7 +50,7 @@ var RootView = Marionette.View.extend({
 
     new PeopleModel({ _id: peopleId })
       .on('sync', function (model) {
-        this.getRegion('main').show(new PeopleView({ model: model }))
+        this.getRegion('main').show(new PeopleView({ model }))
       }.bind(this))
       .fetch()
   },
@@ -62,7 +62,7 @@ var RootView = Marionette.View.extend({
 
     new PeopleModel({ _id: peopleId })
       .on('sync', function (model) {
-        this.getRegion('main').show(new EditView({ model: model }))
+        this.getRegion('main').show(new EditView({ model }))
       }.bind(this))
       .fetch()
   },
@@ -74,7 +74,7 @@ var RootView = Marionette.View.extend({
 
     new FamilyModel({ _id: peopleId })
       .on('sync', function (model) {
-        this.getRegion('main').show(new FamilyView({ model: model }))
+        this.getRegion('main').show(new FamilyView({ model }))
       }.bind(this))
       .fetch()
   }

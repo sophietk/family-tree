@@ -1,4 +1,4 @@
-var LanguageCollectionView = Marionette.CollectionView.extend({
+const LanguageCollectionView = Marionette.CollectionView.extend({
   tagName: 'ul',
 
   childView: LanguageView,

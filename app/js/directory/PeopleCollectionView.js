@@ -1,4 +1,4 @@
-var PeopleCollectionView = Marionette.CollectionView.extend({
+const PeopleCollectionView = Marionette.CollectionView.extend({
   className: 'row',
 
   childView: PeopleCardView,

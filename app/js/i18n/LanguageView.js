@@ -1,4 +1,4 @@
-var LanguageView = Marionette.View.extend({
+const LanguageView = Marionette.View.extend({
   tagName: 'li',
 
   className: 'language',
