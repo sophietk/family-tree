@@ -111,9 +111,10 @@ exports = module.exports = (familyId) => ({
     people.families = [familyId]
     people.audit = audit
     return new Promise((resolve, reject) => {
-      collection.insert(people, (err, result) => {
+      collection.insertOne(people, (err, result) => {
         if (err) return reject(err)
-        resolve(convert(result.ops[0]))
+        people._id = result.insertedId
+        resolve(convert(people))
       })
     })
   },
@@ -133,9 +134,10 @@ exports = module.exports = (familyId) => ({
     avatar.families = [familyId]
     avatar.audit = audit
     return new Promise((resolve, reject) => {
-      uCollection.insert(avatar, (err, result) => {
+      uCollection.insertOne(avatar, (err, result) => {
         if (err) return reject(err)
-        resolve(convert(result.ops[0]))
+        avatar._id = result.insertedId
+        resolve(convert(avatar))
       })
     })
   }
