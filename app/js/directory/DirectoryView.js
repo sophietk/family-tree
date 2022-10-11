@@ -1,4 +1,4 @@
-var DirectoryView = Marionette.View.extend({
+const DirectoryView = Marionette.View.extend({
   className: 'directory',
 
   template: Handlebars.templates['directory.hbs'],

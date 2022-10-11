@@ -1,4 +1,4 @@
-var App = Marionette.Application.extend({
+const App = Marionette.Application.extend({
   region: 'body',
 
   onStart: function () {
@@ -7,4 +7,4 @@ var App = Marionette.Application.extend({
 
 })
 
-var app = new App()
+const app = new App()

@@ -1,4 +1,4 @@
-var MenuView = Marionette.View.extend({
+const MenuView = Marionette.View.extend({
   tagName: 'nav',
 
   template: Handlebars.templates['menu.hbs'],

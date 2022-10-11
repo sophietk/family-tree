@@ -1,4 +1,4 @@
-var AppController = {
+const AppController = {
   home: function () {
     app.getView().showHome()
   },
@@ -24,7 +24,7 @@ var AppController = {
   }
 }
 
-var Router = Marionette.AppRouter.extend({
+const Router = Marionette.AppRouter.extend({
   controller: AppController,
 
   appRoutes: {

@@ -1,4 +1,4 @@
-var SearchView = Marionette.View.extend({
+const SearchView = Marionette.View.extend({
   className: 'input-field',
 
   template: Handlebars.templates['search.hbs'],

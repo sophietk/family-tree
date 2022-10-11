@@ -1,4 +1,4 @@
-var AvatarUploadView = Marionette.View.extend({
+const AvatarUploadView = Marionette.View.extend({
   template: Handlebars.templates['avatarUpload.hbs'],
 
   className: 'modal',
@@ -25,7 +25,7 @@ var AvatarUploadView = Marionette.View.extend({
   uploadAvatar: function () {
     if (this.ui.avatarUploadSave.hasClass('disabled')) return
 
-    var fileObject = this.ui.avatarFile[0].files[0]
+    const fileObject = this.ui.avatarFile[0].files[0]
 
     this.model.save({
       // peopleId: this.model.id,
@@ -39,7 +39,7 @@ var AvatarUploadView = Marionette.View.extend({
   },
 
   uploadAvatarSuccess: function () {
-    var uploadedAvatarUrl = this.model.get('avatarUrl')
+    const uploadedAvatarUrl = this.model.get('avatarUrl')
     this.trigger('complete', uploadedAvatarUrl)
     M.Modal.getInstance(this.$el).close()
   }

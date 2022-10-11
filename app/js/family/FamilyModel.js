@@ -1,4 +1,4 @@
-var FamilyModel = Backbone.Model.extend({
+const FamilyModel = Backbone.Model.extend({
   idAttribute: '_id',
 
   url: function () {
