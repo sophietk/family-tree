@@ -1,4 +1,4 @@
-let polyglot
+var polyglot
 
 app
   .on('before:start', function () {
