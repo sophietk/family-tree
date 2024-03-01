@@ -1,5 +1,5 @@
 const pick = require('lodash.pick')
-const db = require('../database')
+const db = require('../database').getConnectedDb()
 
 const DEFAULT_FAMILY_LEVEL = 10
 

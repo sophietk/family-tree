@@ -1,22 +1,27 @@
-const { MongoClient, ObjectID } = require('mongodb')
+const { MongoClient, ObjectId } = require('mongodb')
 const omit = require('object.omit')
+const family = require('../family')
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017'
 const dbName = process.env.DB_NAME || 'familytree'
 let collection
 let uCollection
 
-console.log(`Connecting to db url: ${dbUrl}, name: ${dbName}`)
-MongoClient.connect(dbUrl, { useUnifiedTopology: true }, (err, client) => {
-  if (err) {
-    console.error('Error when connecting to db', err)
-    process.exit(1)
+let connectedDb
+
+const connect = () => {
+  const client = new MongoClient(dbUrl)
+  client.connect()
+  console.log('Connected to MongoDB')
+  collection = client.db(dbName).collection('people')
+  uCollection = client.db(dbName).collection('upload')
+
+  connectedDb = this
+
+  return familyId => {
+    return connectedDatabaseForFamily(familyId)
   }
-  console.log('Connected to db')
-  const database = client.db(dbName)
-  collection = database.collection('people')
-  uCollection = database.collection('upload')
-})
+}
 
 function convert (doc) {
   if (doc === undefined || doc === null) return
@@ -26,61 +31,50 @@ function convert (doc) {
 }
 
 function toObjectId (string) {
-  return new ObjectID(string)
+  return new ObjectId(string)
 }
 
-exports = module.exports = (familyId) => ({
+const connectedDatabaseForFamily = (familyId) => ({
+
   getAll () {
-    return new Promise((resolve, reject) => {
-      collection.find({ families: familyId }).sort({ lastName: 1, firstName: 1, birthDate: 1 }).toArray((err, docs) => {
-        if (err) return reject(err)
-        resolve(docs.map(convert))
-      })
-    })
+    return collection
+      .find({ families: familyId })
+      .sort({ lastName: 1, firstName: 1, birthDate: 1 })
+      .map(convert)
+      .toArray()
   },
 
   getPeople (id) {
-    return new Promise((resolve, reject) => {
-      collection.findOne({ families: familyId, _id: toObjectId(id) }, (err, doc) => {
-        if (err) return reject(err)
-        resolve(convert(doc))
-      })
-    })
+    const found = collection
+      .findOne({ families: familyId, _id: toObjectId(id) })
+    return found // todo: convert before returning
   },
 
   getSeveralPeople (idArray) {
-    return new Promise((resolve, reject) => {
-      collection.find({ families: familyId, _id: { $in: idArray.map(toObjectId) } }).toArray((err, docs) => {
-        if (err) return reject(err)
-        resolve(docs.map(convert))
-      })
-    })
+    return collection
+      .find({ families: familyId, _id: { $in: idArray.map(toObjectId) } })
+      .map(convert)
+      .toArray()
   },
 
   getInMenu () {
-    return new Promise((resolve, reject) => {
-      collection.find({ families: familyId, menuTab: true }).toArray((err, docs) => {
-        if (err) return reject(err)
-        resolve(docs.map(convert))
-      })
-    })
+    return collection
+      .find({ families: familyId, menuTab: true })
+      .map(convert)
+      .toArray()
   },
 
   getChildren (parentId) {
-    return new Promise((resolve, reject) => {
-      collection.find({ families: familyId, $or: [{ fatherId: parentId }, { motherId: parentId }] })
-        .sort({ birthDate: 1 })
-        .toArray((err, docs) => {
-          if (err) return reject(err)
-          resolve(docs.map(convert))
-        })
-    })
+    return collection
+      .find({ families: familyId, $or: [{ fatherId: parentId }, { motherId: parentId }] })
+      .sort({ birthDate: 1 })
+      .map(convert)
+      .toArray()
   },
 
   replacePeople (id, people, audit) {
     people = omit(people, '_id')
-    return new Promise((resolve, reject) => {
-      collection.findOneAndUpdate(
+    const updateResult = collection.findOneAndUpdate(
         { families: familyId, _id: toObjectId(id) },
         {
           $set: {
@@ -88,57 +82,39 @@ exports = module.exports = (familyId) => ({
             'audit.updatedAt': audit.updatedAt,
             'audit.updatedBy': audit.updatedBy
           }
-        },
-        (err, result) => {
-          if (err) return reject(err)
-          console.log('ok and return ', result.value)
-          resolve(convert(result.value))
-        }
-      )
-    })
+        })
+    return convert(updateResult.value) // @todo: fix
   },
 
   deletePeople (id) {
-    return new Promise((resolve, reject) => {
-      collection.remove({ families: familyId, _id: toObjectId(id) }, true, err => {
-        if (err) return reject(err)
-        resolve()
-      })
-    })
+    collection.remove({ families: familyId, _id: toObjectId(id) })
   },
 
   createPeople (people, audit) {
     people.families = [familyId]
     people.audit = audit
-    return new Promise((resolve, reject) => {
-      collection.insertOne(people, (err, result) => {
-        if (err) return reject(err)
-        people._id = result.insertedId
-        resolve(convert(people))
-      })
-    })
+    const inserted = collection.insertOne(people)
+    people._id = inserted.insertedId
+    return convert(people)
   },
 
   getAvatar (id) {
-    return new Promise((resolve, reject) => {
-      // @todo: add "families: familyId" in db query
-      uCollection.findOne({ _id: toObjectId(id) }, (err, doc) => {
-        if (err) return reject(err)
-        resolve(convert(doc))
-      })
-    })
+    // @todo: add "families: familyId" in db query
+    const found = uCollection
+      .findOne({ _id: toObjectId(id) })
+    return found // todo: convert before returning
   },
 
   createAvatar (avatar, audit) {
     avatar.type = 'avatar'
     avatar.families = [familyId]
     avatar.audit = audit
-    return new Promise((resolve, reject) => {
-      uCollection.insertOne(avatar, (err, result) => {
-        if (err) return reject(err)
-        avatar._id = result.insertedId
-        resolve(convert(avatar))
-      })
-    })
+    const inserted = uCollection.insertOne(avatar)
+    avatar._id = inserted.insertedId
+    return convert(avatar)
   }
 })
+
+exports = module.exports = {
+  getConnectedDb: () => connectedDb || connect()
+}

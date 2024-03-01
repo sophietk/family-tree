@@ -1,6 +1,6 @@
 const fs = require('fs')
 const multer = require('multer')
-const db = require('../database')
+const db = require('../database').getConnectedDb()
 
 const upload = multer({ dest: 'server/upload/avatar/' })
 
