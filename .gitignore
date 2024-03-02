@@ -1,5 +1,6 @@
 .DS_Store
 .idea/
+.vscode/
 node_modules/
 app/bower_components
 .sass-cache/
