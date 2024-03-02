@@ -1,6 +1,5 @@
 const { MongoClient, ObjectId } = require('mongodb')
 const omit = require('object.omit')
-const family = require('../family')
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017'
 const dbName = process.env.DB_NAME || 'familytree'
@@ -75,14 +74,14 @@ const connectedDatabaseForFamily = (familyId) => ({
   async replacePeople (id, people, audit) {
     people = omit(people, '_id')
     const updated = await collection.findOneAndUpdate(
-        { families: familyId, _id: toObjectId(id) },
-        {
-          $set: {
-            ...people,
-            'audit.updatedAt': audit.updatedAt,
-            'audit.updatedBy': audit.updatedBy
-          }
-        })
+      { families: familyId, _id: toObjectId(id) },
+      {
+        $set: {
+          ...people,
+          'audit.updatedAt': audit.updatedAt,
+          'audit.updatedBy': audit.updatedBy
+        }
+      })
     return convert(updated)
   },
 
