@@ -44,10 +44,10 @@ const connectedDatabaseForFamily = (familyId) => ({
       .toArray()
   },
 
-  getPeople (id) {
-    const found = collection
+  async getPeople (id) {
+    const found = await collection
       .findOne({ families: familyId, _id: toObjectId(id) })
-    return found // todo: convert before returning
+    return convert(found)
   },
 
   getSeveralPeople (idArray) {
@@ -72,9 +72,9 @@ const connectedDatabaseForFamily = (familyId) => ({
       .toArray()
   },
 
-  replacePeople (id, people, audit) {
+  async replacePeople (id, people, audit) {
     people = omit(people, '_id')
-    const updateResult = collection.findOneAndUpdate(
+    const updated = await collection.findOneAndUpdate(
         { families: familyId, _id: toObjectId(id) },
         {
           $set: {
@@ -83,26 +83,26 @@ const connectedDatabaseForFamily = (familyId) => ({
             'audit.updatedBy': audit.updatedBy
           }
         })
-    return convert(updateResult.value) // @todo: fix
+    return convert(updated)
   },
 
   deletePeople (id) {
-    collection.remove({ families: familyId, _id: toObjectId(id) })
+    return collection.deleteOne({ families: familyId, _id: toObjectId(id) })
   },
 
-  createPeople (people, audit) {
+  async createPeople (people, audit) {
     people.families = [familyId]
     people.audit = audit
-    const inserted = collection.insertOne(people)
+    const inserted = await collection.insertOne(people)
     people._id = inserted.insertedId
     return convert(people)
   },
 
-  getAvatar (id) {
+  async getAvatar (id) {
     // @todo: add "families: familyId" in db query
-    const found = uCollection
+    const found = await uCollection
       .findOne({ _id: toObjectId(id) })
-    return found // todo: convert before returning
+    return convert(found)
   },
 
   createAvatar (avatar, audit) {
