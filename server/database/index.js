@@ -15,11 +15,10 @@ const connect = () => {
   collection = client.db(dbName).collection('people')
   uCollection = client.db(dbName).collection('upload')
 
-  connectedDb = this
-
-  return familyId => {
+  connectedDb = familyId => {
     return connectedDatabaseForFamily(familyId)
   }
+  return connectedDb
 }
 
 function convert (doc) {
@@ -104,11 +103,11 @@ const connectedDatabaseForFamily = (familyId) => ({
     return convert(found)
   },
 
-  createAvatar (avatar, audit) {
+  async createAvatar (avatar, audit) {
     avatar.type = 'avatar'
     avatar.families = [familyId]
     avatar.audit = audit
-    const inserted = uCollection.insertOne(avatar)
+    const inserted = await uCollection.insertOne(avatar)
     avatar._id = inserted.insertedId
     return convert(avatar)
   }
