@@ -5,7 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
+        with:
+          key: npm-and-bower
+          path: |
+            node_modules/
+            app/bower_components/
       - run: npm install
       - run: npm test
 
@@ -13,6 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
+        with:
+          key: npm-and-bower
+          path: |
+            node_modules/
+            app/bower_components/
       - run: npm install
-      - run: npm build
+      - run: npm run build
