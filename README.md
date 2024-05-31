@@ -21,3 +21,7 @@ ACCESS_USERS="myuser:mypassword:5b47c1eb252696382be9daae;otheruser:otherpassword
 ```
 npm run build
 ```
+
+## troubleshooting
+
+During `npm i`, if an error is faced about "ModuleNotFoundError: No module named 'distutils'" (node-sass setup), let's run `brew install python-setuptools`.
