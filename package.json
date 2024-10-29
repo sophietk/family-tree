@@ -25,7 +25,7 @@
     "handlebars:partials": "handlebars app/js/**/*.partial.hbs app/js/**/**/*.partial.hbs -p -f app/js/partials.js",
     "copy-assets": "mkdir dist; run-p copy:*",
     "copy:img": "cp -r app/img dist/",
-    "copy:font": "mkdir dist/font && cp -r app/bower_components/material-design-icons/iconfont dist/font/material-design-icons",
+    "copy:font": "mkdir dist/font && cp -r app/bower_components/material-design-icons/font dist/font/material-design-icons",
     "copy:i18n": "mkdir dist/js; cp -r app/js/i18n dist/js/",
     "usemin": "usemin app/index.html -d dist > dist/index.html",
     "replace:cssfont": "replace ../font/ ./font/ dist/style.min.css",
