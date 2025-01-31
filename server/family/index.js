@@ -1,4 +1,3 @@
-const pick = require('lodash.pick')
 const db = require('../database').getConnectedDb()
 
 const DEFAULT_FAMILY_LEVEL = 10
@@ -24,21 +23,37 @@ function retrievePeopleFromReq (req) {
   }
   */
 
-  return pick(people, [
-    '_id',
-    'lastName',
-    'maidenName',
-    'firstName',
-    'gender',
-    'birthDate',
-    'deathDate',
-    'fatherId',
-    'motherId',
-    'spousesIds',
-    'avatarUrl',
-    'about',
-    'menuTab'
-  ])
+  const {
+    _id,
+    lastName,
+    maidenName,
+    firstName,
+    gender,
+    birthDate,
+    deathDate,
+    fatherId,
+    motherId,
+    spousesIds,
+    avatarUrl,
+    about,
+    menuTab
+  } = people
+
+  return {
+    _id,
+    lastName,
+    maidenName,
+    firstName,
+    gender,
+    birthDate,
+    deathDate,
+    fatherId,
+    motherId,
+    spousesIds,
+    avatarUrl,
+    about,
+    menuTab
+  }
 }
 
 let all = [] // @todo: load async in children each loop
