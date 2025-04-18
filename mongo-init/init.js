@@ -1,4 +1,4 @@
-/* global db */
+/* global db:writable, ObjectId */
 /* eslint-disable quote-props, quotes */
 
 db = db.getSiblingDB('familytree')
