@@ -1,4 +1,7 @@
-db = db.getSiblingDB('familytree');
+/* global db */
+/* eslint-disable quote-props, quotes */
+
+db = db.getSiblingDB('familytree')
 db.people.insertMany([
   {
     "_id": ObjectId("54f758f3f6a4810a19c3b258"),
@@ -61,4 +64,4 @@ db.people.insertMany([
     "motherId": "54f759141138b91019e18e49",
     "avatarUrl": "http://img2.wikia.nocookie.net/__cb20090820055233/starwars/images/6/66/BenSkywalker_Atlas.jpg"
   }
-]);
+])
