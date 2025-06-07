@@ -19,7 +19,7 @@
     "dist": "run-p build clean:zip && run-s compress",
     "clean:dist": "rm -rf dist",
     "clean:zip": "rm -rf zip",
-    "sass": "sass app/sass/style.scss app/css",
+    "sass": "sass app/sass/style.scss app/css/style.css",
     "handlebars": "run-p handlebars:templates handlebars:partials",
     "handlebars:templates": "handlebars app/js/*.hbs app/js/**/*.hbs app/js/**/**/*.hbs -f app/js/templates.js",
     "handlebars:partials": "handlebars app/js/**/*.partial.hbs app/js/**/**/*.partial.hbs -p -f app/js/partials.js",
