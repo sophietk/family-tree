@@ -19,7 +19,7 @@
     "dist": "run-p build clean:zip && run-s compress",
     "clean:dist": "rm -rf dist",
     "clean:zip": "rm -rf zip",
-    "sass": "node-sass --source-map true app/sass/style.scss -o app/css",
+    "sass": "sass app/sass/style.scss app/css",
     "handlebars": "run-p handlebars:templates handlebars:partials",
     "handlebars:templates": "handlebars app/js/*.hbs app/js/**/*.hbs app/js/**/**/*.hbs -f app/js/templates.js",
     "handlebars:partials": "handlebars app/js/**/*.partial.hbs app/js/**/**/*.partial.hbs -p -f app/js/partials.js",
@@ -60,10 +60,10 @@
     "mongodb": "6.15.0",
     "morgan": "1.10.0",
     "multer": "2.0.1",
-    "node-sass": "9.0.0",
     "npm-run-all": "4.1.5",
     "object.omit": "3.0.0",
     "replace": "1.2.2",
+    "sass": "1.89.1",
     "usemin-cli": "0.6.0"
   },
   "devDependencies": {
