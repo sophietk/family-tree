@@ -1,6 +1,7 @@
 {
   "name": "family-tree",
   "version": "1.0.0",
+  "type": "module",
   "description": "family tree to find and link your family members, and discover your ancerstors' stories",
   "author": "sophietk",
   "private": true,
@@ -67,11 +68,12 @@
     "usemin-cli": "0.6.0"
   },
   "devDependencies": {
-    "eslint": "8.57.0",
-    "eslint-config-standard": "17.1.0",
-    "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-promise": "6.2.0",
+    "@eslint/js": "^9.12.0",
+    "eslint": "^9.12.0",
+    "eslint-plugin-import": "^2.30.0",
+    "eslint-plugin-n": "^17.11.1",
+    "eslint-plugin-promise": "^7.1.0",
+    "globals": "^15.11.0",
     "husky": "9.1.7",
     "npm-watch": "0.13.0"
   },

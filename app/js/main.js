@@ -1,4 +1,4 @@
-var polyglot // eslint-disable-line no-var
+var polyglot
 
 app
   .on('before:start', function () {
