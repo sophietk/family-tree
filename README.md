@@ -2,13 +2,13 @@
 
 ## install
 
-```
+```bash
 npm i
 ```
 
 ## start dev server
 
-```
+```bash
 docker compose up
 npm start
 
@@ -18,7 +18,7 @@ ACCESS_USERS="myuser:mypassword:5b47c1eb252696382be9daae;otheruser:otherpassword
 
 ## build prod files
 
-```
+```bash
 npm run build
 ```
 
