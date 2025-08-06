@@ -1,7 +1,6 @@
 {
   "name": "family-tree",
   "version": "1.0.0",
-  "type": "module",
   "description": "family tree to find and link your family members, and discover your ancerstors' stories",
   "author": "sophietk",
   "private": true,
