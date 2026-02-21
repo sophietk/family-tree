@@ -67,7 +67,7 @@
     "usemin-cli": "0.6.0"
   },
   "devDependencies": {
-    "eslint": "9.39.2",
+    "eslint": "9.39.3",
     "husky": "9.1.7",
     "neostandard": "^0.12.2",
     "npm-watch": "0.13.0"
