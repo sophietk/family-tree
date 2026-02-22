@@ -16,7 +16,7 @@
     "material-design-icons-font": "2.2.3",
     "materialize": "1.0.0",
     "moment": "2.30.1",
-    "polyglot": "2.2.0"
+    "polyglot": "2.2.2"
   },
   "resolutions": {
     "backbone": "1.6.1",
