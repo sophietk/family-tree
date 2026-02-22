@@ -76,7 +76,7 @@
   },
   "overrides": {
     "html-minifier": "npm:html-minifier-terser@7.2.0",
-    "yargs-parser": "5.0.1"
+    "yargs-parser": "22.0.0"
   },
   "cacheDirectories": [
     "node_modules",
