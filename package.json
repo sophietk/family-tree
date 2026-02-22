@@ -76,6 +76,10 @@
   },
   "overrides": {
     "html-minifier": "npm:html-minifier-terser@7.2.0",
+    "minimatch": "10.2.2",
+    "replace": {
+      "minimatch": "8.0.5"
+    },
     "yargs-parser": "22.0.0"
   },
   "cacheDirectories": [
