@@ -1,5 +1,9 @@
 # family tree
 
+A tiny web app to manage family trees. It is built with backbone.js and node.js, and uses mongoDB as the database.
+
+<img src="docs/screenshot-01.png" height="200"> <img src="docs/screenshot-02.png" height="200"> <img src="docs/screenshot-03.png" height="200"> <img src="docs/screenshot-04.png" height="200">
+
 ## install
 
 ```bash
