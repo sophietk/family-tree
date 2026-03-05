@@ -75,7 +75,7 @@
     "npm-watch": "^0.13.0"
   },
   "overrides": {
-    "html-minifier": "npm:html-minifier-terser@7.2.0",
+    "html-minifier": "npm:html-minifier-terser@^7.2.0",
     "replace": {
       "minimatch": "^8.0.7"
     },
