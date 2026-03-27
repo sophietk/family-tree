@@ -58,7 +58,7 @@
     "bower": "^1.8.14",
     "cookie-parser": "^1.4.7",
     "express": "^5.2.1",
-    "handlebars": "^4.7.8",
+    "handlebars": "^4.7.9",
     "mongodb": "^7.1.0",
     "morgan": "^1.10.1",
     "multer": "^2.1.1",
