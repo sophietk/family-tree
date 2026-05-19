@@ -27,7 +27,7 @@ db.people.insertMany([
     "gender": "M",
     "fatherId": "54f758f3f6a4810a19c3b258",
     "motherId": "54f759141138b91019e18e45",
-    "avatarUrl": "https://anniversaire-celebrite.com/upload/250x333/luke-skywalker-250.jpg"
+    "avatarUrl": "https://anniversaire-celebrite.com/images/celebrites/luke-skywalker.jpg"
   },
   {
     "_id": ObjectId("54f759141138b91019e18e47"),
