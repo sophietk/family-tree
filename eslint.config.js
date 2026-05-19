@@ -2,7 +2,6 @@ const neostandard = require('neostandard')
 
 module.exports = [
   ...neostandard({
-    files: ['app/js/**/*.js'],
     globals: {
       Backbone: 'readonly',
       Marionette: 'readonly',
