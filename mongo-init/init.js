@@ -1,5 +1,5 @@
 /* global db:writable, ObjectId */
-/* eslint-disable @stylistic/quote-props, @stylistic/quotes */
+/* eslint-disable @stylistic/quotes */
 
 db = db.getSiblingDB('familytree')
 db.people.insertMany([

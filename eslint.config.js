@@ -1,42 +1,26 @@
-import neostandard from 'neostandard'
+const neostandard = require('neostandard')
 
-export default [
-  // Apply neostandard configuration
-  ...neostandard(),
-
-  // Browser environment configuration for app/js files
-  {
+module.exports = [
+  ...neostandard({
     files: ['app/js/**/*.js'],
-    languageOptions: {
-      globals: {
-        // Add any global variables used in your browser code
-        Backbone: 'readonly',
-        Marionette: 'readonly',
-        _: 'readonly',
-        $: 'readonly',
-        jQuery: 'readonly',
-        Handlebars: 'readonly',
-        moment: 'readonly',
-        Polyglot: 'readonly'
-      }
+    globals: {
+      Backbone: 'readonly',
+      Marionette: 'readonly',
+      M: 'readonly',
+      _: 'readonly',
+      $: 'readonly',
+      jQuery: 'readonly',
+      Handlebars: 'readonly',
+      moment: 'readonly',
+      Polyglot: 'readonly'
     },
+    ignores: neostandard.resolveIgnoresFromGitignore()
+  }),
+  {
     rules: {
       'no-undef': 'off',
       'no-unused-vars': 'off',
-      '@stylistic/quote-props': ['error', 'as-needed', { unnecessary: false }],
-      'object-shorthand': ['error', 'never']
+      '@stylistic/quote-props': ['error', 'as-needed', { unnecessary: false }]
     }
-  },
-
-  // Ignore patterns
-  {
-    ignores: [
-      'node_modules/**',
-      'app/bower_components/**',
-      'dist/**',
-      'zip/**',
-      'app/js/templates.js',
-      'app/js/partials.js'
-    ]
   }
 ]
