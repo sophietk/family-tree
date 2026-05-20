@@ -10,10 +10,10 @@ const StatsView = Marionette.View.extend({
     const averageAge = this.getAverageAge(alivePeople)
 
     return {
-      peopleCount,
-      maleCount,
-      femaleCount,
-      averageAge
+      peopleCount: peopleCount,
+      maleCount: maleCount,
+      femaleCount: femaleCount,
+      averageAge: averageAge
     }
   },
 

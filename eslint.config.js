@@ -30,7 +30,8 @@ module.exports = [
     rules: {
       'no-undef': 'off',
       'no-unused-vars': 'off',
-      '@stylistic/quote-props': ['error', 'as-needed', { unnecessary: false }]
+      '@stylistic/quote-props': ['error', 'as-needed', { unnecessary: false }],
+      'object-shorthand': ['error', 'never']
     }
   }
 ]
