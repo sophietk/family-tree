@@ -25,6 +25,9 @@ app
     Handlebars.registerHelper('p', function (phrase, obj) {
       return polyglot.t(phrase, obj)
     })
+    Handlebars.registerHelper('add', function (value, otherValue) {
+      return value + otherValue
+    })
 
     // i18n
     const userLang = localStorage.getItem('language') || navigator.language || navigator.userLanguage
