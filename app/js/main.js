@@ -20,7 +20,11 @@ app
     })
     Handlebars.registerHelper('readableDate', function (date) {
       if (!date) return ''
-      return moment(date).format('D MMMM, YYYY')
+      return moment(date).format('LL')
+    })
+    Handlebars.registerHelper('readableDayMonth', function (date) {
+      if (!date) return ''
+      return moment(date).format('D MMMM')
     })
     Handlebars.registerHelper('p', function (phrase, obj) {
       return polyglot.t(phrase, obj)
