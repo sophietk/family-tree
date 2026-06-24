@@ -7,14 +7,14 @@ polyglot.extend({
   'tabs.pinned': '%{firstName}’s family',
 
   // Home
-  'home.subtitle': 'Find and link your family members',
-  'home.button': 'Find people',
-  'home.p1.title': 'Find your relations',
-  'home.p1.text': 'Macaroon muffin candy sweet roll chocolate. Pastry cotton candy jelly-o carrot cake cupcake. Macaroon cookie dragée cake oat cake. Bear claw carrot cake chocolate bar marzipan jelly soufflé ice cream halvah. Powder powder caramels gummi bears marzipan candy canes sweet roll lollipop. Pastry macaroon sesame snaps cheesecake gingerbread icing.',
-  'home.p2.title': 'Enrich your family tree',
-  'home.p2.text': 'Marzipan powder jujubes jelly apple pie. Croissant danish gummies toffee jujubes chocolate bar. Gummi bears jelly tootsie roll powder tootsie roll pudding. Biscuit pie tart. Halvah cake pie candy gingerbread liquorice chocolate bar. Cake halvah carrot cake gummies croissant. Jujubes powder wafer. Sugar plum powder bear claw.',
-  'home.p3.title': 'Discover your ancerstors’ stories',
-  'home.p3.text': 'Halvah dragée fruitcake ice cream macaroon chupa chups pastry pie cake. Danish bonbon chupa chups chocolate bar chupa chups gummi bears dessert jujubes pie. Jelly beans gingerbread fruitcake cheesecake. Lollipop cake chocolate bar. Marshmallow candy pie jelly. Toffee dessert muffin cake donut candy fruitcake jelly.',
+  'home.subtitle': 'Search for and connect the members of your family',
+  'home.button': 'Search for people',
+  'home.p1.title': 'Find relatives',
+  'home.p1.text': 'Easily discover members of your family through simple and intuitive searches. Explore the connections between people and begin rebuilding your family story.',
+  'home.p2.title': 'Grow your family tree',
+  'home.p2.text': 'Add new relatives, complete existing branches, and let your tree expand with every discovery. Each piece of information brings you a little closer to your origins.',
+  'home.p3.title': 'Explore your ancestors’ story',
+  'home.p3.text': 'Step into your family’s past and uncover the journeys, origins, and defining moments that shaped your lineage. Bring your family history to life, generation after generation.',
 
   // Common
   'yes': 'Yes',
