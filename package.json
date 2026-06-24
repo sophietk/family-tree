@@ -45,7 +45,8 @@
         "app/js"
       ],
       "extensions": "hbs"
-    }
+    },
+    "handlebars:templates": "app/js/i18n/{en,fr}.js"
   },
   "husky": {
     "hooks": {
