@@ -12,6 +12,7 @@ const FamilyView = Marionette.View.extend({
   },
 
   regions: {
+    celebrations: '.celebrations',
     stats: '.stats'
   },
 
@@ -28,6 +29,7 @@ const FamilyView = Marionette.View.extend({
   },
 
   onRender: function () {
+    this.showChildView('celebrations', new CelebrationsView({ model: this.model }))
     this.showChildView('stats', new StatsView({ model: this.model }))
   },
 

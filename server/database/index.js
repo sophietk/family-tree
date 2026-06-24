@@ -21,10 +21,19 @@ const connect = () => {
   return connectedDb
 }
 
+function computeAge ({ birthDate, deathDate }) {
+  if (!birthDate || deathDate) return
+
+  const birth = new Date(birthDate)
+  const today = new Date()
+  return today.getFullYear() - birth.getFullYear()
+}
+
 function convert (doc) {
   if (doc === undefined || doc === null) return
   doc._id = doc._id.toString()
   if (doc.gender) doc.isMale = doc.gender === 'M'
+  if (computeAge(doc)) doc.age = computeAge(doc)
   return doc
 }
 

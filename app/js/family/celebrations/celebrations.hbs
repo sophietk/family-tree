@@ -1,0 +1,13 @@
+{{#if peopleWithUpcomingBirthdays}}
+
+<h4>{{p 'celebrations.title'}}</h4>
+
+<div class="row">
+  {{#each peopleWithUpcomingBirthdays}}
+    <div class="col s12 m6 l4">
+      <blockquote>{{readableDate nextBirthday}}: {{firstName}} {{lastName}} ({{age}}+1 {{p 'age_unit'}})</blockquote>
+    </div>
+  {{/each}}
+</div>
+
+{{/if}}

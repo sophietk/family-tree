@@ -104,14 +104,6 @@ function buildSpousesWithChildren (familyId) {
   })
 }
 
-function computeAge ({ birthDate, deathDate }) {
-  if (!birthDate || deathDate) return
-
-  const birth = new Date(birthDate)
-  const today = new Date()
-  return today.getFullYear() - birth.getFullYear()
-}
-
 exports = module.exports = app => {
   app.get('/menu', (req, res) => {
     db(req.family).getInMenu()
@@ -159,7 +151,6 @@ exports = module.exports = app => {
         ])
           .then(data => {
             res.send(Object.assign({}, dbPeople, {
-              age: computeAge(dbPeople),
               father: data[0],
               mother: data[1],
               children: data[2]
