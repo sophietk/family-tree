@@ -25,7 +25,7 @@ require('./upload')(app)
 
 // Listen
 app.listen(port, () => {
-  console.log(`Listening on port: ${port}`)
+  console.log(`Application available on: http://localhost:${port}`)
 })
 
 module.exports = app
