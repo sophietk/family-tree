@@ -273,3 +273,14 @@ $color-border: color('teal', 'lighten-4');
     z-index: 1;
   }
 }
+
+span.badge.new {
+  &.left {
+    margin-left: 0;
+    margin-right: 14px;
+  }
+
+  &:after {
+    content: '';
+  }
+}
