@@ -21,7 +21,7 @@ const connect = () => {
   return connectedDb
 }
 
-function computeAge({ birthDate, deathDate }) {
+function computeAge ({ birthDate, deathDate }) {
   if (!birthDate || deathDate) return
 
   const birth = new Date(birthDate)
