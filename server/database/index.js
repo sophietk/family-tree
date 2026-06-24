@@ -21,12 +21,19 @@ const connect = () => {
   return connectedDb
 }
 
-function computeAge ({ birthDate, deathDate }) {
+function computeAge({ birthDate, deathDate }) {
   if (!birthDate || deathDate) return
 
   const birth = new Date(birthDate)
   const today = new Date()
-  return today.getFullYear() - birth.getFullYear()
+  let age = today.getFullYear() - birth.getFullYear()
+
+  const monthDiff = today.getMonth() - birth.getMonth()
+  const dayDiff = today.getDate() - birth.getDate()
+  if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+    age--
+  }
+  return age
 }
 
 function convert (doc) {
