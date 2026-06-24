@@ -7,14 +7,14 @@ polyglot.extend({
   'tabs.pinned': 'Arbre de %{firstName}',
 
   // Home
-  'home.subtitle': 'Rechercher et relier les membres de votre famille',
+  'home.subtitle': 'Recherchez et reliez les membres de votre famille',
   'home.button': 'Chercher une personne',
   'home.p1.title': 'Trouver des proches',
-  'home.p1.text': 'Macaroon muffin candy sweet roll chocolate. Pastry cotton candy jelly-o carrot cake cupcake. Macaroon cookie dragée cake oat cake. Bear claw carrot cake chocolate bar marzipan jelly soufflé ice cream halvah. Powder powder caramels gummi bears marzipan candy canes sweet roll lollipop. Pastry macaroon sesame snaps cheesecake gingerbread icing.',
+  'home.p1.text': 'Retrouvez facilement des membres de votre famille grâce à des recherches simples et intuitives. Explorez les liens entre les personnes et commencez à reconstruire votre histoire familiale.',
   'home.p2.title': 'Enrichir votre arbre généalogique',
-  'home.p2.text': 'Marzipan powder jujubes jelly apple pie. Croissant danish gummies toffee jujubes chocolate bar. Gummi bears jelly tootsie roll powder tootsie roll pudding. Biscuit pie tart. Halvah cake pie candy gingerbread liquorice chocolate bar. Cake halvah carrot cake gummies croissant. Jujubes powder wafer. Sugar plum powder bear claw.',
+  'home.p2.text': 'Ajoutez de nouveaux membres, complétez les branches existantes et faites grandir votre arbre au fil de vos découvertes. Chaque information ajoutée vous rapproche un peu plus de vos origines.',
   'home.p3.title': 'Découvrir l’histoire de vos ancêtres',
-  'home.p3.text': 'Halvah dragée fruitcake ice cream macaroon chupa chups pastry pie cake. Danish bonbon chupa chups chocolate bar chupa chups gummi bears dessert jujubes pie. Jelly beans gingerbread fruitcake cheesecake. Lollipop cake chocolate bar. Marshmallow candy pie jelly. Toffee dessert muffin cake donut candy fruitcake jelly.',
+  'home.p3.text': 'Plongez dans le passé de votre famille et explorez les parcours, les origines et les événements marquants qui ont façonné votre lignée. Donnez vie à votre histoire familiale, génération après génération.',
 
   // Common
   'yes': 'Oui',
