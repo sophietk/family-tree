@@ -65,6 +65,7 @@ polyglot.extend({
   'stats.female_count': '%{smart_count} femme |||| %{smart_count} femmes',
   'stats.average_age': 'Âge moyen',
   'celebrations.title': 'Anniversaires à venir',
+  'celebrations.turning': ', %{smart_count} an |||| , %{smart_count} ans',
 
   // People
   'people.parents': 'Parents',

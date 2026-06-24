@@ -17,7 +17,7 @@ const CelebrationsView = Marionette.View.extend({
           birthday.getDate()
         )
 
-        if (nextBirthday !== today && nextBirthday < today) {
+        if (nextBirthday < today) {
           nextBirthday.setFullYear(today.getFullYear() + 1)
         }
 
@@ -26,6 +26,7 @@ const CelebrationsView = Marionette.View.extend({
         )
 
         people.nextBirthday = nextBirthday
+        people.nextAge = nextBirthday.getTime() === today.getTime() ? people.age : people.age + 1
 
         return diffInDays <= 14
       })

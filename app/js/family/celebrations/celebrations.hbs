@@ -5,7 +5,7 @@
 <div class="row">
   {{#each peopleWithUpcomingBirthdays}}
     <div class="col s12 m6 l4">
-      <blockquote>{{readableDayMonth nextBirthday}}: {{firstName}} {{lastName}}, {{add age 1}} {{p 'age_unit'}}</blockquote>
+      <blockquote>{{readableDayMonth nextBirthday}}: {{firstName}} {{lastName}}{{p 'celebrations.turning' nextAge}}</blockquote>
     </div>
   {{/each}}
 </div>

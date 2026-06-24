@@ -24,7 +24,10 @@ app
     })
     Handlebars.registerHelper('readableDayMonth', function (date) {
       if (!date) return ''
-      return moment(date).format('D MMMM')
+      return new Intl.DateTimeFormat(localStorage.getItem('language'), {
+        month: 'long',
+        day: 'numeric'
+      }).format(date)
     })
     Handlebars.registerHelper('p', function (phrase, obj) {
       return polyglot.t(phrase, obj)

@@ -65,6 +65,7 @@ polyglot.extend({
   'stats.female_count': '%{smart_count} female |||| %{smart_count} females',
   'stats.average_age': 'Average age',
   'celebrations.title': 'Upcoming birthdays',
+  'celebrations.turning': ', turning %{smart_count}',
 
   // People
   'people.parents': 'Parents',
