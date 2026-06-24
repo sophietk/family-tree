@@ -34,7 +34,7 @@
         <li><label>{{p 'birth_date'}}:</label> {{readableDate birthDate}}</li>
       {{/if}}
       {{#if age}}
-        <li><label>{{p 'age'}}:</label> {{age}} {{p 'age_unit'}}</li>
+        <li><label>{{p 'age'}}:</label> {{p 'age_with_units' age}}</li>
       {{/if}}
       {{#if deathDate}}
         <li><label>{{p 'death_date'}}:</label> {{readableDate deathDate}}</li>

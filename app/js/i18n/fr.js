@@ -29,7 +29,7 @@ polyglot.extend({
   'birth_date': 'Date de naissance',
   'death_date': 'Date de décès',
   'age': 'Âge',
-  'age_unit': 'an(s)',
+  'age_with_units': '%{smart_count} an |||| %{smart_count} ans',
   'birth_date.short': 'Naissance',
   'death_date.short': 'Décès',
   'male': 'Homme',
