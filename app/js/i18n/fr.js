@@ -28,6 +28,8 @@ polyglot.extend({
   'maiden_name': 'Nom de jeune fille',
   'birth_date': 'Date de naissance',
   'death_date': 'Date de décès',
+  'age': 'Âge',
+  'age_unit': 'an(s)',
   'birth_date.short': 'Naissance',
   'death_date.short': 'Décès',
   'male': 'Homme',
