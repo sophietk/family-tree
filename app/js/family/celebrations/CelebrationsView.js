@@ -26,6 +26,7 @@ const CelebrationsView = Marionette.View.extend({
         )
 
         people.nextBirthday = nextBirthday
+        people.age = people.age || 0
         people.nextAge = nextBirthday.getTime() === today.getTime() ? people.age : people.age + 1
 
         return diffInDays <= 14
