@@ -16,8 +16,8 @@
     "test": "run-p lint:*",
     "lint:js": "eslint .",
     "build": "run-s clean:dist && run-s generate-build-date generate-build-commit && run-p sass handlebars copy-assets && run-s usemin replace:cssfont",
-    "generate-build-date": "date=$(TZ=Europe/Paris date '+%Y-%m-%d %H:%M'); replace local-dev \"$date\" app/js/root.hbs",
-    "generate-build-commit": "commit=$(printf \"%s\" \"$RENDER_GIT_COMMIT\" | cut -c1-8); replace local-work \"$commit\" app/js/root.hbs",
+    "generate-build-date": "date=$(TZ=Europe/Paris date '+%Y-%m-%d %H:%M'); replace-in-file local-dev \"$date\" app/js/root.hbs",
+    "generate-build-commit": "commit=$(printf \"%s\" \"$RENDER_GIT_COMMIT\" | cut -c1-8); replace-in-file local-work \"$commit\" app/js/root.hbs",
     "dist": "run-p build clean:zip && run-s compress",
     "clean:dist": "rm -rf dist",
     "clean:zip": "rm -rf zip",
@@ -30,7 +30,7 @@
     "copy:font": "mkdir dist/font && cp -r app/bower_components/material-design-icons-font/iconfont dist/font/material-design-icons",
     "copy:i18n": "mkdir dist/js; cp -r app/js/i18n dist/js/",
     "usemin": "usemin app/index.html -d dist > dist/index.html",
-    "replace:cssfont": "replace ../font/ ./font/ dist/style.min.css",
+    "replace:cssfont": "replace-in-file ../font/ ./font/ dist/style.min.css",
     "compress": "mkdir zip; zip -r zip/$npm_package_name-$npm_package_version.zip dist"
   },
   "watch": {
@@ -65,7 +65,7 @@
     "multer": "^2.2.0",
     "npm-run-all2": "^9.0.3",
     "object.omit": "^3.0.0",
-    "replace": "^1.2.2",
+    "replace-in-file": "^8.4.0",
     "sass": "^1.102.0",
     "usemin-cli": "^0.6.0"
   },
@@ -78,9 +78,6 @@
   "overrides": {
     "html-minifier": "npm:html-minifier-terser@^7.2.0",
     "minimatch": "^10.2.6",
-    "replace": {
-      "minimatch": "^8.0.7"
-    },
     "yargs-parser": "^22.0.0"
   },
   "cacheDirectories": [
