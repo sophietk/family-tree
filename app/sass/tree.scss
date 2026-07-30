@@ -275,6 +275,8 @@ $color-border: color('teal', 'lighten-4');
 }
 
 span.badge.new {
+  margin-bottom: 0.5px;
+
   &.left {
     margin-left: 0;
     margin-right: 14px;
