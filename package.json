@@ -62,7 +62,7 @@
     "handlebars": "^4.7.9",
     "mongodb": "^7.6.0",
     "morgan": "^1.12.1",
-    "multer": "^2.3.0",
+    "multer": "^2.4.0",
     "npm-run-all2": "^9.0.3",
     "object.omit": "^3.0.0",
     "replace-in-file": "^9.0.0",
