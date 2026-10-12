@@ -12,7 +12,10 @@
     "postinstall": "bower update",
     "heroku-postbuild": "run-s build",
     "start": "node ./server/server.js",
-    "watch": "npm-watch",
+    "watch:sass": "nodemon --watch app/sass --ext scss --exec 'npm run sass'",
+    "watch:handlebars": "nodemon --watch app/js --ext hbs --exec 'npm run handlebars'",
+    "watch:i18n": "nodemon --watch app/js/i18n/en.js --watch app/js/i18n/fr.js --exec 'npm run handlebars:templates'",
+    "watch": "run-p watch:*",
     "test": "run-p lint:*",
     "lint:js": "eslint .",
     "build": "run-s clean:dist && run-s generate-build-date generate-build-commit && run-p sass handlebars copy-assets && run-s usemin replace:cssfont",
@@ -33,21 +36,6 @@
     "replace:cssfont": "replace-in-file ../font/ ./font/ dist/style.min.css",
     "compress": "mkdir zip; zip -r zip/$npm_package_name-$npm_package_version.zip dist"
   },
-  "watch": {
-    "sass": {
-      "patterns": [
-        "app/sass"
-      ],
-      "extensions": "scss"
-    },
-    "handlebars": {
-      "patterns": [
-        "app/js"
-      ],
-      "extensions": "hbs"
-    },
-    "handlebars:templates": "app/js/i18n/{en,fr}.js"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "npm test"
@@ -58,26 +46,29 @@
     "body-parser": "^2.3.0",
     "bower": "^1.8.14",
     "cookie-parser": "^1.4.7",
-    "express": "^5.2.1",
-    "handlebars": "^4.7.9",
-    "mongodb": "^7.6.0",
+    "express": "^5.3.0",
+    "handlebars": "^4.7.10",
+    "mongodb": "^7.7.0",
     "morgan": "^1.12.1",
     "multer": "^2.4.0",
     "npm-run-all2": "^9.0.3",
     "object.omit": "^3.0.0",
     "replace-in-file": "^9.0.0",
-    "sass": "^1.104.1",
+    "sass": "^1.105.1",
     "usemin-cli": "^0.6.0"
   },
   "devDependencies": {
     "eslint": "^9.39.5",
     "husky": "^9.1.7",
-    "neostandard": "^0.13.0",
-    "npm-watch": "^0.13.0"
+    "neostandard": "^0.14.0",
+    "nodemon": "^3.1.14"
   },
   "overrides": {
     "html-minifier": "npm:html-minifier-terser@^7.2.0",
     "minimatch": "^10.2.6",
+    "nodemon": {
+      "chokidar": "5.0.0"
+    },
     "yargs-parser": "^22.0.0"
   },
   "cacheDirectories": [
