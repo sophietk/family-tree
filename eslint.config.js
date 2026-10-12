@@ -1,13 +1,15 @@
 const neostandard = require('neostandard')
+const stylistic = require('@stylistic/eslint-plugin')
 
 module.exports = [
+  {
+    ignores: neostandard.resolveIgnoresFromGitignore()
+  },
   ...neostandard({
     // Common config for app, server, mongo-init
-    ignores: neostandard.resolveIgnoresFromGitignore(),
     rules: {
       '@stylistic/quote-props': ['error', 'as-needed', { unnecessary: false }]
     }
-
   }),
   {
     // Only for browser app files
@@ -26,6 +28,9 @@ module.exports = [
         moment: 'readonly',
         Polyglot: 'readonly'
       }
+    },
+    plugins: {
+      '@stylistic': stylistic
     },
     rules: {
       'no-undef': 'off',
