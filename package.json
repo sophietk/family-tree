@@ -12,7 +12,7 @@
     "postinstall": "bower update",
     "heroku-postbuild": "run-s build",
     "start": "node ./server/server.js",
-    "watch:sass": "nodemon --watch app/sass --ext scss --exec 'npm run sass'",
+    "watch:sass": "sass --watch app/sass/style.scss:app/css/style.css",
     "watch:handlebars": "nodemon --watch app/js --ext hbs --exec 'npm run handlebars'",
     "watch:i18n": "nodemon --watch app/js/i18n/en.js --watch app/js/i18n/fr.js --exec 'npm run handlebars:templates'",
     "watch": "run-p watch:*",
