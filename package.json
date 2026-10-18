@@ -61,15 +61,17 @@
     "@stylistic/eslint-plugin": "5.10.0",
     "eslint": "^10.12.0",
     "husky": "^9.1.7",
-    "neostandard": "^0.14.0",
+    "neostandard": "^0.14.1",
     "nodemon": "^3.1.14"
   },
   "overrides": {
-    "html-minifier": "npm:html-minifier-terser@^7.2.0",
     "nodemon": {
       "chokidar": "5.0.0"
     },
-    "yargs-parser": "^22.0.0"
+    "usemin-cli": {
+      "html-minifier": "npm:html-minifier-terser@^7.2.0",
+      "yargs-parser": "^22.0.0"
+    }
   },
   "cacheDirectories": [
     "node_modules",
