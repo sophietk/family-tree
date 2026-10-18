@@ -66,7 +66,6 @@
   },
   "overrides": {
     "html-minifier": "npm:html-minifier-terser@^7.2.0",
-    "minimatch": "^10.2.6",
     "nodemon": {
       "chokidar": "5.0.0"
     },
