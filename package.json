@@ -54,7 +54,7 @@
     "npm-run-all2": "^9.0.4",
     "object.omit": "^3.0.0",
     "replace-in-file": "^9.0.0",
-    "sass": "^1.107.1",
+    "sass": "^1.108.0",
     "usemin-cli": "^0.6.0"
   },
   "devDependencies": {
@@ -65,8 +65,12 @@
     "nodemon": "^3.1.14"
   },
   "overrides": {
+    "minimatch": "^11.0.5",
     "nodemon": {
-      "chokidar": "5.0.0"
+      "chokidar": "^5.0.0"
+    },
+    "replace-in-file": {
+      "glob": "^14.0.4"
     },
     "usemin-cli": {
       "html-minifier": "npm:html-minifier-terser@^7.2.0",
